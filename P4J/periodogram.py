@@ -7,7 +7,6 @@ class periodogram:
         self.method = method
         self.M = M
         
-        
     def fit(self, t, y, dy):
         self.t = t
         self.y = y #- np.mean(y)
