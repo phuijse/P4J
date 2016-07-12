@@ -62,6 +62,6 @@ def contaminate_time_series(t, y, SNR=10.0, out_p=0.01, rseed=None):
     y_noisy = y + noise
     # Add outliers with a certain percentage
     rperm = np.where(np.random.uniform(size=N) < out_p)[0]    
-    outlier = np.random.uniform(50.0, 200.0, size=len(rperm))
-    y[rperm] += outlier
+    outlier = np.random.uniform(5.0*np.std(y), 10.0*np.std(y), size=len(rperm))
+    y_noisy[rperm] += outlier
     return y, y_noisy, s

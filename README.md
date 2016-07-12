@@ -22,7 +22,9 @@ https://github.com/phuijse/P4J/blob/master/P4J/demos/periodogram_demo.ipynb
 
 **TODO**
 
-- Cython backend
+- Cython backend for WMCC
+- Periodogram false alarm probabilities
+- Multidimensional time series support
 
 
 **Authors** 

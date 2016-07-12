@@ -71,15 +71,15 @@ def find_beta_OLS(y, Phi):
     R = np.dot(Phi.T, Phi)
     P = np.dot(Phi.T, y)
     beta = np.linalg.solve(R, P)
-    return beta
+    return beta, np.dot(P.T, beta)
 
 """
 Weighted least squares (WLS) regression for benchmark purposes
 """
 def find_beta_WLS(y, Phi, dy):
-    dy2 = np.power(dy, 2.0)
+    dy2 = np.power(dy, -2.0)
     W_mat = np.diag(dy2)
     R = np.dot(np.dot(Phi.T, W_mat), Phi)
     P = np.dot(np.dot(Phi.T, W_mat), y)
     beta = np.linalg.solve(R, P)
-    return beta
+    return beta, np.dot(P.T, beta)
