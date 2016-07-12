@@ -1,1 +1,3 @@
-include README.md
+include *.md
+include *.py
+recursive-include examples *.ipynb
