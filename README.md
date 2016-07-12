@@ -6,10 +6,10 @@ P4J is a python package for periodicity analysis of irregularly sampled time ser
 
 **Contents**
 - Regression using the Weighted Maximum Correntropy Criterion (WMCC)
-- Robust periodogram for irregularly sampled time series based on WMCC
+- Robust periodogram based on WMCC
 - Basic synthetic light curve generator
 
-** Demo**
+**Demo**
 
 
 **Authors** 
@@ -20,7 +20,7 @@ P4J is a python package for periodicity analysis of irregularly sampled time ser
 - José C. Príncipe (University of Florida)
 
 
-** Instalation **
+**Instalation**
 ```
 pip install P4J
 ```
