@@ -7,7 +7,7 @@ def readme():
 setup(
     name = 'P4J',
     packages = ['P4J'], 
-    version = '0.2',
+    version = '0.3',
     description = 'Periodic light curve analysis tools based on Information Theory',
     long_description=readme(),
     author = 'Pablo Huijse',
