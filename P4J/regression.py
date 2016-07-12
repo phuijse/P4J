@@ -1,12 +1,13 @@
 import numpy as np
 
 """
-Find coefficient vector (beta) that better fits data vector (y) to dictionary matrix (Phi) in terms of the Weighted Maximum Correntropy Criterion (WMCC)
+Find coefficient vector (beta in R^{Mx1}) that better fits data vector (y in R^{Nx1}) to dictionary matrix (Phi in R^{NxM}) 
     y approx np.dot(Phi, beta)
+Objective function is the Weighted Maximum Correntropy Criterion (WMCC).
 Returns beta, cost function evolution vector, and kernel size evolution vector
 """
 
-def find_beta_wmcc(y, Phi, dy, max_inner_iterations=1, max_outer_iterations=100, debug=False):
+def find_beta_WMCC(y, Phi, dy, max_inner_iterations=1, max_outer_iterations=100, debug=False):
     N, M = Phi.shape
     beta = np.zeros(shape=(M,))
     dy2 = np.power(dy, 2.0)
@@ -62,3 +63,23 @@ def find_beta_wmcc(y, Phi, dy, max_inner_iterations=1, max_outer_iterations=100,
             ks2 = dy2 + np.exp(2*log_ks)
             
     return beta, cost_history[:i], kernel_size_history[:i]
+    
+"""
+Ordinary least squares (OLS) regression for benchmark purposes
+"""
+def find_beta_OLS(y, Phi):
+    R = np.dot(Phi.T, Phi)
+    P = np.dot(Phi.T, y)
+    beta = np.linalg.solve(R, P)
+    return beta
+
+"""
+Weighted least squares (WLS) regression for benchmark purposes
+"""
+def find_beta_WLS(y, Phi, dy):
+    dy2 = np.power(dy, 2.0)
+    W_mat = np.diag(dy2)
+    R = np.dot(np.dot(Phi.T, W_mat), Phi)
+    P = np.dot(np.dot(Phi.T, W_mat), y)
+    beta = np.linalg.solve(R, P)
+    return beta
