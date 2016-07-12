@@ -9,8 +9,8 @@ P4J is a python package for periodicity analysis of irregularly sampled time ser
 - Robust periodogram based on WMCC
 - Basic synthetic light curve generator
 
-**Demo**
-
+**Example**
+https://github.com/phuijse/P4J/blob/master/P4J/demos/periodogram_demo.ipynb
 
 **Authors** 
 - Pablo Huijse (Millennium Institute of Astrophysics and Universidad de Chile)
