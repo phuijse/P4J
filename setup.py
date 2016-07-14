@@ -4,17 +4,28 @@ def readme():
     with open('README.rst') as f:
         return f.read()
 
+def version(path):
+    """
+    https://packaging.python.org/en/latest/single_source_version.html
+    """
+    version_file = read(path)
+    version_match = re.search(r"""^__version__ = ['"]([^'"]*)['"]""",
+                              version_file, re.M)
+    if version_match:
+        return version_match.group(1)
+    raise RuntimeError("Unable to find version string.")
+    
 setup(
     name = 'P4J',
     packages = ['P4J'], 
-    version = '0.3',
+    version = version('P4J/__init__.py'),
     description = 'Periodic light curve analysis tools based on Information Theory',
     long_description=readme(),
     author = 'Pablo Huijse',
     author_email = 'pablo.huijse@gmail.com',
     license='MIT',
     url = 'https://github.com/phuijse/P4J', 
-    download_url = 'https://github.com/phuijse/P4J/tarball/0.1', 
+    download_url = 'https://github.com/phuijse/P4J/tarball/stable', 
     keywords = ['astronomy periodic time series correntropy'], 
     install_requires=[
         'numpy'

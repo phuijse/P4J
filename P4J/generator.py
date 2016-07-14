@@ -38,7 +38,7 @@ given SNR. SNR is the Signal to Noise ratio of the resulting time series
 and out_p is the percentage of outlier data points. 
 SNR = var_signal**2/var_noise**2
 """
-def contaminate_time_series(t, y, SNR=10.0, out_p=0.01, rseed=None):
+def contaminate_time_series(t, y, SNR=10.0, out_p=0.0, rseed=None):
     np.random.seed(rseed)
     N = len(t)
     # First we generate s from a Gamma distribution

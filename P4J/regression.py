@@ -31,8 +31,10 @@ def find_beta_WMCC(y, Phi, dy, max_inner_iterations=1, max_outer_iterations=100,
     for i in range(0, max_outer_iterations):
         # Fixed point routine to update beta
         for j in range(0, max_inner_iterations):
-            cost = np.divide(np.exp(-0.5*np.divide(np.power(error, 2.0), ks2)), np.sqrt(ks2))
+            ks = np.sqrt(ks2)
+            cost = np.divide(np.exp(-0.5*np.divide(np.power(error, 2.0), ks2)), ks)
             cost_history[i] = np.sum(cost)/(N*np.sqrt(2.0*np.pi))
+            #cost_history[i] = np.sum(cost)/np.sum(1.0/ks)
             if i > 0 and cost_history[i] <= cost_history[i-1]*stopping_tol:
                 break
             W_mat = np.diag(np.divide(cost_history[i], ks2))
@@ -47,12 +49,17 @@ def find_beta_WMCC(y, Phi, dy, max_inner_iterations=1, max_outer_iterations=100,
         # Gradient descent with ADADELTA to update the kernel size
         e2 = np.power(error, 2.0)
         for j in range(0, max_inner_iterations):
-            cost = np.divide(np.exp(-0.5*np.divide(e2, ks2)), np.sqrt(ks2))
+            ks = np.sqrt(ks2)
+            #cost = np.divide(np.exp(-0.5*np.divide(e2, ks2)), ks)
             cost_history[i] = np.sum(cost)/(N*np.sqrt(2.0*np.pi))
+            #den = np.sum(1.0/ks)
+            #cost_history[i] = np.sum(cost)/den
             if i > 0 and cost_history[i] <= cost_history[i-1]*stopping_tol:
                 break
             W_mat = np.diag(np.divide(cost_history[i], ks2))
             grad = np.sum(np.dot(W_mat, np.divide(e2, ks2) - 1.0))*np.exp(2*log_ks)*2/(N*np.sqrt(2.0*np.pi))
+            #ks3 = np.sum(1.0/(ks2*ks))
+            #grad = (np.sum(np.dot(W_mat, np.divide(e2, ks2) - 1.0)) + cost_history[i]*ks3/den)*np.exp(2*log_ks)*2
             ks_grad2_hist = rho*ks_grad2_hist + (1.0-rho)*grad**2
             RMSgt2 = np.sqrt(ks_grad2_hist + eps)
             RMSdx = np.sqrt(ks_dx2_hist + eps)
