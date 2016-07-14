@@ -1,3 +1,4 @@
+from __future__ import division, print_function
 import numpy as np
 from scipy.stats import genextreme as gev
 from scipy.stats import gumbel_r

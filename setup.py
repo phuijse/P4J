@@ -28,7 +28,8 @@ setup(
     download_url = 'https://github.com/phuijse/P4J/tarball/stable', 
     keywords = ['astronomy periodic time series correntropy'], 
     install_requires=[
-        'numpy'
+        'numpy',
+        'scipy'
     ],
     classifiers = [
         'Natural Language :: English',

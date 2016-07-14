@@ -1,3 +1,4 @@
+from __future__ import division, print_function
 import numpy as np
 
 """
@@ -7,7 +8,7 @@ Objective function is the Weighted Maximum Correntropy Criterion (WMCC).
 Returns beta, cost function evolution vector, and kernel size evolution vector
 """
 
-def find_beta_WMCC(y, Phi, dy, max_inner_iterations=1, max_outer_iterations=100, debug=False):
+def find_beta_WMCC(y, Phi, dy, max_inner_iterations=1, max_outer_iterations=100, stopping_tol=1.01, debug=False):
     N, M = Phi.shape
     beta = np.zeros(shape=(M,))
     dy2 = np.power(dy, 2.0)
@@ -23,7 +24,6 @@ def find_beta_WMCC(y, Phi, dy, max_inner_iterations=1, max_outer_iterations=100,
     eps = 1e-6 
     ks_grad2_hist = 0.0
     ks_dx2_hist = 0.01 #This is relevant for convergence time
-    stopping_tol = 1.01
     # Main routine
     kernel_size_history[0] = np.exp(log_ks)
     ks2 = dy2 + np.exp(2*log_ks)
@@ -50,7 +50,7 @@ def find_beta_WMCC(y, Phi, dy, max_inner_iterations=1, max_outer_iterations=100,
         e2 = np.power(error, 2.0)
         for j in range(0, max_inner_iterations):
             ks = np.sqrt(ks2)
-            #cost = np.divide(np.exp(-0.5*np.divide(e2, ks2)), ks)
+            cost = np.divide(np.exp(-0.5*np.divide(e2, ks2)), ks)
             cost_history[i] = np.sum(cost)/(N*np.sqrt(2.0*np.pi))
             #den = np.sum(1.0/ks)
             #cost_history[i] = np.sum(cost)/den

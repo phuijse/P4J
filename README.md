@@ -8,6 +8,7 @@ P4J is a python package for periodicity analysis of irregularly sampled time ser
 
 - Regression using the Weighted Maximum Correntropy Criterion (WMCC)
 - Robust periodogram based on WMCC
+- False alarm probability for periodogram peaks based on extreme value statistics
 - Basic synthetic light curve generator
 
 **Instalation**
@@ -23,7 +24,6 @@ https://github.com/phuijse/P4J/blob/master/examples/periodogram_demo.ipynb
 **TODO**
 
 - Cython backend for WMCC
-- Periodogram false alarm probabilities
 - Multidimensional time series support
 
 
