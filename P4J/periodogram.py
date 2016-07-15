@@ -27,13 +27,16 @@ class periodogram:
             self.norm_constant = np.dot(y.T, np.dot(np.diag(np.power(dy, -2.0)), y))
         elif self.method == 'OLS':
             self.norm_constant = np.var(y)*len(y)*0.5
-            
+    
+    def get_best_frequency(self):
+        return self.freq[self.best_local_max[0]], self.per[self.best_local_max[0]]
+        
     def get_best_frequencies(self):
         """
         Returns the best n_local_max frequencies and their periodogram 
         values, sorted by per
         """
-        return self.freq[self.local_max_index], self.per[self.local_max_index]
+        return self.freq[self.best_local_max], self.per[self.best_local_max]
         
     def get_periodogram(self):
         return self.freq, self.per
@@ -72,7 +75,7 @@ class periodogram:
             if per[k-1] < per[k] and per[k+1] < per[k]:
                 local_max_index.append(k)
         local_max_index = np.array(local_max_index)
-        best_local_max = local_max_index[np.argsort(per[local_max_index])][::-1]
+        best_local_max = local_max_index[np.argsort(per[local_max_index])][::-1][:n_local_max]
         #print(freq[best_local_max])
         # Do finetuning
         for j in range(0, n_local_max):
@@ -93,8 +96,8 @@ class periodogram:
                     freq[best_local_max[j]] = freq_fine
                 freq_fine += fres_fine/self.T
         # Sort them
-        idx = np.argmax(per[local_max_index])
-        self.local_max_index = local_max_index[idx]
+        idx = np.argsort(per[best_local_max])[::-1]
+        self.best_local_max= best_local_max[idx]
         self.freq = freq
         self.per = per
         return freq, per
