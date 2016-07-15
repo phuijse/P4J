@@ -14,7 +14,7 @@ class periodogram:
         """
         self.method = method
         self.M = M
-        self.best_frequency = None
+        self.local_max_index = None
         self.freq = None
         self.per = None
         
@@ -28,8 +28,12 @@ class periodogram:
         elif self.method == 'OLS':
             self.norm_constant = np.var(y)*len(y)*0.5
             
-    def get_best_frequeny(self):
-        return self.best_frequency
+    def get_best_frequencies(self):
+        """
+        Returns the best n_local_max frequencies and their periodogram 
+        values, sorted by per
+        """
+        return self.freq[self.local_max_index], self.per[self.local_max_index]
         
     def get_periodogram(self):
         return self.freq, self.per
@@ -88,7 +92,9 @@ class periodogram:
                     per[best_local_max[j]] = cost
                     freq[best_local_max[j]] = freq_fine
                 freq_fine += fres_fine/self.T
-        self.best_frequency = freq[np.argmax(per)]
+        # Sort them
+        idx = np.argmax(per[local_max_index])
+        self.local_max_index = local_max_index[idx]
         self.freq = freq
         self.per = per
         return freq, per
