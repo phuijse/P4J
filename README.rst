@@ -16,6 +16,8 @@ time series problems in [2, 4].
 
 -  Regression using the Weighted Maximum Correntropy Criterion (WMCC)
 -  Robust periodogram based on WMCC
+-  False alarm probability for periodogram peaks based on extreme value
+   statistics
 -  Basic synthetic light curve generator
 
 **Instalation**
@@ -31,7 +33,6 @@ https://github.com/phuijse/P4J/blob/master/examples/periodogram\_demo.ipynb
 **TODO**
 
 -  Cython backend for WMCC
--  Periodogram false alarm probabilities
 -  Multidimensional time series support
 
 **Authors**

@@ -1,6 +1,6 @@
 from __future__ import division, print_function
 import numpy as np
-from scipy.stats import genextreme as gev
+#from scipy.stats import genextreme as gev
 from scipy.stats import gumbel_r
 from .regression import find_beta_WMCC, find_beta_OLS, find_beta_WLS
 from .dictionary import harmonic_dictionary
