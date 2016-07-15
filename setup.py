@@ -4,6 +4,14 @@ def readme():
     with open('README.rst') as f:
         return f.read()
 
+def read(*names, **kwargs):
+    with io.open(
+        os.path.join(os.path.dirname(__file__), *names),
+        encoding=kwargs.get("encoding", "utf8")
+    ) as fp:
+        return fp.read()
+
+
 def version(path):
     """
     https://packaging.python.org/en/latest/single_source_version.html
