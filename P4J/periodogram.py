@@ -17,6 +17,12 @@ class periodogram:
         self.local_max_index = None
         self.freq = None
         self.per = None
+        if self.method == 'WMCC':
+            self.get_cost = find_beta_WMCC
+        elif self.method == 'WLS':
+            self.get_cost = find_beta_WLS
+        elif self.method == 'OLS':
+            self.get_cost = find_beta_OLS
         
     def fit(self, t, y, dy):
         self.t = t
@@ -37,15 +43,6 @@ class periodogram:
     def get_periodogram(self):
         return self.freq, self.per
         
-    def get_cost(self, Phi):
-        if self.method == 'WMCC':
-            _, cost_history, _ = find_beta_WMCC(self.y, Phi, self.dy)
-            cost = cost_history[-1]
-        elif self.method == 'WLS':
-            _, cost =  find_beta_WLS(self.y, Phi, self.dy)
-        elif self.method == 'OLS':
-            _, cost = find_beta_OLS(self.y, Phi)
-        return cost
         
     def grid_search(self, fmin=0.0, fmax=1.0, fres_coarse=1.0, fres_fine=0.1, n_local_max=10):
         """ 
@@ -66,7 +63,7 @@ class periodogram:
         per = np.zeros(shape=(Nf,))
         for k in range(0, Nf):
             Phi = harmonic_dictionary(self.t, freq[k], self.M)
-            per[k] = self.get_cost(Phi)
+            _, per[k] = self.get_cost(self.y, Phi, self.dy)
         # Find the local minima and do analysis with finer frequency step
         local_max_index = []
         for k in range(1, Nf-1):
@@ -80,7 +77,7 @@ class periodogram:
             freq_fine = freq[best_local_max[j]] - fres_coarse/self.T
             for k in range(0, int(2.0*fres_coarse/fres_fine)):
                 Phi = harmonic_dictionary(self.t, freq_fine, self.M)
-                cost = self.get_cost(Phi)
+                _, cost = self.get_cost(self.y, Phi, self.dy)
                 if cost > per[best_local_max[j]]:
                     per[best_local_max[j]] = cost
                     freq[best_local_max[j]] = freq_fine
@@ -142,7 +139,7 @@ class periodogram:
             per_gev = np.zeros(shape=(n_frequencies,))
             for k in range(0, n_frequencies):
                 Phi = harmonic_dictionary(self.t, self.freq[random_freq[k]], self.M)
-                per_gev[k] = self.get_cost(Phi)
+                _, per_gev[k] = self.get_cost(y[idx[i]], Phi, dy[idx[i]])
             maxima_realization[i] = np.amax(per_gev)
         # Fit the GEV parameters
         self.param = gumbel_r.fit(maxima_realization)

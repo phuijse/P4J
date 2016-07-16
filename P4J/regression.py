@@ -2,7 +2,7 @@ from __future__ import division, print_function
 import numpy as np
 
 
-def find_beta_WMCC(y, Phi, dy, max_inner_iterations=1, max_outer_iterations=100, stopping_tol=1.01, debug=False):
+def find_beta_WMCC(y, Phi, dy, max_inner_iterations=1, max_outer_iterations=100, stopping_tol=1.01, debug=False, full_output=False):
     """
     Find coefficient vector (beta in R^{Mx1}) that better fits data 
     vector (y in R^{Nx1}) to dictionary matrix (Phi in R^{NxM}) 
@@ -85,11 +85,13 @@ def find_beta_WMCC(y, Phi, dy, max_inner_iterations=1, max_outer_iterations=100,
             log_ks += dlog_ks
             kernel_size_history[i] = np.exp(log_ks)
             ks2 = dy2 + np.exp(2*log_ks)
-            
-    return beta, cost_history[:i], kernel_size_history[:i]
+    if full_output:
+        return beta, cost_history[:i], kernel_size_history[:i]
+    else:
+        return beta, cost_history[:i][-1]
     
 
-def find_beta_OLS(y, Phi):
+def find_beta_OLS(y, Phi, dy=None):
     """
     Ordinary least squares (OLS) regression for benchmark purposes
     """
