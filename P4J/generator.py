@@ -1,11 +1,12 @@
 from __future__ import division, print_function
 import numpy as np
 
-"""
-Generates an irregularly sampled time vector with specified number of 
-samples (N) and time span (T)
-"""
+
 def irregular_sampling(T, N, rseed=None):
+    """
+    Generates an irregularly sampled time vector with specified number of 
+    samples (N) and time span (T)
+    """
     N = int(N)
     np.random.seed(rseed)
     sampling_period = (T/N)
@@ -16,12 +17,13 @@ def irregular_sampling(T, N, rseed=None):
     P = np.random.permutation(5*N)
     return np.sort(t[P[:N]])
     
-"""
-Generates a normalized trigonometric model, A corresponds to a vector
-having the amplitudes of the model and t is a time vector, f0 is the 
-fundamental frequency of the model
-"""
+
 def trigonometric_model(t, f0, A):
+    """
+    Generates a normalized trigonometric model, A corresponds to a vector
+    having the amplitudes of the model and t is a time vector, f0 is the 
+    fundamental frequency of the model
+    """
     y = 0.0
     M = len(A)
     var_y = 0.0
@@ -30,16 +32,33 @@ def trigonometric_model(t, f0, A):
         var_y += 0.5*A[k]**2
     return y/np.sqrt(var_y)
 
-"""
-A function that takes an irregulary sampled time series (t, y) 
-and contaminates it, simulating the noise present in light curves. 
-It returns (y, y_noisy, s), where s are the uncertainties 
-associated to the magnitudes (y_noisy). y will be reescaled to fit a 
-given SNR. SNR is the Signal to Noise ratio of the resulting time series 
-and out_p is the percentage of outlier data points. 
-SNR = var_signal**2/var_noise**2
-"""
-def contaminate_time_series(t, y, SNR=10.0, out_p=0.0, rseed=None):
+
+def contaminate_time_series(t, y, SNR=10.0, red_noise_ratio=0.5, outlier_ratio=0.0, rseed=None):
+    """
+    A function that takes an irregulary sampled time series (t, y) 
+    and contaminates it, simulating the noise present in light curves. 
+    It returns (y, y_noisy, s), where s are the uncertainties 
+    associated to the magnitudes (y_noisy). y will be reescaled to fit a 
+    given SNR. 
+    
+    SNR -- Signal to Noise ratio of the resulting time series in dB. SNR }
+    is defined as SNR = 10*log(var_signal/var_noise), so
+     SNR var_signal/var_noise
+     10  10
+      7   5
+      3   2
+      0   1
+     -3   0.5
+     -7   0.2
+    -10   0.1
+    outlier_ratio -- percentage of outlier data points, should be in [0, 1]
+    red_noise_ratio -- How large is the variance of the red noise with
+    respect to the white noise component. The red noise is not accounted 
+    into the uncertainties (s). Setting red_noise_ratio=0.0, would yield
+    "perfect" errorbars.
+    """
+    if outlier_ratio < 0.0 or outlier_ratio > 1.0:
+        raise ValueError("Outlier ratio should be in [0 , 1]")
     np.random.seed(rseed)
     N = len(t)
     # First we generate s from a Gamma distribution
@@ -50,9 +69,8 @@ def contaminate_time_series(t, y, SNR=10.0, out_p=0.0, rseed=None):
     # Draw a heteroscedastic white noise vector
     white_noise = np.random.multivariate_normal(np.zeros(N,), np.diag(s**2))
     # Now we generate a colored noise vector which is unaccounted in s
-    white_over_red_var = 2.0 
     phi = 0.5  # correlation coefficient
-    red_noise_variance = mean_ds_squared/white_over_red_var
+    red_noise_variance = mean_ds_squared*red_noise_ratio
     red_noise = np.random.randn(N)*np.sqrt(red_noise_variance)
     for i in range(1, N):
         red_noise[i] = phi*red_noise[i-1] + np.sqrt(1 - phi**2)*red_noise[i]
@@ -62,7 +80,7 @@ def contaminate_time_series(t, y, SNR=10.0, out_p=0.0, rseed=None):
     y = np.sqrt(SNR*var_noise)*y
     y_noisy = y + noise
     # Add outliers with a certain percentage
-    rperm = np.where(np.random.uniform(size=N) < out_p)[0]    
+    rperm = np.where(np.random.uniform(size=N) < outier_ratio)[0]    
     outlier = np.random.uniform(5.0*np.std(y), 10.0*np.std(y), size=len(rperm))
     y_noisy[rperm] += outlier
     return y, y_noisy, s
