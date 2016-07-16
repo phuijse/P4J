@@ -10,6 +10,11 @@ def find_beta_WMCC(y, Phi, dy, max_inner_iterations=1, max_outer_iterations=100,
     Objective function can be the Weighted Maximum Correntropy Criterion 
     (WMCC), Weighted Least Squares (WLS) or Ordinary Least Squares (OLS)
     
+    max_inner_iterations -- Number of iterations for fixed point and 
+    kernel size adaption routines
+    max_outer_iterations -- Number of iterations for the whole routine
+    stopping_tol -- Stopping criteria check for convergence
+    
     Returns beta, cost function evolution vector, and kernel size 
     evolution vector. The latter two are only relevant for the WMCC
     
