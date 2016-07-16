@@ -4,19 +4,30 @@ import numpy as np
 from scipy.stats import gumbel_r
 from .regression import find_beta_WMCC, find_beta_OLS, find_beta_WLS
 from .dictionary import harmonic_dictionary
+#from multiprocessing import Pool
+#from multiprocess import Pool
+#from functools import partial
+
+
+#def unwrap_self(arg, **kwarg):
+#    return periodogram.compute_per_ordinate(*arg, **kwarg)
 
 class periodogram:
-    def __init__(self, method='WMCC', M=1):
+    def __init__(self, method='WMCC', M=1, n_jobs=1):
         """
         Class for multiharmonic periodogram computation
         M -- number of harmonic components used to fit the data
         method -- method used to perform the fit, options are OLS, WLS and WMCC
+        n_jobs -- number of parallel jobs for periodogram computation, greater than 1
         """
+        if n_jobs < 1:
+            raise ValueError("Number of jobs must be greater than 0")
         self.method = method
         self.M = M
         self.local_max_index = None
         self.freq = None
         self.per = None
+        self.n_jobs = n_jobs
         if self.method == 'WMCC':
             self.get_cost = find_beta_WMCC
         elif self.method == 'WLS':
@@ -43,7 +54,11 @@ class periodogram:
     def get_periodogram(self):
         return self.freq, self.per
         
-        
+    def compute_per_ordinate(self, f):
+        Phi = harmonic_dictionary(self.t, f, self.M)
+        _, per = self.get_cost(self.y, Phi, self.dy)
+        return per
+    
     def grid_search(self, fmin=0.0, fmax=1.0, fres_coarse=1.0, fres_fine=0.1, n_local_max=10):
         """ 
         Computes self.method over a grid of frequencies specified by
@@ -61,7 +76,22 @@ class periodogram:
         freq = np.arange(np.amax([fmin, fres_coarse/self.T]), fmax, step=fres_coarse/self.T)
         Nf = len(freq)
         per = np.zeros(shape=(Nf,))
+        
+        """
+        #partial_job = partial(self.compute_per_ordinate)
+        if self.n_jobs <= 1:
+            m = map
+        else:
+            pool = Pool(self.n_jobs)
+            m = pool.map
+        per = list(m(self.compute_per_ordinate, freq))
+        if self.n_jobs > 1:
+            pool.close()
+            pool.join()
+        per = np.asarray(per, dtype=float)
+        """        
         for k in range(0, Nf):
+            #per[k] = self.compute_per_ordinate(freq[k], self.t, self.y, self.dy, self.M)
             Phi = harmonic_dictionary(self.t, freq[k], self.M)
             _, per[k] = self.get_cost(self.y, Phi, self.dy)
         # Find the local minima and do analysis with finer frequency step
