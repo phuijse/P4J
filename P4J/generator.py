@@ -77,10 +77,11 @@ def contaminate_time_series(t, y, SNR=10.0, red_noise_ratio=0.5, outlier_ratio=0
     # The final noise vector
     noise = white_noise + red_noise 
     var_noise = mean_ds_squared + red_noise_variance
-    y = np.sqrt(SNR*var_noise)*y
+    SNR_unitless = 10.0**(SNR/10.0)
+    y = np.sqrt(SNR_unitless*var_noise)*y
     y_noisy = y + noise
     # Add outliers with a certain percentage
-    rperm = np.where(np.random.uniform(size=N) < outier_ratio)[0]    
+    rperm = np.where(np.random.uniform(size=N) < outlier_ratio)[0]    
     outlier = np.random.uniform(5.0*np.std(y), 10.0*np.std(y), size=len(rperm))
     y_noisy[rperm] += outlier
     return y, y_noisy, s
