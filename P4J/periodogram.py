@@ -38,9 +38,16 @@ class periodogram:
         elif self.method == 'OLS':
             self.get_cost = find_beta_OLS
         
-    def fit(self, t, y, dy):
+    def fit(self, t, y, dy, subtract_average=True):
+        """
+        Save the time series data, subtracts the weighted mean from y
+        """
         self.t = t
-        self.y = y #- np.mean(y)
+        if subtract_mean:
+            w = np.power(dy, -2.0)
+            self.y = y - np.sum(w*y)/np.sum(w)
+        else:
+            self.y = y
         self.dy = dy
         self.T = t[-1] - t[0]
     
