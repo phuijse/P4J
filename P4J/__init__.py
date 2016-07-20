@@ -3,4 +3,4 @@ from .dictionary import harmonic_dictionary
 from .generator import contaminate_time_series, irregular_sampling, trigonometric_model
 from .periodogram import periodogram
 
-__version__ = '0.5'
+__version__ = '0.6'

@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 from __future__ import division, print_function
 import numpy as np
 #from scipy.stats import genextreme as gev
@@ -18,7 +21,7 @@ class periodogram:
         Class for multiharmonic periodogram computation
         M -- number of harmonic components used to fit the data
         method -- method used to perform the fit, options are OLS, WLS and WMCC
-        n_jobs -- number of parallel jobs for periodogram computation, greater than 1
+        n_jobs -- number of parallel jobs for periodogram computation, greater than 1, NOT IMPLEMENTED
         """
         if n_jobs < 1:
             raise ValueError("Number of jobs must be greater than 0")
