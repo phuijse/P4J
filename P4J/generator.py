@@ -115,7 +115,7 @@ def contaminate_time_series(t, y, SNR=10.0, red_noise_ratio=0.5, outlier_ratio=0
     #phi = 0.5  # correlation coefficient
     red_noise_variance = mean_ds_squared*red_noise_ratio
     # First order markovian process to generate 
-    red_noise = first_order_markov_process(t, red_noise_variance, 10.0)
+    red_noise = first_order_markov_process(t, red_noise_variance, 1.0)
     """
     # The following is not ok for irregularly sampled time series
     red_noise = np.random.randn(N)*np.sqrt(red_noise_variance)

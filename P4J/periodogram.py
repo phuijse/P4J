@@ -43,7 +43,7 @@ class periodogram:
         Save the time series data, subtracts the weighted mean from y
         """
         self.t = t
-        if subtract_mean:
+        if subtract_average:
             w = np.power(dy, -2.0)
             self.y = y - np.sum(w*y)/np.sum(w)
         else:
