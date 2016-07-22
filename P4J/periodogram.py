@@ -110,7 +110,11 @@ class periodogram:
             if per[k-1] < per[k] and per[k+1] < per[k]:
                 local_max_index.append(k)
         local_max_index = np.array(local_max_index)
-        best_local_max = local_max_index[np.argsort(per[local_max_index])][::-1][:n_local_max]
+        best_local_max = local_max_index[np.argsort(per[local_max_index])][::-1]
+        if n_local_max > 0:
+            best_local_max = best_local_max[:n_local_max]
+        else:
+            best_local_max = best_local_max[0]
         #print(freq[best_local_max])
         # Do finetuning
         for j in range(0, n_local_max):
@@ -124,7 +128,10 @@ class periodogram:
                 freq_fine += fres_fine/self.T
         # Sort them
         idx = np.argsort(per[best_local_max])[::-1]
-        self.best_local_max= best_local_max[idx]
+        if n_local_max > 0:
+            self.best_local_max= best_local_max[idx]
+        else:
+            self.best_local_max= best_local_max
         self.freq = freq
         self.per = per
         return freq, per

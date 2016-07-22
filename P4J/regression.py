@@ -106,6 +106,7 @@ def find_beta_WLS(y, Phi, dy):
     Weighted least squares (WLS) regression for benchmark purposes
     """
     W = np.power(dy, -2.0)
+    W = W/np.sum(W)
     #W_mat = np.diag(dy2)
     R = np.dot(Phi.T*W, Phi)
     P = np.dot(Phi.T*W, y)
