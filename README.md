@@ -20,6 +20,7 @@ pip install P4J
 **Example**
 
 https://github.com/phuijse/P4J/blob/master/examples/periodogram_demo.ipynb
+https://github.com/phuijse/P4J/blob/master/examples/regression_demo.ipynb
 
 **TODO**
 

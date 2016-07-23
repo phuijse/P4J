@@ -3,25 +3,59 @@
 
 from __future__ import division, print_function
 import numpy as np
-#from scipy.stats import genextreme as gev
-from scipy.stats import gumbel_r
+from scipy.stats import gumbel_r, genextreme
 from .regression import find_beta_WMCC, find_beta_OLS, find_beta_WLS
 from .dictionary import harmonic_dictionary
 #from multiprocessing import Pool
-#from multiprocess import Pool
 #from functools import partial
-
-
-#def unwrap_self(arg, **kwarg):
-#    return periodogram.compute_per_ordinate(*arg, **kwarg)
 
 class periodogram:
     def __init__(self, method='WMCC', M=1, n_jobs=1):
         """
         Class for multiharmonic periodogram computation
-        M -- number of harmonic components used to fit the data
-        method -- method used to perform the fit, options are OLS, WLS and WMCC
-        n_jobs -- number of parallel jobs for periodogram computation, greater than 1, NOT IMPLEMENTED
+        
+        The multiharmonic periodogram of a time series is obtained by 
+        fitting a multiharmonic model to the time series at several different
+        frequencies. The method used to perform the fitting defines the 
+        properties of the periodogram, options are: Ordinary Least 
+        Squares (OLS), Weighted Least Squares (WLS) and Weighted
+        Maximum Correntropy Criterion (WMCC). 
+        
+        Correntropy  is a generalized correlation for random variables 
+        that is robust to outliers and non-Gaussian noise. For more 
+        details on correntropy and the MCC we suggest
+        
+        J. C. Principe, "Information Theoretic Learning, Renyi's Entropy 
+        and Kernel Perspectives", Springer, 2010, Chapters 2 and 10.
+        
+        
+        Parameters
+        ---------
+        M: positive interger
+            Number of harmonic components used to fit the data
+        method: {'OLS', 'WLS', 'WMCC'} 
+            Method used to perform the fit
+        n_jobs: positive integer 
+            Number of parallel jobs for periodogram computation, NOT IMPLEMENTED
+            
+        Example
+        -------
+        
+        This will compute a periodogram for a time series (t, y, dy), 
+        where t, y and dy are ndarray vectors of length N, where y is 
+        the variable of interest, t are the time instants where y was 
+        sampled and dy are the uncertainties associated to y.
+        
+        >>> import P4J
+        >>> my_per = P4J.periodogram(M=3, method='WMCC')
+        >>> my_per.fit(t, y, dy)
+        >>> my_per.grid_search(0.0, 5.0, 1.0, 0.1, n_local_max=10)
+        >>> my_per.fit_extreme_cdf(n_bootstrap=50, n_frequencies=100)
+        >>> fbest = my_per.get_best_frequency()
+        >>> conf = my_per.get_confidence(fbest[1])
+        >>> print("Best frequency is %0.5f" %(fbest[0]))
+        >>> print("with confidence: %0.3f" %(conf))
+        
         """
         if n_jobs < 1:
             raise ValueError("Number of jobs must be greater than 0")
@@ -71,35 +105,50 @@ class periodogram:
     
     def grid_search(self, fmin=0.0, fmax=1.0, fres_coarse=1.0, fres_fine=0.1, n_local_max=10):
         """ 
-        Computes self.method over a grid of frequencies specified by
-        fmin -- starting frequency
-        fmax -- stopping frequency
-        fres_coarse -- step size in the frequency grid, note that the 
-        actual frequency step is fres_coarse/self.T, where T is the 
-        total time span of the time series
+        Computes self.method (OLS, WLS, WMCC) over a grid of frequencies 
+        with limits and resolution specified by the inputs. After that
+        the best local maxima are evaluated over a finer frequency grid
         
-        Then it refines (fine-tune) the estimation for a given number of local maxima:
-        n_local_max -- number of local maxima to refine
-        fres_fine -- oversampling factor for the fine-tuning step
+        Parameters
+        ---------
+        fmin: float
+            starting frequency
+        fmax: float
+            stopping frequency
+        fres_coarse: float
+            step size in the frequency grid, note that the actual 
+            frequency step is fres_coarse/self.T, where T is the 
+            total time span of the time series
+        fres_fine: float
+            step size in the frequency grid for frequency fine-tuning
+        n_local_max: zero or positive integer
+            Number of frequencies to be refined using fres_fine 
+        
+        Returns
+        -------
+        freq: ndarray
+            frequency array that was sweeped to compute the periodogram
+        
+        per: ndarray
+            periodogram evaluated at the frequencies given in freq
         """
         self.fres_coarse = fres_coarse
         freq = np.arange(np.amax([fmin, fres_coarse/self.T]), fmax, step=fres_coarse/self.T)
         Nf = len(freq)
-        per = np.zeros(shape=(Nf,))
+        per = np.zeros(shape=(Nf,))      
         
-        """
         #partial_job = partial(self.compute_per_ordinate)
-        if self.n_jobs <= 1:
-            m = map
-        else:
-            pool = Pool(self.n_jobs)
-            m = pool.map
-        per = list(m(self.compute_per_ordinate, freq))
-        if self.n_jobs > 1:
-            pool.close()
-            pool.join()
-        per = np.asarray(per, dtype=float)
-        """        
+        #if self.n_jobs <= 1:
+        #    m = map
+        #else:
+        #    pool = Pool(self.n_jobs)
+        #    m = pool.map
+        #per = list(m(self.compute_per_ordinate, freq))
+        #if self.n_jobs > 1:
+        #    pool.close()
+        #    pool.join()
+        #per = np.asarray(per, dtype=float)
+              
         for k in range(0, Nf):
             #per[k] = self.compute_per_ordinate(freq[k], self.t, self.y, self.dy, self.M)
             Phi = harmonic_dictionary(self.t, freq[k], self.M)
@@ -151,20 +200,29 @@ class periodogram:
     def fit_extreme_cdf(self, n_bootstrap=10, n_frequencies=10):
         """
         Perform false alarm probability (FAP) computation based on 
-        generalized extreme value (gev) statistics. 
+        generalized extreme value (gev) statistics and bootstrapping 
         
-        n_bootstrap -- the number of bootstrap repetitions of time 
-        series (t,y,dy)
-        n_frequencies -- the number of frequencies to search for maxima, 
-        it is a subset of self.freq
+        Parameters
+        --------
+        n_bootstrap: positive integer
+            The number of bootstrap repetitions of time series (t,y,dy)
+        n_frequencies: positive integer
+            The number of frequencies to search for maxima, it is a 
+            subset of self.freq
         
-        Returns the maxima for each bootstrap repetition and the
-        parameters resulting from the fit
+        Returns
+        -------
+        maxima_realization: ndarray
+            The maxima for each bootstrap repetition
+        param: ndarray 
+            The parameters resulting from GEV the fit
         
-        Reference:
+        Reference
+        --------
         Süveges, M. "False Alarm Probability based on bootstrap and 
         extreme-value methods for periodogram peaks." ADA7-Seventh 
         Conference on Astronomical Data Analysis. Vol. 1. 2012.
+        
         """
         
         y = self.y.copy()

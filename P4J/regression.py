@@ -2,21 +2,33 @@ from __future__ import division, print_function
 import numpy as np
 
 
-def find_beta_WMCC(y, Phi, dy, max_inner_iterations=1, max_outer_iterations=100, stopping_tol=1.01, debug=False, full_output=False):
+def find_beta_WMCC(y, Phi, dy, max_inner_iterations=1, max_outer_iterations=100, stopping_tol=1.01, full_output=False):
     """
-    Find coefficient vector (beta in R^{Mx1}) that better fits data 
+    Finds coefficient vector (beta in R^{Mx1}) that better fits data 
     vector (y in R^{Nx1}) to dictionary matrix (Phi in R^{NxM}) 
         y approx np.dot(Phi, beta)
-    Objective function can be the Weighted Maximum Correntropy Criterion 
-    (WMCC), Weighted Least Squares (WLS) or Ordinary Least Squares (OLS)
     
-    max_inner_iterations -- Number of iterations for fixed point and 
-    kernel size adaption routines
-    max_outer_iterations -- Number of iterations for the whole routine
-    stopping_tol -- Stopping criteria check for convergence
+    Parameters
+    ----------
+    max_inner_iterations: positive integer
+        Number of iterations for fixed point and kernel size adaption 
+        routines
+    max_outer_iterations: positive integer
+        Number of iterations for the main routine
+    stopping_tol: float
+        Stopping criteria check for convergence
+    full_output: bool
+        Whether to return the history of the cost function and kernel size
     
-    Returns beta, cost function evolution vector, and kernel size 
-    evolution vector. The latter two are only relevant for the WMCC
+    Returns
+    -------
+    beta: ndarray
+        Parameter vector resulting from fitting Phi to y
+    cost_history: ndarray
+        Vector containing the evolution of the cost function
+    kernel_size: ndarray
+        Vector containing the evolution of the kernel size
+
     
     TODO: Study kernel size normalizations for WMCC
     """
@@ -52,15 +64,11 @@ def find_beta_WMCC(y, Phi, dy, max_inner_iterations=1, max_outer_iterations=100,
                 break
             W = np.divide(cost, ks2)  # diagonal matrix
             beta = np.linalg.solve(np.dot(PhiT*W, Phi), np.dot(PhiT*W, y))
-            """
-            TODO: Inversion could be not feasible, check conditioning, add regularization...
-            """
+            #TODO: Inversion could be not feasible, check conditioning, add regularization...
             error = y - np.dot(Phi, beta)
             #grad = np.dot(A.T, np.dot(W, e))/(N*np.sqrt(2.0*np.pi))
             #beta += lr*grad
         if i > 0 and cost_history[i] <= cost_history[i-1]*stopping_tol:  # More sophisticated stopping criteria could be tried
-            if debug:
-                print("Breaking at iteration %d" % i)
             break    
         # Gradient descent with ADADELTA to update the kernel size
         e2 = np.power(error, 2.0)
@@ -107,7 +115,6 @@ def find_beta_WLS(y, Phi, dy):
     """
     W = np.power(dy, -2.0)
     W = W/np.sum(W)
-    #W_mat = np.diag(dy2)
     R = np.dot(Phi.T*W, Phi)
     P = np.dot(Phi.T*W, y)
     beta = np.linalg.solve(R, P)
