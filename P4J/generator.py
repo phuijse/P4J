@@ -340,12 +340,13 @@ def generate_uncertainties(N, dist='Gamma', rseed=None):
         
     """
     np.random.seed(rseed)  
+    print(dist)
     if dist == 'EMG':  # Exponential modified Gaussian
         # the mean of a EMG rv is mu + 1/(K*sigma)
         # the variance of a EMG rv is sigma**2 + 1/(K*sigma)**2
         K = 1.824328605481941
-        sigma = 0.068768312946785953
-        mu = 0.87452567616276777
+        sigma = 0.05*0.068768312946785953
+        mu = 0.05*0.87452567616276777
         # IMPORTANT NOTE
         # These parameters were obtained after fitting uncertainties
         # coming from 10,000 light curves of the VVV survey
@@ -355,7 +356,7 @@ def generate_uncertainties(N, dist='Gamma', rseed=None):
         # The mean of a gamma rv is k*sigma
         # The variance of a gamma rv is k*sigma**2
         k = 3.0
-        sigma = 0.05/k  #  mean=0.05, var=0.05**2
+        sigma = 0.05/k  #  mean=0.05, var=0.05**2/k
         s = gamma.rvs(k, loc=0.0, scale=sigma, size=N)
         expected_s_2 = k*(1+k)*sigma**2  
     return s, expected_s_2

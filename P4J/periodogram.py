@@ -72,17 +72,17 @@ class periodogram:
         elif self.method == 'OLS':
             self.get_cost = find_beta_OLS
         
-    def fit(self, t, y, dy, subtract_average=True):
+    def fit(self, t, y, s, subtract_average=True):
         """
         Save the time series data, subtracts the weighted mean from y
         """
         self.t = t
         if subtract_average:
-            w = np.power(dy, -2.0)
+            w = np.power(s, -2.0)
             self.y = y - np.sum(w*y)/np.sum(w)
         else:
             self.y = y
-        self.dy = dy
+        self.s = s
         self.T = t[-1] - t[0]
     
     def get_best_frequency(self):
@@ -100,7 +100,7 @@ class periodogram:
         
     def compute_per_ordinate(self, f):
         Phi = harmonic_dictionary(self.t, f, self.M)
-        _, per = self.get_cost(self.y, Phi, self.dy)
+        _, per = self.get_cost(self.y, Phi, self.s)
         return per
     
     def grid_search(self, fmin=0.0, fmax=1.0, fres_coarse=1.0, fres_fine=0.1, n_local_max=10):
@@ -152,7 +152,7 @@ class periodogram:
         for k in range(0, Nf):
             #per[k] = self.compute_per_ordinate(freq[k], self.t, self.y, self.dy, self.M)
             Phi = harmonic_dictionary(self.t, freq[k], self.M)
-            _, per[k] = self.get_cost(self.y, Phi, self.dy)
+            _, per[k] = self.get_cost(self.y, Phi, self.s)
         # Find the local minima and do analysis with finer frequency step
         local_max_index = []
         for k in range(1, Nf-1):
@@ -170,7 +170,7 @@ class periodogram:
             freq_fine = freq[best_local_max[j]] - fres_coarse/self.T
             for k in range(0, int(2.0*fres_coarse/fres_fine)):
                 Phi = harmonic_dictionary(self.t, freq_fine, self.M)
-                _, cost = self.get_cost(self.y, Phi, self.dy)
+                _, cost = self.get_cost(self.y, Phi, self.s)
                 if cost > per[best_local_max[j]]:
                     per[best_local_max[j]] = cost
                     freq[best_local_max[j]] = freq_fine
@@ -189,7 +189,8 @@ class periodogram:
         """
         Computes the confidence for a given periodogram value
         """
-        return gumbel_r.cdf(per_value, loc=self.param[0], scale=self.param[1])
+        # return gumbel_r.cdf(per_value, loc=self.param[0], scale=self.param[1])
+        return genextreme.cdf(per_value, self.param[0], loc=self.param[1], scale=self.param[2])
     
     def get_FAP(self, p):
         """
@@ -197,7 +198,7 @@ class periodogram:
         """
         return self.param[0] - self.param[1]*np.log(-np.log(1.0-p))
 
-    def fit_extreme_cdf(self, n_bootstrap=10, n_frequencies=10):
+    def fit_extreme_cdf(self, n_bootstrap=100, n_frequencies=10, rseed=None):
         """
         Perform false alarm probability (FAP) computation based on 
         generalized extreme value (gev) statistics and bootstrapping 
@@ -219,14 +220,13 @@ class periodogram:
         
         Reference
         --------
-        Süveges, M. "False Alarm Probability based on bootstrap and 
-        extreme-value methods for periodogram peaks." ADA7-Seventh 
-        Conference on Astronomical Data Analysis. Vol. 1. 2012.
+        M. Süveges, "Extreme-value modelling for the significance 
+        assessment of periodogram peaks", MNRAS, 2012.
         
         """
-        
+        np.random.seed(rseed)
         y = self.y.copy()
-        dy = self.dy.copy()
+        s = self.s.copy()
         #K = int(1.0/self.fres_coarse)  # oversampling factor 
         K = 1
         N = len(self.t)
@@ -242,11 +242,15 @@ class periodogram:
         for i in range(0, n_bootstrap):  # bootstrap
             random_freq = np.random.permutation(Nf)[:n_frequencies]
             per_gev = np.zeros(shape=(n_frequencies,))
+            yr = y[idx[i]]
+            sr = s[idx[i]]
             for k in range(0, n_frequencies):
                 Phi = harmonic_dictionary(self.t, self.freq[random_freq[k]], self.M)
-                _, per_gev[k] = self.get_cost(y[idx[i]], Phi, dy[idx[i]])
+                _, per_gev[k] = self.get_cost(yr, Phi, sr)
             maxima_realization[i] = np.amax(per_gev)
         # Fit the GEV parameters
-        self.param = gumbel_r.fit(maxima_realization)
-        #return self.param[0] - self.param[1]*np.log(-np.log(1.0-p))
+        #self.param = gumbel_r.fit(maxima_realization)
+        s_init = np.std(maxima_realization)
+        mu_init = np.mean(maxima_realization) - 0.5*s_init
+        self.param = genextreme.fit(maxima_realization, 0.001, loc=mu_init, scale=s_init)
         return maxima_realization, self.param
