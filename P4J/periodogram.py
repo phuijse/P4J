@@ -196,7 +196,11 @@ class periodogram:
         """
         Computes the periodogram value associated to FAP=p
         """
-        return self.param[0] - self.param[1]*np.log(-np.log(1.0-p))
+        #return self.param[0] - self.param[1]*np.log(-np.log(1.0-p))
+        mu = self.param[1]
+        ss = self.param[2]
+        chi = -self.param[0]
+        return mu + (ss/chi)*((-np.log(1.0-p))**(-chi) -1.0)
 
     def fit_extreme_cdf(self, n_bootstrap=100, n_frequencies=10, rseed=None):
         """
