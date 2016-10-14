@@ -4,7 +4,7 @@
 from __future__ import division, print_function
 import numpy as np
 from scipy.stats import gumbel_r, genextreme
-from .regression import find_beta_WMCC, find_beta_OLS, find_beta_WLS
+from .regression import find_beta_WMEE, find_beta_WMCC, find_beta_OLS, find_beta_WLS
 from .dictionary import harmonic_dictionary
 #from multiprocessing import Pool
 #from functools import partial
@@ -18,12 +18,14 @@ class periodogram:
         fitting a multiharmonic model to the time series at several different
         frequencies. The method used to perform the fitting defines the 
         properties of the periodogram, options are: Ordinary Least 
-        Squares (OLS), Weighted Least Squares (WLS) and Weighted
-        Maximum Correntropy Criterion (WMCC). 
+        Squares (OLS), Weighted Least Squares (WLS), Weighted
+        Maximum Correntropy Criterion (WMCC) and Weighted Minimum
+        Error Entropy (WMEE).
         
         Correntropy  is a generalized correlation for random variables 
-        that is robust to outliers and non-Gaussian noise. For more 
-        details on correntropy and the MCC we suggest
+        that is robust to outliers and non-Gaussian noise. For entropy Renyi's
+        quadratic entropy is used. Entropy is estimated using Parzen windows.
+        For more details on correntropy/entropy and the MCC/MEE we suggest
         
         J. C. Principe, "Information Theoretic Learning, Renyi's Entropy 
         and Kernel Perspectives", Springer, 2010, Chapters 2 and 10.
@@ -33,7 +35,7 @@ class periodogram:
         ---------
         M: positive interger
             Number of harmonic components used to fit the data
-        method: {'OLS', 'WLS', 'WMCC'} 
+        method: {'OLS', 'WLS', 'WMCC', 'WMEE'} 
             Method used to perform the fit
         n_jobs: positive integer 
             Number of parallel jobs for periodogram computation, NOT IMPLEMENTED
@@ -67,6 +69,8 @@ class periodogram:
         self.n_jobs = n_jobs
         if self.method == 'WMCC':
             self.get_cost = find_beta_WMCC
+        elif self.method == 'WMEE':
+            self.get_cost = find_beta_WMEE
         elif self.method == 'WLS':
             self.get_cost = find_beta_WLS
         elif self.method == 'OLS':
@@ -98,10 +102,13 @@ class periodogram:
     def get_periodogram(self):
         return self.freq, self.per
         
-    def compute_per_ordinate(self, f):
-        Phi = harmonic_dictionary(self.t, f, self.M)
-        _, per = self.get_cost(self.y, Phi, self.s)
-        return per
+    #def compute_per_ordinate(self, f):
+    #    Phi = harmonic_dictionary(self.t, f, self.M)
+    #    beta, per = self.get_cost(self.y, Phi, self.s)
+    #    if self.method == 'WMCC':
+    #        return np.linalg.norm(beta)
+    #    else: 
+    #        return per
     
     def grid_search(self, fmin=0.0, fmax=1.0, fres_coarse=1.0, fres_fine=0.1, n_local_max=10):
         """ 
@@ -151,6 +158,7 @@ class periodogram:
               
         for k in range(0, Nf):
             #per[k] = self.compute_per_ordinate(freq[k], self.t, self.y, self.dy, self.M)
+            #print(freq[k])
             Phi = harmonic_dictionary(self.t, freq[k], self.M)
             _, per[k] = self.get_cost(self.y, Phi, self.s)
         # Find the local minima and do analysis with finer frequency step

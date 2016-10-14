@@ -6,16 +6,22 @@ P4J
 P4J is a python package for periodicity analysis of irregularly sampled
 time series based on Information Theoretic objective functions. P4J was
 developed for astronomical light curves, irregularly sampled time series
-of stellar magnitude or flux. These routines are build on the concept of
-**correntropy** [1], a generalized correlation function that
-incorporates higher order statistics of the process, lifting the
-assumption of Gaussianity. Correntropy has been used in astronomical
-time series problems in [2, 4].
+of stellar magnitude or flux. These routines are build on the information 
+theoretic concepts such as entropy and **correntropy** [1]. Correntropy is
+a generalized correlation function that incorporates higher order 
+statistics of the process, lifting the assumption of Gaussianity. 
+Correntropy has been used in astronomical time series problems in [2, 4].
+To compute entropy we adopt the Renyi's quadratic entropy definition and
+estimate it via Parzen windows [1]. Minimizing the entropy of the error 
+between observations and model yields a robust regression criterion. Using
+entropy and correntropy based regression on harmonic function robust 
+periodograms are obtained.
 
 **Contents**
 
 -  Regression using the Weighted Maximum Correntropy Criterion (WMCC)
--  Robust periodogram based on WMCC
+-  Regression using the Weighted Minimum Error Entropy (WMEE) criterion
+-  Robust periodogram based on WMCC and WMEE
 -  False alarm probability for periodogram peaks based on extreme value
    statistics
 -  Basic synthetic light curve generator
@@ -32,7 +38,7 @@ https://github.com/phuijse/P4J/blob/master/examples/periodogram\_demo.ipynb
 
 **TODO**
 
--  Cython backend for WMCC
+-  Cython backend for WMCC/WMEE
 -  Multidimensional time series support
 
 **Authors**
