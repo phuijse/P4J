@@ -2,6 +2,19 @@ import re
 import io
 import os
 from setuptools import setup
+from setuptools.extension import Extension
+from Cython.Build import cythonize
+import numpy as np
+
+extensions = [
+        Extension("*",
+            ["P4J/*.pyx"],
+            extra_compile_args=['-O3', '-march=native', '-ffast-math'],
+            include_dirs=[np.get_include()],
+            libraries=['m'],
+            library_dirs=[]
+            ),
+        ]
 
 
 def readme():
@@ -30,6 +43,7 @@ def version(path):
 setup(
     name = 'P4J',
     packages = ['P4J'], 
+    ext_modules = cythonize(extensions, annotate=False),
     version = version('P4J/__init__.py'),
     description = 'Periodic light curve analysis tools based on Information Theory',
     long_description=readme(),
@@ -39,9 +53,12 @@ setup(
     url = 'https://github.com/phuijse/P4J', 
     download_url = 'https://github.com/phuijse/P4J/tarball/stable', 
     keywords = ['astronomy periodic time series correntropy'], 
+    setup_requires=[
+        'cython',
+    ],
     install_requires=[
         'numpy',
-        'scipy'
+        'scipy',
     ],
     classifiers = [
         'Natural Language :: English',

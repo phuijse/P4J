@@ -340,7 +340,7 @@ def generate_uncertainties(N, dist='Gamma', rseed=None):
         
     """
     np.random.seed(rseed)  
-    print(dist)
+    #print(dist)
     if dist == 'EMG':  # Exponential modified Gaussian
         # the mean of a EMG rv is mu + 1/(K*sigma)
         # the variance of a EMG rv is sigma**2 + 1/(K*sigma)**2
