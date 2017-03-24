@@ -29,7 +29,7 @@ Phase Dispersion Minimization [5] and Lafler-Kinman's string length [6].
 
 **Example**
 
-https://github.com/phuijse/P4J/blob/master/examples/periodogram\_demo.ipynb
+https://github.com/phuijse/P4J/examples/periodogram\_demo.ipynb
 
 **TODO**
 
