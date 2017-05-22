@@ -25,7 +25,9 @@ def weight_array(x, counts):
     weights is a N float array, it expects sum w_i = 1
 """
 
+
 def wIQR(x, weights):
+
     wx = weight_array(x, np.round(2.0*weights/np.amin(weights)).astype('int'))
     return np.percentile(wx, 75) - np.percentile(wx, 25)
 

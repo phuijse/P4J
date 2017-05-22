@@ -10,13 +10,10 @@ from .PDM import PDM
 #from scipy.stats import gumbel_r, genextreme
 #from .regression import find_beta_WMEE, find_beta_WMCC, find_beta_OLS, find_beta_WLS
 #from .dictionary import harmonic_dictionary
-#from multiprocessing import Pool
-#from functools import partial
-
 
 
 class periodogram:
-    def __init__(self, method='QMI', n_jobs=1):
+    def __init__(self, method='QME', n_jobs=1, debug=False):
         """
         Class for light curve periodogram computation
 
@@ -55,7 +52,11 @@ class periodogram:
         self.local_optima_index = None
         self.freq = None
         self.per = None
+        self.debug = debug
         self.n_jobs = n_jobs
+        methods = ["QMICS", "QMIEU", "QME", "PDM1", "LKSL"]
+        if not method in methods:
+            raise ValueError("Wrong method")
         
     def set_data(self, mjd, mag, err, whitten=False, **kwarg):
         """
@@ -85,27 +86,28 @@ class periodogram:
         self.mjd = self.mjd.astype('float32')
         self.mag = self.mag.astype('float32')
         self.err = self.err.astype('float32')
-        if self.method == 'QMI':
+        if self.method == 'QMICS' or self.method == 'QMIEU' or self.method == 'QME':
             if whitten:
                 hm = 0.9*self.N**(-0.2) # Silverman's rule, assuming data is whittened
             else:
                 hm = 0.9*self.scale*self.N**(-0.2)
-            #print(hm)
             if 'h_KDE_M' in kwarg:
                 hm = hm*kwarg['h_KDE_M']
-            hp = 0.9/np.sqrt(12)*self.N**(-0.2)
-            #print(hp)
+            #hp = 0.9/np.sqrt(12)*self.N**(-0.2)
+            hp = 1.0 # TODO : How to choose this more appropietly
             if 'h_KDE_P' in kwarg:
                 hp = hp*kwarg['h_KDE_P']
+            if self.debug:
+                print("Kernel bandwidths: %f , %f" %(hm, hp))
             self.my_QMI = QMI(self.mjd, self.mag, self.err, hm, hp)
         elif self.method == 'LKSL':
             self.my_SL = LKSL(self.mjd, self.mag, self.err)
         elif self.method == 'PDM1':
-            Nbins = self.N/3
             if 'Nbins' in kwarg:
                 Nbins = kwarg['Nbins']
+            else:
+                Nbins = self.N/3
             self.my_PDM = PDM(self.mjd, self.mag, self.err, Nbins)
-#            self.PDM_normalizer = wSTD(self.mag, self.weights)
 
    
     def get_best_frequency(self):
@@ -115,7 +117,7 @@ class periodogram:
         """
         Returns the best n_local_max frequencies
         """
-        return self.freq[self.best_local_optima]
+        return self.freq[self.best_local_optima], self.per[self.best_local_optima]
         
     def get_periodogram(self):
         return self.freq, self.per
@@ -178,19 +180,7 @@ class periodogram:
         self.fres_grid = fresolution
         freq = np.arange(np.amax([fmin, fresolution/self.time_span]), fmax, step=fresolution/self.time_span).astype('float32')
         Nf = len(freq)
-        per = np.zeros(shape=(Nf,)).astype('float32')      
-        
-        #partial_job = partial(self.compute_per_ordinate)
-        #if self.n_jobs <= 1:
-        #    m = map
-        #else:
-        #    pool = Pool(self.n_jobs)
-        #    m = pool.map
-        #per = list(m(self.compute_per_ordinate, freq))
-        #if self.n_jobs > 1:
-        #    pool.close()
-        #    pool.join()
-        #per = np.asarray(per, dtype=float)
+        per = np.zeros(shape=(Nf,)).astype('float32')     
               
         for k in range(0, Nf):
             per[k] = self.compute_metric(freq[k])
@@ -198,8 +188,12 @@ class periodogram:
         self.per = per
 
     def compute_metric(self, freq):
-        if self.method == 'QMI':
-            return self.my_QMI.eval_frequency(freq)
+        if self.method == 'QMICS':
+            return self.my_QMI.eval_frequency(freq, 0)
+        elif self.method == 'QMIEU':
+             return self.my_QMI.eval_frequency(freq, 1)
+        elif self.method == 'QME':
+              return self.my_QMI.eval_frequency(freq, 2)
         elif self.method == 'LKSL':
             return -self.my_SL.eval_frequency(freq)
         elif self.method == 'PDM1':

@@ -19,6 +19,7 @@ cdef extern from "math.h":
     DTYPE_t powf(DTYPE_t, DTYPE_t)
     DTYPE_t logf(DTYPE_t)
     DTYPE_t expf(DTYPE_t)
+    DTYPE_t fmodf(DTYPE_t, DTYPE_t)
     DTYPE_t remainderf(DTYPE_t, DTYPE_t)
 
 cdef DTYPE_t M_PI = 3.1415926535897
@@ -26,6 +27,20 @@ cdef DTYPE_t M_PI = 3.1415926535897
 """
 Fills the Information Potential matrix using a VonMises kernel
 """
+
+cdef inline void IP_wrappednormal(DTYPE_t* IP, DTYPE_t* angle, DTYPE_t h_KDE, Py_ssize_t N):
+    cdef Py_ssize_t i, j
+    cdef DTYPE_t distance
+    cdef DTYPE_t denominator = sqrtf(2.0*M_PI*2.0)*h_KDE
+
+    for i in range(N):
+        IP[indexMatrixToVector(i, i, N)] = 1.0/denominator
+        for j in range(i+1, N):
+            distance = fabsf(angle[i]-angle[j])
+            if distance > M_PI:
+                distance -= 2.0*M_PI
+            IP[indexMatrixToVector(i, j, N)] = expf(-0.25*powf(distance/h_KDE, 2))/denominator
+
 cdef inline void IP_vonmises(DTYPE_t* IP, DTYPE_t* angle, DTYPE_t h_KDE, Py_ssize_t N):
     cdef Py_ssize_t i, j
     cdef DTYPE_t kappa = 1.0/powf(2.0*M_PI*h_KDE, 2.0)
@@ -34,6 +49,14 @@ cdef inline void IP_vonmises(DTYPE_t* IP, DTYPE_t* angle, DTYPE_t h_KDE, Py_ssiz
         IP[indexMatrixToVector(i, i, N)] = expf(kappa)/denominator
         for j in range(i+1, N):
             IP[indexMatrixToVector(i, j, N)] = expf(kappa*cosf(angle[i] - angle[j]))/denominator
+
+cdef inline void IP_wrappedcauchy(DTYPE_t* IP, DTYPE_t* angle, DTYPE_t h_KDE, Py_ssize_t N):
+    cdef Py_ssize_t i, j
+    cdef DTYPE_t rho = expf(-h_KDE)
+    for i in range(N):
+        IP[indexMatrixToVector(i, i, N)] = (1.+rho)/(2.*M_PI*(1.-rho))
+        for j in range(i+1, N):
+            IP[indexMatrixToVector(i, j, N)] = (1.-rho**2)/(2.*M_PI*(1.+rho**2-2.*rho*cosf(angle[i]-angle[j])))
  
 """
 Fills the Information Potential matrix using a Gaussian kernel
@@ -55,7 +78,7 @@ cdef inline void IP_gaussian(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] h_da
     PyMem_Free(h_data2)
 
 
-cdef Py_ssize_t indexMatrixToVector(Py_ssize_t i, Py_ssize_t j, Py_ssize_t N):
+cdef inline Py_ssize_t indexMatrixToVector(Py_ssize_t i, Py_ssize_t j, Py_ssize_t N):
     # Only works for i <= j, which is always the case here
     return i*N - (i-1)*i/2 + j - i
 
@@ -108,11 +131,14 @@ cdef class QMI:
                 self.VC1[j] += self.IP_M[mat_idx]
                 self.VM1 += 2.0*self.IP_M[mat_idx]
 
-    def eval_frequency(self, DTYPE_t freq):
+    def eval_frequency(self, DTYPE_t freq, int output):
         cdef Py_ssize_t i, j
         for i in range(self.N):
-            self.angle[i] = 2.0*M_PI*remainderf(self.mjd[i], 1.0/freq)*freq  # output in [-pi, pi]
-        IP_vonmises(self.IP_P, self.angle, self.h_KDE_P, self.N)
+            self.angle[i] = 2.0*M_PI*fmodf(self.mjd[i], 1.0/freq)*freq # output in [0.0, 2.0*pi]
+            # print("%0.6f, %0.6f, %0.6f" %(remainderf(self.mjd[i], 1.0/freq)*freq, fmodf(self.mjd[i], 1.0/freq)*freq, self.angle[i]))
+#        IP_vonmises(self.IP_P, self.angle, self.h_KDE_P, self.N)
+#        IP_wrappednormal(self.IP_P, self.angle, self.h_KDE_P, self.N)
+        IP_wrappedcauchy(self.IP_P, self.angle, self.h_KDE_P, self.N)
         cdef Py_ssize_t mat_idx
         cdef DTYPE_t VM1=0.0, VM2=0.0, VC=0.0, VJ=0.0
         for i in range(self.N):
@@ -131,7 +157,12 @@ cdef class QMI:
         for i in range(self.N):
             VC += self.VC1[i]*self.VC2[i]
         # Note that I omitted the log(N) terms because they cancel out in this sum
-        return logf(self.VM1*VM2) + logf(VJ) - 2.0*logf(VC)
+        if output == 0:
+            return logf(self.VM1*VM2) + logf(VJ) - 2.0*logf(VC)
+        elif output == 1:
+            return (self.VM1*VM2/self.N**2 + VJ - 2.0*VC/self.N)/self.N**2
+        elif output == 2:
+            return -logf(self.VM1) - logf(VM2) + logf(VJ) + 2*logf(self.N)
 
     def __dealloc__(self):
         PyMem_Free(self.IP_M)

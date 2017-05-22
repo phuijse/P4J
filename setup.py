@@ -16,18 +16,22 @@ extensions = [
             ),
         ]
 
+# Auto generation of RST readme from markdown using pypandoc
+# http://stackoverflow.com/questions/10718767/have-the-same-readme-both-in-markdown-and-restructuredtext
+try:
+    from pypandoc import convert
+    read_md = lambda f: convert(f, 'rst')
+except ImportError():
+    print("pypandoc not found, RST readme will be generated from markdown without conversion")
+    read_md = lambda f: open(f, 'r').read()
 
-def readme():
-    with open('README.rst') as f:
-        return f.read()
-
+# Read version automatically from __init__.py
 def read(*names, **kwargs):
     with io.open(
         os.path.join(os.path.dirname(__file__), *names),
         encoding=kwargs.get("encoding", "utf8")
     ) as fp:
         return fp.read()
-
 
 def version(path):
     """
@@ -46,7 +50,7 @@ setup(
     ext_modules = cythonize(extensions, annotate=False),
     version = version('P4J/__init__.py'),
     description = 'Periodic light curve analysis tools based on Information Theory',
-    long_description=readme(),
+    long_description=read_md('README.md'),
     author = 'Pablo Huijse',
     author_email = 'pablo.huijse@gmail.com',
     license='MIT',
