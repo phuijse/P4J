@@ -3108,7 +3108,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
  *         elif output == 1:
  *             return (self.VM1*VM2/self.N**2 + VJ - 2.0*VC/self.N)/self.N**2             # <<<<<<<<<<<<<<
  *         elif output == 2:
- *             return -logf(self.VM1) - logf(VM2) + logf(VJ) + 2*logf(self.N)
+ *             return fabsf(-logf(self.VM1) - logf(VM2) + logf(VJ) + 2*logf(self.N))  # Renyi's
  */
     __Pyx_XDECREF(__pyx_r);
     __pyx_t_6 = PyFloat_FromDouble((((((__pyx_v_self->VM1 * __pyx_v_VM2) / __Pyx_pow_Py_ssize_t(__pyx_v_self->N, 2)) + __pyx_v_VJ) - ((2.0 * __pyx_v_VC) / __pyx_v_self->N)) / __Pyx_pow_Py_ssize_t(__pyx_v_self->N, 2))); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 163, __pyx_L1_error)
@@ -3130,20 +3130,20 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
  *         elif output == 1:
  *             return (self.VM1*VM2/self.N**2 + VJ - 2.0*VC/self.N)/self.N**2
  *         elif output == 2:             # <<<<<<<<<<<<<<
- *             return -logf(self.VM1) - logf(VM2) + logf(VJ) + 2*logf(self.N)
- * 
+ *             return fabsf(-logf(self.VM1) - logf(VM2) + logf(VJ) + 2*logf(self.N))  # Renyi's
+ *             # return 1.0 - (self.VM1 + VM2 - VJ)/self.N**2  # Tsallis
  */
     case 2:
 
     /* "P4J/QMI.pyx":165
  *             return (self.VM1*VM2/self.N**2 + VJ - 2.0*VC/self.N)/self.N**2
  *         elif output == 2:
- *             return -logf(self.VM1) - logf(VM2) + logf(VJ) + 2*logf(self.N)             # <<<<<<<<<<<<<<
+ *             return fabsf(-logf(self.VM1) - logf(VM2) + logf(VJ) + 2*logf(self.N))  # Renyi's             # <<<<<<<<<<<<<<
+ *             # return 1.0 - (self.VM1 + VM2 - VJ)/self.N**2  # Tsallis
  * 
- *     def __dealloc__(self):
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_6 = PyFloat_FromDouble(((((-logf(__pyx_v_self->VM1)) - logf(__pyx_v_VM2)) + logf(__pyx_v_VJ)) + (2.0 * logf(__pyx_v_self->N)))); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 165, __pyx_L1_error)
+    __pyx_t_6 = PyFloat_FromDouble(fabsf(((((-logf(__pyx_v_self->VM1)) - logf(__pyx_v_VM2)) + logf(__pyx_v_VJ)) + (2.0 * logf(__pyx_v_self->N))))); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 165, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_r = __pyx_t_6;
     __pyx_t_6 = 0;
@@ -3153,8 +3153,8 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
  *         elif output == 1:
  *             return (self.VM1*VM2/self.N**2 + VJ - 2.0*VC/self.N)/self.N**2
  *         elif output == 2:             # <<<<<<<<<<<<<<
- *             return -logf(self.VM1) - logf(VM2) + logf(VJ) + 2*logf(self.N)
- * 
+ *             return fabsf(-logf(self.VM1) - logf(VM2) + logf(VJ) + 2*logf(self.N))  # Renyi's
+ *             # return 1.0 - (self.VM1 + VM2 - VJ)/self.N**2  # Tsallis
  */
     break;
     default: break;
@@ -3181,8 +3181,8 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
   return __pyx_r;
 }
 
-/* "P4J/QMI.pyx":167
- *             return -logf(self.VM1) - logf(VM2) + logf(VJ) + 2*logf(self.N)
+/* "P4J/QMI.pyx":168
+ *             # return 1.0 - (self.VM1 + VM2 - VJ)/self.N**2  # Tsallis
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         PyMem_Free(self.IP_M)
@@ -3204,7 +3204,7 @@ static void __pyx_pf_3P4J_3QMI_3QMI_4__dealloc__(struct __pyx_obj_3P4J_3QMI_QMI 
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "P4J/QMI.pyx":168
+  /* "P4J/QMI.pyx":169
  * 
  *     def __dealloc__(self):
  *         PyMem_Free(self.IP_M)             # <<<<<<<<<<<<<<
@@ -3213,7 +3213,7 @@ static void __pyx_pf_3P4J_3QMI_3QMI_4__dealloc__(struct __pyx_obj_3P4J_3QMI_QMI 
  */
   PyMem_Free(__pyx_v_self->IP_M);
 
-  /* "P4J/QMI.pyx":169
+  /* "P4J/QMI.pyx":170
  *     def __dealloc__(self):
  *         PyMem_Free(self.IP_M)
  *         PyMem_Free(self.IP_P)             # <<<<<<<<<<<<<<
@@ -3222,7 +3222,7 @@ static void __pyx_pf_3P4J_3QMI_3QMI_4__dealloc__(struct __pyx_obj_3P4J_3QMI_QMI 
  */
   PyMem_Free(__pyx_v_self->IP_P);
 
-  /* "P4J/QMI.pyx":170
+  /* "P4J/QMI.pyx":171
  *         PyMem_Free(self.IP_M)
  *         PyMem_Free(self.IP_P)
  *         PyMem_Free(self.mjd)             # <<<<<<<<<<<<<<
@@ -3231,7 +3231,7 @@ static void __pyx_pf_3P4J_3QMI_3QMI_4__dealloc__(struct __pyx_obj_3P4J_3QMI_QMI 
  */
   PyMem_Free(__pyx_v_self->mjd);
 
-  /* "P4J/QMI.pyx":171
+  /* "P4J/QMI.pyx":172
  *         PyMem_Free(self.IP_P)
  *         PyMem_Free(self.mjd)
  *         PyMem_Free(self.angle)             # <<<<<<<<<<<<<<
@@ -3240,7 +3240,7 @@ static void __pyx_pf_3P4J_3QMI_3QMI_4__dealloc__(struct __pyx_obj_3P4J_3QMI_QMI 
  */
   PyMem_Free(__pyx_v_self->angle);
 
-  /* "P4J/QMI.pyx":172
+  /* "P4J/QMI.pyx":173
  *         PyMem_Free(self.mjd)
  *         PyMem_Free(self.angle)
  *         PyMem_Free(self.VC1)             # <<<<<<<<<<<<<<
@@ -3249,7 +3249,7 @@ static void __pyx_pf_3P4J_3QMI_3QMI_4__dealloc__(struct __pyx_obj_3P4J_3QMI_QMI 
  */
   PyMem_Free(__pyx_v_self->VC1);
 
-  /* "P4J/QMI.pyx":173
+  /* "P4J/QMI.pyx":174
  *         PyMem_Free(self.angle)
  *         PyMem_Free(self.VC1)
  *         PyMem_Free(self.VC2)             # <<<<<<<<<<<<<<
@@ -3258,8 +3258,8 @@ static void __pyx_pf_3P4J_3QMI_3QMI_4__dealloc__(struct __pyx_obj_3P4J_3QMI_QMI 
  */
   PyMem_Free(__pyx_v_self->VC2);
 
-  /* "P4J/QMI.pyx":167
- *             return -logf(self.VM1) - logf(VM2) + logf(VJ) + 2*logf(self.N)
+  /* "P4J/QMI.pyx":168
+ *             # return 1.0 - (self.VM1 + VM2 - VJ)/self.N**2  # Tsallis
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         PyMem_Free(self.IP_M)

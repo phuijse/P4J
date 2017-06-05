@@ -21,7 +21,7 @@ extensions = [
 try:
     from pypandoc import convert
     read_md = lambda f: convert(f, 'rst')
-except ImportError():
+except:
     print("pypandoc not found, RST readme will be generated from markdown without conversion")
     read_md = lambda f: open(f, 'r').read()
 

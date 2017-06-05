@@ -162,7 +162,8 @@ cdef class QMI:
         elif output == 1:
             return (self.VM1*VM2/self.N**2 + VJ - 2.0*VC/self.N)/self.N**2
         elif output == 2:
-            return -logf(self.VM1) - logf(VM2) + logf(VJ) + 2*logf(self.N)
+            return fabsf(-logf(self.VM1) - logf(VM2) + logf(VJ) + 2*logf(self.N))  # Renyi's
+            # return 1.0 - (self.VM1 + VM2 - VJ)/self.N**2  # Tsallis
 
     def __dealloc__(self):
         PyMem_Free(self.IP_M)

@@ -71,7 +71,7 @@ class periodogram:
 
         TODO: verify that arrays are non empty, non constant, etc
         """
-        self.time_span = mjd[-1] - mjd[0]
+        
         self.mjd = mjd
         self.N = len(mjd)
         weights = np.power(err, -2.0)
@@ -123,7 +123,7 @@ class periodogram:
         return self.freq, self.per
         
    
-    def finetune_best_frequencies(self, fresolution=0.1, n_local_optima=10):
+    def finetune_best_frequencies(self, fresolution=1e-5, n_local_optima=10):
         """
         Computes the selected criterion over a grid of frequencies 
         around a specified amount of  local optima of the periodograms. This
@@ -136,6 +136,9 @@ class periodogram:
             if self.per[k-1] < self.per[k] and self.per[k+1] < self.per[k]:
                 local_optima_index.append(k)
         local_optima_index = np.array(local_optima_index)
+        if(len(local_optima_index) < n_local_optima):
+            print("Warning: Not enough local maxima found in the periodogram, skipping finetuning")
+            return
         # Keep only n_local_optima
         best_local_optima = local_optima_index[np.argsort(self.per[local_optima_index])][::-1]
         if n_local_optima > 0:
@@ -143,14 +146,14 @@ class periodogram:
         else:
             best_local_optima = best_local_optima[0]
         # Do finetuning around each local optima
-        for j in range(0, n_local_optima):
-            freq_fine = self.freq[best_local_optima[j]] - self.fres_grid/self.time_span
+        for j in range(n_local_optima):
+            freq_fine = self.freq[best_local_optima[j]] - self.fres_grid
             for k in range(0, int(2.0*self.fres_grid/fresolution)):
                 cost = self.compute_metric(freq_fine)
                 if cost > self.per[best_local_optima[j]]:
                     self.per[best_local_optima[j]] = cost
                     self.freq[best_local_optima[j]] = freq_fine
-                freq_fine += fresolution/self.time_span
+                freq_fine += fresolution
         # Sort them in descending order
         idx = np.argsort(self.per[best_local_optima])[::-1]
         if n_local_optima > 0:
@@ -159,7 +162,7 @@ class periodogram:
             self.best_local_optima = best_local_optima
  
 
-    def frequency_grid_evaluation(self, fmin=0.0, fmax=1.0, fresolution=1.0, n_local_max=10):
+    def frequency_grid_evaluation(self, fmin=0.0, fmax=1.0, fresolution=1e-4, n_local_max=10):
         """ 
         Computes the selected criterion over a grid of frequencies 
         with limits and resolution specified by the inputs. After that
@@ -178,7 +181,7 @@ class periodogram:
         
         """
         self.fres_grid = fresolution
-        freq = np.arange(np.amax([fmin, fresolution/self.time_span]), fmax, step=fresolution/self.time_span).astype('float32')
+        freq = np.arange(np.amax([fmin, fresolution]), fmax, step=fresolution).astype('float32')
         Nf = len(freq)
         per = np.zeros(shape=(Nf,)).astype('float32')     
               
