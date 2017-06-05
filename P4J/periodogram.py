@@ -7,13 +7,15 @@ from .math import robust_center, robust_scale, wSTD
 from .QMI import QMI
 from .LKSL import LKSL
 from .PDM import PDM
+from .MHAOV import AOV
+
 #from scipy.stats import gumbel_r, genextreme
 #from .regression import find_beta_WMEE, find_beta_WMCC, find_beta_OLS, find_beta_WLS
 #from .dictionary import harmonic_dictionary
 
 
 class periodogram:
-    def __init__(self, method='QME', n_jobs=1, debug=False):
+    def __init__(self, method='QMIEU', n_jobs=1, debug=False):
         """
         Class for light curve periodogram computation
 
@@ -34,12 +36,14 @@ class periodogram:
         
         Parameters
         ---------
-        method: {'PDM', 'LKSL', 'QMI'} 
+        method: {'PDM1', 'LKSL', 'MHAOV', 'QMICS', 'QMIEU} 
             Method used to perform the fit
             
             PDM: Phase Dispersion Minimization
             LKSL: Lafler Kinman statistic for string length
-            QMI: Quadratic Mutual Information
+            MHAOV: Orthogonal multiharmonic AoV
+            QMICS: Cauchy Schwarz Quadratic Mutual Information
+            QMIEU: Euclidean Quadratic Mutual Information
 
         n_jobs: positive integer 
             Number of parallel jobs for periodogram computation, NOT IMPLEMENTED
@@ -54,7 +58,7 @@ class periodogram:
         self.per = None
         self.debug = debug
         self.n_jobs = n_jobs
-        methods = ["QMICS", "QMIEU", "QME", "PDM1", "LKSL"]
+        methods = ["QMICS", "QMIEU", "QME", "PDM1", "LKSL", "MHAOV"]
         if not method in methods:
             raise ValueError("Wrong method")
         
@@ -108,6 +112,13 @@ class periodogram:
             else:
                 Nbins = self.N/3
             self.my_PDM = PDM(self.mjd, self.mag, self.err, Nbins)
+        elif self.method == 'MHAOV':
+            if 'Nharmonics' in kwarg:
+                Nharmonics = kwarg["Nharmonics"]
+            else:
+                Nharmonics = 1
+            self.my_AOV = AOV(self.mjd, self.mag, self.err, Nharmonics)
+
 
    
     def get_best_frequency(self):
@@ -175,9 +186,7 @@ class periodogram:
         fmax: float
             stopping frequency
         fresolution: float
-            step size in the frequency grid, note that the actual 
-            frequency step is fres_coarse/self.T, where T is the 
-            total time span of the time series
+            step size in the frequency grid
         
         """
         self.fres_grid = fresolution
@@ -201,28 +210,6 @@ class periodogram:
             return -self.my_SL.eval_frequency(freq)
         elif self.method == 'PDM1':
             return -self.my_PDM.eval_frequency(freq)
-        """
-            phase = np.mod(self.mjd, 1.0/freq)*freq
-            Nbins = 20.
-            pdm_num = 0.0
-            pdm_den = 0.0
-            sorted_idx = np.argsort(phase)
-            sorted_pha = phase[sorted_idx]
-            sorted_mag = self.mag[sorted_idx]
-            sorted_wei = self.weights[sorted_idx]
-            idx_sta = 0
-            idx_end = 0
-            for m in range(int(Nbins)):
-                for j in range(idx_sta+1, self.N):
-                    if sorted_pha[j] - m/Nbins > 1.0/Nbins:
-                        idx_end = j - 1
-                        break
-                N_in_bin = idx_end - idx_sta
-                if N_in_bin < 3:
-                    continue
-                pdm_num += wSTD(sorted_mag[idx_sta:idx_end], sorted_wei[idx_sta:idx_end])*(N_in_bin-1)
-                pdm_den += (N_in_bin-1)
-                idx_sta = idx_end + 1 
-            return -pdm_num/(pdm_den*self.PDM_normalizer)
-        """
+        elif self.method == 'MHAOV':
+            return self.my_AOV.eval_frequency(freq)
 

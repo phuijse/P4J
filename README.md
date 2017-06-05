@@ -12,8 +12,9 @@ The main contribution of this work is a criterion for period detection based on 
 Cauchy-Schwarz Quadratic Mutual Information [1]. Information theoretic criteria incorporate 
 information on the whole probability density function of the process and are more robust than 
 classical second-order statistics based criteria [2, 3, 4]. For comparison P4J also 
-incorporates classical methods for period detection used in astronomy such as
-Phase Dispersion Minimization [5] and Lafler-Kinman's string length [6]. 
+incorporates other period detection methods used in astronomy such as the
+Phase Dispersion Minimization periodogram [5], Lafler-Kinman's string length [6] and the
+Orthogonal multiharmonic AoV periodogram [7]
 
 **Contents**
 
@@ -55,6 +56,7 @@ https://github.com/phuijse/P4J/blob/master/examples/periodogram_demo.ipynb
 4. Pablo Huijse et al., "An Information Theoretic Algorithm for Finding Periodicities in Stellar Light Curves", IEEE Trans. Signal Processing vol. 60, n. 10, pp. 5135-5145, 2012
 5. R. F. Stellingwerf, "Period determination using phase dispersion minimization", The Astrophysical Journal, vol. 224, pp. 953-960, 1978
 6. D. Clarke, "String/Rope length methods using the Lafler-Kinman statistic", Astronomy & Astrophysics, vol. 386, n. 2, pp. 763-774, 2002
+7. A. Schwarzenberg-Czerny "Fast and Statistically Optimal Period Search in Uneven Sampled Observations", Astrophysical Journal Letters, vol. 460, pp. 107, 1996
 
 
 

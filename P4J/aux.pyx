@@ -12,6 +12,16 @@ cdef extern from "math.h":
 Computes an unbiased estimator of the weighted variance, where w_i = (1.0/e_i**2)
 
 """
+
+cdef DTYPE_t weighted_mean(DTYPE_t* data, DTYPE_t* err, Py_ssize_t N):
+    cdef DTYPE_t w_mean = 0.0
+    cdef Py_ssize_t i
+    cdef DTYPE_t w_sum = 0.0
+    for i in range(N):
+        w_sum += 1.0/powf(err[i], 2.0)
+        w_mean += data[i]/powf(err[i], 2.0)
+    return w_mean/w_sum
+
 cdef DTYPE_t unbiased_weighted_variance(DTYPE_t* data, DTYPE_t* err2, Py_ssize_t N):
     cdef DTYPE_t w_mean = 0.0
     cdef DTYPE_t w_var = 0.0
