@@ -98,12 +98,15 @@ class periodogram:
             if 'h_KDE_M' in kwarg:
                 hm = hm*kwarg['h_KDE_M']
             #hp = 0.9/np.sqrt(12)*self.N**(-0.2)
-            hp = 1.0 # TODO : How to choose this more appropietly
+            hp = 0.5 # TODO : How to choose this more appropietly
             if 'h_KDE_P' in kwarg:
                 hp = hp*kwarg['h_KDE_P']
+            kernel = 0
+            if 'kernel' in kwarg:
+                kernel = kwarg['kernel']
             if self.debug:
                 print("Kernel bandwidths: %f , %f" %(hm, hp))
-            self.my_QMI = QMI(self.mjd, self.mag, self.err, hm, hp)
+            self.my_QMI = QMI(self.mjd, self.mag, self.err, hm, hp, kernel)
         elif self.method == 'LKSL':
             self.my_SL = LKSL(self.mjd, self.mag, self.err)
         elif self.method == 'PDM1':

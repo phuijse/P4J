@@ -799,7 +799,7 @@ struct __pyx_MemviewEnum_obj;
 struct __pyx_memoryview_obj;
 struct __pyx_memoryviewslice_obj;
 
-/* "P4J/QMI.pyx":85
+/* "P4J/QMI.pyx":125
  *     return i*N - (i-1)*i/2 + j - i
  * 
  * cdef class QMI:             # <<<<<<<<<<<<<<
@@ -1531,6 +1531,8 @@ static int __pyx_memoryview_thread_locks_used;
 static PyThread_type_lock __pyx_memoryview_thread_locks[8];
 static CYTHON_INLINE void __pyx_f_3P4J_3QMI_IP_wrappedcauchy(__pyx_t_3P4J_3QMI_DTYPE_t *, __pyx_t_3P4J_3QMI_DTYPE_t *, __pyx_t_3P4J_3QMI_DTYPE_t, Py_ssize_t); /*proto*/
 static CYTHON_INLINE void __pyx_f_3P4J_3QMI_IP_gaussian(__pyx_t_3P4J_3QMI_DTYPE_t *, __Pyx_memviewslice, __Pyx_memviewslice, __pyx_t_3P4J_3QMI_DTYPE_t, Py_ssize_t); /*proto*/
+static CYTHON_INLINE void __pyx_f_3P4J_3QMI_IP_gaussian2(__pyx_t_3P4J_3QMI_DTYPE_t *, __Pyx_memviewslice, __Pyx_memviewslice, __pyx_t_3P4J_3QMI_DTYPE_t, Py_ssize_t); /*proto*/
+static CYTHON_INLINE void __pyx_f_3P4J_3QMI_IP_cauchy(__pyx_t_3P4J_3QMI_DTYPE_t *, __Pyx_memviewslice, __Pyx_memviewslice, __pyx_t_3P4J_3QMI_DTYPE_t, Py_ssize_t); /*proto*/
 static CYTHON_INLINE Py_ssize_t __pyx_f_3P4J_3QMI_indexMatrixToVector(Py_ssize_t, Py_ssize_t, Py_ssize_t); /*proto*/
 static struct __pyx_array_obj *__pyx_array_new(PyObject *, Py_ssize_t, char *, char *, char *); /*proto*/
 static void *__pyx_align_pointer(void *, size_t); /*proto*/
@@ -1605,6 +1607,7 @@ static const char __pyx_k_start[] = "start";
 static const char __pyx_k_encode[] = "encode";
 static const char __pyx_k_format[] = "format";
 static const char __pyx_k_import[] = "__import__";
+static const char __pyx_k_kernel[] = "kernel";
 static const char __pyx_k_name_2[] = "__name__";
 static const char __pyx_k_output[] = "output";
 static const char __pyx_k_struct[] = "struct";
@@ -1686,6 +1689,7 @@ static PyObject *__pyx_n_s_id;
 static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_itemsize;
 static PyObject *__pyx_kp_s_itemsize_0_for_cython_array;
+static PyObject *__pyx_n_s_kernel;
 static PyObject *__pyx_n_s_mag;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_memview;
@@ -1713,7 +1717,7 @@ static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_kp_s_unable_to_allocate_array_data;
 static PyObject *__pyx_kp_s_unable_to_allocate_shape_and_str;
 static PyObject *__pyx_n_s_unpack;
-static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__pyx_v_self, __Pyx_memviewslice __pyx_v_mjd, __Pyx_memviewslice __pyx_v_mag, __Pyx_memviewslice __pyx_v_err, __pyx_t_3P4J_3QMI_DTYPE_t __pyx_v_h_KDE_M, __pyx_t_3P4J_3QMI_DTYPE_t __pyx_v_h_KDE_P); /* proto */
+static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__pyx_v_self, __Pyx_memviewslice __pyx_v_mjd, __Pyx_memviewslice __pyx_v_mag, __Pyx_memviewslice __pyx_v_err, __pyx_t_3P4J_3QMI_DTYPE_t __pyx_v_h_KDE_M, __pyx_t_3P4J_3QMI_DTYPE_t __pyx_v_h_KDE_P, int __pyx_v_kernel); /* proto */
 static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3QMI_QMI *__pyx_v_self, __pyx_t_3P4J_3QMI_DTYPE_t __pyx_v_freq, int __pyx_v_output); /* proto */
 static void __pyx_pf_3P4J_3QMI_3QMI_4__dealloc__(struct __pyx_obj_3P4J_3QMI_QMI *__pyx_v_self); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __pyx_array_obj *__pyx_v_self, PyObject *__pyx_v_shape, Py_ssize_t __pyx_v_itemsize, PyObject *__pyx_v_format, PyObject *__pyx_v_mode, int __pyx_v_allocate_buffer); /* proto */
@@ -2211,7 +2215,7 @@ static CYTHON_INLINE void __pyx_f_3P4J_3QMI_IP_gaussian(__pyx_t_3P4J_3QMI_DTYPE_
  *             IP[indexMatrixToVector(i, j, N)] = expf(-0.5*delta2/gauss_var)/sqrtf(2.0*M_PI*gauss_var)
  *     PyMem_Free(h_data2)             # <<<<<<<<<<<<<<
  * 
- * 
+ * cdef inline void IP_gaussian2(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] h_data, DTYPE_t h_KDE, Py_ssize_t N):
  */
   PyMem_Free(__pyx_v_h_data2);
 
@@ -2227,7 +2231,330 @@ static CYTHON_INLINE void __pyx_f_3P4J_3QMI_IP_gaussian(__pyx_t_3P4J_3QMI_DTYPE_
   __Pyx_RefNannyFinishContext();
 }
 
-/* "P4J/QMI.pyx":81
+/* "P4J/QMI.pyx":80
+ *     PyMem_Free(h_data2)
+ * 
+ * cdef inline void IP_gaussian2(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] h_data, DTYPE_t h_KDE, Py_ssize_t N):             # <<<<<<<<<<<<<<
+ *     cdef Py_ssize_t i, j
+ *     cdef DTYPE_t gauss_var, delta2, h_KDE2 = 2.0*powf(h_KDE, 2.0)
+ */
+
+static CYTHON_INLINE void __pyx_f_3P4J_3QMI_IP_gaussian2(__pyx_t_3P4J_3QMI_DTYPE_t *__pyx_v_IP, __Pyx_memviewslice __pyx_v_data, __Pyx_memviewslice __pyx_v_h_data, __pyx_t_3P4J_3QMI_DTYPE_t __pyx_v_h_KDE, Py_ssize_t __pyx_v_N) {
+  Py_ssize_t __pyx_v_i;
+  Py_ssize_t __pyx_v_j;
+  __pyx_t_3P4J_3QMI_DTYPE_t __pyx_v_gauss_var;
+  __pyx_t_3P4J_3QMI_DTYPE_t __pyx_v_delta2;
+  __pyx_t_3P4J_3QMI_DTYPE_t __pyx_v_h_KDE2;
+  __pyx_t_3P4J_3QMI_DTYPE_t *__pyx_v_w;
+  __pyx_t_3P4J_3QMI_DTYPE_t __pyx_v_sum_w;
+  __Pyx_RefNannyDeclarations
+  Py_ssize_t __pyx_t_1;
+  Py_ssize_t __pyx_t_2;
+  Py_ssize_t __pyx_t_3;
+  Py_ssize_t __pyx_t_4;
+  Py_ssize_t __pyx_t_5;
+  Py_ssize_t __pyx_t_6;
+  Py_ssize_t __pyx_t_7;
+  __Pyx_RefNannySetupContext("IP_gaussian2", 0);
+
+  /* "P4J/QMI.pyx":82
+ * cdef inline void IP_gaussian2(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] h_data, DTYPE_t h_KDE, Py_ssize_t N):
+ *     cdef Py_ssize_t i, j
+ *     cdef DTYPE_t gauss_var, delta2, h_KDE2 = 2.0*powf(h_KDE, 2.0)             # <<<<<<<<<<<<<<
+ *     cdef DTYPE_t* w = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))
+ *     cdef DTYPE_t sum_w = 0.0
+ */
+  __pyx_v_h_KDE2 = (2.0 * powf(__pyx_v_h_KDE, 2.0));
+
+  /* "P4J/QMI.pyx":83
+ *     cdef Py_ssize_t i, j
+ *     cdef DTYPE_t gauss_var, delta2, h_KDE2 = 2.0*powf(h_KDE, 2.0)
+ *     cdef DTYPE_t* w = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
+ *     cdef DTYPE_t sum_w = 0.0
+ *     for i in range(N):
+ */
+  __pyx_v_w = ((__pyx_t_3P4J_3QMI_DTYPE_t *)PyMem_Malloc((__pyx_v_N * (sizeof(__pyx_t_3P4J_3QMI_DTYPE_t)))));
+
+  /* "P4J/QMI.pyx":84
+ *     cdef DTYPE_t gauss_var, delta2, h_KDE2 = 2.0*powf(h_KDE, 2.0)
+ *     cdef DTYPE_t* w = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))
+ *     cdef DTYPE_t sum_w = 0.0             # <<<<<<<<<<<<<<
+ *     for i in range(N):
+ *         w[i] = 1.0/powf(h_data[i], 2.0)
+ */
+  __pyx_v_sum_w = 0.0;
+
+  /* "P4J/QMI.pyx":85
+ *     cdef DTYPE_t* w = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))
+ *     cdef DTYPE_t sum_w = 0.0
+ *     for i in range(N):             # <<<<<<<<<<<<<<
+ *         w[i] = 1.0/powf(h_data[i], 2.0)
+ *         sum_w += w[i]
+ */
+  __pyx_t_1 = __pyx_v_N;
+  for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
+    __pyx_v_i = __pyx_t_2;
+
+    /* "P4J/QMI.pyx":86
+ *     cdef DTYPE_t sum_w = 0.0
+ *     for i in range(N):
+ *         w[i] = 1.0/powf(h_data[i], 2.0)             # <<<<<<<<<<<<<<
+ *         sum_w += w[i]
+ *     #for i in range(N):
+ */
+    __pyx_t_3 = __pyx_v_i;
+    (__pyx_v_w[__pyx_v_i]) = (1.0 / powf((*((__pyx_t_3P4J_3QMI_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_3QMI_DTYPE_t *) __pyx_v_h_data.data) + __pyx_t_3)) ))), 2.0));
+
+    /* "P4J/QMI.pyx":87
+ *     for i in range(N):
+ *         w[i] = 1.0/powf(h_data[i], 2.0)
+ *         sum_w += w[i]             # <<<<<<<<<<<<<<
+ *     #for i in range(N):
+ *     #    w[i] = w[i]/sum_w
+ */
+    __pyx_v_sum_w = (__pyx_v_sum_w + (__pyx_v_w[__pyx_v_i]));
+  }
+
+  /* "P4J/QMI.pyx":90
+ *     #for i in range(N):
+ *     #    w[i] = w[i]/sum_w
+ *     for i in range(N):             # <<<<<<<<<<<<<<
+ *         gauss_var = h_KDE2
+ *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/sqrtf(2.0*M_PI*gauss_var)
+ */
+  __pyx_t_1 = __pyx_v_N;
+  for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
+    __pyx_v_i = __pyx_t_2;
+
+    /* "P4J/QMI.pyx":91
+ *     #    w[i] = w[i]/sum_w
+ *     for i in range(N):
+ *         gauss_var = h_KDE2             # <<<<<<<<<<<<<<
+ *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/sqrtf(2.0*M_PI*gauss_var)
+ *         for j in range(i+1, N):
+ */
+    __pyx_v_gauss_var = __pyx_v_h_KDE2;
+
+    /* "P4J/QMI.pyx":92
+ *     for i in range(N):
+ *         gauss_var = h_KDE2
+ *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/sqrtf(2.0*M_PI*gauss_var)             # <<<<<<<<<<<<<<
+ *         for j in range(i+1, N):
+ *             delta2 = powf(data[i] - data[j], 2.0)
+ */
+    (__pyx_v_IP[__pyx_f_3P4J_3QMI_indexMatrixToVector(__pyx_v_i, __pyx_v_i, __pyx_v_N)]) = (powf((__pyx_v_w[__pyx_v_i]), 2.0) / sqrtf(((2.0 * __pyx_v_3P4J_3QMI_M_PI) * __pyx_v_gauss_var)));
+
+    /* "P4J/QMI.pyx":93
+ *         gauss_var = h_KDE2
+ *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/sqrtf(2.0*M_PI*gauss_var)
+ *         for j in range(i+1, N):             # <<<<<<<<<<<<<<
+ *             delta2 = powf(data[i] - data[j], 2.0)
+ *             #delta2 = fabsf(data[i] - data[j])
+ */
+    __pyx_t_4 = __pyx_v_N;
+    for (__pyx_t_5 = (__pyx_v_i + 1); __pyx_t_5 < __pyx_t_4; __pyx_t_5+=1) {
+      __pyx_v_j = __pyx_t_5;
+
+      /* "P4J/QMI.pyx":94
+ *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/sqrtf(2.0*M_PI*gauss_var)
+ *         for j in range(i+1, N):
+ *             delta2 = powf(data[i] - data[j], 2.0)             # <<<<<<<<<<<<<<
+ *             #delta2 = fabsf(data[i] - data[j])
+ *             gauss_var = h_KDE2
+ */
+      __pyx_t_6 = __pyx_v_i;
+      __pyx_t_7 = __pyx_v_j;
+      __pyx_v_delta2 = powf(((*((__pyx_t_3P4J_3QMI_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_3QMI_DTYPE_t *) __pyx_v_data.data) + __pyx_t_6)) ))) - (*((__pyx_t_3P4J_3QMI_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_3QMI_DTYPE_t *) __pyx_v_data.data) + __pyx_t_7)) )))), 2.0);
+
+      /* "P4J/QMI.pyx":96
+ *             delta2 = powf(data[i] - data[j], 2.0)
+ *             #delta2 = fabsf(data[i] - data[j])
+ *             gauss_var = h_KDE2             # <<<<<<<<<<<<<<
+ *             IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]*expf(-0.5*delta2/gauss_var)/sqrtf(2.0*M_PI*gauss_var)
+ *     PyMem_Free(w)
+ */
+      __pyx_v_gauss_var = __pyx_v_h_KDE2;
+
+      /* "P4J/QMI.pyx":97
+ *             #delta2 = fabsf(data[i] - data[j])
+ *             gauss_var = h_KDE2
+ *             IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]*expf(-0.5*delta2/gauss_var)/sqrtf(2.0*M_PI*gauss_var)             # <<<<<<<<<<<<<<
+ *     PyMem_Free(w)
+ * 
+ */
+      (__pyx_v_IP[__pyx_f_3P4J_3QMI_indexMatrixToVector(__pyx_v_i, __pyx_v_j, __pyx_v_N)]) = ((((__pyx_v_w[__pyx_v_i]) * (__pyx_v_w[__pyx_v_j])) * expf(((-0.5 * __pyx_v_delta2) / __pyx_v_gauss_var))) / sqrtf(((2.0 * __pyx_v_3P4J_3QMI_M_PI) * __pyx_v_gauss_var)));
+    }
+  }
+
+  /* "P4J/QMI.pyx":98
+ *             gauss_var = h_KDE2
+ *             IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]*expf(-0.5*delta2/gauss_var)/sqrtf(2.0*M_PI*gauss_var)
+ *     PyMem_Free(w)             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  PyMem_Free(__pyx_v_w);
+
+  /* "P4J/QMI.pyx":80
+ *     PyMem_Free(h_data2)
+ * 
+ * cdef inline void IP_gaussian2(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] h_data, DTYPE_t h_KDE, Py_ssize_t N):             # <<<<<<<<<<<<<<
+ *     cdef Py_ssize_t i, j
+ *     cdef DTYPE_t gauss_var, delta2, h_KDE2 = 2.0*powf(h_KDE, 2.0)
+ */
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "P4J/QMI.pyx":101
+ * 
+ * 
+ * cdef inline void IP_cauchy(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] err, DTYPE_t h_KDE, Py_ssize_t N):             # <<<<<<<<<<<<<<
+ *     cdef Py_ssize_t i, j
+ *     cdef DTYPE_t delta2
+ */
+
+static CYTHON_INLINE void __pyx_f_3P4J_3QMI_IP_cauchy(__pyx_t_3P4J_3QMI_DTYPE_t *__pyx_v_IP, __Pyx_memviewslice __pyx_v_data, __Pyx_memviewslice __pyx_v_err, __pyx_t_3P4J_3QMI_DTYPE_t __pyx_v_h_KDE, Py_ssize_t __pyx_v_N) {
+  Py_ssize_t __pyx_v_i;
+  Py_ssize_t __pyx_v_j;
+  __pyx_t_3P4J_3QMI_DTYPE_t __pyx_v_delta2;
+  __pyx_t_3P4J_3QMI_DTYPE_t *__pyx_v_w;
+  __pyx_t_3P4J_3QMI_DTYPE_t __pyx_v_w_sum;
+  __Pyx_RefNannyDeclarations
+  Py_ssize_t __pyx_t_1;
+  Py_ssize_t __pyx_t_2;
+  Py_ssize_t __pyx_t_3;
+  Py_ssize_t __pyx_t_4;
+  Py_ssize_t __pyx_t_5;
+  Py_ssize_t __pyx_t_6;
+  Py_ssize_t __pyx_t_7;
+  __Pyx_RefNannySetupContext("IP_cauchy", 0);
+
+  /* "P4J/QMI.pyx":104
+ *     cdef Py_ssize_t i, j
+ *     cdef DTYPE_t delta2
+ *     cdef DTYPE_t* w = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
+ *     cdef DTYPE_t w_sum = 0.0
+ *     for i in range(N):
+ */
+  __pyx_v_w = ((__pyx_t_3P4J_3QMI_DTYPE_t *)PyMem_Malloc((__pyx_v_N * (sizeof(__pyx_t_3P4J_3QMI_DTYPE_t)))));
+
+  /* "P4J/QMI.pyx":105
+ *     cdef DTYPE_t delta2
+ *     cdef DTYPE_t* w = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))
+ *     cdef DTYPE_t w_sum = 0.0             # <<<<<<<<<<<<<<
+ *     for i in range(N):
+ *         w[i] = 1.0/powf(err[i], 2.0)
+ */
+  __pyx_v_w_sum = 0.0;
+
+  /* "P4J/QMI.pyx":106
+ *     cdef DTYPE_t* w = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))
+ *     cdef DTYPE_t w_sum = 0.0
+ *     for i in range(N):             # <<<<<<<<<<<<<<
+ *         w[i] = 1.0/powf(err[i], 2.0)
+ *         w_sum += w[i]
+ */
+  __pyx_t_1 = __pyx_v_N;
+  for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
+    __pyx_v_i = __pyx_t_2;
+
+    /* "P4J/QMI.pyx":107
+ *     cdef DTYPE_t w_sum = 0.0
+ *     for i in range(N):
+ *         w[i] = 1.0/powf(err[i], 2.0)             # <<<<<<<<<<<<<<
+ *         w_sum += w[i]
+ *     #for i in range(N):
+ */
+    __pyx_t_3 = __pyx_v_i;
+    (__pyx_v_w[__pyx_v_i]) = (1.0 / powf((*((__pyx_t_3P4J_3QMI_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_3QMI_DTYPE_t *) __pyx_v_err.data) + __pyx_t_3)) ))), 2.0));
+
+    /* "P4J/QMI.pyx":108
+ *     for i in range(N):
+ *         w[i] = 1.0/powf(err[i], 2.0)
+ *         w_sum += w[i]             # <<<<<<<<<<<<<<
+ *     #for i in range(N):
+ *     #    w[i] = w[i]/w_sum
+ */
+    __pyx_v_w_sum = (__pyx_v_w_sum + (__pyx_v_w[__pyx_v_i]));
+  }
+
+  /* "P4J/QMI.pyx":111
+ *     #for i in range(N):
+ *     #    w[i] = w[i]/w_sum
+ *     for i in range(N):             # <<<<<<<<<<<<<<
+ *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/(M_PI*2.0*h_KDE)
+ *         for j in range(i+1, N):
+ */
+  __pyx_t_1 = __pyx_v_N;
+  for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
+    __pyx_v_i = __pyx_t_2;
+
+    /* "P4J/QMI.pyx":112
+ *     #    w[i] = w[i]/w_sum
+ *     for i in range(N):
+ *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/(M_PI*2.0*h_KDE)             # <<<<<<<<<<<<<<
+ *         for j in range(i+1, N):
+ *             delta2 = powf((data[i] - data[j])/(2.0*h_KDE), 2.0)
+ */
+    (__pyx_v_IP[__pyx_f_3P4J_3QMI_indexMatrixToVector(__pyx_v_i, __pyx_v_i, __pyx_v_N)]) = (powf((__pyx_v_w[__pyx_v_i]), 2.0) / ((__pyx_v_3P4J_3QMI_M_PI * 2.0) * __pyx_v_h_KDE));
+
+    /* "P4J/QMI.pyx":113
+ *     for i in range(N):
+ *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/(M_PI*2.0*h_KDE)
+ *         for j in range(i+1, N):             # <<<<<<<<<<<<<<
+ *             delta2 = powf((data[i] - data[j])/(2.0*h_KDE), 2.0)
+ *             IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]/(M_PI*2.0*h_KDE*(1.0 + delta2))
+ */
+    __pyx_t_4 = __pyx_v_N;
+    for (__pyx_t_5 = (__pyx_v_i + 1); __pyx_t_5 < __pyx_t_4; __pyx_t_5+=1) {
+      __pyx_v_j = __pyx_t_5;
+
+      /* "P4J/QMI.pyx":114
+ *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/(M_PI*2.0*h_KDE)
+ *         for j in range(i+1, N):
+ *             delta2 = powf((data[i] - data[j])/(2.0*h_KDE), 2.0)             # <<<<<<<<<<<<<<
+ *             IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]/(M_PI*2.0*h_KDE*(1.0 + delta2))
+ *     PyMem_Free(w)
+ */
+      __pyx_t_6 = __pyx_v_i;
+      __pyx_t_7 = __pyx_v_j;
+      __pyx_v_delta2 = powf((((*((__pyx_t_3P4J_3QMI_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_3QMI_DTYPE_t *) __pyx_v_data.data) + __pyx_t_6)) ))) - (*((__pyx_t_3P4J_3QMI_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_3QMI_DTYPE_t *) __pyx_v_data.data) + __pyx_t_7)) )))) / (2.0 * __pyx_v_h_KDE)), 2.0);
+
+      /* "P4J/QMI.pyx":115
+ *         for j in range(i+1, N):
+ *             delta2 = powf((data[i] - data[j])/(2.0*h_KDE), 2.0)
+ *             IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]/(M_PI*2.0*h_KDE*(1.0 + delta2))             # <<<<<<<<<<<<<<
+ *     PyMem_Free(w)
+ * 
+ */
+      (__pyx_v_IP[__pyx_f_3P4J_3QMI_indexMatrixToVector(__pyx_v_i, __pyx_v_j, __pyx_v_N)]) = (((__pyx_v_w[__pyx_v_i]) * (__pyx_v_w[__pyx_v_j])) / (((__pyx_v_3P4J_3QMI_M_PI * 2.0) * __pyx_v_h_KDE) * (1.0 + __pyx_v_delta2)));
+    }
+  }
+
+  /* "P4J/QMI.pyx":116
+ *             delta2 = powf((data[i] - data[j])/(2.0*h_KDE), 2.0)
+ *             IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]/(M_PI*2.0*h_KDE*(1.0 + delta2))
+ *     PyMem_Free(w)             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  PyMem_Free(__pyx_v_w);
+
+  /* "P4J/QMI.pyx":101
+ * 
+ * 
+ * cdef inline void IP_cauchy(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] err, DTYPE_t h_KDE, Py_ssize_t N):             # <<<<<<<<<<<<<<
+ *     cdef Py_ssize_t i, j
+ *     cdef DTYPE_t delta2
+ */
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "P4J/QMI.pyx":121
  * 
  * 
  * cdef inline Py_ssize_t indexMatrixToVector(Py_ssize_t i, Py_ssize_t j, Py_ssize_t N):             # <<<<<<<<<<<<<<
@@ -2240,7 +2567,7 @@ static CYTHON_INLINE Py_ssize_t __pyx_f_3P4J_3QMI_indexMatrixToVector(Py_ssize_t
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("indexMatrixToVector", 0);
 
-  /* "P4J/QMI.pyx":83
+  /* "P4J/QMI.pyx":123
  * cdef inline Py_ssize_t indexMatrixToVector(Py_ssize_t i, Py_ssize_t j, Py_ssize_t N):
  *     # Only works for i <= j, which is always the case here
  *     return i*N - (i-1)*i/2 + j - i             # <<<<<<<<<<<<<<
@@ -2250,7 +2577,7 @@ static CYTHON_INLINE Py_ssize_t __pyx_f_3P4J_3QMI_indexMatrixToVector(Py_ssize_t
   __pyx_r = ((((__pyx_v_i * __pyx_v_N) - (((__pyx_v_i - 1) * __pyx_v_i) / 2)) + __pyx_v_j) - __pyx_v_i);
   goto __pyx_L0;
 
-  /* "P4J/QMI.pyx":81
+  /* "P4J/QMI.pyx":121
  * 
  * 
  * cdef inline Py_ssize_t indexMatrixToVector(Py_ssize_t i, Py_ssize_t j, Py_ssize_t N):             # <<<<<<<<<<<<<<
@@ -2264,10 +2591,10 @@ static CYTHON_INLINE Py_ssize_t __pyx_f_3P4J_3QMI_indexMatrixToVector(Py_ssize_t
   return __pyx_r;
 }
 
-/* "P4J/QMI.pyx":95
+/* "P4J/QMI.pyx":135
  *     cdef DTYPE_t* angle
  *     cdef DTYPE_t* mjd
- *     def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err, DTYPE_t h_KDE_M, DTYPE_t h_KDE_P):             # <<<<<<<<<<<<<<
+ *     def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err, DTYPE_t h_KDE_M, DTYPE_t h_KDE_P, int kernel=0):             # <<<<<<<<<<<<<<
  *         cdef Py_ssize_t i, j, mat_idx
  *         self.N = mag.shape[0]
  */
@@ -2280,16 +2607,18 @@ static int __pyx_pw_3P4J_3QMI_3QMI_1__init__(PyObject *__pyx_v_self, PyObject *_
   __Pyx_memviewslice __pyx_v_err = { 0, 0, { 0 }, { 0 }, { 0 } };
   __pyx_t_3P4J_3QMI_DTYPE_t __pyx_v_h_KDE_M;
   __pyx_t_3P4J_3QMI_DTYPE_t __pyx_v_h_KDE_P;
+  int __pyx_v_kernel;
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__init__ (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_mjd,&__pyx_n_s_mag,&__pyx_n_s_err,&__pyx_n_s_h_KDE_M,&__pyx_n_s_h_KDE_P,0};
-    PyObject* values[5] = {0,0,0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_mjd,&__pyx_n_s_mag,&__pyx_n_s_err,&__pyx_n_s_h_KDE_M,&__pyx_n_s_h_KDE_P,&__pyx_n_s_kernel,0};
+    PyObject* values[6] = {0,0,0,0,0,0};
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case  6: values[5] = PyTuple_GET_ITEM(__pyx_args, 5);
         case  5: values[4] = PyTuple_GET_ITEM(__pyx_args, 4);
         case  4: values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
         case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
@@ -2306,58 +2635,71 @@ static int __pyx_pw_3P4J_3QMI_3QMI_1__init__(PyObject *__pyx_v_self, PyObject *_
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_mag)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 5, 5, 1); __PYX_ERR(0, 95, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 0, 5, 6, 1); __PYX_ERR(0, 135, __pyx_L3_error)
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_err)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 5, 5, 2); __PYX_ERR(0, 95, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 0, 5, 6, 2); __PYX_ERR(0, 135, __pyx_L3_error)
         }
         case  3:
         if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_h_KDE_M)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 5, 5, 3); __PYX_ERR(0, 95, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 0, 5, 6, 3); __PYX_ERR(0, 135, __pyx_L3_error)
         }
         case  4:
         if (likely((values[4] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_h_KDE_P)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 5, 5, 4); __PYX_ERR(0, 95, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 0, 5, 6, 4); __PYX_ERR(0, 135, __pyx_L3_error)
+        }
+        case  5:
+        if (kw_args > 0) {
+          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_kernel);
+          if (value) { values[5] = value; kw_args--; }
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 95, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 135, __pyx_L3_error)
       }
-    } else if (PyTuple_GET_SIZE(__pyx_args) != 5) {
-      goto __pyx_L5_argtuple_error;
     } else {
-      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
-      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
-      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
-      values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
-      values[4] = PyTuple_GET_ITEM(__pyx_args, 4);
+      switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  6: values[5] = PyTuple_GET_ITEM(__pyx_args, 5);
+        case  5: values[4] = PyTuple_GET_ITEM(__pyx_args, 4);
+        values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
+        values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        break;
+        default: goto __pyx_L5_argtuple_error;
+      }
     }
-    __pyx_v_mjd = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_3QMI_DTYPE_t(values[0]); if (unlikely(!__pyx_v_mjd.memview)) __PYX_ERR(0, 95, __pyx_L3_error)
-    __pyx_v_mag = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_3QMI_DTYPE_t(values[1]); if (unlikely(!__pyx_v_mag.memview)) __PYX_ERR(0, 95, __pyx_L3_error)
-    __pyx_v_err = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_3QMI_DTYPE_t(values[2]); if (unlikely(!__pyx_v_err.memview)) __PYX_ERR(0, 95, __pyx_L3_error)
-    __pyx_v_h_KDE_M = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_h_KDE_M == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 95, __pyx_L3_error)
-    __pyx_v_h_KDE_P = __pyx_PyFloat_AsFloat(values[4]); if (unlikely((__pyx_v_h_KDE_P == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 95, __pyx_L3_error)
+    __pyx_v_mjd = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_3QMI_DTYPE_t(values[0]); if (unlikely(!__pyx_v_mjd.memview)) __PYX_ERR(0, 135, __pyx_L3_error)
+    __pyx_v_mag = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_3QMI_DTYPE_t(values[1]); if (unlikely(!__pyx_v_mag.memview)) __PYX_ERR(0, 135, __pyx_L3_error)
+    __pyx_v_err = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_3QMI_DTYPE_t(values[2]); if (unlikely(!__pyx_v_err.memview)) __PYX_ERR(0, 135, __pyx_L3_error)
+    __pyx_v_h_KDE_M = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_h_KDE_M == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 135, __pyx_L3_error)
+    __pyx_v_h_KDE_P = __pyx_PyFloat_AsFloat(values[4]); if (unlikely((__pyx_v_h_KDE_P == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 135, __pyx_L3_error)
+    if (values[5]) {
+      __pyx_v_kernel = __Pyx_PyInt_As_int(values[5]); if (unlikely((__pyx_v_kernel == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 135, __pyx_L3_error)
+    } else {
+      __pyx_v_kernel = ((int)0);
+    }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 5, 5, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 95, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 5, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 135, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("P4J.QMI.QMI.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_3P4J_3QMI_3QMI___init__(((struct __pyx_obj_3P4J_3QMI_QMI *)__pyx_v_self), __pyx_v_mjd, __pyx_v_mag, __pyx_v_err, __pyx_v_h_KDE_M, __pyx_v_h_KDE_P);
+  __pyx_r = __pyx_pf_3P4J_3QMI_3QMI___init__(((struct __pyx_obj_3P4J_3QMI_QMI *)__pyx_v_self), __pyx_v_mjd, __pyx_v_mag, __pyx_v_err, __pyx_v_h_KDE_M, __pyx_v_h_KDE_P, __pyx_v_kernel);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__pyx_v_self, __Pyx_memviewslice __pyx_v_mjd, __Pyx_memviewslice __pyx_v_mag, __Pyx_memviewslice __pyx_v_err, __pyx_t_3P4J_3QMI_DTYPE_t __pyx_v_h_KDE_M, __pyx_t_3P4J_3QMI_DTYPE_t __pyx_v_h_KDE_P) {
+static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__pyx_v_self, __Pyx_memviewslice __pyx_v_mjd, __Pyx_memviewslice __pyx_v_mag, __Pyx_memviewslice __pyx_v_err, __pyx_t_3P4J_3QMI_DTYPE_t __pyx_v_h_KDE_M, __pyx_t_3P4J_3QMI_DTYPE_t __pyx_v_h_KDE_P, int __pyx_v_kernel) {
   Py_ssize_t __pyx_v_i;
   Py_ssize_t __pyx_v_j;
   Py_ssize_t __pyx_v_mat_idx;
@@ -2372,8 +2714,8 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
   Py_ssize_t __pyx_t_7;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "P4J/QMI.pyx":97
- *     def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err, DTYPE_t h_KDE_M, DTYPE_t h_KDE_P):
+  /* "P4J/QMI.pyx":137
+ *     def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err, DTYPE_t h_KDE_M, DTYPE_t h_KDE_P, int kernel=0):
  *         cdef Py_ssize_t i, j, mat_idx
  *         self.N = mag.shape[0]             # <<<<<<<<<<<<<<
  *         self.mjd = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
@@ -2381,7 +2723,7 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
  */
   __pyx_v_self->N = (__pyx_v_mag.shape[0]);
 
-  /* "P4J/QMI.pyx":98
+  /* "P4J/QMI.pyx":138
  *         cdef Py_ssize_t i, j, mat_idx
  *         self.N = mag.shape[0]
  *         self.mjd = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
@@ -2390,7 +2732,7 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
  */
   __pyx_v_self->mjd = ((__pyx_t_3P4J_3QMI_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_3QMI_DTYPE_t)))));
 
-  /* "P4J/QMI.pyx":99
+  /* "P4J/QMI.pyx":139
  *         self.N = mag.shape[0]
  *         self.mjd = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.angle = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
@@ -2399,7 +2741,7 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
  */
   __pyx_v_self->angle = ((__pyx_t_3P4J_3QMI_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_3QMI_DTYPE_t)))));
 
-  /* "P4J/QMI.pyx":100
+  /* "P4J/QMI.pyx":140
  *         self.mjd = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.angle = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         if not self.mjd:             # <<<<<<<<<<<<<<
@@ -2409,16 +2751,16 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
   __pyx_t_1 = ((!(__pyx_v_self->mjd != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "P4J/QMI.pyx":101
+    /* "P4J/QMI.pyx":141
  *         self.angle = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         if not self.mjd:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  *         if not self.angle:
  *             raise MemoryError()
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 101, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 141, __pyx_L1_error)
 
-    /* "P4J/QMI.pyx":100
+    /* "P4J/QMI.pyx":140
  *         self.mjd = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.angle = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         if not self.mjd:             # <<<<<<<<<<<<<<
@@ -2427,7 +2769,7 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
  */
   }
 
-  /* "P4J/QMI.pyx":102
+  /* "P4J/QMI.pyx":142
  *         if not self.mjd:
  *             raise MemoryError()
  *         if not self.angle:             # <<<<<<<<<<<<<<
@@ -2437,16 +2779,16 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
   __pyx_t_1 = ((!(__pyx_v_self->angle != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "P4J/QMI.pyx":103
+    /* "P4J/QMI.pyx":143
  *             raise MemoryError()
  *         if not self.angle:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  *         for i in range(self.N):
  *             self.mjd[i] = mjd[i]
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 103, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 143, __pyx_L1_error)
 
-    /* "P4J/QMI.pyx":102
+    /* "P4J/QMI.pyx":142
  *         if not self.mjd:
  *             raise MemoryError()
  *         if not self.angle:             # <<<<<<<<<<<<<<
@@ -2455,7 +2797,7 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
  */
   }
 
-  /* "P4J/QMI.pyx":104
+  /* "P4J/QMI.pyx":144
  *         if not self.angle:
  *             raise MemoryError()
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -2466,7 +2808,7 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/QMI.pyx":105
+    /* "P4J/QMI.pyx":145
  *             raise MemoryError()
  *         for i in range(self.N):
  *             self.mjd[i] = mjd[i]             # <<<<<<<<<<<<<<
@@ -2477,7 +2819,7 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
     (__pyx_v_self->mjd[__pyx_v_i]) = (*((__pyx_t_3P4J_3QMI_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_3QMI_DTYPE_t *) __pyx_v_mjd.data) + __pyx_t_4)) )));
   }
 
-  /* "P4J/QMI.pyx":107
+  /* "P4J/QMI.pyx":147
  *             self.mjd[i] = mjd[i]
  *         #self.h_KDE_P = 0.9*(1.0/sqrtf(12.0))*powf(self.N, -0.2)  # bandwidth considering a uniform distribution in phase
  *         self.h_KDE_P = h_KDE_P             # <<<<<<<<<<<<<<
@@ -2486,7 +2828,7 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
  */
   __pyx_v_self->h_KDE_P = __pyx_v_h_KDE_P;
 
-  /* "P4J/QMI.pyx":108
+  /* "P4J/QMI.pyx":148
  *         #self.h_KDE_P = 0.9*(1.0/sqrtf(12.0))*powf(self.N, -0.2)  # bandwidth considering a uniform distribution in phase
  *         self.h_KDE_P = h_KDE_P
  *         self.IP_M = <DTYPE_t*>PyMem_Malloc(self.N*(self.N+1)/2*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
@@ -2495,7 +2837,7 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
  */
   __pyx_v_self->IP_M = ((__pyx_t_3P4J_3QMI_DTYPE_t *)PyMem_Malloc((((__pyx_v_self->N * (__pyx_v_self->N + 1)) / 2) * (sizeof(__pyx_t_3P4J_3QMI_DTYPE_t)))));
 
-  /* "P4J/QMI.pyx":109
+  /* "P4J/QMI.pyx":149
  *         self.h_KDE_P = h_KDE_P
  *         self.IP_M = <DTYPE_t*>PyMem_Malloc(self.N*(self.N+1)/2*sizeof(DTYPE_t))
  *         self.IP_P = <DTYPE_t*>PyMem_Malloc(self.N*(self.N+1)/2*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
@@ -2504,7 +2846,7 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
  */
   __pyx_v_self->IP_P = ((__pyx_t_3P4J_3QMI_DTYPE_t *)PyMem_Malloc((((__pyx_v_self->N * (__pyx_v_self->N + 1)) / 2) * (sizeof(__pyx_t_3P4J_3QMI_DTYPE_t)))));
 
-  /* "P4J/QMI.pyx":110
+  /* "P4J/QMI.pyx":150
  *         self.IP_M = <DTYPE_t*>PyMem_Malloc(self.N*(self.N+1)/2*sizeof(DTYPE_t))
  *         self.IP_P = <DTYPE_t*>PyMem_Malloc(self.N*(self.N+1)/2*sizeof(DTYPE_t))
  *         if not self.IP_M:             # <<<<<<<<<<<<<<
@@ -2514,16 +2856,16 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
   __pyx_t_1 = ((!(__pyx_v_self->IP_M != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "P4J/QMI.pyx":111
+    /* "P4J/QMI.pyx":151
  *         self.IP_P = <DTYPE_t*>PyMem_Malloc(self.N*(self.N+1)/2*sizeof(DTYPE_t))
  *         if not self.IP_M:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  *         if not self.IP_P:
  *             raise MemoryError()
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 111, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 151, __pyx_L1_error)
 
-    /* "P4J/QMI.pyx":110
+    /* "P4J/QMI.pyx":150
  *         self.IP_M = <DTYPE_t*>PyMem_Malloc(self.N*(self.N+1)/2*sizeof(DTYPE_t))
  *         self.IP_P = <DTYPE_t*>PyMem_Malloc(self.N*(self.N+1)/2*sizeof(DTYPE_t))
  *         if not self.IP_M:             # <<<<<<<<<<<<<<
@@ -2532,54 +2874,129 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
  */
   }
 
-  /* "P4J/QMI.pyx":112
+  /* "P4J/QMI.pyx":152
  *         if not self.IP_M:
  *             raise MemoryError()
  *         if not self.IP_P:             # <<<<<<<<<<<<<<
  *             raise MemoryError()
- *         IP_gaussian(self.IP_M, mag, err, h_KDE_M, self.N)
+ *         if kernel == 0:
  */
   __pyx_t_1 = ((!(__pyx_v_self->IP_P != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "P4J/QMI.pyx":113
+    /* "P4J/QMI.pyx":153
  *             raise MemoryError()
  *         if not self.IP_P:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
- *         IP_gaussian(self.IP_M, mag, err, h_KDE_M, self.N)
- *         self.VC1 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
+ *         if kernel == 0:
+ *             IP_gaussian(self.IP_M, mag, err, h_KDE_M, self.N)
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 113, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 153, __pyx_L1_error)
 
-    /* "P4J/QMI.pyx":112
+    /* "P4J/QMI.pyx":152
  *         if not self.IP_M:
  *             raise MemoryError()
  *         if not self.IP_P:             # <<<<<<<<<<<<<<
  *             raise MemoryError()
- *         IP_gaussian(self.IP_M, mag, err, h_KDE_M, self.N)
+ *         if kernel == 0:
  */
   }
 
-  /* "P4J/QMI.pyx":114
+  /* "P4J/QMI.pyx":154
  *         if not self.IP_P:
  *             raise MemoryError()
- *         IP_gaussian(self.IP_M, mag, err, h_KDE_M, self.N)             # <<<<<<<<<<<<<<
- *         self.VC1 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
- *         self.VC2 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
+ *         if kernel == 0:             # <<<<<<<<<<<<<<
+ *             IP_gaussian(self.IP_M, mag, err, h_KDE_M, self.N)
+ *         elif kernel == 1:
  */
-  __pyx_f_3P4J_3QMI_IP_gaussian(__pyx_v_self->IP_M, __pyx_v_mag, __pyx_v_err, __pyx_v_h_KDE_M, __pyx_v_self->N);
+  switch (__pyx_v_kernel) {
+    case 0:
 
-  /* "P4J/QMI.pyx":115
+    /* "P4J/QMI.pyx":155
  *             raise MemoryError()
- *         IP_gaussian(self.IP_M, mag, err, h_KDE_M, self.N)
+ *         if kernel == 0:
+ *             IP_gaussian(self.IP_M, mag, err, h_KDE_M, self.N)             # <<<<<<<<<<<<<<
+ *         elif kernel == 1:
+ *             IP_cauchy(self.IP_M, mag, err, h_KDE_M, self.N)
+ */
+    __pyx_f_3P4J_3QMI_IP_gaussian(__pyx_v_self->IP_M, __pyx_v_mag, __pyx_v_err, __pyx_v_h_KDE_M, __pyx_v_self->N);
+
+    /* "P4J/QMI.pyx":154
+ *         if not self.IP_P:
+ *             raise MemoryError()
+ *         if kernel == 0:             # <<<<<<<<<<<<<<
+ *             IP_gaussian(self.IP_M, mag, err, h_KDE_M, self.N)
+ *         elif kernel == 1:
+ */
+    break;
+
+    /* "P4J/QMI.pyx":156
+ *         if kernel == 0:
+ *             IP_gaussian(self.IP_M, mag, err, h_KDE_M, self.N)
+ *         elif kernel == 1:             # <<<<<<<<<<<<<<
+ *             IP_cauchy(self.IP_M, mag, err, h_KDE_M, self.N)
+ *         elif kernel == 2:
+ */
+    case 1:
+
+    /* "P4J/QMI.pyx":157
+ *             IP_gaussian(self.IP_M, mag, err, h_KDE_M, self.N)
+ *         elif kernel == 1:
+ *             IP_cauchy(self.IP_M, mag, err, h_KDE_M, self.N)             # <<<<<<<<<<<<<<
+ *         elif kernel == 2:
+ *             IP_gaussian2(self.IP_M, mag, err, h_KDE_M, self.N)
+ */
+    __pyx_f_3P4J_3QMI_IP_cauchy(__pyx_v_self->IP_M, __pyx_v_mag, __pyx_v_err, __pyx_v_h_KDE_M, __pyx_v_self->N);
+
+    /* "P4J/QMI.pyx":156
+ *         if kernel == 0:
+ *             IP_gaussian(self.IP_M, mag, err, h_KDE_M, self.N)
+ *         elif kernel == 1:             # <<<<<<<<<<<<<<
+ *             IP_cauchy(self.IP_M, mag, err, h_KDE_M, self.N)
+ *         elif kernel == 2:
+ */
+    break;
+
+    /* "P4J/QMI.pyx":158
+ *         elif kernel == 1:
+ *             IP_cauchy(self.IP_M, mag, err, h_KDE_M, self.N)
+ *         elif kernel == 2:             # <<<<<<<<<<<<<<
+ *             IP_gaussian2(self.IP_M, mag, err, h_KDE_M, self.N)
+ * 
+ */
+    case 2:
+
+    /* "P4J/QMI.pyx":159
+ *             IP_cauchy(self.IP_M, mag, err, h_KDE_M, self.N)
+ *         elif kernel == 2:
+ *             IP_gaussian2(self.IP_M, mag, err, h_KDE_M, self.N)             # <<<<<<<<<<<<<<
+ * 
+ *         self.VC1 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
+ */
+    __pyx_f_3P4J_3QMI_IP_gaussian2(__pyx_v_self->IP_M, __pyx_v_mag, __pyx_v_err, __pyx_v_h_KDE_M, __pyx_v_self->N);
+
+    /* "P4J/QMI.pyx":158
+ *         elif kernel == 1:
+ *             IP_cauchy(self.IP_M, mag, err, h_KDE_M, self.N)
+ *         elif kernel == 2:             # <<<<<<<<<<<<<<
+ *             IP_gaussian2(self.IP_M, mag, err, h_KDE_M, self.N)
+ * 
+ */
+    break;
+    default: break;
+  }
+
+  /* "P4J/QMI.pyx":161
+ *             IP_gaussian2(self.IP_M, mag, err, h_KDE_M, self.N)
+ * 
  *         self.VC1 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
  *         self.VC2 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         if not self.VC1:
  */
   __pyx_v_self->VC1 = ((__pyx_t_3P4J_3QMI_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_3QMI_DTYPE_t)))));
 
-  /* "P4J/QMI.pyx":116
- *         IP_gaussian(self.IP_M, mag, err, h_KDE_M, self.N)
+  /* "P4J/QMI.pyx":162
+ * 
  *         self.VC1 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.VC2 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
  *         if not self.VC1:
@@ -2587,7 +3004,7 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
  */
   __pyx_v_self->VC2 = ((__pyx_t_3P4J_3QMI_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_3QMI_DTYPE_t)))));
 
-  /* "P4J/QMI.pyx":117
+  /* "P4J/QMI.pyx":163
  *         self.VC1 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.VC2 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         if not self.VC1:             # <<<<<<<<<<<<<<
@@ -2597,16 +3014,16 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
   __pyx_t_1 = ((!(__pyx_v_self->VC1 != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "P4J/QMI.pyx":118
+    /* "P4J/QMI.pyx":164
  *         self.VC2 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         if not self.VC1:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  *         if not self.VC2:
  *             raise MemoryError()
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 118, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 164, __pyx_L1_error)
 
-    /* "P4J/QMI.pyx":117
+    /* "P4J/QMI.pyx":163
  *         self.VC1 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.VC2 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         if not self.VC1:             # <<<<<<<<<<<<<<
@@ -2615,7 +3032,7 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
  */
   }
 
-  /* "P4J/QMI.pyx":119
+  /* "P4J/QMI.pyx":165
  *         if not self.VC1:
  *             raise MemoryError()
  *         if not self.VC2:             # <<<<<<<<<<<<<<
@@ -2625,16 +3042,16 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
   __pyx_t_1 = ((!(__pyx_v_self->VC2 != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "P4J/QMI.pyx":120
+    /* "P4J/QMI.pyx":166
  *             raise MemoryError()
  *         if not self.VC2:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  *         self.VM1 = 0.0
  *         for i in range(self.N):
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 120, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 166, __pyx_L1_error)
 
-    /* "P4J/QMI.pyx":119
+    /* "P4J/QMI.pyx":165
  *         if not self.VC1:
  *             raise MemoryError()
  *         if not self.VC2:             # <<<<<<<<<<<<<<
@@ -2643,7 +3060,7 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
  */
   }
 
-  /* "P4J/QMI.pyx":121
+  /* "P4J/QMI.pyx":167
  *         if not self.VC2:
  *             raise MemoryError()
  *         self.VM1 = 0.0             # <<<<<<<<<<<<<<
@@ -2652,7 +3069,7 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
  */
   __pyx_v_self->VM1 = 0.0;
 
-  /* "P4J/QMI.pyx":122
+  /* "P4J/QMI.pyx":168
  *             raise MemoryError()
  *         self.VM1 = 0.0
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -2663,7 +3080,7 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/QMI.pyx":123
+    /* "P4J/QMI.pyx":169
  *         self.VM1 = 0.0
  *         for i in range(self.N):
  *             self.VC1[i] = 0.0             # <<<<<<<<<<<<<<
@@ -2673,7 +3090,7 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
     (__pyx_v_self->VC1[__pyx_v_i]) = 0.0;
   }
 
-  /* "P4J/QMI.pyx":124
+  /* "P4J/QMI.pyx":170
  *         for i in range(self.N):
  *             self.VC1[i] = 0.0
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -2684,7 +3101,7 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/QMI.pyx":125
+    /* "P4J/QMI.pyx":171
  *             self.VC1[i] = 0.0
  *         for i in range(self.N):
  *             mat_idx = indexMatrixToVector(i, i, self.N)             # <<<<<<<<<<<<<<
@@ -2693,7 +3110,7 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
  */
     __pyx_v_mat_idx = __pyx_f_3P4J_3QMI_indexMatrixToVector(__pyx_v_i, __pyx_v_i, __pyx_v_self->N);
 
-    /* "P4J/QMI.pyx":126
+    /* "P4J/QMI.pyx":172
  *         for i in range(self.N):
  *             mat_idx = indexMatrixToVector(i, i, self.N)
  *             self.VC1[i] += self.IP_M[mat_idx]             # <<<<<<<<<<<<<<
@@ -2703,7 +3120,7 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
     __pyx_t_5 = __pyx_v_i;
     (__pyx_v_self->VC1[__pyx_t_5]) = ((__pyx_v_self->VC1[__pyx_t_5]) + (__pyx_v_self->IP_M[__pyx_v_mat_idx]));
 
-    /* "P4J/QMI.pyx":127
+    /* "P4J/QMI.pyx":173
  *             mat_idx = indexMatrixToVector(i, i, self.N)
  *             self.VC1[i] += self.IP_M[mat_idx]
  *             self.VM1 += self.IP_M[mat_idx]             # <<<<<<<<<<<<<<
@@ -2712,7 +3129,7 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
  */
     __pyx_v_self->VM1 = (__pyx_v_self->VM1 + (__pyx_v_self->IP_M[__pyx_v_mat_idx]));
 
-    /* "P4J/QMI.pyx":128
+    /* "P4J/QMI.pyx":174
  *             self.VC1[i] += self.IP_M[mat_idx]
  *             self.VM1 += self.IP_M[mat_idx]
  *             for j in range(i+1, self.N):             # <<<<<<<<<<<<<<
@@ -2723,7 +3140,7 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
     for (__pyx_t_6 = (__pyx_v_i + 1); __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
-      /* "P4J/QMI.pyx":129
+      /* "P4J/QMI.pyx":175
  *             self.VM1 += self.IP_M[mat_idx]
  *             for j in range(i+1, self.N):
  *                 mat_idx = indexMatrixToVector(i, j, self.N)             # <<<<<<<<<<<<<<
@@ -2732,7 +3149,7 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
  */
       __pyx_v_mat_idx = __pyx_f_3P4J_3QMI_indexMatrixToVector(__pyx_v_i, __pyx_v_j, __pyx_v_self->N);
 
-      /* "P4J/QMI.pyx":130
+      /* "P4J/QMI.pyx":176
  *             for j in range(i+1, self.N):
  *                 mat_idx = indexMatrixToVector(i, j, self.N)
  *                 self.VC1[i] += self.IP_M[mat_idx]             # <<<<<<<<<<<<<<
@@ -2742,7 +3159,7 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
       __pyx_t_7 = __pyx_v_i;
       (__pyx_v_self->VC1[__pyx_t_7]) = ((__pyx_v_self->VC1[__pyx_t_7]) + (__pyx_v_self->IP_M[__pyx_v_mat_idx]));
 
-      /* "P4J/QMI.pyx":131
+      /* "P4J/QMI.pyx":177
  *                 mat_idx = indexMatrixToVector(i, j, self.N)
  *                 self.VC1[i] += self.IP_M[mat_idx]
  *                 self.VC1[j] += self.IP_M[mat_idx]             # <<<<<<<<<<<<<<
@@ -2752,7 +3169,7 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
       __pyx_t_7 = __pyx_v_j;
       (__pyx_v_self->VC1[__pyx_t_7]) = ((__pyx_v_self->VC1[__pyx_t_7]) + (__pyx_v_self->IP_M[__pyx_v_mat_idx]));
 
-      /* "P4J/QMI.pyx":132
+      /* "P4J/QMI.pyx":178
  *                 self.VC1[i] += self.IP_M[mat_idx]
  *                 self.VC1[j] += self.IP_M[mat_idx]
  *                 self.VM1 += 2.0*self.IP_M[mat_idx]             # <<<<<<<<<<<<<<
@@ -2763,10 +3180,10 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
     }
   }
 
-  /* "P4J/QMI.pyx":95
+  /* "P4J/QMI.pyx":135
  *     cdef DTYPE_t* angle
  *     cdef DTYPE_t* mjd
- *     def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err, DTYPE_t h_KDE_M, DTYPE_t h_KDE_P):             # <<<<<<<<<<<<<<
+ *     def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err, DTYPE_t h_KDE_M, DTYPE_t h_KDE_P, int kernel=0):             # <<<<<<<<<<<<<<
  *         cdef Py_ssize_t i, j, mat_idx
  *         self.N = mag.shape[0]
  */
@@ -2785,7 +3202,7 @@ static int __pyx_pf_3P4J_3QMI_3QMI___init__(struct __pyx_obj_3P4J_3QMI_QMI *__py
   return __pyx_r;
 }
 
-/* "P4J/QMI.pyx":134
+/* "P4J/QMI.pyx":180
  *                 self.VM1 += 2.0*self.IP_M[mat_idx]
  * 
  *     def eval_frequency(self, DTYPE_t freq, int output):             # <<<<<<<<<<<<<<
@@ -2821,11 +3238,11 @@ static PyObject *__pyx_pw_3P4J_3QMI_3QMI_3eval_frequency(PyObject *__pyx_v_self,
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_output)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("eval_frequency", 1, 2, 2, 1); __PYX_ERR(0, 134, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("eval_frequency", 1, 2, 2, 1); __PYX_ERR(0, 180, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "eval_frequency") < 0)) __PYX_ERR(0, 134, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "eval_frequency") < 0)) __PYX_ERR(0, 180, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2833,12 +3250,12 @@ static PyObject *__pyx_pw_3P4J_3QMI_3QMI_3eval_frequency(PyObject *__pyx_v_self,
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_freq = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_freq == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 134, __pyx_L3_error)
-    __pyx_v_output = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_output == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 134, __pyx_L3_error)
+    __pyx_v_freq = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_freq == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 180, __pyx_L3_error)
+    __pyx_v_output = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_output == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 180, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("eval_frequency", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 134, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("eval_frequency", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 180, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("P4J.QMI.QMI.eval_frequency", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2869,7 +3286,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
   PyObject *__pyx_t_6 = NULL;
   __Pyx_RefNannySetupContext("eval_frequency", 0);
 
-  /* "P4J/QMI.pyx":136
+  /* "P4J/QMI.pyx":182
  *     def eval_frequency(self, DTYPE_t freq, int output):
  *         cdef Py_ssize_t i, j
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -2880,7 +3297,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "P4J/QMI.pyx":137
+    /* "P4J/QMI.pyx":183
  *         cdef Py_ssize_t i, j
  *         for i in range(self.N):
  *             self.angle[i] = 2.0*M_PI*fmodf(self.mjd[i], 1.0/freq)*freq # output in [0.0, 2.0*pi]             # <<<<<<<<<<<<<<
@@ -2890,7 +3307,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
     (__pyx_v_self->angle[__pyx_v_i]) = (((2.0 * __pyx_v_3P4J_3QMI_M_PI) * fmodf((__pyx_v_self->mjd[__pyx_v_i]), (1.0 / __pyx_v_freq))) * __pyx_v_freq);
   }
 
-  /* "P4J/QMI.pyx":141
+  /* "P4J/QMI.pyx":187
  * #        IP_vonmises(self.IP_P, self.angle, self.h_KDE_P, self.N)
  * #        IP_wrappednormal(self.IP_P, self.angle, self.h_KDE_P, self.N)
  *         IP_wrappedcauchy(self.IP_P, self.angle, self.h_KDE_P, self.N)             # <<<<<<<<<<<<<<
@@ -2899,7 +3316,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
  */
   __pyx_f_3P4J_3QMI_IP_wrappedcauchy(__pyx_v_self->IP_P, __pyx_v_self->angle, __pyx_v_self->h_KDE_P, __pyx_v_self->N);
 
-  /* "P4J/QMI.pyx":143
+  /* "P4J/QMI.pyx":189
  *         IP_wrappedcauchy(self.IP_P, self.angle, self.h_KDE_P, self.N)
  *         cdef Py_ssize_t mat_idx
  *         cdef DTYPE_t VM1=0.0, VM2=0.0, VC=0.0, VJ=0.0             # <<<<<<<<<<<<<<
@@ -2911,7 +3328,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
   __pyx_v_VC = 0.0;
   __pyx_v_VJ = 0.0;
 
-  /* "P4J/QMI.pyx":144
+  /* "P4J/QMI.pyx":190
  *         cdef Py_ssize_t mat_idx
  *         cdef DTYPE_t VM1=0.0, VM2=0.0, VC=0.0, VJ=0.0
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -2922,7 +3339,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "P4J/QMI.pyx":145
+    /* "P4J/QMI.pyx":191
  *         cdef DTYPE_t VM1=0.0, VM2=0.0, VC=0.0, VJ=0.0
  *         for i in range(self.N):
  *             self.VC2[i] = 0.0             # <<<<<<<<<<<<<<
@@ -2932,7 +3349,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
     (__pyx_v_self->VC2[__pyx_v_i]) = 0.0;
   }
 
-  /* "P4J/QMI.pyx":146
+  /* "P4J/QMI.pyx":192
  *         for i in range(self.N):
  *             self.VC2[i] = 0.0
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -2943,7 +3360,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "P4J/QMI.pyx":147
+    /* "P4J/QMI.pyx":193
  *             self.VC2[i] = 0.0
  *         for i in range(self.N):
  *             mat_idx = indexMatrixToVector(i, i, self.N)             # <<<<<<<<<<<<<<
@@ -2952,7 +3369,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
  */
     __pyx_v_mat_idx = __pyx_f_3P4J_3QMI_indexMatrixToVector(__pyx_v_i, __pyx_v_i, __pyx_v_self->N);
 
-    /* "P4J/QMI.pyx":148
+    /* "P4J/QMI.pyx":194
  *         for i in range(self.N):
  *             mat_idx = indexMatrixToVector(i, i, self.N)
  *             self.VC2[i] += self.IP_P[mat_idx]             # <<<<<<<<<<<<<<
@@ -2962,7 +3379,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
     __pyx_t_3 = __pyx_v_i;
     (__pyx_v_self->VC2[__pyx_t_3]) = ((__pyx_v_self->VC2[__pyx_t_3]) + (__pyx_v_self->IP_P[__pyx_v_mat_idx]));
 
-    /* "P4J/QMI.pyx":149
+    /* "P4J/QMI.pyx":195
  *             mat_idx = indexMatrixToVector(i, i, self.N)
  *             self.VC2[i] += self.IP_P[mat_idx]
  *             VM2 += self.IP_P[mat_idx]             # <<<<<<<<<<<<<<
@@ -2971,7 +3388,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
  */
     __pyx_v_VM2 = (__pyx_v_VM2 + (__pyx_v_self->IP_P[__pyx_v_mat_idx]));
 
-    /* "P4J/QMI.pyx":150
+    /* "P4J/QMI.pyx":196
  *             self.VC2[i] += self.IP_P[mat_idx]
  *             VM2 += self.IP_P[mat_idx]
  *             VJ += self.IP_M[mat_idx]*self.IP_P[mat_idx]             # <<<<<<<<<<<<<<
@@ -2980,7 +3397,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
  */
     __pyx_v_VJ = (__pyx_v_VJ + ((__pyx_v_self->IP_M[__pyx_v_mat_idx]) * (__pyx_v_self->IP_P[__pyx_v_mat_idx])));
 
-    /* "P4J/QMI.pyx":151
+    /* "P4J/QMI.pyx":197
  *             VM2 += self.IP_P[mat_idx]
  *             VJ += self.IP_M[mat_idx]*self.IP_P[mat_idx]
  *             for j in range(i+1, self.N):             # <<<<<<<<<<<<<<
@@ -2991,7 +3408,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
     for (__pyx_t_4 = (__pyx_v_i + 1); __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
       __pyx_v_j = __pyx_t_4;
 
-      /* "P4J/QMI.pyx":152
+      /* "P4J/QMI.pyx":198
  *             VJ += self.IP_M[mat_idx]*self.IP_P[mat_idx]
  *             for j in range(i+1, self.N):
  *                 mat_idx = indexMatrixToVector(i, j, self.N)             # <<<<<<<<<<<<<<
@@ -3000,7 +3417,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
  */
       __pyx_v_mat_idx = __pyx_f_3P4J_3QMI_indexMatrixToVector(__pyx_v_i, __pyx_v_j, __pyx_v_self->N);
 
-      /* "P4J/QMI.pyx":153
+      /* "P4J/QMI.pyx":199
  *             for j in range(i+1, self.N):
  *                 mat_idx = indexMatrixToVector(i, j, self.N)
  *                 VM2 += 2.0*self.IP_P[mat_idx]             # <<<<<<<<<<<<<<
@@ -3009,7 +3426,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
  */
       __pyx_v_VM2 = (__pyx_v_VM2 + (2.0 * (__pyx_v_self->IP_P[__pyx_v_mat_idx])));
 
-      /* "P4J/QMI.pyx":154
+      /* "P4J/QMI.pyx":200
  *                 mat_idx = indexMatrixToVector(i, j, self.N)
  *                 VM2 += 2.0*self.IP_P[mat_idx]
  *                 self.VC2[j] += self.IP_P[mat_idx]             # <<<<<<<<<<<<<<
@@ -3019,7 +3436,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
       __pyx_t_5 = __pyx_v_j;
       (__pyx_v_self->VC2[__pyx_t_5]) = ((__pyx_v_self->VC2[__pyx_t_5]) + (__pyx_v_self->IP_P[__pyx_v_mat_idx]));
 
-      /* "P4J/QMI.pyx":155
+      /* "P4J/QMI.pyx":201
  *                 VM2 += 2.0*self.IP_P[mat_idx]
  *                 self.VC2[j] += self.IP_P[mat_idx]
  *                 self.VC2[i] += self.IP_P[mat_idx]             # <<<<<<<<<<<<<<
@@ -3029,7 +3446,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
       __pyx_t_5 = __pyx_v_i;
       (__pyx_v_self->VC2[__pyx_t_5]) = ((__pyx_v_self->VC2[__pyx_t_5]) + (__pyx_v_self->IP_P[__pyx_v_mat_idx]));
 
-      /* "P4J/QMI.pyx":156
+      /* "P4J/QMI.pyx":202
  *                 self.VC2[j] += self.IP_P[mat_idx]
  *                 self.VC2[i] += self.IP_P[mat_idx]
  *                 VJ += 2.0*self.IP_M[mat_idx]*self.IP_P[mat_idx]             # <<<<<<<<<<<<<<
@@ -3040,7 +3457,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
     }
   }
 
-  /* "P4J/QMI.pyx":157
+  /* "P4J/QMI.pyx":203
  *                 self.VC2[i] += self.IP_P[mat_idx]
  *                 VJ += 2.0*self.IP_M[mat_idx]*self.IP_P[mat_idx]
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -3051,7 +3468,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "P4J/QMI.pyx":158
+    /* "P4J/QMI.pyx":204
  *                 VJ += 2.0*self.IP_M[mat_idx]*self.IP_P[mat_idx]
  *         for i in range(self.N):
  *             VC += self.VC1[i]*self.VC2[i]             # <<<<<<<<<<<<<<
@@ -3061,7 +3478,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
     __pyx_v_VC = (__pyx_v_VC + ((__pyx_v_self->VC1[__pyx_v_i]) * (__pyx_v_self->VC2[__pyx_v_i])));
   }
 
-  /* "P4J/QMI.pyx":160
+  /* "P4J/QMI.pyx":206
  *             VC += self.VC1[i]*self.VC2[i]
  *         # Note that I omitted the log(N) terms because they cancel out in this sum
  *         if output == 0:             # <<<<<<<<<<<<<<
@@ -3071,7 +3488,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
   switch (__pyx_v_output) {
     case 0:
 
-    /* "P4J/QMI.pyx":161
+    /* "P4J/QMI.pyx":207
  *         # Note that I omitted the log(N) terms because they cancel out in this sum
  *         if output == 0:
  *             return logf(self.VM1*VM2) + logf(VJ) - 2.0*logf(VC)             # <<<<<<<<<<<<<<
@@ -3079,13 +3496,13 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
  *             return (self.VM1*VM2/self.N**2 + VJ - 2.0*VC/self.N)/self.N**2
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_6 = PyFloat_FromDouble(((logf((__pyx_v_self->VM1 * __pyx_v_VM2)) + logf(__pyx_v_VJ)) - (2.0 * logf(__pyx_v_VC)))); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 161, __pyx_L1_error)
+    __pyx_t_6 = PyFloat_FromDouble(((logf((__pyx_v_self->VM1 * __pyx_v_VM2)) + logf(__pyx_v_VJ)) - (2.0 * logf(__pyx_v_VC)))); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 207, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_r = __pyx_t_6;
     __pyx_t_6 = 0;
     goto __pyx_L0;
 
-    /* "P4J/QMI.pyx":160
+    /* "P4J/QMI.pyx":206
  *             VC += self.VC1[i]*self.VC2[i]
  *         # Note that I omitted the log(N) terms because they cancel out in this sum
  *         if output == 0:             # <<<<<<<<<<<<<<
@@ -3094,7 +3511,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
  */
     break;
 
-    /* "P4J/QMI.pyx":162
+    /* "P4J/QMI.pyx":208
  *         if output == 0:
  *             return logf(self.VM1*VM2) + logf(VJ) - 2.0*logf(VC)
  *         elif output == 1:             # <<<<<<<<<<<<<<
@@ -3103,7 +3520,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
  */
     case 1:
 
-    /* "P4J/QMI.pyx":163
+    /* "P4J/QMI.pyx":209
  *             return logf(self.VM1*VM2) + logf(VJ) - 2.0*logf(VC)
  *         elif output == 1:
  *             return (self.VM1*VM2/self.N**2 + VJ - 2.0*VC/self.N)/self.N**2             # <<<<<<<<<<<<<<
@@ -3111,13 +3528,13 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
  *             return fabsf(-logf(self.VM1) - logf(VM2) + logf(VJ) + 2*logf(self.N))  # Renyi's
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_6 = PyFloat_FromDouble((((((__pyx_v_self->VM1 * __pyx_v_VM2) / __Pyx_pow_Py_ssize_t(__pyx_v_self->N, 2)) + __pyx_v_VJ) - ((2.0 * __pyx_v_VC) / __pyx_v_self->N)) / __Pyx_pow_Py_ssize_t(__pyx_v_self->N, 2))); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 163, __pyx_L1_error)
+    __pyx_t_6 = PyFloat_FromDouble((((((__pyx_v_self->VM1 * __pyx_v_VM2) / __Pyx_pow_Py_ssize_t(__pyx_v_self->N, 2)) + __pyx_v_VJ) - ((2.0 * __pyx_v_VC) / __pyx_v_self->N)) / __Pyx_pow_Py_ssize_t(__pyx_v_self->N, 2))); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 209, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_r = __pyx_t_6;
     __pyx_t_6 = 0;
     goto __pyx_L0;
 
-    /* "P4J/QMI.pyx":162
+    /* "P4J/QMI.pyx":208
  *         if output == 0:
  *             return logf(self.VM1*VM2) + logf(VJ) - 2.0*logf(VC)
  *         elif output == 1:             # <<<<<<<<<<<<<<
@@ -3126,7 +3543,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
  */
     break;
 
-    /* "P4J/QMI.pyx":164
+    /* "P4J/QMI.pyx":210
  *         elif output == 1:
  *             return (self.VM1*VM2/self.N**2 + VJ - 2.0*VC/self.N)/self.N**2
  *         elif output == 2:             # <<<<<<<<<<<<<<
@@ -3135,7 +3552,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
  */
     case 2:
 
-    /* "P4J/QMI.pyx":165
+    /* "P4J/QMI.pyx":211
  *             return (self.VM1*VM2/self.N**2 + VJ - 2.0*VC/self.N)/self.N**2
  *         elif output == 2:
  *             return fabsf(-logf(self.VM1) - logf(VM2) + logf(VJ) + 2*logf(self.N))  # Renyi's             # <<<<<<<<<<<<<<
@@ -3143,13 +3560,13 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
  * 
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_6 = PyFloat_FromDouble(fabsf(((((-logf(__pyx_v_self->VM1)) - logf(__pyx_v_VM2)) + logf(__pyx_v_VJ)) + (2.0 * logf(__pyx_v_self->N))))); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 165, __pyx_L1_error)
+    __pyx_t_6 = PyFloat_FromDouble(fabsf(((((-logf(__pyx_v_self->VM1)) - logf(__pyx_v_VM2)) + logf(__pyx_v_VJ)) + (2.0 * logf(__pyx_v_self->N))))); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 211, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_r = __pyx_t_6;
     __pyx_t_6 = 0;
     goto __pyx_L0;
 
-    /* "P4J/QMI.pyx":164
+    /* "P4J/QMI.pyx":210
  *         elif output == 1:
  *             return (self.VM1*VM2/self.N**2 + VJ - 2.0*VC/self.N)/self.N**2
  *         elif output == 2:             # <<<<<<<<<<<<<<
@@ -3160,7 +3577,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
     default: break;
   }
 
-  /* "P4J/QMI.pyx":134
+  /* "P4J/QMI.pyx":180
  *                 self.VM1 += 2.0*self.IP_M[mat_idx]
  * 
  *     def eval_frequency(self, DTYPE_t freq, int output):             # <<<<<<<<<<<<<<
@@ -3181,7 +3598,7 @@ static PyObject *__pyx_pf_3P4J_3QMI_3QMI_2eval_frequency(struct __pyx_obj_3P4J_3
   return __pyx_r;
 }
 
-/* "P4J/QMI.pyx":168
+/* "P4J/QMI.pyx":214
  *             # return 1.0 - (self.VM1 + VM2 - VJ)/self.N**2  # Tsallis
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -3204,7 +3621,7 @@ static void __pyx_pf_3P4J_3QMI_3QMI_4__dealloc__(struct __pyx_obj_3P4J_3QMI_QMI 
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "P4J/QMI.pyx":169
+  /* "P4J/QMI.pyx":215
  * 
  *     def __dealloc__(self):
  *         PyMem_Free(self.IP_M)             # <<<<<<<<<<<<<<
@@ -3213,7 +3630,7 @@ static void __pyx_pf_3P4J_3QMI_3QMI_4__dealloc__(struct __pyx_obj_3P4J_3QMI_QMI 
  */
   PyMem_Free(__pyx_v_self->IP_M);
 
-  /* "P4J/QMI.pyx":170
+  /* "P4J/QMI.pyx":216
  *     def __dealloc__(self):
  *         PyMem_Free(self.IP_M)
  *         PyMem_Free(self.IP_P)             # <<<<<<<<<<<<<<
@@ -3222,7 +3639,7 @@ static void __pyx_pf_3P4J_3QMI_3QMI_4__dealloc__(struct __pyx_obj_3P4J_3QMI_QMI 
  */
   PyMem_Free(__pyx_v_self->IP_P);
 
-  /* "P4J/QMI.pyx":171
+  /* "P4J/QMI.pyx":217
  *         PyMem_Free(self.IP_M)
  *         PyMem_Free(self.IP_P)
  *         PyMem_Free(self.mjd)             # <<<<<<<<<<<<<<
@@ -3231,7 +3648,7 @@ static void __pyx_pf_3P4J_3QMI_3QMI_4__dealloc__(struct __pyx_obj_3P4J_3QMI_QMI 
  */
   PyMem_Free(__pyx_v_self->mjd);
 
-  /* "P4J/QMI.pyx":172
+  /* "P4J/QMI.pyx":218
  *         PyMem_Free(self.IP_P)
  *         PyMem_Free(self.mjd)
  *         PyMem_Free(self.angle)             # <<<<<<<<<<<<<<
@@ -3240,7 +3657,7 @@ static void __pyx_pf_3P4J_3QMI_3QMI_4__dealloc__(struct __pyx_obj_3P4J_3QMI_QMI 
  */
   PyMem_Free(__pyx_v_self->angle);
 
-  /* "P4J/QMI.pyx":173
+  /* "P4J/QMI.pyx":219
  *         PyMem_Free(self.mjd)
  *         PyMem_Free(self.angle)
  *         PyMem_Free(self.VC1)             # <<<<<<<<<<<<<<
@@ -3249,7 +3666,7 @@ static void __pyx_pf_3P4J_3QMI_3QMI_4__dealloc__(struct __pyx_obj_3P4J_3QMI_QMI 
  */
   PyMem_Free(__pyx_v_self->VC1);
 
-  /* "P4J/QMI.pyx":174
+  /* "P4J/QMI.pyx":220
  *         PyMem_Free(self.angle)
  *         PyMem_Free(self.VC1)
  *         PyMem_Free(self.VC2)             # <<<<<<<<<<<<<<
@@ -3258,7 +3675,7 @@ static void __pyx_pf_3P4J_3QMI_3QMI_4__dealloc__(struct __pyx_obj_3P4J_3QMI_QMI 
  */
   PyMem_Free(__pyx_v_self->VC2);
 
-  /* "P4J/QMI.pyx":168
+  /* "P4J/QMI.pyx":214
  *             # return 1.0 - (self.VM1 + VM2 - VJ)/self.N**2  # Tsallis
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -15745,6 +16162,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {&__pyx_n_s_itemsize, __pyx_k_itemsize, sizeof(__pyx_k_itemsize), 0, 0, 1, 1},
   {&__pyx_kp_s_itemsize_0_for_cython_array, __pyx_k_itemsize_0_for_cython_array, sizeof(__pyx_k_itemsize_0_for_cython_array), 0, 0, 1, 0},
+  {&__pyx_n_s_kernel, __pyx_k_kernel, sizeof(__pyx_k_kernel), 0, 0, 1, 1},
   {&__pyx_n_s_mag, __pyx_k_mag, sizeof(__pyx_k_mag), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_memview, __pyx_k_memview, sizeof(__pyx_k_memview), 0, 0, 1, 1},
@@ -15776,7 +16194,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
 };
 static int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 36, __pyx_L1_error)
-  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(0, 101, __pyx_L1_error)
+  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(0, 141, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 131, __pyx_L1_error)
   __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(1, 149, __pyx_L1_error)
   __pyx_builtin_Ellipsis = __Pyx_GetBuiltinName(__pyx_n_s_Ellipsis); if (!__pyx_builtin_Ellipsis) __PYX_ERR(1, 396, __pyx_L1_error)
@@ -16100,9 +16518,9 @@ PyMODINIT_FUNC PyInit_QMI(void)
   /*--- Variable export code ---*/
   /*--- Function export code ---*/
   /*--- Type init code ---*/
-  if (PyType_Ready(&__pyx_type_3P4J_3QMI_QMI) < 0) __PYX_ERR(0, 85, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_3P4J_3QMI_QMI) < 0) __PYX_ERR(0, 125, __pyx_L1_error)
   __pyx_type_3P4J_3QMI_QMI.tp_print = 0;
-  if (PyObject_SetAttrString(__pyx_m, "QMI", (PyObject *)&__pyx_type_3P4J_3QMI_QMI) < 0) __PYX_ERR(0, 85, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "QMI", (PyObject *)&__pyx_type_3P4J_3QMI_QMI) < 0) __PYX_ERR(0, 125, __pyx_L1_error)
   __pyx_ptype_3P4J_3QMI_QMI = &__pyx_type_3P4J_3QMI_QMI;
   __pyx_vtabptr_array = &__pyx_vtable_array;
   __pyx_vtable_array.get_memview = (PyObject *(*)(struct __pyx_array_obj *))__pyx_array_get_memview;

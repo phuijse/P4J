@@ -1,4 +1,6 @@
 include *.rst
 include *.py
+include *.pxd
+include *.pyx
 include LICENSE
 recursive-include examples *.ipynb

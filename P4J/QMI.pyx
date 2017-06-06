@@ -77,6 +77,46 @@ cdef inline void IP_gaussian(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] h_da
             IP[indexMatrixToVector(i, j, N)] = expf(-0.5*delta2/gauss_var)/sqrtf(2.0*M_PI*gauss_var)
     PyMem_Free(h_data2)
 
+cdef inline void IP_gaussian2(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] h_data, DTYPE_t h_KDE, Py_ssize_t N):
+    cdef Py_ssize_t i, j
+    cdef DTYPE_t gauss_var, delta2, h_KDE2 = 2.0*powf(h_KDE, 2.0)
+    cdef DTYPE_t* w = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))
+    cdef DTYPE_t sum_w = 0.0
+    for i in range(N):
+        w[i] = 1.0/powf(h_data[i], 2.0)
+        sum_w += w[i]
+    #for i in range(N):
+    #    w[i] = w[i]/sum_w
+    for i in range(N):
+        gauss_var = h_KDE2
+        IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/sqrtf(2.0*M_PI*gauss_var)
+        for j in range(i+1, N):
+            delta2 = powf(data[i] - data[j], 2.0)
+            #delta2 = fabsf(data[i] - data[j])
+            gauss_var = h_KDE2
+            IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]*expf(-0.5*delta2/gauss_var)/sqrtf(2.0*M_PI*gauss_var)
+    PyMem_Free(w)
+
+
+cdef inline void IP_cauchy(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] err, DTYPE_t h_KDE, Py_ssize_t N):
+    cdef Py_ssize_t i, j
+    cdef DTYPE_t delta2
+    cdef DTYPE_t* w = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))
+    cdef DTYPE_t w_sum = 0.0
+    for i in range(N):
+        w[i] = 1.0/powf(err[i], 2.0)
+        w_sum += w[i]
+    #for i in range(N):
+    #    w[i] = w[i]/w_sum
+    for i in range(N):
+        IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/(M_PI*2.0*h_KDE)
+        for j in range(i+1, N):
+            delta2 = powf((data[i] - data[j])/(2.0*h_KDE), 2.0)
+            IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]/(M_PI*2.0*h_KDE*(1.0 + delta2))
+    PyMem_Free(w)
+
+
+
 
 cdef inline Py_ssize_t indexMatrixToVector(Py_ssize_t i, Py_ssize_t j, Py_ssize_t N):
     # Only works for i <= j, which is always the case here
@@ -92,7 +132,7 @@ cdef class QMI:
     cdef DTYPE_t h_KDE_P
     cdef DTYPE_t* angle
     cdef DTYPE_t* mjd
-    def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err, DTYPE_t h_KDE_M, DTYPE_t h_KDE_P):
+    def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err, DTYPE_t h_KDE_M, DTYPE_t h_KDE_P, int kernel=0):
         cdef Py_ssize_t i, j, mat_idx
         self.N = mag.shape[0]
         self.mjd = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
@@ -111,7 +151,13 @@ cdef class QMI:
             raise MemoryError()
         if not self.IP_P:
             raise MemoryError()
-        IP_gaussian(self.IP_M, mag, err, h_KDE_M, self.N)
+        if kernel == 0:
+            IP_gaussian(self.IP_M, mag, err, h_KDE_M, self.N)
+        elif kernel == 1:
+            IP_cauchy(self.IP_M, mag, err, h_KDE_M, self.N)
+        elif kernel == 2:
+            IP_gaussian2(self.IP_M, mag, err, h_KDE_M, self.N)
+
         self.VC1 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
         self.VC2 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
         if not self.VC1:
