@@ -10,12 +10,13 @@ Cauchy-Schwarz Quadratic Mutual Information [1]. Information theoretic criteria 
 information on the whole probability density function of the process and are more robust than 
 classical second-order statistics based criteria [2, 3, 4]. For comparison P4J also 
 incorporates classical methods for period detection used in astronomy such as
-Phase Dispersion Minimization [5] and Lafler-Kinman's string length [6]. 
+Phase Dispersion Minimization [5], Lafler-Kinman's string length [6], and the 
+orthogonal multiharmonic AoV periodogram [7].
 
 Contents:
 
 -  Quadratic Mutual Information periodogram for light curves 
--  Phase Dispersion Minimization and String Length methods
+-  Phase Dispersion Minimization, String Length, Orthogonal Multiharmonic AoV
 -  Basic synthetic light curve generator
 
 
@@ -23,7 +24,7 @@ https://github.com/phuijse/P4J
 
 """
 
-__version__ = '0.23'
+__version__ = '0.24'
 
 from .generator import synthetic_light_curve_generator
 from .periodogram import periodogram
