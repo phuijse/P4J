@@ -1,6 +1,5 @@
 include *.rst
 include *.py
-include *.pxd
-include *.pyx
+recursive-include P4J *.pyx *.pxd *.c *.h
 include LICENSE
 recursive-include examples *.ipynb
