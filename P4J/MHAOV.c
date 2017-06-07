@@ -749,25 +749,25 @@ typedef volatile __pyx_atomic_int_type __pyx_atomic_int;
 #endif
 
 
-/* "aux.pxd":2
+/* "utilities.pxd":2
  * 
  * ctypedef float DTYPE_t             # <<<<<<<<<<<<<<
  * ctypedef int ITYPE_t
  * 
  */
-typedef float __pyx_t_3P4J_3aux_DTYPE_t;
+typedef float __pyx_t_3P4J_9utilities_DTYPE_t;
 
-/* "aux.pxd":3
+/* "utilities.pxd":3
  * 
  * ctypedef float DTYPE_t
  * ctypedef int ITYPE_t             # <<<<<<<<<<<<<<
  * 
  * cdef void argsort(DTYPE_t*, ITYPE_t*, Py_ssize_t)
  */
-typedef int __pyx_t_3P4J_3aux_ITYPE_t;
+typedef int __pyx_t_3P4J_9utilities_ITYPE_t;
 
 /* "P4J/MHAOV.pyx":8
- * from .aux cimport weighted_mean, unbiased_weighted_variance
+ * from .utilities cimport weighted_mean
  * 
  * ctypedef float DTYPE_t             # <<<<<<<<<<<<<<
  * ctypedef int ITYPE_t
@@ -1449,9 +1449,8 @@ static PyObject *__pyx_memoryviewslice_assign_item_from_object(struct __pyx_memo
 
 /* Module declarations from 'cpython.mem' */
 
-/* Module declarations from 'P4J.aux' */
-static __pyx_t_3P4J_3aux_DTYPE_t (*__pyx_f_3P4J_3aux_weighted_mean)(__pyx_t_3P4J_3aux_DTYPE_t *, __pyx_t_3P4J_3aux_DTYPE_t *, Py_ssize_t); /*proto*/
-static __pyx_t_3P4J_3aux_DTYPE_t (*__pyx_f_3P4J_3aux_unbiased_weighted_variance)(__pyx_t_3P4J_3aux_DTYPE_t *, __pyx_t_3P4J_3aux_DTYPE_t *, Py_ssize_t); /*proto*/
+/* Module declarations from 'P4J.utilities' */
+static __pyx_t_3P4J_9utilities_DTYPE_t (*__pyx_f_3P4J_9utilities_weighted_mean)(__pyx_t_3P4J_9utilities_DTYPE_t *, __pyx_t_3P4J_9utilities_DTYPE_t *, Py_ssize_t); /*proto*/
 
 /* Module declarations from 'P4J.MHAOV' */
 static PyTypeObject *__pyx_ptype_3P4J_5MHAOV_AOV = 0;
@@ -2088,7 +2087,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
  *         self.d1 = Nharmonics*2.0
  *         self.d2 = self.N - Nharmonics*2 - 1
  */
-  __pyx_v_self->wmean = __pyx_f_3P4J_3aux_weighted_mean(__pyx_v_self->mag, __pyx_v_self->err, __pyx_v_self->N);
+  __pyx_v_self->wmean = __pyx_f_3P4J_9utilities_weighted_mean(__pyx_v_self->mag, __pyx_v_self->err, __pyx_v_self->N);
 
   /* "P4J/MHAOV.pyx":80
  * 
@@ -15638,9 +15637,8 @@ PyMODINIT_FUNC PyInit_MHAOV(void)
   /*--- Type import code ---*/
   /*--- Variable import code ---*/
   /*--- Function import code ---*/
-  __pyx_t_1 = __Pyx_ImportModule("P4J.aux"); if (!__pyx_t_1) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (__Pyx_ImportFunction(__pyx_t_1, "weighted_mean", (void (**)(void))&__pyx_f_3P4J_3aux_weighted_mean, "__pyx_t_3P4J_3aux_DTYPE_t (__pyx_t_3P4J_3aux_DTYPE_t *, __pyx_t_3P4J_3aux_DTYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (__Pyx_ImportFunction(__pyx_t_1, "unbiased_weighted_variance", (void (**)(void))&__pyx_f_3P4J_3aux_unbiased_weighted_variance, "__pyx_t_3P4J_3aux_DTYPE_t (__pyx_t_3P4J_3aux_DTYPE_t *, __pyx_t_3P4J_3aux_DTYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_ImportModule("P4J.utilities"); if (!__pyx_t_1) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_ImportFunction(__pyx_t_1, "weighted_mean", (void (**)(void))&__pyx_f_3P4J_9utilities_weighted_mean, "__pyx_t_3P4J_9utilities_DTYPE_t (__pyx_t_3P4J_9utilities_DTYPE_t *, __pyx_t_3P4J_9utilities_DTYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   Py_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   /*--- Execution code ---*/
   #if defined(__Pyx_Generator_USED) || defined(__Pyx_Coroutine_USED)

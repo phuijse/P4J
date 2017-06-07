@@ -3,7 +3,7 @@
 
 cimport cython
 from cpython.mem cimport PyMem_Malloc, PyMem_Free
-from .aux cimport argsort, unbiased_weighted_variance
+from .utilities cimport argsort, unbiased_weighted_variance
 
 ctypedef float DTYPE_t
 ctypedef int ITYPE_t
@@ -12,7 +12,6 @@ cdef extern from "math.h":
     DTYPE_t sqrtf(DTYPE_t)
     DTYPE_t powf(DTYPE_t, DTYPE_t)
     DTYPE_t remainderf(DTYPE_t, DTYPE_t)
-
 
 """
 
@@ -23,7 +22,10 @@ The original method is modified to include uncertainties, the variance in
 the denominator is replaced by the unbiased weighted variance, and the euclidean 
 distance between sorted samples is replaced by a weighted version, i.e.
  sum[m[1:N] - m[0:N-1)**2/(e[1:N]**2 + e[0:N-1]**2)]/sum[1.0/(e[1:N]**2 + e[0:N-1]**2)]
+
+Please cite the paper above if using this code
 """
+
 cdef class LKSL:
     cdef Py_ssize_t N
     cdef DTYPE_t* phase

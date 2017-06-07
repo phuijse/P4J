@@ -2300,7 +2300,7 @@ static CYTHON_INLINE void __pyx_f_3P4J_3QMI_IP_gaussian2(__pyx_t_3P4J_3QMI_DTYPE
  *     for i in range(N):
  *         w[i] = 1.0/powf(h_data[i], 2.0)             # <<<<<<<<<<<<<<
  *         sum_w += w[i]
- *     #for i in range(N):
+ *     for i in range(N):
  */
     __pyx_t_3 = __pyx_v_i;
     (__pyx_v_w[__pyx_v_i]) = (1.0 / powf((*((__pyx_t_3P4J_3QMI_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_3QMI_DTYPE_t *) __pyx_v_h_data.data) + __pyx_t_3)) ))), 2.0));
@@ -2309,15 +2309,36 @@ static CYTHON_INLINE void __pyx_f_3P4J_3QMI_IP_gaussian2(__pyx_t_3P4J_3QMI_DTYPE
  *     for i in range(N):
  *         w[i] = 1.0/powf(h_data[i], 2.0)
  *         sum_w += w[i]             # <<<<<<<<<<<<<<
- *     #for i in range(N):
- *     #    w[i] = w[i]/sum_w
+ *     for i in range(N):
+ *         w[i] = w[i]/sum_w
  */
     __pyx_v_sum_w = (__pyx_v_sum_w + (__pyx_v_w[__pyx_v_i]));
   }
 
+  /* "P4J/QMI.pyx":88
+ *         w[i] = 1.0/powf(h_data[i], 2.0)
+ *         sum_w += w[i]
+ *     for i in range(N):             # <<<<<<<<<<<<<<
+ *         w[i] = w[i]/sum_w
+ *     for i in range(N):
+ */
+  __pyx_t_1 = __pyx_v_N;
+  for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
+    __pyx_v_i = __pyx_t_2;
+
+    /* "P4J/QMI.pyx":89
+ *         sum_w += w[i]
+ *     for i in range(N):
+ *         w[i] = w[i]/sum_w             # <<<<<<<<<<<<<<
+ *     for i in range(N):
+ *         gauss_var = h_KDE2
+ */
+    (__pyx_v_w[__pyx_v_i]) = ((__pyx_v_w[__pyx_v_i]) / __pyx_v_sum_w);
+  }
+
   /* "P4J/QMI.pyx":90
- *     #for i in range(N):
- *     #    w[i] = w[i]/sum_w
+ *     for i in range(N):
+ *         w[i] = w[i]/sum_w
  *     for i in range(N):             # <<<<<<<<<<<<<<
  *         gauss_var = h_KDE2
  *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/sqrtf(2.0*M_PI*gauss_var)
@@ -2327,7 +2348,7 @@ static CYTHON_INLINE void __pyx_f_3P4J_3QMI_IP_gaussian2(__pyx_t_3P4J_3QMI_DTYPE
     __pyx_v_i = __pyx_t_2;
 
     /* "P4J/QMI.pyx":91
- *     #    w[i] = w[i]/sum_w
+ *         w[i] = w[i]/sum_w
  *     for i in range(N):
  *         gauss_var = h_KDE2             # <<<<<<<<<<<<<<
  *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/sqrtf(2.0*M_PI*gauss_var)
@@ -2465,7 +2486,7 @@ static CYTHON_INLINE void __pyx_f_3P4J_3QMI_IP_cauchy(__pyx_t_3P4J_3QMI_DTYPE_t 
  *     for i in range(N):
  *         w[i] = 1.0/powf(err[i], 2.0)             # <<<<<<<<<<<<<<
  *         w_sum += w[i]
- *     #for i in range(N):
+ *     for i in range(N):
  */
     __pyx_t_3 = __pyx_v_i;
     (__pyx_v_w[__pyx_v_i]) = (1.0 / powf((*((__pyx_t_3P4J_3QMI_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_3QMI_DTYPE_t *) __pyx_v_err.data) + __pyx_t_3)) ))), 2.0));
@@ -2474,15 +2495,36 @@ static CYTHON_INLINE void __pyx_f_3P4J_3QMI_IP_cauchy(__pyx_t_3P4J_3QMI_DTYPE_t 
  *     for i in range(N):
  *         w[i] = 1.0/powf(err[i], 2.0)
  *         w_sum += w[i]             # <<<<<<<<<<<<<<
- *     #for i in range(N):
- *     #    w[i] = w[i]/w_sum
+ *     for i in range(N):
+ *         w[i] = w[i]/w_sum
  */
     __pyx_v_w_sum = (__pyx_v_w_sum + (__pyx_v_w[__pyx_v_i]));
   }
 
+  /* "P4J/QMI.pyx":109
+ *         w[i] = 1.0/powf(err[i], 2.0)
+ *         w_sum += w[i]
+ *     for i in range(N):             # <<<<<<<<<<<<<<
+ *         w[i] = w[i]/w_sum
+ *     for i in range(N):
+ */
+  __pyx_t_1 = __pyx_v_N;
+  for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
+    __pyx_v_i = __pyx_t_2;
+
+    /* "P4J/QMI.pyx":110
+ *         w_sum += w[i]
+ *     for i in range(N):
+ *         w[i] = w[i]/w_sum             # <<<<<<<<<<<<<<
+ *     for i in range(N):
+ *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/(M_PI*2.0*h_KDE)
+ */
+    (__pyx_v_w[__pyx_v_i]) = ((__pyx_v_w[__pyx_v_i]) / __pyx_v_w_sum);
+  }
+
   /* "P4J/QMI.pyx":111
- *     #for i in range(N):
- *     #    w[i] = w[i]/w_sum
+ *     for i in range(N):
+ *         w[i] = w[i]/w_sum
  *     for i in range(N):             # <<<<<<<<<<<<<<
  *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/(M_PI*2.0*h_KDE)
  *         for j in range(i+1, N):
@@ -2492,7 +2534,7 @@ static CYTHON_INLINE void __pyx_f_3P4J_3QMI_IP_cauchy(__pyx_t_3P4J_3QMI_DTYPE_t 
     __pyx_v_i = __pyx_t_2;
 
     /* "P4J/QMI.pyx":112
- *     #    w[i] = w[i]/w_sum
+ *         w[i] = w[i]/w_sum
  *     for i in range(N):
  *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/(M_PI*2.0*h_KDE)             # <<<<<<<<<<<<<<
  *         for j in range(i+1, N):

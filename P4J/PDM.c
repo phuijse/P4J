@@ -749,25 +749,25 @@ typedef volatile __pyx_atomic_int_type __pyx_atomic_int;
 #endif
 
 
-/* "aux.pxd":2
+/* "utilities.pxd":2
  * 
  * ctypedef float DTYPE_t             # <<<<<<<<<<<<<<
  * ctypedef int ITYPE_t
  * 
  */
-typedef float __pyx_t_3P4J_3aux_DTYPE_t;
+typedef float __pyx_t_3P4J_9utilities_DTYPE_t;
 
-/* "aux.pxd":3
+/* "utilities.pxd":3
  * 
  * ctypedef float DTYPE_t
  * ctypedef int ITYPE_t             # <<<<<<<<<<<<<<
  * 
  * cdef void argsort(DTYPE_t*, ITYPE_t*, Py_ssize_t)
  */
-typedef int __pyx_t_3P4J_3aux_ITYPE_t;
+typedef int __pyx_t_3P4J_9utilities_ITYPE_t;
 
 /* "P4J/PDM.pyx":8
- * from .aux cimport argsort, unbiased_weighted_variance
+ * from .utilities cimport argsort, unbiased_weighted_variance
  * 
  * ctypedef float DTYPE_t             # <<<<<<<<<<<<<<
  * ctypedef int ITYPE_t
@@ -1442,9 +1442,9 @@ static PyObject *__pyx_memoryviewslice_assign_item_from_object(struct __pyx_memo
 
 /* Module declarations from 'cpython.mem' */
 
-/* Module declarations from 'P4J.aux' */
-static void (*__pyx_f_3P4J_3aux_argsort)(__pyx_t_3P4J_3aux_DTYPE_t *, __pyx_t_3P4J_3aux_ITYPE_t *, Py_ssize_t); /*proto*/
-static __pyx_t_3P4J_3aux_DTYPE_t (*__pyx_f_3P4J_3aux_unbiased_weighted_variance)(__pyx_t_3P4J_3aux_DTYPE_t *, __pyx_t_3P4J_3aux_DTYPE_t *, Py_ssize_t); /*proto*/
+/* Module declarations from 'P4J.utilities' */
+static void (*__pyx_f_3P4J_9utilities_argsort)(__pyx_t_3P4J_9utilities_DTYPE_t *, __pyx_t_3P4J_9utilities_ITYPE_t *, Py_ssize_t); /*proto*/
+static __pyx_t_3P4J_9utilities_DTYPE_t (*__pyx_f_3P4J_9utilities_unbiased_weighted_variance)(__pyx_t_3P4J_9utilities_DTYPE_t *, __pyx_t_3P4J_9utilities_DTYPE_t *, Py_ssize_t); /*proto*/
 
 /* Module declarations from 'P4J.PDM' */
 static PyTypeObject *__pyx_ptype_3P4J_3PDM_PDM = 0;
@@ -2124,7 +2124,7 @@ static int __pyx_pf_3P4J_3PDM_3PDM___init__(struct __pyx_obj_3P4J_3PDM_PDM *__py
  * 
  *     def eval_frequency(self, DTYPE_t freq):
  */
-  __pyx_v_self->normalizer = (1.0 / __pyx_f_3P4J_3aux_unbiased_weighted_variance(__pyx_v_self->mag, __pyx_v_self->err2, __pyx_v_self->N));
+  __pyx_v_self->normalizer = (1.0 / __pyx_f_3P4J_9utilities_unbiased_weighted_variance(__pyx_v_self->mag, __pyx_v_self->err2, __pyx_v_self->N));
 
   /* "P4J/PDM.pyx":39
  *     cdef DTYPE_t* tmp_mag
@@ -2351,7 +2351,7 @@ static PyObject *__pyx_pf_3P4J_3PDM_3PDM_2eval_frequency(struct __pyx_obj_3P4J_3
  *                 PDM_den += (V1 - V2/V1)
  * 
  */
-      __pyx_v_PDM_num = (__pyx_v_PDM_num + (__pyx_f_3P4J_3aux_unbiased_weighted_variance(__pyx_v_self->tmp_mag, __pyx_v_self->tmp_err2, __pyx_v_samples_in_bin) * (__pyx_v_V1 - (__pyx_v_V2 / __pyx_v_V1))));
+      __pyx_v_PDM_num = (__pyx_v_PDM_num + (__pyx_f_3P4J_9utilities_unbiased_weighted_variance(__pyx_v_self->tmp_mag, __pyx_v_self->tmp_err2, __pyx_v_samples_in_bin) * (__pyx_v_V1 - (__pyx_v_V2 / __pyx_v_V1))));
 
       /* "P4J/PDM.pyx":90
  *             if samples_in_bin > 2:
@@ -15367,9 +15367,9 @@ PyMODINIT_FUNC PyInit_PDM(void)
   /*--- Type import code ---*/
   /*--- Variable import code ---*/
   /*--- Function import code ---*/
-  __pyx_t_1 = __Pyx_ImportModule("P4J.aux"); if (!__pyx_t_1) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (__Pyx_ImportFunction(__pyx_t_1, "argsort", (void (**)(void))&__pyx_f_3P4J_3aux_argsort, "void (__pyx_t_3P4J_3aux_DTYPE_t *, __pyx_t_3P4J_3aux_ITYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (__Pyx_ImportFunction(__pyx_t_1, "unbiased_weighted_variance", (void (**)(void))&__pyx_f_3P4J_3aux_unbiased_weighted_variance, "__pyx_t_3P4J_3aux_DTYPE_t (__pyx_t_3P4J_3aux_DTYPE_t *, __pyx_t_3P4J_3aux_DTYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_ImportModule("P4J.utilities"); if (!__pyx_t_1) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_ImportFunction(__pyx_t_1, "argsort", (void (**)(void))&__pyx_f_3P4J_9utilities_argsort, "void (__pyx_t_3P4J_9utilities_DTYPE_t *, __pyx_t_3P4J_9utilities_ITYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_ImportFunction(__pyx_t_1, "unbiased_weighted_variance", (void (**)(void))&__pyx_f_3P4J_9utilities_unbiased_weighted_variance, "__pyx_t_3P4J_9utilities_DTYPE_t (__pyx_t_3P4J_9utilities_DTYPE_t *, __pyx_t_3P4J_9utilities_DTYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   Py_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   /*--- Execution code ---*/
   #if defined(__Pyx_Generator_USED) || defined(__Pyx_Coroutine_USED)

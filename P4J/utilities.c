@@ -16,7 +16,7 @@
             "m"
         ]
     },
-    "module_name": "P4J.aux"
+    "module_name": "P4J.utilities"
 }
 END: Cython Metadata */
 
@@ -447,8 +447,8 @@ static CYTHON_INLINE float __PYX_NAN() {
   #endif
 #endif
 
-#define __PYX_HAVE__P4J__aux
-#define __PYX_HAVE_API__P4J__aux
+#define __PYX_HAVE__P4J__utilities
+#define __PYX_HAVE_API__P4J__utilities
 #include "math.h"
 #include "stdlib.h"
 #ifdef _OPENMP
@@ -646,39 +646,39 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "P4J/aux.pyx",
+  "P4J/utilities.pyx",
 };
 
-/* "P4J/aux.pxd":2
+/* "P4J/utilities.pxd":2
  * 
  * ctypedef float DTYPE_t             # <<<<<<<<<<<<<<
  * ctypedef int ITYPE_t
  * 
  */
-typedef float __pyx_t_3P4J_3aux_DTYPE_t;
+typedef float __pyx_t_3P4J_9utilities_DTYPE_t;
 
-/* "P4J/aux.pxd":3
+/* "P4J/utilities.pxd":3
  * 
  * ctypedef float DTYPE_t
  * ctypedef int ITYPE_t             # <<<<<<<<<<<<<<
  * 
  * cdef void argsort(DTYPE_t*, ITYPE_t*, Py_ssize_t)
  */
-typedef int __pyx_t_3P4J_3aux_ITYPE_t;
+typedef int __pyx_t_3P4J_9utilities_ITYPE_t;
 
 /*--- Type declarations ---*/
-struct __pyx_t_3P4J_3aux_Sorter;
+struct __pyx_t_3P4J_9utilities_Sorter;
 
-/* "P4J/aux.pyx":50
+/* "P4J/utilities.pyx":50
  *             int(*compar)(const_void *, const_void *)) nogil
  * 
  * cdef struct Sorter:             # <<<<<<<<<<<<<<
  *     Py_ssize_t index
  *     DTYPE_t value
  */
-struct __pyx_t_3P4J_3aux_Sorter {
+struct __pyx_t_3P4J_9utilities_Sorter {
   Py_ssize_t index;
-  __pyx_t_3P4J_3aux_DTYPE_t value;
+  __pyx_t_3P4J_9utilities_DTYPE_t value;
 };
 
 /* --- Runtime support code (head) --- */
@@ -806,13 +806,13 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 /* Module declarations from 'cpython.mem' */
 
-/* Module declarations from 'P4J.aux' */
-static int __pyx_f_3P4J_3aux__compare(const void *, const void *); /*proto*/
-static void __pyx_f_3P4J_3aux_cyargsort(__pyx_t_3P4J_3aux_DTYPE_t *, struct __pyx_t_3P4J_3aux_Sorter *, Py_ssize_t); /*proto*/
-#define __Pyx_MODULE_NAME "P4J.aux"
-int __pyx_module_is_main_P4J__aux = 0;
+/* Module declarations from 'P4J.utilities' */
+static int __pyx_f_3P4J_9utilities__compare(const void *, const void *); /*proto*/
+static void __pyx_f_3P4J_9utilities_cyargsort(__pyx_t_3P4J_9utilities_DTYPE_t *, struct __pyx_t_3P4J_9utilities_Sorter *, Py_ssize_t); /*proto*/
+#define __Pyx_MODULE_NAME "P4J.utilities"
+int __pyx_module_is_main_P4J__utilities = 0;
 
-/* Implementation of 'P4J.aux' */
+/* Implementation of 'P4J.utilities' */
 static PyObject *__pyx_builtin_range;
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_test[] = "__test__";
@@ -821,7 +821,7 @@ static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_range;
 static PyObject *__pyx_n_s_test;
 
-/* "P4J/aux.pyx":16
+/* "P4J/utilities.pyx":16
  * """
  * 
  * cdef DTYPE_t weighted_mean(DTYPE_t* data, DTYPE_t* err, Py_ssize_t N):             # <<<<<<<<<<<<<<
@@ -829,17 +829,17 @@ static PyObject *__pyx_n_s_test;
  *     cdef Py_ssize_t i
  */
 
-static __pyx_t_3P4J_3aux_DTYPE_t __pyx_f_3P4J_3aux_weighted_mean(__pyx_t_3P4J_3aux_DTYPE_t *__pyx_v_data, __pyx_t_3P4J_3aux_DTYPE_t *__pyx_v_err, Py_ssize_t __pyx_v_N) {
-  __pyx_t_3P4J_3aux_DTYPE_t __pyx_v_w_mean;
+static __pyx_t_3P4J_9utilities_DTYPE_t __pyx_f_3P4J_9utilities_weighted_mean(__pyx_t_3P4J_9utilities_DTYPE_t *__pyx_v_data, __pyx_t_3P4J_9utilities_DTYPE_t *__pyx_v_err, Py_ssize_t __pyx_v_N) {
+  __pyx_t_3P4J_9utilities_DTYPE_t __pyx_v_w_mean;
   Py_ssize_t __pyx_v_i;
-  __pyx_t_3P4J_3aux_DTYPE_t __pyx_v_w_sum;
-  __pyx_t_3P4J_3aux_DTYPE_t __pyx_r;
+  __pyx_t_3P4J_9utilities_DTYPE_t __pyx_v_w_sum;
+  __pyx_t_3P4J_9utilities_DTYPE_t __pyx_r;
   __Pyx_RefNannyDeclarations
   Py_ssize_t __pyx_t_1;
   Py_ssize_t __pyx_t_2;
   __Pyx_RefNannySetupContext("weighted_mean", 0);
 
-  /* "P4J/aux.pyx":17
+  /* "P4J/utilities.pyx":17
  * 
  * cdef DTYPE_t weighted_mean(DTYPE_t* data, DTYPE_t* err, Py_ssize_t N):
  *     cdef DTYPE_t w_mean = 0.0             # <<<<<<<<<<<<<<
@@ -848,7 +848,7 @@ static __pyx_t_3P4J_3aux_DTYPE_t __pyx_f_3P4J_3aux_weighted_mean(__pyx_t_3P4J_3a
  */
   __pyx_v_w_mean = 0.0;
 
-  /* "P4J/aux.pyx":19
+  /* "P4J/utilities.pyx":19
  *     cdef DTYPE_t w_mean = 0.0
  *     cdef Py_ssize_t i
  *     cdef DTYPE_t w_sum = 0.0             # <<<<<<<<<<<<<<
@@ -857,7 +857,7 @@ static __pyx_t_3P4J_3aux_DTYPE_t __pyx_f_3P4J_3aux_weighted_mean(__pyx_t_3P4J_3a
  */
   __pyx_v_w_sum = 0.0;
 
-  /* "P4J/aux.pyx":20
+  /* "P4J/utilities.pyx":20
  *     cdef Py_ssize_t i
  *     cdef DTYPE_t w_sum = 0.0
  *     for i in range(N):             # <<<<<<<<<<<<<<
@@ -868,7 +868,7 @@ static __pyx_t_3P4J_3aux_DTYPE_t __pyx_f_3P4J_3aux_weighted_mean(__pyx_t_3P4J_3a
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "P4J/aux.pyx":21
+    /* "P4J/utilities.pyx":21
  *     cdef DTYPE_t w_sum = 0.0
  *     for i in range(N):
  *         w_sum += 1.0/powf(err[i], 2.0)             # <<<<<<<<<<<<<<
@@ -877,7 +877,7 @@ static __pyx_t_3P4J_3aux_DTYPE_t __pyx_f_3P4J_3aux_weighted_mean(__pyx_t_3P4J_3a
  */
     __pyx_v_w_sum = (__pyx_v_w_sum + (1.0 / powf((__pyx_v_err[__pyx_v_i]), 2.0)));
 
-    /* "P4J/aux.pyx":22
+    /* "P4J/utilities.pyx":22
  *     for i in range(N):
  *         w_sum += 1.0/powf(err[i], 2.0)
  *         w_mean += data[i]/powf(err[i], 2.0)             # <<<<<<<<<<<<<<
@@ -887,7 +887,7 @@ static __pyx_t_3P4J_3aux_DTYPE_t __pyx_f_3P4J_3aux_weighted_mean(__pyx_t_3P4J_3a
     __pyx_v_w_mean = (__pyx_v_w_mean + ((__pyx_v_data[__pyx_v_i]) / powf((__pyx_v_err[__pyx_v_i]), 2.0)));
   }
 
-  /* "P4J/aux.pyx":23
+  /* "P4J/utilities.pyx":23
  *         w_sum += 1.0/powf(err[i], 2.0)
  *         w_mean += data[i]/powf(err[i], 2.0)
  *     return w_mean/w_sum             # <<<<<<<<<<<<<<
@@ -897,7 +897,7 @@ static __pyx_t_3P4J_3aux_DTYPE_t __pyx_f_3P4J_3aux_weighted_mean(__pyx_t_3P4J_3a
   __pyx_r = (__pyx_v_w_mean / __pyx_v_w_sum);
   goto __pyx_L0;
 
-  /* "P4J/aux.pyx":16
+  /* "P4J/utilities.pyx":16
  * """
  * 
  * cdef DTYPE_t weighted_mean(DTYPE_t* data, DTYPE_t* err, Py_ssize_t N):             # <<<<<<<<<<<<<<
@@ -911,7 +911,7 @@ static __pyx_t_3P4J_3aux_DTYPE_t __pyx_f_3P4J_3aux_weighted_mean(__pyx_t_3P4J_3a
   return __pyx_r;
 }
 
-/* "P4J/aux.pyx":25
+/* "P4J/utilities.pyx":25
  *     return w_mean/w_sum
  * 
  * cdef DTYPE_t unbiased_weighted_variance(DTYPE_t* data, DTYPE_t* err2, Py_ssize_t N):             # <<<<<<<<<<<<<<
@@ -919,19 +919,19 @@ static __pyx_t_3P4J_3aux_DTYPE_t __pyx_f_3P4J_3aux_weighted_mean(__pyx_t_3P4J_3a
  *     cdef DTYPE_t w_var = 0.0
  */
 
-static __pyx_t_3P4J_3aux_DTYPE_t __pyx_f_3P4J_3aux_unbiased_weighted_variance(__pyx_t_3P4J_3aux_DTYPE_t *__pyx_v_data, __pyx_t_3P4J_3aux_DTYPE_t *__pyx_v_err2, Py_ssize_t __pyx_v_N) {
-  __pyx_t_3P4J_3aux_DTYPE_t __pyx_v_w_mean;
-  __pyx_t_3P4J_3aux_DTYPE_t __pyx_v_w_var;
-  __pyx_t_3P4J_3aux_DTYPE_t __pyx_v_V1;
-  __pyx_t_3P4J_3aux_DTYPE_t __pyx_v_V2;
+static __pyx_t_3P4J_9utilities_DTYPE_t __pyx_f_3P4J_9utilities_unbiased_weighted_variance(__pyx_t_3P4J_9utilities_DTYPE_t *__pyx_v_data, __pyx_t_3P4J_9utilities_DTYPE_t *__pyx_v_err2, Py_ssize_t __pyx_v_N) {
+  __pyx_t_3P4J_9utilities_DTYPE_t __pyx_v_w_mean;
+  __pyx_t_3P4J_9utilities_DTYPE_t __pyx_v_w_var;
+  __pyx_t_3P4J_9utilities_DTYPE_t __pyx_v_V1;
+  __pyx_t_3P4J_9utilities_DTYPE_t __pyx_v_V2;
   Py_ssize_t __pyx_v_i;
-  __pyx_t_3P4J_3aux_DTYPE_t __pyx_r;
+  __pyx_t_3P4J_9utilities_DTYPE_t __pyx_r;
   __Pyx_RefNannyDeclarations
   Py_ssize_t __pyx_t_1;
   Py_ssize_t __pyx_t_2;
   __Pyx_RefNannySetupContext("unbiased_weighted_variance", 0);
 
-  /* "P4J/aux.pyx":26
+  /* "P4J/utilities.pyx":26
  * 
  * cdef DTYPE_t unbiased_weighted_variance(DTYPE_t* data, DTYPE_t* err2, Py_ssize_t N):
  *     cdef DTYPE_t w_mean = 0.0             # <<<<<<<<<<<<<<
@@ -940,7 +940,7 @@ static __pyx_t_3P4J_3aux_DTYPE_t __pyx_f_3P4J_3aux_unbiased_weighted_variance(__
  */
   __pyx_v_w_mean = 0.0;
 
-  /* "P4J/aux.pyx":27
+  /* "P4J/utilities.pyx":27
  * cdef DTYPE_t unbiased_weighted_variance(DTYPE_t* data, DTYPE_t* err2, Py_ssize_t N):
  *     cdef DTYPE_t w_mean = 0.0
  *     cdef DTYPE_t w_var = 0.0             # <<<<<<<<<<<<<<
@@ -949,7 +949,7 @@ static __pyx_t_3P4J_3aux_DTYPE_t __pyx_f_3P4J_3aux_unbiased_weighted_variance(__
  */
   __pyx_v_w_var = 0.0;
 
-  /* "P4J/aux.pyx":28
+  /* "P4J/utilities.pyx":28
  *     cdef DTYPE_t w_mean = 0.0
  *     cdef DTYPE_t w_var = 0.0
  *     cdef DTYPE_t V1 = 0.0, V2 = 0.0             # <<<<<<<<<<<<<<
@@ -959,7 +959,7 @@ static __pyx_t_3P4J_3aux_DTYPE_t __pyx_f_3P4J_3aux_unbiased_weighted_variance(__
   __pyx_v_V1 = 0.0;
   __pyx_v_V2 = 0.0;
 
-  /* "P4J/aux.pyx":30
+  /* "P4J/utilities.pyx":30
  *     cdef DTYPE_t V1 = 0.0, V2 = 0.0
  *     cdef Py_ssize_t i
  *     for i in range(N):             # <<<<<<<<<<<<<<
@@ -970,7 +970,7 @@ static __pyx_t_3P4J_3aux_DTYPE_t __pyx_f_3P4J_3aux_unbiased_weighted_variance(__
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "P4J/aux.pyx":31
+    /* "P4J/utilities.pyx":31
  *     cdef Py_ssize_t i
  *     for i in range(N):
  *         V1 += 1.0/err2[i]             # <<<<<<<<<<<<<<
@@ -979,7 +979,7 @@ static __pyx_t_3P4J_3aux_DTYPE_t __pyx_f_3P4J_3aux_unbiased_weighted_variance(__
  */
     __pyx_v_V1 = (__pyx_v_V1 + (1.0 / (__pyx_v_err2[__pyx_v_i])));
 
-    /* "P4J/aux.pyx":32
+    /* "P4J/utilities.pyx":32
  *     for i in range(N):
  *         V1 += 1.0/err2[i]
  *         V2 += 1.0/powf(err2[i], 2.0)             # <<<<<<<<<<<<<<
@@ -988,7 +988,7 @@ static __pyx_t_3P4J_3aux_DTYPE_t __pyx_f_3P4J_3aux_unbiased_weighted_variance(__
  */
     __pyx_v_V2 = (__pyx_v_V2 + (1.0 / powf((__pyx_v_err2[__pyx_v_i]), 2.0)));
 
-    /* "P4J/aux.pyx":33
+    /* "P4J/utilities.pyx":33
  *         V1 += 1.0/err2[i]
  *         V2 += 1.0/powf(err2[i], 2.0)
  *         w_mean += data[i]/err2[i]             # <<<<<<<<<<<<<<
@@ -998,7 +998,7 @@ static __pyx_t_3P4J_3aux_DTYPE_t __pyx_f_3P4J_3aux_unbiased_weighted_variance(__
     __pyx_v_w_mean = (__pyx_v_w_mean + ((__pyx_v_data[__pyx_v_i]) / (__pyx_v_err2[__pyx_v_i])));
   }
 
-  /* "P4J/aux.pyx":34
+  /* "P4J/utilities.pyx":34
  *         V2 += 1.0/powf(err2[i], 2.0)
  *         w_mean += data[i]/err2[i]
  *     for i in range(N):             # <<<<<<<<<<<<<<
@@ -1009,7 +1009,7 @@ static __pyx_t_3P4J_3aux_DTYPE_t __pyx_f_3P4J_3aux_unbiased_weighted_variance(__
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "P4J/aux.pyx":35
+    /* "P4J/utilities.pyx":35
  *         w_mean += data[i]/err2[i]
  *     for i in range(N):
  *         w_var += powf(data[i] - w_mean/V1, 2.0)/err2[i]             # <<<<<<<<<<<<<<
@@ -1019,7 +1019,7 @@ static __pyx_t_3P4J_3aux_DTYPE_t __pyx_f_3P4J_3aux_unbiased_weighted_variance(__
     __pyx_v_w_var = (__pyx_v_w_var + (powf(((__pyx_v_data[__pyx_v_i]) - (__pyx_v_w_mean / __pyx_v_V1)), 2.0) / (__pyx_v_err2[__pyx_v_i])));
   }
 
-  /* "P4J/aux.pyx":36
+  /* "P4J/utilities.pyx":36
  *     for i in range(N):
  *         w_var += powf(data[i] - w_mean/V1, 2.0)/err2[i]
  *     return w_var/(V1 - V2/V1)             # <<<<<<<<<<<<<<
@@ -1029,7 +1029,7 @@ static __pyx_t_3P4J_3aux_DTYPE_t __pyx_f_3P4J_3aux_unbiased_weighted_variance(__
   __pyx_r = (__pyx_v_w_var / (__pyx_v_V1 - (__pyx_v_V2 / __pyx_v_V1)));
   goto __pyx_L0;
 
-  /* "P4J/aux.pyx":25
+  /* "P4J/utilities.pyx":25
  *     return w_mean/w_sum
  * 
  * cdef DTYPE_t unbiased_weighted_variance(DTYPE_t* data, DTYPE_t* err2, Py_ssize_t N):             # <<<<<<<<<<<<<<
@@ -1043,7 +1043,7 @@ static __pyx_t_3P4J_3aux_DTYPE_t __pyx_f_3P4J_3aux_unbiased_weighted_variance(__
   return __pyx_r;
 }
 
-/* "P4J/aux.pyx":54
+/* "P4J/utilities.pyx":54
  *     DTYPE_t value
  * 
  * cdef int _compare(const_void *a, const_void *b):             # <<<<<<<<<<<<<<
@@ -1051,23 +1051,23 @@ static __pyx_t_3P4J_3aux_DTYPE_t __pyx_f_3P4J_3aux_unbiased_weighted_variance(__
  *     if v < 0: return -1
  */
 
-static int __pyx_f_3P4J_3aux__compare(const void *__pyx_v_a, const void *__pyx_v_b) {
-  __pyx_t_3P4J_3aux_DTYPE_t __pyx_v_v;
+static int __pyx_f_3P4J_9utilities__compare(const void *__pyx_v_a, const void *__pyx_v_b) {
+  __pyx_t_3P4J_9utilities_DTYPE_t __pyx_v_v;
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("_compare", 0);
 
-  /* "P4J/aux.pyx":55
+  /* "P4J/utilities.pyx":55
  * 
  * cdef int _compare(const_void *a, const_void *b):
  *     cdef DTYPE_t v = ((<Sorter*>a)).value-((<Sorter*>b)).value             # <<<<<<<<<<<<<<
  *     if v < 0: return -1
  *     if v >= 0: return 1
  */
-  __pyx_v_v = (((struct __pyx_t_3P4J_3aux_Sorter *)__pyx_v_a)->value - ((struct __pyx_t_3P4J_3aux_Sorter *)__pyx_v_b)->value);
+  __pyx_v_v = (((struct __pyx_t_3P4J_9utilities_Sorter *)__pyx_v_a)->value - ((struct __pyx_t_3P4J_9utilities_Sorter *)__pyx_v_b)->value);
 
-  /* "P4J/aux.pyx":56
+  /* "P4J/utilities.pyx":56
  * cdef int _compare(const_void *a, const_void *b):
  *     cdef DTYPE_t v = ((<Sorter*>a)).value-((<Sorter*>b)).value
  *     if v < 0: return -1             # <<<<<<<<<<<<<<
@@ -1080,7 +1080,7 @@ static int __pyx_f_3P4J_3aux__compare(const void *__pyx_v_a, const void *__pyx_v
     goto __pyx_L0;
   }
 
-  /* "P4J/aux.pyx":57
+  /* "P4J/utilities.pyx":57
  *     cdef DTYPE_t v = ((<Sorter*>a)).value-((<Sorter*>b)).value
  *     if v < 0: return -1
  *     if v >= 0: return 1             # <<<<<<<<<<<<<<
@@ -1093,7 +1093,7 @@ static int __pyx_f_3P4J_3aux__compare(const void *__pyx_v_a, const void *__pyx_v
     goto __pyx_L0;
   }
 
-  /* "P4J/aux.pyx":54
+  /* "P4J/utilities.pyx":54
  *     DTYPE_t value
  * 
  * cdef int _compare(const_void *a, const_void *b):             # <<<<<<<<<<<<<<
@@ -1108,7 +1108,7 @@ static int __pyx_f_3P4J_3aux__compare(const void *__pyx_v_a, const void *__pyx_v
   return __pyx_r;
 }
 
-/* "P4J/aux.pyx":59
+/* "P4J/utilities.pyx":59
  *     if v >= 0: return 1
  * 
  * cdef void cyargsort(DTYPE_t* data, Sorter * order, Py_ssize_t N):             # <<<<<<<<<<<<<<
@@ -1116,14 +1116,14 @@ static int __pyx_f_3P4J_3aux__compare(const void *__pyx_v_a, const void *__pyx_v
  *     for i in range(N):
  */
 
-static void __pyx_f_3P4J_3aux_cyargsort(__pyx_t_3P4J_3aux_DTYPE_t *__pyx_v_data, struct __pyx_t_3P4J_3aux_Sorter *__pyx_v_order, Py_ssize_t __pyx_v_N) {
+static void __pyx_f_3P4J_9utilities_cyargsort(__pyx_t_3P4J_9utilities_DTYPE_t *__pyx_v_data, struct __pyx_t_3P4J_9utilities_Sorter *__pyx_v_order, Py_ssize_t __pyx_v_N) {
   Py_ssize_t __pyx_v_i;
   __Pyx_RefNannyDeclarations
   Py_ssize_t __pyx_t_1;
   Py_ssize_t __pyx_t_2;
   __Pyx_RefNannySetupContext("cyargsort", 0);
 
-  /* "P4J/aux.pyx":61
+  /* "P4J/utilities.pyx":61
  * cdef void cyargsort(DTYPE_t* data, Sorter * order, Py_ssize_t N):
  *     cdef Py_ssize_t i
  *     for i in range(N):             # <<<<<<<<<<<<<<
@@ -1134,7 +1134,7 @@ static void __pyx_f_3P4J_3aux_cyargsort(__pyx_t_3P4J_3aux_DTYPE_t *__pyx_v_data,
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "P4J/aux.pyx":62
+    /* "P4J/utilities.pyx":62
  *     cdef Py_ssize_t i
  *     for i in range(N):
  *         order[i].index = i             # <<<<<<<<<<<<<<
@@ -1143,7 +1143,7 @@ static void __pyx_f_3P4J_3aux_cyargsort(__pyx_t_3P4J_3aux_DTYPE_t *__pyx_v_data,
  */
     (__pyx_v_order[__pyx_v_i]).index = __pyx_v_i;
 
-    /* "P4J/aux.pyx":63
+    /* "P4J/utilities.pyx":63
  *     for i in range(N):
  *         order[i].index = i
  *         order[i].value = data[i]             # <<<<<<<<<<<<<<
@@ -1153,16 +1153,16 @@ static void __pyx_f_3P4J_3aux_cyargsort(__pyx_t_3P4J_3aux_DTYPE_t *__pyx_v_data,
     (__pyx_v_order[__pyx_v_i]).value = (__pyx_v_data[__pyx_v_i]);
   }
 
-  /* "P4J/aux.pyx":64
+  /* "P4J/utilities.pyx":64
  *         order[i].index = i
  *         order[i].value = data[i]
  *     qsort(<void *> order, N, sizeof(Sorter), _compare)             # <<<<<<<<<<<<<<
  * 
  * cdef void argsort(DTYPE_t* data, ITYPE_t* order, Py_ssize_t N):
  */
-  qsort(((void *)__pyx_v_order), __pyx_v_N, (sizeof(struct __pyx_t_3P4J_3aux_Sorter)), __pyx_f_3P4J_3aux__compare);
+  qsort(((void *)__pyx_v_order), __pyx_v_N, (sizeof(struct __pyx_t_3P4J_9utilities_Sorter)), __pyx_f_3P4J_9utilities__compare);
 
-  /* "P4J/aux.pyx":59
+  /* "P4J/utilities.pyx":59
  *     if v >= 0: return 1
  * 
  * cdef void cyargsort(DTYPE_t* data, Sorter * order, Py_ssize_t N):             # <<<<<<<<<<<<<<
@@ -1174,7 +1174,7 @@ static void __pyx_f_3P4J_3aux_cyargsort(__pyx_t_3P4J_3aux_DTYPE_t *__pyx_v_data,
   __Pyx_RefNannyFinishContext();
 }
 
-/* "P4J/aux.pyx":66
+/* "P4J/utilities.pyx":66
  *     qsort(<void *> order, N, sizeof(Sorter), _compare)
  * 
  * cdef void argsort(DTYPE_t* data, ITYPE_t* order, Py_ssize_t N):             # <<<<<<<<<<<<<<
@@ -1182,34 +1182,34 @@ static void __pyx_f_3P4J_3aux_cyargsort(__pyx_t_3P4J_3aux_DTYPE_t *__pyx_v_data,
  *     cdef Sorter *order_struct = <Sorter *> PyMem_Malloc(N*sizeof(Sorter))
  */
 
-static void __pyx_f_3P4J_3aux_argsort(__pyx_t_3P4J_3aux_DTYPE_t *__pyx_v_data, __pyx_t_3P4J_3aux_ITYPE_t *__pyx_v_order, Py_ssize_t __pyx_v_N) {
+static void __pyx_f_3P4J_9utilities_argsort(__pyx_t_3P4J_9utilities_DTYPE_t *__pyx_v_data, __pyx_t_3P4J_9utilities_ITYPE_t *__pyx_v_order, Py_ssize_t __pyx_v_N) {
   Py_ssize_t __pyx_v_i;
-  struct __pyx_t_3P4J_3aux_Sorter *__pyx_v_order_struct;
+  struct __pyx_t_3P4J_9utilities_Sorter *__pyx_v_order_struct;
   __Pyx_RefNannyDeclarations
   Py_ssize_t __pyx_t_1;
   Py_ssize_t __pyx_t_2;
   Py_ssize_t __pyx_t_3;
   __Pyx_RefNannySetupContext("argsort", 0);
 
-  /* "P4J/aux.pyx":68
+  /* "P4J/utilities.pyx":68
  * cdef void argsort(DTYPE_t* data, ITYPE_t* order, Py_ssize_t N):
  *     cdef Py_ssize_t i
  *     cdef Sorter *order_struct = <Sorter *> PyMem_Malloc(N*sizeof(Sorter))             # <<<<<<<<<<<<<<
  *     cyargsort(data, order_struct, N)
  *     for i in range(N):
  */
-  __pyx_v_order_struct = ((struct __pyx_t_3P4J_3aux_Sorter *)PyMem_Malloc((__pyx_v_N * (sizeof(struct __pyx_t_3P4J_3aux_Sorter)))));
+  __pyx_v_order_struct = ((struct __pyx_t_3P4J_9utilities_Sorter *)PyMem_Malloc((__pyx_v_N * (sizeof(struct __pyx_t_3P4J_9utilities_Sorter)))));
 
-  /* "P4J/aux.pyx":69
+  /* "P4J/utilities.pyx":69
  *     cdef Py_ssize_t i
  *     cdef Sorter *order_struct = <Sorter *> PyMem_Malloc(N*sizeof(Sorter))
  *     cyargsort(data, order_struct, N)             # <<<<<<<<<<<<<<
  *     for i in range(N):
  *         order[i] = order_struct[i].index
  */
-  __pyx_f_3P4J_3aux_cyargsort(__pyx_v_data, __pyx_v_order_struct, __pyx_v_N);
+  __pyx_f_3P4J_9utilities_cyargsort(__pyx_v_data, __pyx_v_order_struct, __pyx_v_N);
 
-  /* "P4J/aux.pyx":70
+  /* "P4J/utilities.pyx":70
  *     cdef Sorter *order_struct = <Sorter *> PyMem_Malloc(N*sizeof(Sorter))
  *     cyargsort(data, order_struct, N)
  *     for i in range(N):             # <<<<<<<<<<<<<<
@@ -1220,7 +1220,7 @@ static void __pyx_f_3P4J_3aux_argsort(__pyx_t_3P4J_3aux_DTYPE_t *__pyx_v_data, _
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "P4J/aux.pyx":71
+    /* "P4J/utilities.pyx":71
  *     cyargsort(data, order_struct, N)
  *     for i in range(N):
  *         order[i] = order_struct[i].index             # <<<<<<<<<<<<<<
@@ -1231,7 +1231,7 @@ static void __pyx_f_3P4J_3aux_argsort(__pyx_t_3P4J_3aux_DTYPE_t *__pyx_v_data, _
     (__pyx_v_order[__pyx_v_i]) = __pyx_t_3;
   }
 
-  /* "P4J/aux.pyx":72
+  /* "P4J/utilities.pyx":72
  *     for i in range(N):
  *         order[i] = order_struct[i].index
  *     PyMem_Free(order_struct)             # <<<<<<<<<<<<<<
@@ -1239,7 +1239,7 @@ static void __pyx_f_3P4J_3aux_argsort(__pyx_t_3P4J_3aux_DTYPE_t *__pyx_v_data, _
  */
   PyMem_Free(__pyx_v_order_struct);
 
-  /* "P4J/aux.pyx":66
+  /* "P4J/utilities.pyx":66
  *     qsort(<void *> order, N, sizeof(Sorter), _compare)
  * 
  * cdef void argsort(DTYPE_t* data, ITYPE_t* order, Py_ssize_t N):             # <<<<<<<<<<<<<<
@@ -1262,7 +1262,7 @@ static struct PyModuleDef __pyx_moduledef = {
   #else
     PyModuleDef_HEAD_INIT,
   #endif
-    "aux",
+    "utilities",
     0, /* m_doc */
     -1, /* m_size */
     __pyx_methods /* m_methods */,
@@ -1301,11 +1301,11 @@ static int __Pyx_InitGlobals(void) {
 }
 
 #if PY_MAJOR_VERSION < 3
-PyMODINIT_FUNC initaux(void); /*proto*/
-PyMODINIT_FUNC initaux(void)
+PyMODINIT_FUNC initutilities(void); /*proto*/
+PyMODINIT_FUNC initutilities(void)
 #else
-PyMODINIT_FUNC PyInit_aux(void); /*proto*/
-PyMODINIT_FUNC PyInit_aux(void)
+PyMODINIT_FUNC PyInit_utilities(void); /*proto*/
+PyMODINIT_FUNC PyInit_utilities(void)
 #endif
 {
   PyObject *__pyx_t_1 = NULL;
@@ -1319,7 +1319,7 @@ PyMODINIT_FUNC PyInit_aux(void)
           Py_FatalError("failed to import 'refnanny' module");
   }
   #endif
-  __Pyx_RefNannySetupContext("PyMODINIT_FUNC PyInit_aux(void)", 0);
+  __Pyx_RefNannySetupContext("PyMODINIT_FUNC PyInit_utilities(void)", 0);
   if (__Pyx_check_binary_version() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_empty_tuple = PyTuple_New(0); if (unlikely(!__pyx_empty_tuple)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_empty_bytes = PyBytes_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_bytes)) __PYX_ERR(0, 1, __pyx_L1_error)
@@ -1348,7 +1348,7 @@ PyMODINIT_FUNC PyInit_aux(void)
   #endif
   /*--- Module creation code ---*/
   #if PY_MAJOR_VERSION < 3
-  __pyx_m = Py_InitModule4("aux", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
+  __pyx_m = Py_InitModule4("utilities", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
   #else
   __pyx_m = PyModule_Create(&__pyx_moduledef);
   #endif
@@ -1365,14 +1365,14 @@ PyMODINIT_FUNC PyInit_aux(void)
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
-  if (__pyx_module_is_main_P4J__aux) {
+  if (__pyx_module_is_main_P4J__utilities) {
     if (PyObject_SetAttrString(__pyx_m, "__name__", __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 1, __pyx_L1_error)
-    if (!PyDict_GetItemString(modules, "P4J.aux")) {
-      if (unlikely(PyDict_SetItemString(modules, "P4J.aux", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
+    if (!PyDict_GetItemString(modules, "P4J.utilities")) {
+      if (unlikely(PyDict_SetItemString(modules, "P4J.utilities", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
     }
   }
   #endif
@@ -1383,9 +1383,9 @@ PyMODINIT_FUNC PyInit_aux(void)
   /*--- Global init code ---*/
   /*--- Variable export code ---*/
   /*--- Function export code ---*/
-  if (__Pyx_ExportFunction("argsort", (void (*)(void))__pyx_f_3P4J_3aux_argsort, "void (__pyx_t_3P4J_3aux_DTYPE_t *, __pyx_t_3P4J_3aux_ITYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (__Pyx_ExportFunction("weighted_mean", (void (*)(void))__pyx_f_3P4J_3aux_weighted_mean, "__pyx_t_3P4J_3aux_DTYPE_t (__pyx_t_3P4J_3aux_DTYPE_t *, __pyx_t_3P4J_3aux_DTYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (__Pyx_ExportFunction("unbiased_weighted_variance", (void (*)(void))__pyx_f_3P4J_3aux_unbiased_weighted_variance, "__pyx_t_3P4J_3aux_DTYPE_t (__pyx_t_3P4J_3aux_DTYPE_t *, __pyx_t_3P4J_3aux_DTYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_ExportFunction("argsort", (void (*)(void))__pyx_f_3P4J_9utilities_argsort, "void (__pyx_t_3P4J_9utilities_DTYPE_t *, __pyx_t_3P4J_9utilities_ITYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_ExportFunction("weighted_mean", (void (*)(void))__pyx_f_3P4J_9utilities_weighted_mean, "__pyx_t_3P4J_9utilities_DTYPE_t (__pyx_t_3P4J_9utilities_DTYPE_t *, __pyx_t_3P4J_9utilities_DTYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_ExportFunction("unbiased_weighted_variance", (void (*)(void))__pyx_f_3P4J_9utilities_unbiased_weighted_variance, "__pyx_t_3P4J_9utilities_DTYPE_t (__pyx_t_3P4J_9utilities_DTYPE_t *, __pyx_t_3P4J_9utilities_DTYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   /*--- Type init code ---*/
   /*--- Type import code ---*/
   /*--- Variable import code ---*/
@@ -1395,7 +1395,7 @@ PyMODINIT_FUNC PyInit_aux(void)
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "P4J/aux.pyx":1
+  /* "P4J/utilities.pyx":1
  * #!/usr/bin/python             # <<<<<<<<<<<<<<
  * #cython: initializedcheck=False, boundscheck=False, wraparound=False, cdivision=True, profile=False
  * 
@@ -1412,11 +1412,11 @@ PyMODINIT_FUNC PyInit_aux(void)
   __Pyx_XDECREF(__pyx_t_1);
   if (__pyx_m) {
     if (__pyx_d) {
-      __Pyx_AddTraceback("init P4J.aux", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init P4J.utilities", __pyx_clineno, __pyx_lineno, __pyx_filename);
     }
     Py_DECREF(__pyx_m); __pyx_m = 0;
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init P4J.aux");
+    PyErr_SetString(PyExc_ImportError, "init P4J.utilities");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();

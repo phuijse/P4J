@@ -85,8 +85,8 @@ cdef inline void IP_gaussian2(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] h_d
     for i in range(N):
         w[i] = 1.0/powf(h_data[i], 2.0)
         sum_w += w[i]
-    #for i in range(N):
-    #    w[i] = w[i]/sum_w
+    for i in range(N):
+        w[i] = w[i]/sum_w
     for i in range(N):
         gauss_var = h_KDE2
         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/sqrtf(2.0*M_PI*gauss_var)
@@ -106,8 +106,8 @@ cdef inline void IP_cauchy(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] err, D
     for i in range(N):
         w[i] = 1.0/powf(err[i], 2.0)
         w_sum += w[i]
-    #for i in range(N):
-    #    w[i] = w[i]/w_sum
+    for i in range(N):
+        w[i] = w[i]/w_sum
     for i in range(N):
         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/(M_PI*2.0*h_KDE)
         for j in range(i+1, N):

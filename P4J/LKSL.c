@@ -749,25 +749,25 @@ typedef volatile __pyx_atomic_int_type __pyx_atomic_int;
 #endif
 
 
-/* "aux.pxd":2
+/* "utilities.pxd":2
  * 
  * ctypedef float DTYPE_t             # <<<<<<<<<<<<<<
  * ctypedef int ITYPE_t
  * 
  */
-typedef float __pyx_t_3P4J_3aux_DTYPE_t;
+typedef float __pyx_t_3P4J_9utilities_DTYPE_t;
 
-/* "aux.pxd":3
+/* "utilities.pxd":3
  * 
  * ctypedef float DTYPE_t
  * ctypedef int ITYPE_t             # <<<<<<<<<<<<<<
  * 
  * cdef void argsort(DTYPE_t*, ITYPE_t*, Py_ssize_t)
  */
-typedef int __pyx_t_3P4J_3aux_ITYPE_t;
+typedef int __pyx_t_3P4J_9utilities_ITYPE_t;
 
 /* "P4J/LKSL.pyx":8
- * from .aux cimport argsort, unbiased_weighted_variance
+ * from .utilities cimport argsort, unbiased_weighted_variance
  * 
  * ctypedef float DTYPE_t             # <<<<<<<<<<<<<<
  * ctypedef int ITYPE_t
@@ -791,9 +791,9 @@ struct __pyx_MemviewEnum_obj;
 struct __pyx_memoryview_obj;
 struct __pyx_memoryviewslice_obj;
 
-/* "P4J/LKSL.pyx":27
- *  sum[m[1:N] - m[0:N-1)**2/(e[1:N]**2 + e[0:N-1]**2)]/sum[1.0/(e[1:N]**2 + e[0:N-1]**2)]
+/* "P4J/LKSL.pyx":29
  * """
+ * 
  * cdef class LKSL:             # <<<<<<<<<<<<<<
  *     cdef Py_ssize_t N
  *     cdef DTYPE_t* phase
@@ -1439,9 +1439,9 @@ static PyObject *__pyx_memoryviewslice_assign_item_from_object(struct __pyx_memo
 
 /* Module declarations from 'cpython.mem' */
 
-/* Module declarations from 'P4J.aux' */
-static void (*__pyx_f_3P4J_3aux_argsort)(__pyx_t_3P4J_3aux_DTYPE_t *, __pyx_t_3P4J_3aux_ITYPE_t *, Py_ssize_t); /*proto*/
-static __pyx_t_3P4J_3aux_DTYPE_t (*__pyx_f_3P4J_3aux_unbiased_weighted_variance)(__pyx_t_3P4J_3aux_DTYPE_t *, __pyx_t_3P4J_3aux_DTYPE_t *, Py_ssize_t); /*proto*/
+/* Module declarations from 'P4J.utilities' */
+static void (*__pyx_f_3P4J_9utilities_argsort)(__pyx_t_3P4J_9utilities_DTYPE_t *, __pyx_t_3P4J_9utilities_ITYPE_t *, Py_ssize_t); /*proto*/
+static __pyx_t_3P4J_9utilities_DTYPE_t (*__pyx_f_3P4J_9utilities_unbiased_weighted_variance)(__pyx_t_3P4J_9utilities_DTYPE_t *, __pyx_t_3P4J_9utilities_DTYPE_t *, Py_ssize_t); /*proto*/
 
 /* Module declarations from 'P4J.LKSL' */
 static PyTypeObject *__pyx_ptype_3P4J_4LKSL_LKSL = 0;
@@ -1691,7 +1691,7 @@ static PyObject *__pyx_tuple__16;
 static PyObject *__pyx_tuple__17;
 static PyObject *__pyx_tuple__18;
 
-/* "P4J/LKSL.pyx":35
+/* "P4J/LKSL.pyx":37
  *     cdef DTYPE_t normalizer
  *     cdef ITYPE_t* sorted_idx
  *     def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err):             # <<<<<<<<<<<<<<
@@ -1729,16 +1729,16 @@ static int __pyx_pw_3P4J_4LKSL_4LKSL_1__init__(PyObject *__pyx_v_self, PyObject 
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_mag)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 1); __PYX_ERR(0, 35, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 1); __PYX_ERR(0, 37, __pyx_L3_error)
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_err)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 2); __PYX_ERR(0, 35, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 2); __PYX_ERR(0, 37, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 35, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 37, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -1747,13 +1747,13 @@ static int __pyx_pw_3P4J_4LKSL_4LKSL_1__init__(PyObject *__pyx_v_self, PyObject 
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
     }
-    __pyx_v_mjd = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_4LKSL_DTYPE_t(values[0]); if (unlikely(!__pyx_v_mjd.memview)) __PYX_ERR(0, 35, __pyx_L3_error)
-    __pyx_v_mag = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_4LKSL_DTYPE_t(values[1]); if (unlikely(!__pyx_v_mag.memview)) __PYX_ERR(0, 35, __pyx_L3_error)
-    __pyx_v_err = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_4LKSL_DTYPE_t(values[2]); if (unlikely(!__pyx_v_err.memview)) __PYX_ERR(0, 35, __pyx_L3_error)
+    __pyx_v_mjd = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_4LKSL_DTYPE_t(values[0]); if (unlikely(!__pyx_v_mjd.memview)) __PYX_ERR(0, 37, __pyx_L3_error)
+    __pyx_v_mag = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_4LKSL_DTYPE_t(values[1]); if (unlikely(!__pyx_v_mag.memview)) __PYX_ERR(0, 37, __pyx_L3_error)
+    __pyx_v_err = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_4LKSL_DTYPE_t(values[2]); if (unlikely(!__pyx_v_err.memview)) __PYX_ERR(0, 37, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 35, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 37, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("P4J.LKSL.LKSL.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1778,7 +1778,7 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
   Py_ssize_t __pyx_t_6;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "P4J/LKSL.pyx":37
+  /* "P4J/LKSL.pyx":39
  *     def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err):
  *         cdef Py_ssize_t i, j, mat_idx
  *         self.N = mag.shape[0]             # <<<<<<<<<<<<<<
@@ -1787,7 +1787,7 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
  */
   __pyx_v_self->N = (__pyx_v_mag.shape[0]);
 
-  /* "P4J/LKSL.pyx":38
+  /* "P4J/LKSL.pyx":40
  *         cdef Py_ssize_t i, j, mat_idx
  *         self.N = mag.shape[0]
  *         self.mjd = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
@@ -1796,7 +1796,7 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
  */
   __pyx_v_self->mjd = ((__pyx_t_3P4J_4LKSL_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_4LKSL_DTYPE_t)))));
 
-  /* "P4J/LKSL.pyx":39
+  /* "P4J/LKSL.pyx":41
  *         self.N = mag.shape[0]
  *         self.mjd = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.mag = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
@@ -1805,7 +1805,7 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
  */
   __pyx_v_self->mag = ((__pyx_t_3P4J_4LKSL_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_4LKSL_DTYPE_t)))));
 
-  /* "P4J/LKSL.pyx":40
+  /* "P4J/LKSL.pyx":42
  *         self.mjd = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.mag = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.err2 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
@@ -1814,7 +1814,7 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
  */
   __pyx_v_self->err2 = ((__pyx_t_3P4J_4LKSL_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_4LKSL_DTYPE_t)))));
 
-  /* "P4J/LKSL.pyx":41
+  /* "P4J/LKSL.pyx":43
  *         self.mag = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.err2 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.phase = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
@@ -1823,7 +1823,7 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
  */
   __pyx_v_self->phase = ((__pyx_t_3P4J_4LKSL_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_4LKSL_DTYPE_t)))));
 
-  /* "P4J/LKSL.pyx":42
+  /* "P4J/LKSL.pyx":44
  *         self.err2 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.phase = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.sorted_idx = <ITYPE_t*>PyMem_Malloc(self.N*sizeof(ITYPE_t))             # <<<<<<<<<<<<<<
@@ -1832,7 +1832,7 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
  */
   __pyx_v_self->sorted_idx = ((__pyx_t_3P4J_4LKSL_ITYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_4LKSL_ITYPE_t)))));
 
-  /* "P4J/LKSL.pyx":43
+  /* "P4J/LKSL.pyx":45
  *         self.phase = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.sorted_idx = <ITYPE_t*>PyMem_Malloc(self.N*sizeof(ITYPE_t))
  *         if not self.mjd:             # <<<<<<<<<<<<<<
@@ -1842,16 +1842,16 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
   __pyx_t_1 = ((!(__pyx_v_self->mjd != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "P4J/LKSL.pyx":44
+    /* "P4J/LKSL.pyx":46
  *         self.sorted_idx = <ITYPE_t*>PyMem_Malloc(self.N*sizeof(ITYPE_t))
  *         if not self.mjd:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  *         if not self.phase:
  *             raise MemoryError()
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 44, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 46, __pyx_L1_error)
 
-    /* "P4J/LKSL.pyx":43
+    /* "P4J/LKSL.pyx":45
  *         self.phase = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.sorted_idx = <ITYPE_t*>PyMem_Malloc(self.N*sizeof(ITYPE_t))
  *         if not self.mjd:             # <<<<<<<<<<<<<<
@@ -1860,7 +1860,7 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
  */
   }
 
-  /* "P4J/LKSL.pyx":45
+  /* "P4J/LKSL.pyx":47
  *         if not self.mjd:
  *             raise MemoryError()
  *         if not self.phase:             # <<<<<<<<<<<<<<
@@ -1870,16 +1870,16 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
   __pyx_t_1 = ((!(__pyx_v_self->phase != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "P4J/LKSL.pyx":46
+    /* "P4J/LKSL.pyx":48
  *             raise MemoryError()
  *         if not self.phase:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  *         if not self.mag:
  *             raise MemoryError()
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 46, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 48, __pyx_L1_error)
 
-    /* "P4J/LKSL.pyx":45
+    /* "P4J/LKSL.pyx":47
  *         if not self.mjd:
  *             raise MemoryError()
  *         if not self.phase:             # <<<<<<<<<<<<<<
@@ -1888,7 +1888,7 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
  */
   }
 
-  /* "P4J/LKSL.pyx":47
+  /* "P4J/LKSL.pyx":49
  *         if not self.phase:
  *             raise MemoryError()
  *         if not self.mag:             # <<<<<<<<<<<<<<
@@ -1898,16 +1898,16 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
   __pyx_t_1 = ((!(__pyx_v_self->mag != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "P4J/LKSL.pyx":48
+    /* "P4J/LKSL.pyx":50
  *             raise MemoryError()
  *         if not self.mag:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  *         if not self.err2:
  *             raise MemoryError()
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 48, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 50, __pyx_L1_error)
 
-    /* "P4J/LKSL.pyx":47
+    /* "P4J/LKSL.pyx":49
  *         if not self.phase:
  *             raise MemoryError()
  *         if not self.mag:             # <<<<<<<<<<<<<<
@@ -1916,7 +1916,7 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
  */
   }
 
-  /* "P4J/LKSL.pyx":49
+  /* "P4J/LKSL.pyx":51
  *         if not self.mag:
  *             raise MemoryError()
  *         if not self.err2:             # <<<<<<<<<<<<<<
@@ -1926,16 +1926,16 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
   __pyx_t_1 = ((!(__pyx_v_self->err2 != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "P4J/LKSL.pyx":50
+    /* "P4J/LKSL.pyx":52
  *             raise MemoryError()
  *         if not self.err2:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  *         if not self.sorted_idx:
  *             raise MemoryError()
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 50, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 52, __pyx_L1_error)
 
-    /* "P4J/LKSL.pyx":49
+    /* "P4J/LKSL.pyx":51
  *         if not self.mag:
  *             raise MemoryError()
  *         if not self.err2:             # <<<<<<<<<<<<<<
@@ -1944,7 +1944,7 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
  */
   }
 
-  /* "P4J/LKSL.pyx":51
+  /* "P4J/LKSL.pyx":53
  *         if not self.err2:
  *             raise MemoryError()
  *         if not self.sorted_idx:             # <<<<<<<<<<<<<<
@@ -1954,16 +1954,16 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
   __pyx_t_1 = ((!(__pyx_v_self->sorted_idx != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "P4J/LKSL.pyx":52
+    /* "P4J/LKSL.pyx":54
  *             raise MemoryError()
  *         if not self.sorted_idx:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  *         for i in range(self.N):
  *             self.mjd[i] = mjd[i]
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 52, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 54, __pyx_L1_error)
 
-    /* "P4J/LKSL.pyx":51
+    /* "P4J/LKSL.pyx":53
  *         if not self.err2:
  *             raise MemoryError()
  *         if not self.sorted_idx:             # <<<<<<<<<<<<<<
@@ -1972,7 +1972,7 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
  */
   }
 
-  /* "P4J/LKSL.pyx":53
+  /* "P4J/LKSL.pyx":55
  *         if not self.sorted_idx:
  *             raise MemoryError()
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -1983,7 +1983,7 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/LKSL.pyx":54
+    /* "P4J/LKSL.pyx":56
  *             raise MemoryError()
  *         for i in range(self.N):
  *             self.mjd[i] = mjd[i]             # <<<<<<<<<<<<<<
@@ -1993,7 +1993,7 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
     __pyx_t_4 = __pyx_v_i;
     (__pyx_v_self->mjd[__pyx_v_i]) = (*((__pyx_t_3P4J_4LKSL_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_4LKSL_DTYPE_t *) __pyx_v_mjd.data) + __pyx_t_4)) )));
 
-    /* "P4J/LKSL.pyx":55
+    /* "P4J/LKSL.pyx":57
  *         for i in range(self.N):
  *             self.mjd[i] = mjd[i]
  *             self.mag[i] = mag[i]             # <<<<<<<<<<<<<<
@@ -2003,7 +2003,7 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
     __pyx_t_5 = __pyx_v_i;
     (__pyx_v_self->mag[__pyx_v_i]) = (*((__pyx_t_3P4J_4LKSL_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_4LKSL_DTYPE_t *) __pyx_v_mag.data) + __pyx_t_5)) )));
 
-    /* "P4J/LKSL.pyx":56
+    /* "P4J/LKSL.pyx":58
  *             self.mjd[i] = mjd[i]
  *             self.mag[i] = mag[i]
  *             self.err2[i] = powf(err[i], 2.0)             # <<<<<<<<<<<<<<
@@ -2014,16 +2014,16 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
     (__pyx_v_self->err2[__pyx_v_i]) = powf((*((__pyx_t_3P4J_4LKSL_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_4LKSL_DTYPE_t *) __pyx_v_err.data) + __pyx_t_6)) ))), 2.0);
   }
 
-  /* "P4J/LKSL.pyx":57
+  /* "P4J/LKSL.pyx":59
  *             self.mag[i] = mag[i]
  *             self.err2[i] = powf(err[i], 2.0)
  *         self.normalizer = 1.0/unbiased_weighted_variance(self.mag, self.err2, self.N)             # <<<<<<<<<<<<<<
  * 
  *     def eval_frequency(self, DTYPE_t freq):
  */
-  __pyx_v_self->normalizer = (1.0 / __pyx_f_3P4J_3aux_unbiased_weighted_variance(__pyx_v_self->mag, __pyx_v_self->err2, __pyx_v_self->N));
+  __pyx_v_self->normalizer = (1.0 / __pyx_f_3P4J_9utilities_unbiased_weighted_variance(__pyx_v_self->mag, __pyx_v_self->err2, __pyx_v_self->N));
 
-  /* "P4J/LKSL.pyx":35
+  /* "P4J/LKSL.pyx":37
  *     cdef DTYPE_t normalizer
  *     cdef ITYPE_t* sorted_idx
  *     def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err):             # <<<<<<<<<<<<<<
@@ -2045,7 +2045,7 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
   return __pyx_r;
 }
 
-/* "P4J/LKSL.pyx":59
+/* "P4J/LKSL.pyx":61
  *         self.normalizer = 1.0/unbiased_weighted_variance(self.mag, self.err2, self.N)
  * 
  *     def eval_frequency(self, DTYPE_t freq):             # <<<<<<<<<<<<<<
@@ -2061,7 +2061,7 @@ static PyObject *__pyx_pw_3P4J_4LKSL_4LKSL_3eval_frequency(PyObject *__pyx_v_sel
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("eval_frequency (wrapper)", 0);
   assert(__pyx_arg_freq); {
-    __pyx_v_freq = __pyx_PyFloat_AsFloat(__pyx_arg_freq); if (unlikely((__pyx_v_freq == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 59, __pyx_L3_error)
+    __pyx_v_freq = __pyx_PyFloat_AsFloat(__pyx_arg_freq); if (unlikely((__pyx_v_freq == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 61, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2088,7 +2088,7 @@ static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_2eval_frequency(struct __pyx_obj_3P4J
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("eval_frequency", 0);
 
-  /* "P4J/LKSL.pyx":61
+  /* "P4J/LKSL.pyx":63
  *     def eval_frequency(self, DTYPE_t freq):
  *         cdef Py_ssize_t i, j
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -2099,7 +2099,7 @@ static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_2eval_frequency(struct __pyx_obj_3P4J
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "P4J/LKSL.pyx":62
+    /* "P4J/LKSL.pyx":64
  *         cdef Py_ssize_t i, j
  *         for i in range(self.N):
  *             self.phase[i] = remainderf(self.mjd[i], 1.0/freq)*freq  # output in [-0.5, 0.5]             # <<<<<<<<<<<<<<
@@ -2109,16 +2109,16 @@ static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_2eval_frequency(struct __pyx_obj_3P4J
     (__pyx_v_self->phase[__pyx_v_i]) = (remainderf((__pyx_v_self->mjd[__pyx_v_i]), (1.0 / __pyx_v_freq)) * __pyx_v_freq);
   }
 
-  /* "P4J/LKSL.pyx":63
+  /* "P4J/LKSL.pyx":65
  *         for i in range(self.N):
  *             self.phase[i] = remainderf(self.mjd[i], 1.0/freq)*freq  # output in [-0.5, 0.5]
  *         argsort(self.phase, self.sorted_idx, self.N)             # <<<<<<<<<<<<<<
  *         cdef DTYPE_t err2_err2 = self.err2[self.sorted_idx[0]] + self.err2[self.sorted_idx[self.N-1]]
  *         cdef DTYPE_t err2_acum = 1.0/err2_err2
  */
-  __pyx_f_3P4J_3aux_argsort(__pyx_v_self->phase, __pyx_v_self->sorted_idx, __pyx_v_self->N);
+  __pyx_f_3P4J_9utilities_argsort(__pyx_v_self->phase, __pyx_v_self->sorted_idx, __pyx_v_self->N);
 
-  /* "P4J/LKSL.pyx":64
+  /* "P4J/LKSL.pyx":66
  *             self.phase[i] = remainderf(self.mjd[i], 1.0/freq)*freq  # output in [-0.5, 0.5]
  *         argsort(self.phase, self.sorted_idx, self.N)
  *         cdef DTYPE_t err2_err2 = self.err2[self.sorted_idx[0]] + self.err2[self.sorted_idx[self.N-1]]             # <<<<<<<<<<<<<<
@@ -2127,7 +2127,7 @@ static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_2eval_frequency(struct __pyx_obj_3P4J
  */
   __pyx_v_err2_err2 = ((__pyx_v_self->err2[(__pyx_v_self->sorted_idx[0])]) + (__pyx_v_self->err2[(__pyx_v_self->sorted_idx[(__pyx_v_self->N - 1)])]));
 
-  /* "P4J/LKSL.pyx":65
+  /* "P4J/LKSL.pyx":67
  *         argsort(self.phase, self.sorted_idx, self.N)
  *         cdef DTYPE_t err2_err2 = self.err2[self.sorted_idx[0]] + self.err2[self.sorted_idx[self.N-1]]
  *         cdef DTYPE_t err2_acum = 1.0/err2_err2             # <<<<<<<<<<<<<<
@@ -2136,7 +2136,7 @@ static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_2eval_frequency(struct __pyx_obj_3P4J
  */
   __pyx_v_err2_acum = (1.0 / __pyx_v_err2_err2);
 
-  /* "P4J/LKSL.pyx":66
+  /* "P4J/LKSL.pyx":68
  *         cdef DTYPE_t err2_err2 = self.err2[self.sorted_idx[0]] + self.err2[self.sorted_idx[self.N-1]]
  *         cdef DTYPE_t err2_acum = 1.0/err2_err2
  *         cdef DTYPE_t SL = powf(self.mag[self.sorted_idx[0]] - self.mag[self.sorted_idx[self.N-1]], 2.0)/err2_err2             # <<<<<<<<<<<<<<
@@ -2145,7 +2145,7 @@ static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_2eval_frequency(struct __pyx_obj_3P4J
  */
   __pyx_v_SL = (powf(((__pyx_v_self->mag[(__pyx_v_self->sorted_idx[0])]) - (__pyx_v_self->mag[(__pyx_v_self->sorted_idx[(__pyx_v_self->N - 1)])])), 2.0) / __pyx_v_err2_err2);
 
-  /* "P4J/LKSL.pyx":67
+  /* "P4J/LKSL.pyx":69
  *         cdef DTYPE_t err2_acum = 1.0/err2_err2
  *         cdef DTYPE_t SL = powf(self.mag[self.sorted_idx[0]] - self.mag[self.sorted_idx[self.N-1]], 2.0)/err2_err2
  *         for i in range(1, self.N):             # <<<<<<<<<<<<<<
@@ -2156,7 +2156,7 @@ static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_2eval_frequency(struct __pyx_obj_3P4J
   for (__pyx_t_2 = 1; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "P4J/LKSL.pyx":68
+    /* "P4J/LKSL.pyx":70
  *         cdef DTYPE_t SL = powf(self.mag[self.sorted_idx[0]] - self.mag[self.sorted_idx[self.N-1]], 2.0)/err2_err2
  *         for i in range(1, self.N):
  *             err2_err2 = self.err2[self.sorted_idx[i-1]] + self.err2[self.sorted_idx[i]]             # <<<<<<<<<<<<<<
@@ -2165,7 +2165,7 @@ static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_2eval_frequency(struct __pyx_obj_3P4J
  */
     __pyx_v_err2_err2 = ((__pyx_v_self->err2[(__pyx_v_self->sorted_idx[(__pyx_v_i - 1)])]) + (__pyx_v_self->err2[(__pyx_v_self->sorted_idx[__pyx_v_i])]));
 
-    /* "P4J/LKSL.pyx":69
+    /* "P4J/LKSL.pyx":71
  *         for i in range(1, self.N):
  *             err2_err2 = self.err2[self.sorted_idx[i-1]] + self.err2[self.sorted_idx[i]]
  *             err2_acum += 1.0/err2_err2             # <<<<<<<<<<<<<<
@@ -2174,7 +2174,7 @@ static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_2eval_frequency(struct __pyx_obj_3P4J
  */
     __pyx_v_err2_acum = (__pyx_v_err2_acum + (1.0 / __pyx_v_err2_err2));
 
-    /* "P4J/LKSL.pyx":70
+    /* "P4J/LKSL.pyx":72
  *             err2_err2 = self.err2[self.sorted_idx[i-1]] + self.err2[self.sorted_idx[i]]
  *             err2_acum += 1.0/err2_err2
  *             SL += powf(self.mag[self.sorted_idx[i-1]] - self.mag[self.sorted_idx[i]], 2.0)/err2_err2             # <<<<<<<<<<<<<<
@@ -2184,7 +2184,7 @@ static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_2eval_frequency(struct __pyx_obj_3P4J
     __pyx_v_SL = (__pyx_v_SL + (powf(((__pyx_v_self->mag[(__pyx_v_self->sorted_idx[(__pyx_v_i - 1)])]) - (__pyx_v_self->mag[(__pyx_v_self->sorted_idx[__pyx_v_i])])), 2.0) / __pyx_v_err2_err2));
   }
 
-  /* "P4J/LKSL.pyx":71
+  /* "P4J/LKSL.pyx":73
  *             err2_acum += 1.0/err2_err2
  *             SL += powf(self.mag[self.sorted_idx[i-1]] - self.mag[self.sorted_idx[i]], 2.0)/err2_err2
  *         return 0.5*SL*self.normalizer/err2_acum             # <<<<<<<<<<<<<<
@@ -2192,13 +2192,13 @@ static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_2eval_frequency(struct __pyx_obj_3P4J
  *     def __dealloc__(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_3 = PyFloat_FromDouble((((0.5 * __pyx_v_SL) * __pyx_v_self->normalizer) / __pyx_v_err2_acum)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble((((0.5 * __pyx_v_SL) * __pyx_v_self->normalizer) / __pyx_v_err2_acum)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 73, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "P4J/LKSL.pyx":59
+  /* "P4J/LKSL.pyx":61
  *         self.normalizer = 1.0/unbiased_weighted_variance(self.mag, self.err2, self.N)
  * 
  *     def eval_frequency(self, DTYPE_t freq):             # <<<<<<<<<<<<<<
@@ -2217,7 +2217,7 @@ static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_2eval_frequency(struct __pyx_obj_3P4J
   return __pyx_r;
 }
 
-/* "P4J/LKSL.pyx":73
+/* "P4J/LKSL.pyx":75
  *         return 0.5*SL*self.normalizer/err2_acum
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -2240,7 +2240,7 @@ static void __pyx_pf_3P4J_4LKSL_4LKSL_4__dealloc__(struct __pyx_obj_3P4J_4LKSL_L
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "P4J/LKSL.pyx":74
+  /* "P4J/LKSL.pyx":76
  * 
  *     def __dealloc__(self):
  *         PyMem_Free(self.mjd)             # <<<<<<<<<<<<<<
@@ -2249,7 +2249,7 @@ static void __pyx_pf_3P4J_4LKSL_4LKSL_4__dealloc__(struct __pyx_obj_3P4J_4LKSL_L
  */
   PyMem_Free(__pyx_v_self->mjd);
 
-  /* "P4J/LKSL.pyx":75
+  /* "P4J/LKSL.pyx":77
  *     def __dealloc__(self):
  *         PyMem_Free(self.mjd)
  *         PyMem_Free(self.mag)             # <<<<<<<<<<<<<<
@@ -2258,7 +2258,7 @@ static void __pyx_pf_3P4J_4LKSL_4LKSL_4__dealloc__(struct __pyx_obj_3P4J_4LKSL_L
  */
   PyMem_Free(__pyx_v_self->mag);
 
-  /* "P4J/LKSL.pyx":76
+  /* "P4J/LKSL.pyx":78
  *         PyMem_Free(self.mjd)
  *         PyMem_Free(self.mag)
  *         PyMem_Free(self.err2)             # <<<<<<<<<<<<<<
@@ -2267,7 +2267,7 @@ static void __pyx_pf_3P4J_4LKSL_4LKSL_4__dealloc__(struct __pyx_obj_3P4J_4LKSL_L
  */
   PyMem_Free(__pyx_v_self->err2);
 
-  /* "P4J/LKSL.pyx":77
+  /* "P4J/LKSL.pyx":79
  *         PyMem_Free(self.mag)
  *         PyMem_Free(self.err2)
  *         PyMem_Free(self.phase)             # <<<<<<<<<<<<<<
@@ -2276,7 +2276,7 @@ static void __pyx_pf_3P4J_4LKSL_4LKSL_4__dealloc__(struct __pyx_obj_3P4J_4LKSL_L
  */
   PyMem_Free(__pyx_v_self->phase);
 
-  /* "P4J/LKSL.pyx":78
+  /* "P4J/LKSL.pyx":80
  *         PyMem_Free(self.err2)
  *         PyMem_Free(self.phase)
  *         PyMem_Free(self.sorted_idx)             # <<<<<<<<<<<<<<
@@ -2285,7 +2285,7 @@ static void __pyx_pf_3P4J_4LKSL_4LKSL_4__dealloc__(struct __pyx_obj_3P4J_4LKSL_L
  */
   PyMem_Free(__pyx_v_self->sorted_idx);
 
-  /* "P4J/LKSL.pyx":73
+  /* "P4J/LKSL.pyx":75
  *         return 0.5*SL*self.normalizer/err2_acum
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -14798,8 +14798,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(0, 44, __pyx_L1_error)
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 53, __pyx_L1_error)
+  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 55, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 131, __pyx_L1_error)
   __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(1, 149, __pyx_L1_error)
   __pyx_builtin_Ellipsis = __Pyx_GetBuiltinName(__pyx_n_s_Ellipsis); if (!__pyx_builtin_Ellipsis) __PYX_ERR(1, 396, __pyx_L1_error)
@@ -15123,9 +15123,9 @@ PyMODINIT_FUNC PyInit_LKSL(void)
   /*--- Variable export code ---*/
   /*--- Function export code ---*/
   /*--- Type init code ---*/
-  if (PyType_Ready(&__pyx_type_3P4J_4LKSL_LKSL) < 0) __PYX_ERR(0, 27, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_3P4J_4LKSL_LKSL) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
   __pyx_type_3P4J_4LKSL_LKSL.tp_print = 0;
-  if (PyObject_SetAttrString(__pyx_m, "LKSL", (PyObject *)&__pyx_type_3P4J_4LKSL_LKSL) < 0) __PYX_ERR(0, 27, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "LKSL", (PyObject *)&__pyx_type_3P4J_4LKSL_LKSL) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
   __pyx_ptype_3P4J_4LKSL_LKSL = &__pyx_type_3P4J_4LKSL_LKSL;
   __pyx_vtabptr_array = &__pyx_vtable_array;
   __pyx_vtable_array.get_memview = (PyObject *(*)(struct __pyx_array_obj *))__pyx_array_get_memview;
@@ -15160,9 +15160,9 @@ PyMODINIT_FUNC PyInit_LKSL(void)
   /*--- Type import code ---*/
   /*--- Variable import code ---*/
   /*--- Function import code ---*/
-  __pyx_t_1 = __Pyx_ImportModule("P4J.aux"); if (!__pyx_t_1) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (__Pyx_ImportFunction(__pyx_t_1, "argsort", (void (**)(void))&__pyx_f_3P4J_3aux_argsort, "void (__pyx_t_3P4J_3aux_DTYPE_t *, __pyx_t_3P4J_3aux_ITYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (__Pyx_ImportFunction(__pyx_t_1, "unbiased_weighted_variance", (void (**)(void))&__pyx_f_3P4J_3aux_unbiased_weighted_variance, "__pyx_t_3P4J_3aux_DTYPE_t (__pyx_t_3P4J_3aux_DTYPE_t *, __pyx_t_3P4J_3aux_DTYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_ImportModule("P4J.utilities"); if (!__pyx_t_1) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_ImportFunction(__pyx_t_1, "argsort", (void (**)(void))&__pyx_f_3P4J_9utilities_argsort, "void (__pyx_t_3P4J_9utilities_DTYPE_t *, __pyx_t_3P4J_9utilities_ITYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_ImportFunction(__pyx_t_1, "unbiased_weighted_variance", (void (**)(void))&__pyx_f_3P4J_9utilities_unbiased_weighted_variance, "__pyx_t_3P4J_9utilities_DTYPE_t (__pyx_t_3P4J_9utilities_DTYPE_t *, __pyx_t_3P4J_9utilities_DTYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   Py_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   /*--- Execution code ---*/
   #if defined(__Pyx_Generator_USED) || defined(__Pyx_Coroutine_USED)

@@ -3,7 +3,7 @@
 
 cimport cython
 from cpython.mem cimport PyMem_Malloc, PyMem_Free
-from .aux cimport argsort, unbiased_weighted_variance
+from .utilities cimport argsort, unbiased_weighted_variance
 
 ctypedef float DTYPE_t
 ctypedef int ITYPE_t
