@@ -6,7 +6,7 @@ cimport cython
 #from numpy cimport ndarray, double_t, int_t
 #from libc.math cimport sqrt, pow, M_PI, log
 from cpython.mem cimport PyMem_Malloc, PyMem_Free
-from scipy.special.cython_special cimport i0
+#from scipy.special.cython_special cimport i0
 
 #DTYPE = np.double
 ctypedef float DTYPE_t
@@ -25,22 +25,26 @@ cdef extern from "math.h":
 cdef DTYPE_t M_PI = 3.1415926535897
 
 """
-Fills the Information Potential matrix using a VonMises kernel
+Fills the Information Potential matrix using a different kernels
+
+Wrapped kernels are meant for angle data.
+
 """
 
 cdef inline void IP_wrappednormal(DTYPE_t* IP, DTYPE_t* angle, DTYPE_t h_KDE, Py_ssize_t N):
     cdef Py_ssize_t i, j
     cdef DTYPE_t distance
     cdef DTYPE_t denominator = sqrtf(2.0*M_PI*2.0)*h_KDE
-
     for i in range(N):
         IP[indexMatrixToVector(i, i, N)] = 1.0/denominator
         for j in range(i+1, N):
+            # This is not quite right, it should be an infinite sum of |a_i - a_j - k2PI|
             distance = fabsf(angle[i]-angle[j])
             if distance > M_PI:
                 distance -= 2.0*M_PI
             IP[indexMatrixToVector(i, j, N)] = expf(-0.25*powf(distance/h_KDE, 2))/denominator
 
+"""
 cdef inline void IP_vonmises(DTYPE_t* IP, DTYPE_t* angle, DTYPE_t h_KDE, Py_ssize_t N):
     cdef Py_ssize_t i, j
     cdef DTYPE_t kappa = 1.0/powf(2.0*M_PI*h_KDE, 2.0)
@@ -49,6 +53,7 @@ cdef inline void IP_vonmises(DTYPE_t* IP, DTYPE_t* angle, DTYPE_t h_KDE, Py_ssiz
         IP[indexMatrixToVector(i, i, N)] = expf(kappa)/denominator
         for j in range(i+1, N):
             IP[indexMatrixToVector(i, j, N)] = expf(kappa*cosf(angle[i] - angle[j]))/denominator
+"""
 
 cdef inline void IP_wrappedcauchy(DTYPE_t* IP, DTYPE_t* angle, DTYPE_t h_KDE, Py_ssize_t N):
     cdef Py_ssize_t i, j
@@ -58,9 +63,6 @@ cdef inline void IP_wrappedcauchy(DTYPE_t* IP, DTYPE_t* angle, DTYPE_t h_KDE, Py
         for j in range(i+1, N):
             IP[indexMatrixToVector(i, j, N)] = (1.-rho**2)/(2.*M_PI*(1.+rho**2-2.*rho*cosf(angle[i]-angle[j])))
  
-"""
-Fills the Information Potential matrix using a Gaussian kernel
-"""
 cdef inline void IP_gaussian(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] h_data, DTYPE_t h_KDE, Py_ssize_t N):
     cdef Py_ssize_t i, j
     cdef DTYPE_t gauss_var, delta2, h_KDE2 = 2.0*powf(h_KDE, 2.0)
@@ -72,11 +74,14 @@ cdef inline void IP_gaussian(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] h_da
         IP[indexMatrixToVector(i, i, N)] = 1.0/sqrtf(2.0*M_PI*gauss_var)
         for j in range(i+1, N):
             delta2 = powf(data[i] - data[j], 2.0)
-            #delta2 = fabsf(data[i] - data[j])
             gauss_var = h_KDE2 + h_data2[i] + h_data2[j]
             IP[indexMatrixToVector(i, j, N)] = expf(-0.5*delta2/gauss_var)/sqrtf(2.0*M_PI*gauss_var)
     PyMem_Free(h_data2)
 
+
+"""
+ Testing Abramson's weighted KDE:
+"""
 cdef inline void IP_gaussian2(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] h_data, DTYPE_t h_KDE, Py_ssize_t N):
     cdef Py_ssize_t i, j
     cdef DTYPE_t gauss_var, delta2, h_KDE2 = 2.0*powf(h_KDE, 2.0)
@@ -92,7 +97,6 @@ cdef inline void IP_gaussian2(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] h_d
         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/sqrtf(2.0*M_PI*gauss_var)
         for j in range(i+1, N):
             delta2 = powf(data[i] - data[j], 2.0)
-            #delta2 = fabsf(data[i] - data[j])
             gauss_var = h_KDE2
             IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]*expf(-0.5*delta2/gauss_var)/sqrtf(2.0*M_PI*gauss_var)
     PyMem_Free(w)
@@ -114,9 +118,6 @@ cdef inline void IP_cauchy(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] err, D
             delta2 = powf((data[i] - data[j])/(2.0*h_KDE), 2.0)
             IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]/(M_PI*2.0*h_KDE*(1.0 + delta2))
     PyMem_Free(w)
-
-
-
 
 cdef inline Py_ssize_t indexMatrixToVector(Py_ssize_t i, Py_ssize_t j, Py_ssize_t N):
     # Only works for i <= j, which is always the case here
@@ -151,6 +152,7 @@ cdef class QMI:
             raise MemoryError()
         if not self.IP_P:
             raise MemoryError()
+        # Fill the IP matrix of the magnitudes
         if kernel == 0:
             IP_gaussian(self.IP_M, mag, err, h_KDE_M, self.N)
         elif kernel == 1:
@@ -164,6 +166,8 @@ cdef class QMI:
             raise MemoryError()
         if not self.VC2:
             raise MemoryError()
+
+        # Precompute terms related to the magnitudes
         self.VM1 = 0.0
         for i in range(self.N):
             self.VC1[i] = 0.0
@@ -181,8 +185,6 @@ cdef class QMI:
         cdef Py_ssize_t i, j
         for i in range(self.N):
             self.angle[i] = 2.0*M_PI*fmodf(self.mjd[i], 1.0/freq)*freq # output in [0.0, 2.0*pi]
-            # print("%0.6f, %0.6f, %0.6f" %(remainderf(self.mjd[i], 1.0/freq)*freq, fmodf(self.mjd[i], 1.0/freq)*freq, self.angle[i]))
-#        IP_vonmises(self.IP_P, self.angle, self.h_KDE_P, self.N)
 #        IP_wrappednormal(self.IP_P, self.angle, self.h_KDE_P, self.N)
         IP_wrappedcauchy(self.IP_P, self.angle, self.h_KDE_P, self.N)
         cdef Py_ssize_t mat_idx
@@ -202,13 +204,15 @@ cdef class QMI:
                 VJ += 2.0*self.IP_M[mat_idx]*self.IP_P[mat_idx]
         for i in range(self.N):
             VC += self.VC1[i]*self.VC2[i]
-        # Note that I omitted the log(N) terms because they cancel out in this sum
-        if output == 0:
+        if output == 0:  # Cauchy-Schwarz MI
+            # The log(N) terms cancel out in this sum
             return logf(self.VM1*VM2) + logf(VJ) - 2.0*logf(VC)
-        elif output == 1:
+        elif output == 1:  # Euclidean MI
             return (self.VM1*VM2/self.N**2 + VJ - 2.0*VC/self.N)/self.N**2
-        elif output == 2:
-            return fabsf(-logf(self.VM1) - logf(VM2) + logf(VJ) + 2*logf(self.N))  # Renyi's
+        elif output == 2:  # Quadratic Mutual Entropy, not safe yet
+            # Using Renyi's formulation
+            return fabsf(-logf(self.VM1) - logf(VM2) + logf(VJ) + 2*logf(self.N))
+            # Using Tsallis' formulation
             # return 1.0 - (self.VM1 + VM2 - VJ)/self.N**2  # Tsallis
 
     def __dealloc__(self):
