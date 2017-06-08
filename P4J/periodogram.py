@@ -97,29 +97,26 @@ class periodogram:
                 hm = 0.9*self.scale*self.N**(-0.2)
             if 'h_KDE_M' in kwarg:
                 hm = hm*kwarg['h_KDE_M']
-            #hp = 0.9/np.sqrt(12)*self.N**(-0.2)
-            hp = 0.5 # TODO : How to choose this more appropietly
+            hp = 1.0 # How to choose this more appropietly?
             if 'h_KDE_P' in kwarg:
                 hp = hp*kwarg['h_KDE_P']
-            kernel = 0
+            kernel = 0  # Select the kernel for the magnitudes, 0 is safe
             if 'kernel' in kwarg:
                 kernel = kwarg['kernel']
             if self.debug:
                 print("Kernel bandwidths: %f , %f" %(hm, hp))
             self.my_QMI = QMI(self.mjd, self.mag, self.err, hm, hp, kernel)
-        elif self.method == 'LKSL':
+        elif self.method == 'LKSL':  # Lafler-Kinman Minimum String Length
             self.my_SL = LKSL(self.mjd, self.mag, self.err)
-        elif self.method == 'PDM1':
+        elif self.method == 'PDM1':  # Phase Dispersion Minimization
+            Nbins = int(self.N/3)
             if 'Nbins' in kwarg:
                 Nbins = kwarg['Nbins']
-            else:
-                Nbins = self.N/3
             self.my_PDM = PDM(self.mjd, self.mag, self.err, Nbins)
-        elif self.method == 'MHAOV':
+        elif self.method == 'MHAOV':  # Orthogonal Multiharmonics AoV periodogram
+            Nharmonics = 1
             if 'Nharmonics' in kwarg:
                 Nharmonics = kwarg["Nharmonics"]
-            else:
-                Nharmonics = 1
             self.my_AOV = AOV(self.mjd, self.mag, self.err, Nharmonics)
 
 

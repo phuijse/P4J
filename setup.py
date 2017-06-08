@@ -3,8 +3,13 @@ import io
 import os
 from setuptools import setup
 from setuptools.extension import Extension
-from Cython.Build import cythonize
-import numpy as np
+
+try:
+    import numpy as np
+    from Cython.Build import cythonize
+except ImportError:
+    raise ImportError("Please install Numpy and Cython before installing P4J")
+
 
 extensions = [
         Extension("*",
@@ -16,16 +21,21 @@ extensions = [
             ),
         ]
 
-# Auto generation of RST readme from markdown using pypandoc
-# http://stackoverflow.com/questions/10718767/have-the-same-readme-both-in-markdown-and-restructuredtext
+"""
+    Auto generation of RST readme from markdown using pypandoc
+    http://stackoverflow.com/questions/10718767/have-the-same-readme-both-in-markdown-and-restructuredtext
+"""
 try:
     from pypandoc import convert
     read_md = lambda f: convert(f, 'rst')
-except:
+except ImportError:
     print("pypandoc not found, RST readme will be generated from markdown without conversion")
     read_md = lambda f: open(f, 'r').read()
 
-# Read version automatically from __init__.py
+"""
+    Read version automatically from __init__.py
+    https://packaging.python.org/en/latest/single_source_version.html
+"""
 def read(*names, **kwargs):
     with io.open(
         os.path.join(os.path.dirname(__file__), *names),
@@ -34,9 +44,6 @@ def read(*names, **kwargs):
         return fp.read()
 
 def version(path):
-    """
-    https://packaging.python.org/en/latest/single_source_version.html
-    """
     version_file = read(path)
     version_match = re.search(r"""^__version__ = ['"]([^'"]*)['"]""",
                               version_file, re.M)
@@ -55,9 +62,9 @@ setup(
     author_email = 'pablo.huijse@gmail.com',
     license='MIT',
     url = 'https://github.com/phuijse/P4J', 
-    download_url = 'https://github.com/phuijse/P4J/tarball/stable', 
+    #download_url = 'https://github.com/phuijse/P4J/tarball/stable', 
     keywords = ['astronomy periodic time series correntropy'], 
-    setup_requires=[
+        setup_requires=[
         'cython',
     ],
     install_requires=[
@@ -70,8 +77,9 @@ setup(
         'Intended Audience :: Science/Research',
         'Topic :: Scientific/Engineering :: Astronomy',
         'License :: OSI Approved :: MIT License',
-        'Environment :: Console',
+        'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
