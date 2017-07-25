@@ -10,9 +10,12 @@
         ],
         "include_dirs": [
             "/usr/lib/python3.6/site-packages/numpy/core/include"
+        ],
+        "libraries": [
+            "m"
         ]
     },
-    "module_name": "P4J"
+    "module_name": "P4J.LKSL"
 }
 END: Cython Metadata */
 
@@ -2088,7 +2091,7 @@ static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_2eval_frequency(struct __pyx_obj_3P4J
  *     def eval_frequency(self, DTYPE_t freq):
  *         cdef Py_ssize_t i, j
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
- *             self.phase[i] = remainderf(self.mjd[i], 1.0/freq)*freq  # output in [-0.5, 0.5]
+ *             self.phase[i] = fmodf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]
  *         argsort(self.phase, self.sorted_idx, self.N)
  */
   __pyx_t_1 = __pyx_v_self->N;
@@ -2098,16 +2101,16 @@ static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_2eval_frequency(struct __pyx_obj_3P4J
     /* "P4J/LKSL.pyx":64
  *         cdef Py_ssize_t i, j
  *         for i in range(self.N):
- *             self.phase[i] = remainderf(self.mjd[i], 1.0/freq)*freq  # output in [-0.5, 0.5]             # <<<<<<<<<<<<<<
+ *             self.phase[i] = fmodf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]             # <<<<<<<<<<<<<<
  *         argsort(self.phase, self.sorted_idx, self.N)
  *         cdef DTYPE_t err2_err2 = self.err2[self.sorted_idx[0]] + self.err2[self.sorted_idx[self.N-1]]
  */
-    (__pyx_v_self->phase[__pyx_v_i]) = (remainderf((__pyx_v_self->mjd[__pyx_v_i]), (1.0 / __pyx_v_freq)) * __pyx_v_freq);
+    (__pyx_v_self->phase[__pyx_v_i]) = (fmodf((__pyx_v_self->mjd[__pyx_v_i]), (1.0 / __pyx_v_freq)) * __pyx_v_freq);
   }
 
   /* "P4J/LKSL.pyx":65
  *         for i in range(self.N):
- *             self.phase[i] = remainderf(self.mjd[i], 1.0/freq)*freq  # output in [-0.5, 0.5]
+ *             self.phase[i] = fmodf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]
  *         argsort(self.phase, self.sorted_idx, self.N)             # <<<<<<<<<<<<<<
  *         cdef DTYPE_t err2_err2 = self.err2[self.sorted_idx[0]] + self.err2[self.sorted_idx[self.N-1]]
  *         cdef DTYPE_t err2_acum = 1.0/err2_err2
@@ -2115,7 +2118,7 @@ static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_2eval_frequency(struct __pyx_obj_3P4J
   __pyx_f_3P4J_9utilities_argsort(__pyx_v_self->phase, __pyx_v_self->sorted_idx, __pyx_v_self->N);
 
   /* "P4J/LKSL.pyx":66
- *             self.phase[i] = remainderf(self.mjd[i], 1.0/freq)*freq  # output in [-0.5, 0.5]
+ *             self.phase[i] = fmodf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]
  *         argsort(self.phase, self.sorted_idx, self.N)
  *         cdef DTYPE_t err2_err2 = self.err2[self.sorted_idx[0]] + self.err2[self.sorted_idx[self.N-1]]             # <<<<<<<<<<<<<<
  *         cdef DTYPE_t err2_acum = 1.0/err2_err2

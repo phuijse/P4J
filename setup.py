@@ -13,7 +13,7 @@ except ImportError:
 include_dirs = [np.get_include()]
 compiler_args = ['-O3', '-ffast-math']
 library_dirs = []
-libraries = []
+libraries = ['m']
 
 extensions = [
         Extension("P4J.QMI",
@@ -26,17 +26,30 @@ extensions = [
         Extension("P4J.LKSL",
             sources=[os.path.join("P4J", "LKSL.pyx")],
             extra_compile_args=compiler_args,
-            include_dirs=include_dirs
+            include_dirs=include_dirs,
+            libraries=libraries,
+            library_dirs=library_dirs
             ),
         Extension("P4J.MHAOV",
             sources=[os.path.join("P4J", "MHAOV.pyx")],
             extra_compile_args=compiler_args,
-            include_dirs=include_dirs
+            include_dirs=include_dirs,
+            libraries=libraries,
+            library_dirs=library_dirs
             ),
         Extension("P4J.PDM",
             sources=[os.path.join("P4J", "PDM.pyx")],
             extra_compile_args=compiler_args,
-            include_dirs=include_dirs
+            include_dirs=include_dirs,
+            libraries=libraries,
+            library_dirs=library_dirs
+            ),
+        Extension("P4J.utilities",
+            sources=[os.path.join("P4J", "utilities.pyx")],
+            extra_compile_args=compiler_args,
+            include_dirs=include_dirs,
+            libraries=libraries,
+            library_dirs=library_dirs
             ),
         ]
 

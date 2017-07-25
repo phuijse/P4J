@@ -6,7 +6,6 @@
         "depends": [],
         "extra_compile_args": [
             "-O3",
-            "-march=native",
             "-ffast-math"
         ],
         "include_dirs": [
@@ -2201,7 +2200,7 @@ static PyObject *__pyx_pf_3P4J_3PDM_3PDM_2eval_frequency(struct __pyx_obj_3P4J_3
  *     def eval_frequency(self, DTYPE_t freq):
  *         cdef Py_ssize_t i, j
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
- *             self.phase[i] = 0.5 + remainderf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]
+ *             self.phase[i] = fmodf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]
  *         # argsort(self.phase, self.sorted_idx, self.N)
  */
   __pyx_t_1 = __pyx_v_self->N;
@@ -2211,15 +2210,15 @@ static PyObject *__pyx_pf_3P4J_3PDM_3PDM_2eval_frequency(struct __pyx_obj_3P4J_3
     /* "P4J/PDM.pyx":73
  *         cdef Py_ssize_t i, j
  *         for i in range(self.N):
- *             self.phase[i] = 0.5 + remainderf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]             # <<<<<<<<<<<<<<
+ *             self.phase[i] = fmodf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]             # <<<<<<<<<<<<<<
  *         # argsort(self.phase, self.sorted_idx, self.N)
  *         cdef DTYPE_t PDM_num=0.0, PDM_den=0.0
  */
-    (__pyx_v_self->phase[__pyx_v_i]) = (0.5 + (remainderf((__pyx_v_self->mjd[__pyx_v_i]), (1.0 / __pyx_v_freq)) * __pyx_v_freq));
+    (__pyx_v_self->phase[__pyx_v_i]) = (fmodf((__pyx_v_self->mjd[__pyx_v_i]), (1.0 / __pyx_v_freq)) * __pyx_v_freq);
   }
 
   /* "P4J/PDM.pyx":75
- *             self.phase[i] = 0.5 + remainderf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]
+ *             self.phase[i] = fmodf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]
  *         # argsort(self.phase, self.sorted_idx, self.N)
  *         cdef DTYPE_t PDM_num=0.0, PDM_den=0.0             # <<<<<<<<<<<<<<
  *         cdef ITYPE_t samples_in_bin

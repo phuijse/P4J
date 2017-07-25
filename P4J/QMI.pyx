@@ -20,7 +20,6 @@ cdef extern from "math.h":
     DTYPE_t logf(DTYPE_t)
     DTYPE_t expf(DTYPE_t)
     DTYPE_t fmodf(DTYPE_t, DTYPE_t)
-    DTYPE_t remainderf(DTYPE_t, DTYPE_t)
 
 cdef DTYPE_t M_PI = 3.1415926535897
 

@@ -6,7 +6,6 @@
         "depends": [],
         "extra_compile_args": [
             "-O3",
-            "-march=native",
             "-ffast-math"
         ],
         "include_dirs": [
@@ -791,7 +790,7 @@ struct __pyx_MemviewEnum_obj;
 struct __pyx_memoryview_obj;
 struct __pyx_memoryviewslice_obj;
 
-/* "P4J/MHAOV.pyx":39
+/* "P4J/MHAOV.pyx":38
  *     return array
  * 
  * cdef class AOV:             # <<<<<<<<<<<<<<
@@ -1707,7 +1706,7 @@ static PyObject *__pyx_tuple__17;
 static PyObject *__pyx_tuple__18;
 static PyObject *__pyx_tuple__19;
 
-/* "P4J/MHAOV.pyx":33
+/* "P4J/MHAOV.pyx":32
  * cdef DTYPE_t M_PI = 3.1415926535897
  * 
  * cdef DTYPE_t* allocate_and_verify(Py_ssize_t N):             # <<<<<<<<<<<<<<
@@ -1722,7 +1721,7 @@ static __pyx_t_3P4J_5MHAOV_DTYPE_t *__pyx_f_3P4J_5MHAOV_allocate_and_verify(Py_s
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("allocate_and_verify", 0);
 
-  /* "P4J/MHAOV.pyx":34
+  /* "P4J/MHAOV.pyx":33
  * 
  * cdef DTYPE_t* allocate_and_verify(Py_ssize_t N):
  *     cdef DTYPE_t* array = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
@@ -1731,7 +1730,7 @@ static __pyx_t_3P4J_5MHAOV_DTYPE_t *__pyx_f_3P4J_5MHAOV_allocate_and_verify(Py_s
  */
   __pyx_v_array = ((__pyx_t_3P4J_5MHAOV_DTYPE_t *)PyMem_Malloc((__pyx_v_N * (sizeof(__pyx_t_3P4J_5MHAOV_DTYPE_t)))));
 
-  /* "P4J/MHAOV.pyx":35
+  /* "P4J/MHAOV.pyx":34
  * cdef DTYPE_t* allocate_and_verify(Py_ssize_t N):
  *     cdef DTYPE_t* array = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))
  *     if not array:             # <<<<<<<<<<<<<<
@@ -1741,16 +1740,16 @@ static __pyx_t_3P4J_5MHAOV_DTYPE_t *__pyx_f_3P4J_5MHAOV_allocate_and_verify(Py_s
   __pyx_t_1 = ((!(__pyx_v_array != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "P4J/MHAOV.pyx":36
+    /* "P4J/MHAOV.pyx":35
  *     cdef DTYPE_t* array = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))
  *     if not array:
  *         raise MemoryError()             # <<<<<<<<<<<<<<
  *     return array
  * 
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 36, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 35, __pyx_L1_error)
 
-    /* "P4J/MHAOV.pyx":35
+    /* "P4J/MHAOV.pyx":34
  * cdef DTYPE_t* allocate_and_verify(Py_ssize_t N):
  *     cdef DTYPE_t* array = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))
  *     if not array:             # <<<<<<<<<<<<<<
@@ -1759,7 +1758,7 @@ static __pyx_t_3P4J_5MHAOV_DTYPE_t *__pyx_f_3P4J_5MHAOV_allocate_and_verify(Py_s
  */
   }
 
-  /* "P4J/MHAOV.pyx":37
+  /* "P4J/MHAOV.pyx":36
  *     if not array:
  *         raise MemoryError()
  *     return array             # <<<<<<<<<<<<<<
@@ -1769,7 +1768,7 @@ static __pyx_t_3P4J_5MHAOV_DTYPE_t *__pyx_f_3P4J_5MHAOV_allocate_and_verify(Py_s
   __pyx_r = __pyx_v_array;
   goto __pyx_L0;
 
-  /* "P4J/MHAOV.pyx":33
+  /* "P4J/MHAOV.pyx":32
  * cdef DTYPE_t M_PI = 3.1415926535897
  * 
  * cdef DTYPE_t* allocate_and_verify(Py_ssize_t N):             # <<<<<<<<<<<<<<
@@ -1786,7 +1785,7 @@ static __pyx_t_3P4J_5MHAOV_DTYPE_t *__pyx_f_3P4J_5MHAOV_allocate_and_verify(Py_s
   return __pyx_r;
 }
 
-/* "P4J/MHAOV.pyx":56
+/* "P4J/MHAOV.pyx":55
  *     cdef DTYPE_t* cfi
  * 
  *     def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err, ITYPE_t Nharmonics=1):             # <<<<<<<<<<<<<<
@@ -1826,12 +1825,12 @@ static int __pyx_pw_3P4J_5MHAOV_3AOV_1__init__(PyObject *__pyx_v_self, PyObject 
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_mag)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 0, 3, 4, 1); __PYX_ERR(0, 56, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 0, 3, 4, 1); __PYX_ERR(0, 55, __pyx_L3_error)
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_err)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 0, 3, 4, 2); __PYX_ERR(0, 56, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 0, 3, 4, 2); __PYX_ERR(0, 55, __pyx_L3_error)
         }
         case  3:
         if (kw_args > 0) {
@@ -1840,7 +1839,7 @@ static int __pyx_pw_3P4J_5MHAOV_3AOV_1__init__(PyObject *__pyx_v_self, PyObject 
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 56, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 55, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -1852,18 +1851,18 @@ static int __pyx_pw_3P4J_5MHAOV_3AOV_1__init__(PyObject *__pyx_v_self, PyObject 
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_mjd = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_5MHAOV_DTYPE_t(values[0]); if (unlikely(!__pyx_v_mjd.memview)) __PYX_ERR(0, 56, __pyx_L3_error)
-    __pyx_v_mag = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_5MHAOV_DTYPE_t(values[1]); if (unlikely(!__pyx_v_mag.memview)) __PYX_ERR(0, 56, __pyx_L3_error)
-    __pyx_v_err = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_5MHAOV_DTYPE_t(values[2]); if (unlikely(!__pyx_v_err.memview)) __PYX_ERR(0, 56, __pyx_L3_error)
+    __pyx_v_mjd = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_5MHAOV_DTYPE_t(values[0]); if (unlikely(!__pyx_v_mjd.memview)) __PYX_ERR(0, 55, __pyx_L3_error)
+    __pyx_v_mag = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_5MHAOV_DTYPE_t(values[1]); if (unlikely(!__pyx_v_mag.memview)) __PYX_ERR(0, 55, __pyx_L3_error)
+    __pyx_v_err = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_5MHAOV_DTYPE_t(values[2]); if (unlikely(!__pyx_v_err.memview)) __PYX_ERR(0, 55, __pyx_L3_error)
     if (values[3]) {
-      __pyx_v_Nharmonics = __Pyx_PyInt_As_int(values[3]); if (unlikely((__pyx_v_Nharmonics == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 56, __pyx_L3_error)
+      __pyx_v_Nharmonics = __Pyx_PyInt_As_int(values[3]); if (unlikely((__pyx_v_Nharmonics == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 55, __pyx_L3_error)
     } else {
       __pyx_v_Nharmonics = ((__pyx_t_3P4J_5MHAOV_ITYPE_t)1);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 0, 3, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 56, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 3, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 55, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("P4J.MHAOV.AOV.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1889,7 +1888,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
   Py_ssize_t __pyx_t_7;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "P4J/MHAOV.pyx":58
+  /* "P4J/MHAOV.pyx":57
  *     def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err, ITYPE_t Nharmonics=1):
  *         cdef Py_ssize_t i
  *         if Nharmonics < 1:             # <<<<<<<<<<<<<<
@@ -1899,20 +1898,20 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
   __pyx_t_1 = ((__pyx_v_Nharmonics < 1) != 0);
   if (__pyx_t_1) {
 
-    /* "P4J/MHAOV.pyx":59
+    /* "P4J/MHAOV.pyx":58
  *         cdef Py_ssize_t i
  *         if Nharmonics < 1:
  *             raise ValueError("Number of harmonics has to be greater or equal to 1")             # <<<<<<<<<<<<<<
  *         self.Nharmonics = Nharmonics
  *         self.N = mag.shape[0]
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 59, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 58, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 59, __pyx_L1_error)
+    __PYX_ERR(0, 58, __pyx_L1_error)
 
-    /* "P4J/MHAOV.pyx":58
+    /* "P4J/MHAOV.pyx":57
  *     def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err, ITYPE_t Nharmonics=1):
  *         cdef Py_ssize_t i
  *         if Nharmonics < 1:             # <<<<<<<<<<<<<<
@@ -1921,7 +1920,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
  */
   }
 
-  /* "P4J/MHAOV.pyx":60
+  /* "P4J/MHAOV.pyx":59
  *         if Nharmonics < 1:
  *             raise ValueError("Number of harmonics has to be greater or equal to 1")
  *         self.Nharmonics = Nharmonics             # <<<<<<<<<<<<<<
@@ -1930,7 +1929,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
  */
   __pyx_v_self->Nharmonics = __pyx_v_Nharmonics;
 
-  /* "P4J/MHAOV.pyx":61
+  /* "P4J/MHAOV.pyx":60
  *             raise ValueError("Number of harmonics has to be greater or equal to 1")
  *         self.Nharmonics = Nharmonics
  *         self.N = mag.shape[0]             # <<<<<<<<<<<<<<
@@ -1939,7 +1938,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
  */
   __pyx_v_self->N = (__pyx_v_mag.shape[0]);
 
-  /* "P4J/MHAOV.pyx":62
+  /* "P4J/MHAOV.pyx":61
  *         self.Nharmonics = Nharmonics
  *         self.N = mag.shape[0]
  *         self.mjd = allocate_and_verify(self.N)             # <<<<<<<<<<<<<<
@@ -1948,7 +1947,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
  */
   __pyx_v_self->mjd = __pyx_f_3P4J_5MHAOV_allocate_and_verify(__pyx_v_self->N);
 
-  /* "P4J/MHAOV.pyx":63
+  /* "P4J/MHAOV.pyx":62
  *         self.N = mag.shape[0]
  *         self.mjd = allocate_and_verify(self.N)
  *         self.mag = allocate_and_verify(self.N)             # <<<<<<<<<<<<<<
@@ -1957,7 +1956,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
  */
   __pyx_v_self->mag = __pyx_f_3P4J_5MHAOV_allocate_and_verify(__pyx_v_self->N);
 
-  /* "P4J/MHAOV.pyx":64
+  /* "P4J/MHAOV.pyx":63
  *         self.mjd = allocate_and_verify(self.N)
  *         self.mag = allocate_and_verify(self.N)
  *         self.err = allocate_and_verify(self.N)             # <<<<<<<<<<<<<<
@@ -1966,7 +1965,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
  */
   __pyx_v_self->err = __pyx_f_3P4J_5MHAOV_allocate_and_verify(__pyx_v_self->N);
 
-  /* "P4J/MHAOV.pyx":65
+  /* "P4J/MHAOV.pyx":64
  *         self.mag = allocate_and_verify(self.N)
  *         self.err = allocate_and_verify(self.N)
  *         self.zr = allocate_and_verify(self.N)             # <<<<<<<<<<<<<<
@@ -1975,7 +1974,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
  */
   __pyx_v_self->zr = __pyx_f_3P4J_5MHAOV_allocate_and_verify(__pyx_v_self->N);
 
-  /* "P4J/MHAOV.pyx":66
+  /* "P4J/MHAOV.pyx":65
  *         self.err = allocate_and_verify(self.N)
  *         self.zr = allocate_and_verify(self.N)
  *         self.zi = allocate_and_verify(self.N)             # <<<<<<<<<<<<<<
@@ -1984,7 +1983,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
  */
   __pyx_v_self->zi = __pyx_f_3P4J_5MHAOV_allocate_and_verify(__pyx_v_self->N);
 
-  /* "P4J/MHAOV.pyx":67
+  /* "P4J/MHAOV.pyx":66
  *         self.zr = allocate_and_verify(self.N)
  *         self.zi = allocate_and_verify(self.N)
  *         self.znr = allocate_and_verify(self.N)             # <<<<<<<<<<<<<<
@@ -1993,7 +1992,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
  */
   __pyx_v_self->znr = __pyx_f_3P4J_5MHAOV_allocate_and_verify(__pyx_v_self->N);
 
-  /* "P4J/MHAOV.pyx":68
+  /* "P4J/MHAOV.pyx":67
  *         self.zi = allocate_and_verify(self.N)
  *         self.znr = allocate_and_verify(self.N)
  *         self.zni = allocate_and_verify(self.N)             # <<<<<<<<<<<<<<
@@ -2002,7 +2001,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
  */
   __pyx_v_self->zni = __pyx_f_3P4J_5MHAOV_allocate_and_verify(__pyx_v_self->N);
 
-  /* "P4J/MHAOV.pyx":69
+  /* "P4J/MHAOV.pyx":68
  *         self.znr = allocate_and_verify(self.N)
  *         self.zni = allocate_and_verify(self.N)
  *         self.pr = allocate_and_verify(self.N)             # <<<<<<<<<<<<<<
@@ -2011,7 +2010,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
  */
   __pyx_v_self->pr = __pyx_f_3P4J_5MHAOV_allocate_and_verify(__pyx_v_self->N);
 
-  /* "P4J/MHAOV.pyx":70
+  /* "P4J/MHAOV.pyx":69
  *         self.zni = allocate_and_verify(self.N)
  *         self.pr = allocate_and_verify(self.N)
  *         self.pi = allocate_and_verify(self.N)             # <<<<<<<<<<<<<<
@@ -2020,7 +2019,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
  */
   __pyx_v_self->pi = __pyx_f_3P4J_5MHAOV_allocate_and_verify(__pyx_v_self->N);
 
-  /* "P4J/MHAOV.pyx":71
+  /* "P4J/MHAOV.pyx":70
  *         self.pr = allocate_and_verify(self.N)
  *         self.pi = allocate_and_verify(self.N)
  *         self.cfr = allocate_and_verify(self.N)             # <<<<<<<<<<<<<<
@@ -2029,7 +2028,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
  */
   __pyx_v_self->cfr = __pyx_f_3P4J_5MHAOV_allocate_and_verify(__pyx_v_self->N);
 
-  /* "P4J/MHAOV.pyx":72
+  /* "P4J/MHAOV.pyx":71
  *         self.pi = allocate_and_verify(self.N)
  *         self.cfr = allocate_and_verify(self.N)
  *         self.cfi = allocate_and_verify(self.N)             # <<<<<<<<<<<<<<
@@ -2038,7 +2037,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
  */
   __pyx_v_self->cfi = __pyx_f_3P4J_5MHAOV_allocate_and_verify(__pyx_v_self->N);
 
-  /* "P4J/MHAOV.pyx":74
+  /* "P4J/MHAOV.pyx":73
  *         self.cfi = allocate_and_verify(self.N)
  * 
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -2049,7 +2048,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
   for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_i = __pyx_t_4;
 
-    /* "P4J/MHAOV.pyx":75
+    /* "P4J/MHAOV.pyx":74
  * 
  *         for i in range(self.N):
  *             self.mjd[i] = mjd[i]             # <<<<<<<<<<<<<<
@@ -2059,7 +2058,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
     __pyx_t_5 = __pyx_v_i;
     (__pyx_v_self->mjd[__pyx_v_i]) = (*((__pyx_t_3P4J_5MHAOV_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_5MHAOV_DTYPE_t *) __pyx_v_mjd.data) + __pyx_t_5)) )));
 
-    /* "P4J/MHAOV.pyx":76
+    /* "P4J/MHAOV.pyx":75
  *         for i in range(self.N):
  *             self.mjd[i] = mjd[i]
  *             self.mag[i] = mag[i]             # <<<<<<<<<<<<<<
@@ -2069,7 +2068,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
     __pyx_t_6 = __pyx_v_i;
     (__pyx_v_self->mag[__pyx_v_i]) = (*((__pyx_t_3P4J_5MHAOV_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_5MHAOV_DTYPE_t *) __pyx_v_mag.data) + __pyx_t_6)) )));
 
-    /* "P4J/MHAOV.pyx":77
+    /* "P4J/MHAOV.pyx":76
  *             self.mjd[i] = mjd[i]
  *             self.mag[i] = mag[i]
  *             self.err[i] = err[i]             # <<<<<<<<<<<<<<
@@ -2080,7 +2079,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
     (__pyx_v_self->err[__pyx_v_i]) = (*((__pyx_t_3P4J_5MHAOV_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_5MHAOV_DTYPE_t *) __pyx_v_err.data) + __pyx_t_7)) )));
   }
 
-  /* "P4J/MHAOV.pyx":79
+  /* "P4J/MHAOV.pyx":78
  *             self.err[i] = err[i]
  * 
  *         self.wmean = weighted_mean(self.mag, self.err, self.N)             # <<<<<<<<<<<<<<
@@ -2089,7 +2088,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
  */
   __pyx_v_self->wmean = __pyx_f_3P4J_9utilities_weighted_mean(__pyx_v_self->mag, __pyx_v_self->err, __pyx_v_self->N);
 
-  /* "P4J/MHAOV.pyx":80
+  /* "P4J/MHAOV.pyx":79
  * 
  *         self.wmean = weighted_mean(self.mag, self.err, self.N)
  *         self.d1 = Nharmonics*2.0             # <<<<<<<<<<<<<<
@@ -2098,7 +2097,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
  */
   __pyx_v_self->d1 = (__pyx_v_Nharmonics * 2.0);
 
-  /* "P4J/MHAOV.pyx":81
+  /* "P4J/MHAOV.pyx":80
  *         self.wmean = weighted_mean(self.mag, self.err, self.N)
  *         self.d1 = Nharmonics*2.0
  *         self.d2 = self.N - Nharmonics*2 - 1             # <<<<<<<<<<<<<<
@@ -2107,7 +2106,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
  */
   __pyx_v_self->d2 = ((__pyx_v_self->N - (__pyx_v_Nharmonics * 2)) - 1);
 
-  /* "P4J/MHAOV.pyx":82
+  /* "P4J/MHAOV.pyx":81
  *         self.d1 = Nharmonics*2.0
  *         self.d2 = self.N - Nharmonics*2 - 1
  *         self.wvar = 0.0             # <<<<<<<<<<<<<<
@@ -2116,7 +2115,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
  */
   __pyx_v_self->wvar = 0.0;
 
-  /* "P4J/MHAOV.pyx":83
+  /* "P4J/MHAOV.pyx":82
  *         self.d2 = self.N - Nharmonics*2 - 1
  *         self.wvar = 0.0
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -2127,7 +2126,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
   for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_i = __pyx_t_4;
 
-    /* "P4J/MHAOV.pyx":84
+    /* "P4J/MHAOV.pyx":83
  *         self.wvar = 0.0
  *         for i in range(self.N):
  *             self.wvar += powf(self.mag[i] - self.wmean, 2.)/powf(self.err[i], 2.)             # <<<<<<<<<<<<<<
@@ -2137,7 +2136,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
     __pyx_v_self->wvar = (__pyx_v_self->wvar + (powf(((__pyx_v_self->mag[__pyx_v_i]) - __pyx_v_self->wmean), 2.) / powf((__pyx_v_self->err[__pyx_v_i]), 2.)));
   }
 
-  /* "P4J/MHAOV.pyx":56
+  /* "P4J/MHAOV.pyx":55
  *     cdef DTYPE_t* cfi
  * 
  *     def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err, ITYPE_t Nharmonics=1):             # <<<<<<<<<<<<<<
@@ -2160,7 +2159,7 @@ static int __pyx_pf_3P4J_5MHAOV_3AOV___init__(struct __pyx_obj_3P4J_5MHAOV_AOV *
   return __pyx_r;
 }
 
-/* "P4J/MHAOV.pyx":87
+/* "P4J/MHAOV.pyx":86
  * 
  * 
  *     def eval_frequency(self, DTYPE_t freq):             # <<<<<<<<<<<<<<
@@ -2176,7 +2175,7 @@ static PyObject *__pyx_pw_3P4J_5MHAOV_3AOV_3eval_frequency(PyObject *__pyx_v_sel
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("eval_frequency (wrapper)", 0);
   assert(__pyx_arg_freq); {
-    __pyx_v_freq = __pyx_PyFloat_AsFloat(__pyx_arg_freq); if (unlikely((__pyx_v_freq == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 87, __pyx_L3_error)
+    __pyx_v_freq = __pyx_PyFloat_AsFloat(__pyx_arg_freq); if (unlikely((__pyx_v_freq == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 86, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2214,7 +2213,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
   PyObject *__pyx_t_6 = NULL;
   __Pyx_RefNannySetupContext("eval_frequency", 0);
 
-  /* "P4J/MHAOV.pyx":90
+  /* "P4J/MHAOV.pyx":89
  *         cdef Py_ssize_t i, j
  *         cdef DTYPE_t sn, alr, ali, scr, sci
  *         cdef DTYPE_t aov=0.0             # <<<<<<<<<<<<<<
@@ -2223,7 +2222,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  */
   __pyx_v_aov = 0.0;
 
-  /* "P4J/MHAOV.pyx":92
+  /* "P4J/MHAOV.pyx":91
  *         cdef DTYPE_t aov=0.0
  *         cdef DTYPE_t arg, tmp, sr, si
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -2234,7 +2233,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "P4J/MHAOV.pyx":93
+    /* "P4J/MHAOV.pyx":92
  *         cdef DTYPE_t arg, tmp, sr, si
  *         for i in range(self.N):
  *             arg = self.mjd[i]*freq             # <<<<<<<<<<<<<<
@@ -2243,7 +2242,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  */
     __pyx_v_arg = ((__pyx_v_self->mjd[__pyx_v_i]) * __pyx_v_freq);
 
-    /* "P4J/MHAOV.pyx":94
+    /* "P4J/MHAOV.pyx":93
  *         for i in range(self.N):
  *             arg = self.mjd[i]*freq
  *             arg = 2.0*M_PI*(arg - floorf(arg))             # <<<<<<<<<<<<<<
@@ -2252,7 +2251,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  */
     __pyx_v_arg = ((2.0 * __pyx_v_3P4J_5MHAOV_M_PI) * (__pyx_v_arg - floorf(__pyx_v_arg)));
 
-    /* "P4J/MHAOV.pyx":95
+    /* "P4J/MHAOV.pyx":94
  *             arg = self.mjd[i]*freq
  *             arg = 2.0*M_PI*(arg - floorf(arg))
  *             self.zr[i] = cosf(arg)             # <<<<<<<<<<<<<<
@@ -2261,7 +2260,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  */
     (__pyx_v_self->zr[__pyx_v_i]) = cosf(__pyx_v_arg);
 
-    /* "P4J/MHAOV.pyx":96
+    /* "P4J/MHAOV.pyx":95
  *             arg = 2.0*M_PI*(arg - floorf(arg))
  *             self.zr[i] = cosf(arg)
  *             self.zi[i] = sinf(arg)             # <<<<<<<<<<<<<<
@@ -2270,7 +2269,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  */
     (__pyx_v_self->zi[__pyx_v_i]) = sinf(__pyx_v_arg);
 
-    /* "P4J/MHAOV.pyx":97
+    /* "P4J/MHAOV.pyx":96
  *             self.zr[i] = cosf(arg)
  *             self.zi[i] = sinf(arg)
  *             self.znr[i] = 1.             # <<<<<<<<<<<<<<
@@ -2279,7 +2278,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  */
     (__pyx_v_self->znr[__pyx_v_i]) = 1.;
 
-    /* "P4J/MHAOV.pyx":98
+    /* "P4J/MHAOV.pyx":97
  *             self.zi[i] = sinf(arg)
  *             self.znr[i] = 1.
  *             self.pr[i] = 1./self.err[i]             # <<<<<<<<<<<<<<
@@ -2288,7 +2287,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  */
     (__pyx_v_self->pr[__pyx_v_i]) = (1. / (__pyx_v_self->err[__pyx_v_i]));
 
-    /* "P4J/MHAOV.pyx":99
+    /* "P4J/MHAOV.pyx":98
  *             self.znr[i] = 1.
  *             self.pr[i] = 1./self.err[i]
  *             self.zni[i] = 0.             # <<<<<<<<<<<<<<
@@ -2297,7 +2296,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  */
     (__pyx_v_self->zni[__pyx_v_i]) = 0.;
 
-    /* "P4J/MHAOV.pyx":100
+    /* "P4J/MHAOV.pyx":99
  *             self.pr[i] = 1./self.err[i]
  *             self.zni[i] = 0.
  *             self.pi[i] = 0.             # <<<<<<<<<<<<<<
@@ -2306,7 +2305,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  */
     (__pyx_v_self->pi[__pyx_v_i]) = 0.;
 
-    /* "P4J/MHAOV.pyx":101
+    /* "P4J/MHAOV.pyx":100
  *             self.zni[i] = 0.
  *             self.pi[i] = 0.
  *             self.cfr[i] = (self.mag[i] - self.wmean)*cosf(self.Nharmonics*arg)/self.err[i]             # <<<<<<<<<<<<<<
@@ -2315,7 +2314,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  */
     (__pyx_v_self->cfr[__pyx_v_i]) = ((((__pyx_v_self->mag[__pyx_v_i]) - __pyx_v_self->wmean) * cosf((__pyx_v_self->Nharmonics * __pyx_v_arg))) / (__pyx_v_self->err[__pyx_v_i]));
 
-    /* "P4J/MHAOV.pyx":102
+    /* "P4J/MHAOV.pyx":101
  *             self.pi[i] = 0.
  *             self.cfr[i] = (self.mag[i] - self.wmean)*cosf(self.Nharmonics*arg)/self.err[i]
  *             self.cfi[i] = (self.mag[i] - self.wmean)*sinf(self.Nharmonics*arg)/self.err[i]             # <<<<<<<<<<<<<<
@@ -2325,7 +2324,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
     (__pyx_v_self->cfi[__pyx_v_i]) = ((((__pyx_v_self->mag[__pyx_v_i]) - __pyx_v_self->wmean) * sinf((__pyx_v_self->Nharmonics * __pyx_v_arg))) / (__pyx_v_self->err[__pyx_v_i]));
   }
 
-  /* "P4J/MHAOV.pyx":103
+  /* "P4J/MHAOV.pyx":102
  *             self.cfr[i] = (self.mag[i] - self.wmean)*cosf(self.Nharmonics*arg)/self.err[i]
  *             self.cfi[i] = (self.mag[i] - self.wmean)*sinf(self.Nharmonics*arg)/self.err[i]
  *         for j in range(2*self.Nharmonics+1):             # <<<<<<<<<<<<<<
@@ -2336,7 +2335,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
   for (__pyx_t_1 = 0; __pyx_t_1 < __pyx_t_3; __pyx_t_1+=1) {
     __pyx_v_j = __pyx_t_1;
 
-    /* "P4J/MHAOV.pyx":104
+    /* "P4J/MHAOV.pyx":103
  *             self.cfi[i] = (self.mag[i] - self.wmean)*sinf(self.Nharmonics*arg)/self.err[i]
  *         for j in range(2*self.Nharmonics+1):
  *             sn = alr = ali = scr = sci = 0.0             # <<<<<<<<<<<<<<
@@ -2349,7 +2348,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
     __pyx_v_scr = 0.0;
     __pyx_v_sci = 0.0;
 
-    /* "P4J/MHAOV.pyx":105
+    /* "P4J/MHAOV.pyx":104
  *         for j in range(2*self.Nharmonics+1):
  *             sn = alr = ali = scr = sci = 0.0
  *             for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -2360,7 +2359,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
     for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_2; __pyx_t_4+=1) {
       __pyx_v_i = __pyx_t_4;
 
-      /* "P4J/MHAOV.pyx":106
+      /* "P4J/MHAOV.pyx":105
  *             sn = alr = ali = scr = sci = 0.0
  *             for i in range(self.N):
  *                 sn += self.pr[i]**2 + self.pi[i]**2             # <<<<<<<<<<<<<<
@@ -2369,7 +2368,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  */
       __pyx_v_sn = (__pyx_v_sn + (powf((__pyx_v_self->pr[__pyx_v_i]), 2.0) + powf((__pyx_v_self->pi[__pyx_v_i]), 2.0)));
 
-      /* "P4J/MHAOV.pyx":107
+      /* "P4J/MHAOV.pyx":106
  *             for i in range(self.N):
  *                 sn += self.pr[i]**2 + self.pi[i]**2
  *                 alr += (self.zr[i]*self.pr[i] - self.zi[i]*self.pi[i])/self.err[i]             # <<<<<<<<<<<<<<
@@ -2378,7 +2377,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  */
       __pyx_v_alr = (__pyx_v_alr + ((((__pyx_v_self->zr[__pyx_v_i]) * (__pyx_v_self->pr[__pyx_v_i])) - ((__pyx_v_self->zi[__pyx_v_i]) * (__pyx_v_self->pi[__pyx_v_i]))) / (__pyx_v_self->err[__pyx_v_i])));
 
-      /* "P4J/MHAOV.pyx":108
+      /* "P4J/MHAOV.pyx":107
  *                 sn += self.pr[i]**2 + self.pi[i]**2
  *                 alr += (self.zr[i]*self.pr[i] - self.zi[i]*self.pi[i])/self.err[i]
  *                 ali += (self.zr[i]*self.pi[i] + self.zi[i]*self.pr[i])/self.err[i]             # <<<<<<<<<<<<<<
@@ -2387,7 +2386,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  */
       __pyx_v_ali = (__pyx_v_ali + ((((__pyx_v_self->zr[__pyx_v_i]) * (__pyx_v_self->pi[__pyx_v_i])) + ((__pyx_v_self->zi[__pyx_v_i]) * (__pyx_v_self->pr[__pyx_v_i]))) / (__pyx_v_self->err[__pyx_v_i])));
 
-      /* "P4J/MHAOV.pyx":109
+      /* "P4J/MHAOV.pyx":108
  *                 alr += (self.zr[i]*self.pr[i] - self.zi[i]*self.pi[i])/self.err[i]
  *                 ali += (self.zr[i]*self.pi[i] + self.zi[i]*self.pr[i])/self.err[i]
  *                 scr += self.pr[i]*self.cfr[i] + self.pi[i]*self.cfi[i]             # <<<<<<<<<<<<<<
@@ -2396,7 +2395,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  */
       __pyx_v_scr = (__pyx_v_scr + (((__pyx_v_self->pr[__pyx_v_i]) * (__pyx_v_self->cfr[__pyx_v_i])) + ((__pyx_v_self->pi[__pyx_v_i]) * (__pyx_v_self->cfi[__pyx_v_i]))));
 
-      /* "P4J/MHAOV.pyx":110
+      /* "P4J/MHAOV.pyx":109
  *                 ali += (self.zr[i]*self.pi[i] + self.zi[i]*self.pr[i])/self.err[i]
  *                 scr += self.pr[i]*self.cfr[i] + self.pi[i]*self.cfi[i]
  *                 sci += self.pr[i]*self.cfi[i] - self.pi[i]*self.cfr[i]             # <<<<<<<<<<<<<<
@@ -2406,7 +2405,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
       __pyx_v_sci = (__pyx_v_sci + (((__pyx_v_self->pr[__pyx_v_i]) * (__pyx_v_self->cfi[__pyx_v_i])) - ((__pyx_v_self->pi[__pyx_v_i]) * (__pyx_v_self->cfr[__pyx_v_i]))));
     }
 
-    /* "P4J/MHAOV.pyx":111
+    /* "P4J/MHAOV.pyx":110
  *                 scr += self.pr[i]*self.cfr[i] + self.pi[i]*self.cfi[i]
  *                 sci += self.pr[i]*self.cfi[i] - self.pi[i]*self.cfr[i]
  *             if sn > 1e-31:             # <<<<<<<<<<<<<<
@@ -2416,7 +2415,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
     __pyx_t_5 = ((__pyx_v_sn > 1e-31) != 0);
     if (__pyx_t_5) {
 
-      /* "P4J/MHAOV.pyx":112
+      /* "P4J/MHAOV.pyx":111
  *                 sci += self.pr[i]*self.cfi[i] - self.pi[i]*self.cfr[i]
  *             if sn > 1e-31:
  *                 alr = alr/sn             # <<<<<<<<<<<<<<
@@ -2425,7 +2424,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  */
       __pyx_v_alr = (__pyx_v_alr / __pyx_v_sn);
 
-      /* "P4J/MHAOV.pyx":113
+      /* "P4J/MHAOV.pyx":112
  *             if sn > 1e-31:
  *                 alr = alr/sn
  *                 ali = ali/sn             # <<<<<<<<<<<<<<
@@ -2434,7 +2433,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  */
       __pyx_v_ali = (__pyx_v_ali / __pyx_v_sn);
 
-      /* "P4J/MHAOV.pyx":111
+      /* "P4J/MHAOV.pyx":110
  *                 scr += self.pr[i]*self.cfr[i] + self.pi[i]*self.cfi[i]
  *                 sci += self.pr[i]*self.cfi[i] - self.pi[i]*self.cfr[i]
  *             if sn > 1e-31:             # <<<<<<<<<<<<<<
@@ -2444,7 +2443,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
       goto __pyx_L9;
     }
 
-    /* "P4J/MHAOV.pyx":115
+    /* "P4J/MHAOV.pyx":114
  *                 ali = ali/sn
  *             else:
  *                 alr = alr/1e-31             # <<<<<<<<<<<<<<
@@ -2454,7 +2453,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
     /*else*/ {
       __pyx_v_alr = (__pyx_v_alr / 1e-31);
 
-      /* "P4J/MHAOV.pyx":116
+      /* "P4J/MHAOV.pyx":115
  *             else:
  *                 alr = alr/1e-31
  *                 ali = ali/1e-31             # <<<<<<<<<<<<<<
@@ -2465,7 +2464,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
     }
     __pyx_L9:;
 
-    /* "P4J/MHAOV.pyx":117
+    /* "P4J/MHAOV.pyx":116
  *                 alr = alr/1e-31
  *                 ali = ali/1e-31
  *             aov += (scr**2 + sci**2)/sn             # <<<<<<<<<<<<<<
@@ -2474,7 +2473,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  */
     __pyx_v_aov = (__pyx_v_aov + ((powf(__pyx_v_scr, 2.0) + powf(__pyx_v_sci, 2.0)) / __pyx_v_sn));
 
-    /* "P4J/MHAOV.pyx":118
+    /* "P4J/MHAOV.pyx":117
  *                 ali = ali/1e-31
  *             aov += (scr**2 + sci**2)/sn
  *             for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -2485,7 +2484,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
     for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_2; __pyx_t_4+=1) {
       __pyx_v_i = __pyx_t_4;
 
-      /* "P4J/MHAOV.pyx":119
+      /* "P4J/MHAOV.pyx":118
  *             aov += (scr**2 + sci**2)/sn
  *             for i in range(self.N):
  *                 sr = alr*self.znr[i] - ali*self.zni[i]             # <<<<<<<<<<<<<<
@@ -2494,7 +2493,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  */
       __pyx_v_sr = ((__pyx_v_alr * (__pyx_v_self->znr[__pyx_v_i])) - (__pyx_v_ali * (__pyx_v_self->zni[__pyx_v_i])));
 
-      /* "P4J/MHAOV.pyx":120
+      /* "P4J/MHAOV.pyx":119
  *             for i in range(self.N):
  *                 sr = alr*self.znr[i] - ali*self.zni[i]
  *                 si = alr*self.zni[i] + ali*self.znr[i]             # <<<<<<<<<<<<<<
@@ -2503,7 +2502,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  */
       __pyx_v_si = ((__pyx_v_alr * (__pyx_v_self->zni[__pyx_v_i])) + (__pyx_v_ali * (__pyx_v_self->znr[__pyx_v_i])));
 
-      /* "P4J/MHAOV.pyx":121
+      /* "P4J/MHAOV.pyx":120
  *                 sr = alr*self.znr[i] - ali*self.zni[i]
  *                 si = alr*self.zni[i] + ali*self.znr[i]
  *                 tmp = self.pr[i]*self.zr[i] - self.pi[i]*self.zi[i] - sr*self.pr[i] - si*self.pi[i]             # <<<<<<<<<<<<<<
@@ -2512,7 +2511,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  */
       __pyx_v_tmp = (((((__pyx_v_self->pr[__pyx_v_i]) * (__pyx_v_self->zr[__pyx_v_i])) - ((__pyx_v_self->pi[__pyx_v_i]) * (__pyx_v_self->zi[__pyx_v_i]))) - (__pyx_v_sr * (__pyx_v_self->pr[__pyx_v_i]))) - (__pyx_v_si * (__pyx_v_self->pi[__pyx_v_i])));
 
-      /* "P4J/MHAOV.pyx":122
+      /* "P4J/MHAOV.pyx":121
  *                 si = alr*self.zni[i] + ali*self.znr[i]
  *                 tmp = self.pr[i]*self.zr[i] - self.pi[i]*self.zi[i] - sr*self.pr[i] - si*self.pi[i]
  *                 self.pi[i] = self.pr[i]*self.zi[i] + self.pi[i]*self.zr[i] + sr*self.pi[i] - si*self.pr[i]             # <<<<<<<<<<<<<<
@@ -2521,7 +2520,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  */
       (__pyx_v_self->pi[__pyx_v_i]) = (((((__pyx_v_self->pr[__pyx_v_i]) * (__pyx_v_self->zi[__pyx_v_i])) + ((__pyx_v_self->pi[__pyx_v_i]) * (__pyx_v_self->zr[__pyx_v_i]))) + (__pyx_v_sr * (__pyx_v_self->pi[__pyx_v_i]))) - (__pyx_v_si * (__pyx_v_self->pr[__pyx_v_i])));
 
-      /* "P4J/MHAOV.pyx":123
+      /* "P4J/MHAOV.pyx":122
  *                 tmp = self.pr[i]*self.zr[i] - self.pi[i]*self.zi[i] - sr*self.pr[i] - si*self.pi[i]
  *                 self.pi[i] = self.pr[i]*self.zi[i] + self.pi[i]*self.zr[i] + sr*self.pi[i] - si*self.pr[i]
  *                 self.pr[i] = tmp             # <<<<<<<<<<<<<<
@@ -2530,7 +2529,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  */
       (__pyx_v_self->pr[__pyx_v_i]) = __pyx_v_tmp;
 
-      /* "P4J/MHAOV.pyx":124
+      /* "P4J/MHAOV.pyx":123
  *                 self.pi[i] = self.pr[i]*self.zi[i] + self.pi[i]*self.zr[i] + sr*self.pi[i] - si*self.pr[i]
  *                 self.pr[i] = tmp
  *                 tmp = self.znr[i]*self.zr[i] - self.zni[i]*self.zi[i]             # <<<<<<<<<<<<<<
@@ -2539,7 +2538,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  */
       __pyx_v_tmp = (((__pyx_v_self->znr[__pyx_v_i]) * (__pyx_v_self->zr[__pyx_v_i])) - ((__pyx_v_self->zni[__pyx_v_i]) * (__pyx_v_self->zi[__pyx_v_i])));
 
-      /* "P4J/MHAOV.pyx":125
+      /* "P4J/MHAOV.pyx":124
  *                 self.pr[i] = tmp
  *                 tmp = self.znr[i]*self.zr[i] - self.zni[i]*self.zi[i]
  *                 self.zni[i] = self.zni[i]*self.zr[i] + self.znr[i]*self.zi[i]             # <<<<<<<<<<<<<<
@@ -2548,7 +2547,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  */
       (__pyx_v_self->zni[__pyx_v_i]) = (((__pyx_v_self->zni[__pyx_v_i]) * (__pyx_v_self->zr[__pyx_v_i])) + ((__pyx_v_self->znr[__pyx_v_i]) * (__pyx_v_self->zi[__pyx_v_i])));
 
-      /* "P4J/MHAOV.pyx":126
+      /* "P4J/MHAOV.pyx":125
  *                 tmp = self.znr[i]*self.zr[i] - self.zni[i]*self.zi[i]
  *                 self.zni[i] = self.zni[i]*self.zr[i] + self.znr[i]*self.zi[i]
  *                 self.znr[i] = tmp             # <<<<<<<<<<<<<<
@@ -2559,7 +2558,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
     }
   }
 
-  /* "P4J/MHAOV.pyx":127
+  /* "P4J/MHAOV.pyx":126
  *                 self.zni[i] = self.zni[i]*self.zr[i] + self.znr[i]*self.zi[i]
  *                 self.znr[i] = tmp
  *         if self.wvar - aov > 1e-32:             # <<<<<<<<<<<<<<
@@ -2569,7 +2568,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
   __pyx_t_5 = (((__pyx_v_self->wvar - __pyx_v_aov) > 1e-32) != 0);
   if (__pyx_t_5) {
 
-    /* "P4J/MHAOV.pyx":128
+    /* "P4J/MHAOV.pyx":127
  *                 self.znr[i] = tmp
  *         if self.wvar - aov > 1e-32:
  *             return self.d2*aov/(self.d1*(self.wvar - aov))             # <<<<<<<<<<<<<<
@@ -2577,13 +2576,13 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  *             return self.d2*aov/(self.d1*1e-32)
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_6 = PyFloat_FromDouble(((__pyx_v_self->d2 * __pyx_v_aov) / (__pyx_v_self->d1 * (__pyx_v_self->wvar - __pyx_v_aov)))); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 128, __pyx_L1_error)
+    __pyx_t_6 = PyFloat_FromDouble(((__pyx_v_self->d2 * __pyx_v_aov) / (__pyx_v_self->d1 * (__pyx_v_self->wvar - __pyx_v_aov)))); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_r = __pyx_t_6;
     __pyx_t_6 = 0;
     goto __pyx_L0;
 
-    /* "P4J/MHAOV.pyx":127
+    /* "P4J/MHAOV.pyx":126
  *                 self.zni[i] = self.zni[i]*self.zr[i] + self.znr[i]*self.zi[i]
  *                 self.znr[i] = tmp
  *         if self.wvar - aov > 1e-32:             # <<<<<<<<<<<<<<
@@ -2592,7 +2591,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  */
   }
 
-  /* "P4J/MHAOV.pyx":130
+  /* "P4J/MHAOV.pyx":129
  *             return self.d2*aov/(self.d1*(self.wvar - aov))
  *         else:
  *             return self.d2*aov/(self.d1*1e-32)             # <<<<<<<<<<<<<<
@@ -2601,14 +2600,14 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
  */
   /*else*/ {
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_6 = PyFloat_FromDouble(((__pyx_v_self->d2 * __pyx_v_aov) / (__pyx_v_self->d1 * 1e-32))); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 130, __pyx_L1_error)
+    __pyx_t_6 = PyFloat_FromDouble(((__pyx_v_self->d2 * __pyx_v_aov) / (__pyx_v_self->d1 * 1e-32))); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 129, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_r = __pyx_t_6;
     __pyx_t_6 = 0;
     goto __pyx_L0;
   }
 
-  /* "P4J/MHAOV.pyx":87
+  /* "P4J/MHAOV.pyx":86
  * 
  * 
  *     def eval_frequency(self, DTYPE_t freq):             # <<<<<<<<<<<<<<
@@ -2627,7 +2626,7 @@ static PyObject *__pyx_pf_3P4J_5MHAOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J
   return __pyx_r;
 }
 
-/* "P4J/MHAOV.pyx":132
+/* "P4J/MHAOV.pyx":131
  *             return self.d2*aov/(self.d1*1e-32)
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -2650,7 +2649,7 @@ static void __pyx_pf_3P4J_5MHAOV_3AOV_4__dealloc__(struct __pyx_obj_3P4J_5MHAOV_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "P4J/MHAOV.pyx":133
+  /* "P4J/MHAOV.pyx":132
  * 
  *     def __dealloc__(self):
  *         PyMem_Free(self.mjd)             # <<<<<<<<<<<<<<
@@ -2659,7 +2658,7 @@ static void __pyx_pf_3P4J_5MHAOV_3AOV_4__dealloc__(struct __pyx_obj_3P4J_5MHAOV_
  */
   PyMem_Free(__pyx_v_self->mjd);
 
-  /* "P4J/MHAOV.pyx":134
+  /* "P4J/MHAOV.pyx":133
  *     def __dealloc__(self):
  *         PyMem_Free(self.mjd)
  *         PyMem_Free(self.mag)             # <<<<<<<<<<<<<<
@@ -2668,7 +2667,7 @@ static void __pyx_pf_3P4J_5MHAOV_3AOV_4__dealloc__(struct __pyx_obj_3P4J_5MHAOV_
  */
   PyMem_Free(__pyx_v_self->mag);
 
-  /* "P4J/MHAOV.pyx":135
+  /* "P4J/MHAOV.pyx":134
  *         PyMem_Free(self.mjd)
  *         PyMem_Free(self.mag)
  *         PyMem_Free(self.err)             # <<<<<<<<<<<<<<
@@ -2677,7 +2676,7 @@ static void __pyx_pf_3P4J_5MHAOV_3AOV_4__dealloc__(struct __pyx_obj_3P4J_5MHAOV_
  */
   PyMem_Free(__pyx_v_self->err);
 
-  /* "P4J/MHAOV.pyx":136
+  /* "P4J/MHAOV.pyx":135
  *         PyMem_Free(self.mag)
  *         PyMem_Free(self.err)
  *         PyMem_Free(self.zr)             # <<<<<<<<<<<<<<
@@ -2686,7 +2685,7 @@ static void __pyx_pf_3P4J_5MHAOV_3AOV_4__dealloc__(struct __pyx_obj_3P4J_5MHAOV_
  */
   PyMem_Free(__pyx_v_self->zr);
 
-  /* "P4J/MHAOV.pyx":137
+  /* "P4J/MHAOV.pyx":136
  *         PyMem_Free(self.err)
  *         PyMem_Free(self.zr)
  *         PyMem_Free(self.zi)             # <<<<<<<<<<<<<<
@@ -2695,7 +2694,7 @@ static void __pyx_pf_3P4J_5MHAOV_3AOV_4__dealloc__(struct __pyx_obj_3P4J_5MHAOV_
  */
   PyMem_Free(__pyx_v_self->zi);
 
-  /* "P4J/MHAOV.pyx":138
+  /* "P4J/MHAOV.pyx":137
  *         PyMem_Free(self.zr)
  *         PyMem_Free(self.zi)
  *         PyMem_Free(self.znr)             # <<<<<<<<<<<<<<
@@ -2704,7 +2703,7 @@ static void __pyx_pf_3P4J_5MHAOV_3AOV_4__dealloc__(struct __pyx_obj_3P4J_5MHAOV_
  */
   PyMem_Free(__pyx_v_self->znr);
 
-  /* "P4J/MHAOV.pyx":139
+  /* "P4J/MHAOV.pyx":138
  *         PyMem_Free(self.zi)
  *         PyMem_Free(self.znr)
  *         PyMem_Free(self.zni)             # <<<<<<<<<<<<<<
@@ -2713,7 +2712,7 @@ static void __pyx_pf_3P4J_5MHAOV_3AOV_4__dealloc__(struct __pyx_obj_3P4J_5MHAOV_
  */
   PyMem_Free(__pyx_v_self->zni);
 
-  /* "P4J/MHAOV.pyx":140
+  /* "P4J/MHAOV.pyx":139
  *         PyMem_Free(self.znr)
  *         PyMem_Free(self.zni)
  *         PyMem_Free(self.pr)             # <<<<<<<<<<<<<<
@@ -2722,7 +2721,7 @@ static void __pyx_pf_3P4J_5MHAOV_3AOV_4__dealloc__(struct __pyx_obj_3P4J_5MHAOV_
  */
   PyMem_Free(__pyx_v_self->pr);
 
-  /* "P4J/MHAOV.pyx":141
+  /* "P4J/MHAOV.pyx":140
  *         PyMem_Free(self.zni)
  *         PyMem_Free(self.pr)
  *         PyMem_Free(self.pi)             # <<<<<<<<<<<<<<
@@ -2731,7 +2730,7 @@ static void __pyx_pf_3P4J_5MHAOV_3AOV_4__dealloc__(struct __pyx_obj_3P4J_5MHAOV_
  */
   PyMem_Free(__pyx_v_self->pi);
 
-  /* "P4J/MHAOV.pyx":142
+  /* "P4J/MHAOV.pyx":141
  *         PyMem_Free(self.pr)
  *         PyMem_Free(self.pi)
  *         PyMem_Free(self.cfr)             # <<<<<<<<<<<<<<
@@ -2740,7 +2739,7 @@ static void __pyx_pf_3P4J_5MHAOV_3AOV_4__dealloc__(struct __pyx_obj_3P4J_5MHAOV_
  */
   PyMem_Free(__pyx_v_self->cfr);
 
-  /* "P4J/MHAOV.pyx":143
+  /* "P4J/MHAOV.pyx":142
  *         PyMem_Free(self.pi)
  *         PyMem_Free(self.cfr)
  *         PyMem_Free(self.cfi)             # <<<<<<<<<<<<<<
@@ -2749,7 +2748,7 @@ static void __pyx_pf_3P4J_5MHAOV_3AOV_4__dealloc__(struct __pyx_obj_3P4J_5MHAOV_
  */
   PyMem_Free(__pyx_v_self->cfi);
 
-  /* "P4J/MHAOV.pyx":132
+  /* "P4J/MHAOV.pyx":131
  *             return self.d2*aov/(self.d1*1e-32)
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -15264,9 +15263,9 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(0, 36, __pyx_L1_error)
-  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 59, __pyx_L1_error)
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 74, __pyx_L1_error)
+  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 73, __pyx_L1_error)
   __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(1, 149, __pyx_L1_error)
   __pyx_builtin_Ellipsis = __Pyx_GetBuiltinName(__pyx_n_s_Ellipsis); if (!__pyx_builtin_Ellipsis) __PYX_ERR(1, 396, __pyx_L1_error)
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(1, 425, __pyx_L1_error)
@@ -15281,14 +15280,14 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "P4J/MHAOV.pyx":59
+  /* "P4J/MHAOV.pyx":58
  *         cdef Py_ssize_t i
  *         if Nharmonics < 1:
  *             raise ValueError("Number of harmonics has to be greater or equal to 1")             # <<<<<<<<<<<<<<
  *         self.Nharmonics = Nharmonics
  *         self.N = mag.shape[0]
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_Number_of_harmonics_has_to_be_gr); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_Number_of_harmonics_has_to_be_gr); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
@@ -15600,9 +15599,9 @@ PyMODINIT_FUNC PyInit_MHAOV(void)
   /*--- Variable export code ---*/
   /*--- Function export code ---*/
   /*--- Type init code ---*/
-  if (PyType_Ready(&__pyx_type_3P4J_5MHAOV_AOV) < 0) __PYX_ERR(0, 39, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_3P4J_5MHAOV_AOV) < 0) __PYX_ERR(0, 38, __pyx_L1_error)
   __pyx_type_3P4J_5MHAOV_AOV.tp_print = 0;
-  if (PyObject_SetAttrString(__pyx_m, "AOV", (PyObject *)&__pyx_type_3P4J_5MHAOV_AOV) < 0) __PYX_ERR(0, 39, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "AOV", (PyObject *)&__pyx_type_3P4J_5MHAOV_AOV) < 0) __PYX_ERR(0, 38, __pyx_L1_error)
   __pyx_ptype_3P4J_5MHAOV_AOV = &__pyx_type_3P4J_5MHAOV_AOV;
   __pyx_vtabptr_array = &__pyx_vtable_array;
   __pyx_vtable_array.get_memview = (PyObject *(*)(struct __pyx_array_obj *))__pyx_array_get_memview;
@@ -15645,7 +15644,7 @@ PyMODINIT_FUNC PyInit_MHAOV(void)
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "P4J/MHAOV.pyx":31
+  /* "P4J/MHAOV.pyx":30
  * """
  * 
  * cdef DTYPE_t M_PI = 3.1415926535897             # <<<<<<<<<<<<<<

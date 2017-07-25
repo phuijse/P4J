@@ -11,7 +11,6 @@ ctypedef int ITYPE_t
 cdef extern from "math.h":
     DTYPE_t sqrtf(DTYPE_t)
     DTYPE_t powf(DTYPE_t, DTYPE_t)
-    DTYPE_t remainderf(DTYPE_t, DTYPE_t)
     DTYPE_t floorf(DTYPE_t)
     DTYPE_t cosf(DTYPE_t)
     DTYPE_t sinf(DTYPE_t)

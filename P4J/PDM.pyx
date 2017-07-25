@@ -11,8 +11,8 @@ ctypedef int ITYPE_t
 cdef extern from "math.h":
     DTYPE_t sqrtf(DTYPE_t)
     DTYPE_t powf(DTYPE_t, DTYPE_t)
-    DTYPE_t remainderf(DTYPE_t, DTYPE_t)
     DTYPE_t floorf(DTYPE_t)
+    DTYPE_t fmodf(DTYPE_t, DTYPE_t)
 
 """
 
@@ -70,7 +70,7 @@ cdef class PDM:
     def eval_frequency(self, DTYPE_t freq):
         cdef Py_ssize_t i, j
         for i in range(self.N):
-            self.phase[i] = 0.5 + remainderf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]
+            self.phase[i] = fmodf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]
         # argsort(self.phase, self.sorted_idx, self.N)
         cdef DTYPE_t PDM_num=0.0, PDM_den=0.0
         cdef ITYPE_t samples_in_bin

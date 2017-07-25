@@ -11,7 +11,7 @@ ctypedef int ITYPE_t
 cdef extern from "math.h":
     DTYPE_t sqrtf(DTYPE_t)
     DTYPE_t powf(DTYPE_t, DTYPE_t)
-    DTYPE_t remainderf(DTYPE_t, DTYPE_t)
+    DTYPE_t fmodf(DTYPE_t, DTYPE_t)
 
 """
 
@@ -61,7 +61,7 @@ cdef class LKSL:
     def eval_frequency(self, DTYPE_t freq):
         cdef Py_ssize_t i, j
         for i in range(self.N):
-            self.phase[i] = remainderf(self.mjd[i], 1.0/freq)*freq  # output in [-0.5, 0.5]
+            self.phase[i] = fmodf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]
         argsort(self.phase, self.sorted_idx, self.N)
         cdef DTYPE_t err2_err2 = self.err2[self.sorted_idx[0]] + self.err2[self.sorted_idx[self.N-1]]
         cdef DTYPE_t err2_acum = 1.0/err2_err2
