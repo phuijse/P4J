@@ -11,9 +11,13 @@ except ImportError:
 
 
 include_dirs = [np.get_include()]
-compiler_args = ['-O3', '-ffast-math']
 library_dirs = []
-libraries = ['m']
+if os.name == 'nt':  # Windows, assumming MSVC compiler
+    libraries = []
+    compiler_args = ['/Ox', '/fp:fast']
+elif os.name == 'posix':  # UNIX, assumming GCC compiler
+    libraries = ['m']
+    compiler_args = ['-O3', '-ffast-math']
 
 extensions = [
         Extension("P4J.QMI",
