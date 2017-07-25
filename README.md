@@ -31,16 +31,16 @@ Dependencies
     GCC 
     Cython (optional)
 ```
-UNIX systems most likely have the GCC compiler already installed. 
-If you have a Windows system you may want to install the Microsoft Visual C++ (MSVC) compiler. You can
-find relevant information at: https://wiki.python.org/moin/WindowsCompilers
-If Cython is found in your system, pyx are compiled to c sources. If not the provided c sources are used.
+If you have a UNIX system the GCC compiler is most likely already installed. 
+If you have a Windows system you may want to install the Microsoft Visual C++ (MSVC) compiler. You can find relevant information at: https://wiki.python.org/moin/WindowsCompilers.
+
+Note on Cython: If Cython is found in your system, pyx are compiled to c sources. If not the provided c sources are used.
 
 Install from PyPI using
 ```
-
     pip install P4J
 ```
+
 or clone the github repository and do
 ```
     python setup.py install --user
