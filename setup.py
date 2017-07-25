@@ -6,20 +6,75 @@ from setuptools.extension import Extension
 
 try:
     import numpy as np
-    from Cython.Build import cythonize
 except ImportError:
-    raise ImportError("Please install Numpy and Cython before installing P4J")
+    raise ImportError("Please install Numpy before installing P4J")
 
+
+include_dirs = [np.get_include()]
+compiler_args = ['-O3', '-ffast-math']
+library_dirs = []
+libraries = []
 
 extensions = [
-        Extension("*",
-            ["P4J/*.pyx"],
-            extra_compile_args=['-O3', '-march=native', '-ffast-math'],
-            include_dirs=[np.get_include()],
-            libraries=['m'],
-            library_dirs=[]
+        Extension("P4J.QMI",
+            sources=[os.path.join("P4J", "QMI.pyx")],
+            extra_compile_args=compiler_args,
+            include_dirs=include_dirs,
+            libraries=libraries,
+            library_dirs=library_dirs
+            ),
+        Extension("P4J.LKSL",
+            sources=[os.path.join("P4J", "LKSL.pyx")],
+            extra_compile_args=compiler_args,
+            include_dirs=include_dirs
+            ),
+        Extension("P4J.MHAOV",
+            sources=[os.path.join("P4J", "MHAOV.pyx")],
+            extra_compile_args=compiler_args,
+            include_dirs=include_dirs
+            ),
+        Extension("P4J.PDM",
+            sources=[os.path.join("P4J", "PDM.pyx")],
+            extra_compile_args=compiler_args,
+            include_dirs=include_dirs
             ),
         ]
+
+"""
+Allow users to install the module even if they do not have cython.
+If cython is not found the c sources are compiled instead. More details at:
+http://docs.cython.org/en/latest/src/reference/compilation.html
+"""
+try:
+    from Cython.Build import cythonize
+    USE_CYTHON = True
+except ImportError:
+    import warnings
+    USE_CYTHON = False
+    warnings.warn('Cython not found, compiling from c sources')
+
+
+def no_cythonize(extensions, **_ignore):
+    for extension in extensions:
+        sources = []
+        for sfile in extension.sources:
+            path, ext = os.path.splitext(sfile)
+            if ext in ('.pyx', '.py'):
+                if extension.language == 'c++':
+                    ext = '.cpp'
+                else:
+                    ext = '.c'
+                sfile = path + ext
+            sources.append(sfile)
+        extension.sources[:] = sources
+    return extensions
+            
+
+if USE_CYTHON:
+    extensions = cythonize(extensions, annotate=False)
+else:
+    extensions = no_cythonize(extensions)
+
 
 """
     Auto generation of RST readme from markdown using pypandoc
@@ -29,7 +84,8 @@ try:
     from pypandoc import convert
     read_md = lambda f: convert(f, 'rst')
 except ImportError:
-    print("pypandoc not found, RST readme will be generated from markdown without conversion")
+    import warnings
+    warnings.warn('pypandoc not found, RST readme will be generated from markdown without conversion')
     read_md = lambda f: open(f, 'r').read()
 
 """
@@ -50,11 +106,14 @@ def version(path):
     if version_match:
         return version_match.group(1)
     raise RuntimeError("Unable to find version string.")
-    
+
+"""
+Actual setup 
+"""
 setup(
     name = 'P4J',
     packages = ['P4J'], 
-    ext_modules = cythonize(extensions, annotate=False),
+    ext_modules = extensions,
     version = version('P4J/__init__.py'),
     description = 'Periodic light curve analysis tools based on Information Theory',
     long_description=read_md('README.md'),
@@ -62,14 +121,13 @@ setup(
     author_email = 'pablo.huijse@gmail.com',
     license='MIT',
     url = 'https://github.com/phuijse/P4J', 
-    #download_url = 'https://github.com/phuijse/P4J/tarball/stable', 
     keywords = ['astronomy periodic time series correntropy'], 
-        setup_requires=[
-        'cython',
-    ],
+    #setup_requires=[
+    #    'cython >= 0.25.0',
+    #],
     install_requires=[
-        'numpy',
-        'scipy',
+        'numpy >=1.9.0',
+        #'scipy',
     ],
     classifiers = [
         'Natural Language :: English',
@@ -77,9 +135,10 @@ setup(
         'Intended Audience :: Science/Research',
         'Topic :: Scientific/Engineering :: Astronomy',
         'License :: OSI Approved :: MIT License',
+        'Programming Language :: C',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.',
+        'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',

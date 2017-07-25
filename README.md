@@ -19,15 +19,33 @@ Orthogonal multiharmonic AoV periodogram [7]
 **Contents**
 
 -  Quadratic Mutual Information periodogram for light curves 
--  Phase Dispersion Minimization and String Length methods
+-  Phase Dispersion Minimization, Analysis of Variance and String Length methods
 -  Basic synthetic light curve generator
 
 **Instalation**
 
+Dependencies
+
+```
+    Numpy
+    GCC 
+    Cython (optional)
+```
+UNIX systems most likely have the GCC compiler already installed. 
+If you have a Windows system you may want to install the Microsoft Visual C++ (MSVC) compiler. You can
+find relevant information at: https://wiki.python.org/moin/WindowsCompilers
+If Cython is found in your system, pyx are compiled to c sources. If not the provided c sources are used.
+
+Install from PyPI using
 ```
 
     pip install P4J
 ```
+or clone the github repository and do
+```
+    python setup.py install --user
+```
+
 
 **Example**
 

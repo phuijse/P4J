@@ -6,17 +6,13 @@
         "depends": [],
         "extra_compile_args": [
             "-O3",
-            "-march=native",
             "-ffast-math"
         ],
         "include_dirs": [
             "/usr/lib/python3.6/site-packages/numpy/core/include"
-        ],
-        "libraries": [
-            "m"
         ]
     },
-    "module_name": "P4J.LKSL"
+    "module_name": "P4J"
 }
 END: Cython Metadata */
 
