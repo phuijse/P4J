@@ -94,18 +94,6 @@ else:
 
 
 """
-    Auto generation of RST readme from markdown using pypandoc
-    http://stackoverflow.com/questions/10718767/have-the-same-readme-both-in-markdown-and-restructuredtext
-"""
-try:
-    from pypandoc import convert
-    read_md = lambda f: convert(f, 'rst')
-except ImportError:
-    import warnings
-    warnings.warn('pypandoc not found, RST readme will be generated from markdown without conversion')
-    read_md = lambda f: open(f, 'r').read()
-
-"""
     Read version automatically from __init__.py
     https://packaging.python.org/en/latest/single_source_version.html
 """
@@ -133,15 +121,12 @@ setup(
     ext_modules = extensions,
     version = version('P4J/__init__.py'),
     description = 'Periodic light curve analysis tools based on Information Theory',
-    long_description=read_md('README.md'),
+    long_description = open('README.rst').read(),
     author = 'Pablo Huijse',
     author_email = 'pablo.huijse@gmail.com',
     license='MIT',
     url = 'https://github.com/phuijse/P4J', 
     keywords = ['astronomy periodic time series correntropy'], 
-    #setup_requires=[
-    #    'cython >= 0.25.0',
-    #],
     install_requires=[
         'numpy >=1.9.0',
         #'scipy',
