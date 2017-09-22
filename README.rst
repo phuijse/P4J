@@ -40,7 +40,7 @@ Example
 
 Please review
 
-    https://github.com/phuijse/P4J/examples/periodogram_demo.ipynb
+    https://github.com/phuijse/P4J/blob/master/examples/periodogram_demo.ipynb
 
 TODO
 ----
