@@ -38,7 +38,8 @@ or clone this github and do::
 Example
 -------
 
-::
+Please review
+
     https://github.com/phuijse/P4J/examples/periodogram_demo.ipynb
 
 TODO
@@ -68,13 +69,13 @@ We would like to thank the people of the Computational Intelligence laboratory @
 References
 ----------
 
-1. J. C. Príncipe, "Information Theoretic Learning: Renyi's Entropy and Kernel Perspectives", Springer, 2010
-2. P. Huijse et al., "Robust period estimation using mutual information for multi-band light curves in the synoptic survey era", accepted for publication, The Astrophysical Journal Supplement Series, Special Issue on Stellar Astronomy Big Data, http://arxiv.org/abs/1709.03541, 2017
-3. P. Protopapas et al., "A Novel, Fully Automated Pipeline for Period Estimation in the EROS 2 Data Set", The Astrophysical Journal Supplement, vol. 216, n. 2, 2015
-4. P. Huijse et al., "Computational Intelligence Challenges and Applications on Large-Scale Astronomical Time Series Databases", IEEE Mag. Computational Intelligence, vol. 9, n. 3, pp. 27-39, 2014
-5. P. Huijse et al., "An Information Theoretic Algorithm for Finding Periodicities in Stellar Light Curves", IEEE Trans. Signal Processing vol. 60, n. 10, pp. 5135-5145, 2012
-6. R. F. Stellingwerf, "Period determination using phase dispersion minimization", The Astrophysical Journal, vol. 224, pp. 953-960, 1978
-7. D. Clarke, "String/Rope length methods using the Lafler-Kinman statistic", Astronomy & Astrophysics, vol. 386, n. 2, pp. 763-774, 2002
-8. A. Schwarzenberg-Czerny "Fast and Statistically Optimal Period Search in Uneven Sampled Observations", Astrophysical Journal Letters, vol. 460, pp. 107, 1996
+1. José C. Príncipe, "Information Theoretic Learning: Renyi's Entropy and Kernel Perspectives", Springer, 2010
+2. Pablo Huijse et al., "Robust period estimation using mutual information for multi-band light curves in the synoptic survey era", accepted for publication, The Astrophysical Journal Supplement Series, Special Issue on Stellar Astronomy Big Data, 2017, http://arxiv.org/abs/1709.03541
+3. Pavlos Protopapas et al., "A Novel, Fully Automated Pipeline for Period Estimation in the EROS 2 Data Set", The Astrophysical Journal Supplement, vol. 216, n. 2, 2015
+4. Pablo Huijse et al., "Computational Intelligence Challenges and Applications on Large-Scale Astronomical Time Series Databases", IEEE Mag. Computational Intelligence, vol. 9, n. 3, pp. 27-39, 2014
+5. Pablo Huijse et al., "An Information Theoretic Algorithm for Finding Periodicities in Stellar Light Curves", IEEE Trans. Signal Processing vol. 60, n. 10, pp. 5135-5145, 2012
+6. Robert F. Stellingwerf, "Period determination using phase dispersion minimization", The Astrophysical Journal, vol. 224, pp. 953-960, 1978, http://adsabs.harvard.edu/abs/1978ApJ...224..953S
+7. David Clarke, "String/Rope length methods using the Lafler-Kinman statistic", Astronomy & Astrophysics, vol. 386, n. 2, pp. 763-774, 2002, http://adsabs.harvard.edu/abs/2002A%26A...386..763C
+8. Alex Schwarzenberg-Czerny "Fast and Statistically Optimal Period Search in Uneven Sampled Observations", Astrophysical Journal Letters, vol. 460, pp. 107, 1996, http://adsabs.harvard.edu/abs/1996ApJ...460L.107S
 
 
