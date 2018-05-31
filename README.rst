@@ -11,7 +11,7 @@ Contents
 --------
 
 -  Quadratic Mutual Information periodogram for light curves 
--  Phase Dispersion Minimization and String Length methods
+-  Phase Dispersion Minimization, String Length, and Analysis of variance periodograms.
 -  Basic synthetic light curve generator
 
 Instalation
@@ -47,12 +47,12 @@ TODO
 
 -  Multidimensional time series support
 -  More period detection criteria (Conditional Entropy, Lomb-Scargle)
--  Bootstrap test to get confidence bars
+-  Implement block bootstrap for irregular time series
 
 Authors
 -------
 
--  Pablo Huijse pablo.huijse@gmail.com (Millennium Institute of Astrophysics and Universidad de Chile)
+-  Pablo Huijse pablo.huijse@gmail.com (Millennium Institute of Astrophysics and Universidad Austral de Chile)
 -  Pavlos Protopapas (Harvard Institute of Applied Computational Sciences)
 -  Pablo A. Estévez (Millennium Institute of Astrophysics and Universidad de Chile)
 -  Pablo Zegers (Universidad de los Andes)
@@ -70,7 +70,7 @@ References
 ----------
 
 1. José C. Príncipe, "Information Theoretic Learning: Renyi's Entropy and Kernel Perspectives", Springer, 2010
-2. Pablo Huijse et al., "Robust period estimation using mutual information for multi-band light curves in the synoptic survey era", accepted for publication, The Astrophysical Journal Supplement Series, Special Issue on Stellar Astronomy Big Data, 2017, http://arxiv.org/abs/1709.03541
+2. Pablo Huijse et al., "Robust period estimation using mutual information for multi-band light curves in the synoptic survey era", The Astrophysical Journal Supplement Series, vol. 236, n. 1, 2018, DOI: http://doi.org/10.3847/1538-4365/aab77c, http://arxiv.org/abs/1709.03541
 3. Pavlos Protopapas et al., "A Novel, Fully Automated Pipeline for Period Estimation in the EROS 2 Data Set", The Astrophysical Journal Supplement, vol. 216, n. 2, 2015
 4. Pablo Huijse et al., "Computational Intelligence Challenges and Applications on Large-Scale Astronomical Time Series Databases", IEEE Mag. Computational Intelligence, vol. 9, n. 3, pp. 27-39, 2014
 5. Pablo Huijse et al., "An Information Theoretic Algorithm for Finding Periodicities in Stellar Light Curves", IEEE Trans. Signal Processing vol. 60, n. 10, pp. 5135-5145, 2012
