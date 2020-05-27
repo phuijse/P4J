@@ -18,37 +18,44 @@ if os.name == 'nt':  # Windows, assumming MSVC compiler
 elif os.name == 'posix':  # UNIX, assumming GCC compiler
     libraries = ['m']
     compiler_args = ['-O3', '-ffast-math']
+else:
+    raise Exception('Unsupported operating system')
 
 extensions = [
-        Extension("P4J.QMI",
+        Extension(
+            "P4J.QMI",
             sources=[os.path.join("P4J", "QMI.pyx")],
             extra_compile_args=compiler_args,
             include_dirs=include_dirs,
             libraries=libraries,
             library_dirs=library_dirs
             ),
-        Extension("P4J.LKSL",
+        Extension(
+            "P4J.LKSL",
             sources=[os.path.join("P4J", "LKSL.pyx")],
             extra_compile_args=compiler_args,
             include_dirs=include_dirs,
             libraries=libraries,
             library_dirs=library_dirs
             ),
-        Extension("P4J.MHAOV",
+        Extension(
+            "P4J.MHAOV",
             sources=[os.path.join("P4J", "MHAOV.pyx")],
             extra_compile_args=compiler_args,
             include_dirs=include_dirs,
             libraries=libraries,
             library_dirs=library_dirs
             ),
-        Extension("P4J.PDM",
+        Extension(
+            "P4J.PDM",
             sources=[os.path.join("P4J", "PDM.pyx")],
             extra_compile_args=compiler_args,
             include_dirs=include_dirs,
             libraries=libraries,
             library_dirs=library_dirs
             ),
-        Extension("P4J.utilities",
+        Extension(
+            "P4J.utilities",
             sources=[os.path.join("P4J", "utilities.pyx")],
             extra_compile_args=compiler_args,
             include_dirs=include_dirs,
@@ -88,7 +95,7 @@ def no_cythonize(extensions, **_ignore):
             
 
 if USE_CYTHON:
-    extensions = cythonize(extensions, annotate=False)
+    extensions = cythonize(extensions, annotate=False, force=True)
 else:
     extensions = no_cythonize(extensions)
 
@@ -97,12 +104,15 @@ else:
     Read version automatically from __init__.py
     https://packaging.python.org/en/latest/single_source_version.html
 """
+
+
 def read(*names, **kwargs):
     with io.open(
         os.path.join(os.path.dirname(__file__), *names),
         encoding=kwargs.get("encoding", "utf8")
     ) as fp:
         return fp.read()
+
 
 def version(path):
     version_file = read(path)
@@ -116,22 +126,22 @@ def version(path):
 Actual setup 
 """
 setup(
-    name = 'P4J',
-    packages = ['P4J'], 
-    ext_modules = extensions,
-    version = version('P4J/__init__.py'),
-    description = 'Periodic light curve analysis tools based on Information Theory',
-    long_description = open('README.rst').read(),
-    author = 'Pablo Huijse',
-    author_email = 'pablo.huijse@gmail.com',
+    name='P4J',
+    packages=['P4J'],
+    ext_modules=extensions,
+    version=version('P4J/__init__.py'),
+    description='Periodic light curve analysis tools based on Information Theory',
+    long_description=open('README.rst').read(),
+    author='Pablo Huijse',
+    author_email='pablo.huijse@gmail.com',
     license='MIT',
-    url = 'https://github.com/phuijse/P4J', 
-    keywords = ['astronomy periodic time series correntropy'], 
+    url='https://github.com/phuijse/P4J',
+    keywords=['astronomy periodic time series correntropy'],
     install_requires=[
         'numpy >=1.9.0',
         #'scipy',
     ],
-    classifiers = [
+    classifiers=[
         'Natural Language :: English',
         'Development Status :: 4 - Beta',
         'Intended Audience :: Science/Research',

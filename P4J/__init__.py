@@ -24,7 +24,7 @@ https://github.com/phuijse/P4J
 
 """
 
-__version__ = '0.27'
+__version__ = '0.28'
 
 from .generator import synthetic_light_curve_generator
 from .periodogram import periodogram

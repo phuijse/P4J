@@ -59,9 +59,9 @@ class periodogram:
         self.debug = debug
         self.n_jobs = n_jobs
         methods = ["QMICS", "QMIEU", "QME", "PDM1", "LKSL", "MHAOV"]
-        if not method in methods:
+        if method not in methods:
             raise ValueError("Wrong method")
-        
+
     def set_data(self, mjd, mag, err, whitten=False, **kwarg):
         """
         Saves the light curve data, where 
@@ -75,7 +75,7 @@ class periodogram:
 
         TODO: verify that arrays are non empty, non constant, etc
         """
-        
+
         self.mjd = mjd
         self.N = len(mjd)
         weights = np.power(err, -2.0)
@@ -92,12 +92,12 @@ class periodogram:
         self.err = self.err.astype('float32')
         if self.method == 'QMICS' or self.method == 'QMIEU' or self.method == 'QME':
             if whitten:
-                hm = 0.9*self.N**(-0.2) # Silverman's rule, assuming data is whittened
+                hm = 0.9*self.N**(-0.2)  # Silverman's rule, assuming data is whittened
             else:
                 hm = 0.9*self.scale*self.N**(-0.2)
             if 'h_KDE_M' in kwarg:
                 hm = hm*kwarg['h_KDE_M']
-            hp = 1.0 # How to choose this more appropietly?
+            hp = 1.0  # How to choose this more appropietly?
             if 'h_KDE_P' in kwarg:
                 hp = hp*kwarg['h_KDE_P']
             kernel = 0  # Select the kernel for the magnitudes, 0 is safe
@@ -119,21 +119,18 @@ class periodogram:
                 Nharmonics = kwarg["Nharmonics"]
             self.my_AOV = AOV(self.mjd, self.mag, self.err, Nharmonics)
 
-
-   
     def get_best_frequency(self):
         return self.freq[self.best_local_optima[0]]
-        
+
     def get_best_frequencies(self):
         """
         Returns the best n_local_max frequencies
         """
         return self.freq[self.best_local_optima], self.per[self.best_local_optima]
-        
+
     def get_periodogram(self):
         return self.freq, self.per
-        
-   
+
     def finetune_best_frequencies(self, fresolution=1e-5, n_local_optima=10):
         """
         Computes the selected criterion over a grid of frequencies 
@@ -147,7 +144,7 @@ class periodogram:
             if self.per[k-1] < self.per[k] and self.per[k+1] < self.per[k]:
                 local_optima_index.append(k)
         local_optima_index = np.array(local_optima_index)
-        if(len(local_optima_index) < n_local_optima):
+        if len(local_optima_index) < n_local_optima:
             print("Warning: Not enough local maxima found in the periodogram, skipping finetuning")
             return
         # Keep only n_local_optima
@@ -171,7 +168,6 @@ class periodogram:
             self.best_local_optima = best_local_optima[idx]
         else:
             self.best_local_optima = best_local_optima
- 
 
     def frequency_grid_evaluation(self, fmin=0.0, fmax=1.0, fresolution=1e-4, n_local_max=10):
         """ 
@@ -192,8 +188,8 @@ class periodogram:
         self.fres_grid = fresolution
         freq = np.arange(np.amax([fmin, fresolution]), fmax, step=fresolution).astype('float32')
         Nf = len(freq)
-        per = np.zeros(shape=(Nf,)).astype('float32')     
-              
+        per = np.zeros(shape=(Nf,)).astype('float32')
+
         for k in range(0, Nf):
             per[k] = self.compute_metric(freq[k])
         self.freq = freq
@@ -203,13 +199,12 @@ class periodogram:
         if self.method == 'QMICS':
             return self.my_QMI.eval_frequency(freq, 0)
         elif self.method == 'QMIEU':
-             return self.my_QMI.eval_frequency(freq, 1)
+            return self.my_QMI.eval_frequency(freq, 1)
         elif self.method == 'QME':
-              return self.my_QMI.eval_frequency(freq, 2)
+            return self.my_QMI.eval_frequency(freq, 2)
         elif self.method == 'LKSL':
             return -self.my_SL.eval_frequency(freq)
         elif self.method == 'PDM1':
             return -self.my_PDM.eval_frequency(freq)
         elif self.method == 'MHAOV':
             return self.my_AOV.eval_frequency(freq)
-
