@@ -54,7 +54,7 @@ class periodogram:
             raise ValueError("Number of jobs must be greater than 0")
         self.method = method
         self.local_optima_index = None
-        self.freq = None
+        self.npfreq = None
         self.per = None
         self.debug = debug
         self.n_jobs = n_jobs
@@ -139,29 +139,40 @@ class periodogram:
         with grid_search
         """
         # Find the local optima
-        local_optima_index = []
+        local_optima_indexes = []
         for k in range(1, len(self.per)-1):
             if self.per[k-1] < self.per[k] and self.per[k+1] < self.per[k]:
-                local_optima_index.append(k)
-        local_optima_index = np.array(local_optima_index)
-        if len(local_optima_index) < n_local_optima:
+                local_optima_indexes.append(k)
+        local_optima_indexes = np.array(local_optima_indexes)
+        if len(local_optima_indexes) < n_local_optima:
             print("Warning: Not enough local maxima found in the periodogram, skipping finetuning")
             return
         # Keep only n_local_optima
-        best_local_optima = local_optima_index[np.argsort(self.per[local_optima_index])][::-1]
+        best_local_optima = local_optima_indexes[np.argsort(self.per[local_optima_indexes])][::-1]
         if n_local_optima > 0:
             best_local_optima = best_local_optima[:n_local_optima]
         else:
             best_local_optima = best_local_optima[0]
         # Do finetuning around each local optima
-        for j in range(n_local_optima):
-            freq_fine = self.freq[best_local_optima[j]] - self.fres_grid
-            for k in range(0, int(2.0*self.fres_grid/fresolution)):
-                cost = self.compute_metric(freq_fine)
-                if cost > self.per[best_local_optima[j]]:
-                    self.per[best_local_optima[j]] = cost
-                    self.freq[best_local_optima[j]] = freq_fine
-                freq_fine += fresolution
+        for local_optima_index in best_local_optima:
+            if local_optima_index - 1 < 0:
+                freq_before = self.freq[0] - (self.freq[1] - self.freq[0])
+            else:
+                freq_before = self.freq[local_optima_index - 1]
+
+            if local_optima_index + 1 >= len(self.freq):
+                freq_after = self.freq[-1] + (self.freq[-1] - self.freq[-2])
+            else:
+                freq_after = self.freq[local_optima_index + 1]
+
+            fine_grid = np.linspace(
+                    freq_before, freq_after, 2*np.ceil(self.fres_grid / fresolution))
+            for freq_candidate in fine_grid:
+                metric_value = self.compute_metric(freq_candidate)
+                if metric_value > self.per[local_optima_index]:
+                    self.per[local_optima_index] = metric_value
+                    self.freq[local_optima_index] = freq_candidate
+
         # Sort them in descending order
         idx = np.argsort(self.per[best_local_optima])[::-1]
         if n_local_optima > 0:
@@ -169,7 +180,9 @@ class periodogram:
         else:
             self.best_local_optima = best_local_optima
 
-    def frequency_grid_evaluation(self, fmin=0.0, fmax=1.0, fresolution=1e-4, n_local_max=10):
+    def frequency_grid_evaluation(
+            self, fmin=0.0, fmax=1.0, fresolution=1e-4,
+            n_local_max=10, log_period_spacing=False):
         """ 
         Computes the selected criterion over a grid of frequencies 
         with limits and resolution specified by the inputs. After that
@@ -183,14 +196,24 @@ class periodogram:
             stopping frequency
         fresolution: float
             step size in the frequency grid
-        
+        log_period_spacing: bool
+            If True uses a log-spaced period grid.
+            If False (default) uses a linear-spaced frequency grid.
         """
         self.fres_grid = fresolution
-        freq = np.arange(np.amax([fmin, fresolution]), fmax, step=fresolution).astype('float32')
-        Nf = len(freq)
-        per = np.zeros(shape=(Nf,)).astype('float32')
+        if log_period_spacing:
+            period_min = np.log10(1.0/fmax)
+            period_max = np.log10(1.0/fmin)
+            grid_len = int((fmax - fmin) / fresolution)
+            periods = np.logspace(period_min, period_max, grid_len)
+            freq = 1.0 / periods
+            freq = freq[::-1]
+        else:
+            freq = np.arange(np.amax([fmin, fresolution]), fmax, step=fresolution).astype('float32')
+        grid_len = len(freq)
+        per = np.zeros(shape=(grid_len,)).astype('float32')
 
-        for k in range(0, Nf):
+        for k in range(0, grid_len):
             per[k] = self.compute_metric(freq[k])
         self.freq = freq
         self.per = per
