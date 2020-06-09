@@ -60,7 +60,7 @@ extensions = [
 """
 Allow users to install the module even if they do not have cython.
 If cython is not found the c sources are compiled instead. More details at:
-http://docs.cython.org/en/latest/src/reference/compilation.html
+https://cython.readthedocs.io/en/latest/src/userguide/source_files_and_compilation.html#distributing-cython-modules
 """
 try:
     from Cython.Build import cythonize
@@ -85,10 +85,10 @@ def no_cythonize(extensions, **_ignore):
             sources.append(sfile)
         extension.sources[:] = sources
     return extensions
-            
+
 
 if USE_CYTHON:
-    extensions = cythonize(extensions, annotate=False)
+    extensions = cythonize(extensions, annotate=False,  compiler_directives={'language_level' : "3"})
 else:
     extensions = no_cythonize(extensions)
 
@@ -113,11 +113,11 @@ def version(path):
     raise RuntimeError("Unable to find version string.")
 
 """
-Actual setup 
+Actual setup
 """
 setup(
     name = 'P4J',
-    packages = ['P4J'], 
+    packages = ['P4J'],
     ext_modules = extensions,
     version = version('P4J/__init__.py'),
     description = 'Periodic light curve analysis tools based on Information Theory',
@@ -125,8 +125,8 @@ setup(
     author = 'Pablo Huijse',
     author_email = 'pablo.huijse@gmail.com',
     license='MIT',
-    url = 'https://github.com/phuijse/P4J', 
-    keywords = ['astronomy periodic time series correntropy'], 
+    url = 'https://github.com/phuijse/P4J',
+    keywords = ['astronomy periodic time series correntropy'],
     install_requires=[
         'numpy >=1.9.0',
         #'scipy',
@@ -138,8 +138,6 @@ setup(
         'Topic :: Scientific/Engineering :: Astronomy',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: C',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
