@@ -132,8 +132,10 @@ cdef class QMI:
     cdef DTYPE_t h_KDE_P
     cdef DTYPE_t* angle
     cdef DTYPE_t* mjd
-    def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err, DTYPE_t h_KDE_M, DTYPE_t h_KDE_P, int kernel=0):
+    cdef int mode # 0: Cauchy, 1: 
+    def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err, DTYPE_t h_KDE_M, DTYPE_t h_KDE_P, int mode=0, int kernel=0):
         cdef Py_ssize_t i, j, mat_idx
+        self.mode = mode
         self.N = mag.shape[0]
         self.mjd = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
         self.angle = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
@@ -180,7 +182,7 @@ cdef class QMI:
                 self.VC1[j] += self.IP_M[mat_idx]
                 self.VM1 += 2.0*self.IP_M[mat_idx]
 
-    def eval_frequency(self, DTYPE_t freq, int output):
+    def eval_frequency(self, DTYPE_t freq):
         cdef Py_ssize_t i, j
         for i in range(self.N):
             self.angle[i] = 2.0*M_PI*fmodf(self.mjd[i], 1.0/freq)*freq # output in [0.0, 2.0*pi]
@@ -203,12 +205,12 @@ cdef class QMI:
                 VJ += 2.0*self.IP_M[mat_idx]*self.IP_P[mat_idx]
         for i in range(self.N):
             VC += self.VC1[i]*self.VC2[i]
-        if output == 0:  # Cauchy-Schwarz MI
+        if self.mode == 0:  # Cauchy-Schwarz MI
             # The log(N) terms cancel out in this sum
             return logf(self.VM1*VM2) + logf(VJ) - 2.0*logf(VC)
-        elif output == 1:  # Euclidean MI
+        elif self.mode == 1:  # Euclidean MI
             return (self.VM1*VM2/self.N**2 + VJ - 2.0*VC/self.N)/self.N**2
-        elif output == 2:  # Quadratic Mutual Entropy, not safe yet
+        elif self.mode == 2:  # Quadratic Mutual Entropy, not safe yet
             # Using Renyi's formulation
             return fabsf(-logf(self.VM1) - logf(VM2) + logf(VJ) + 2*logf(self.N))
             # Using Tsallis' formulation

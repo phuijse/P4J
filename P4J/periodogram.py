@@ -7,7 +7,8 @@ from .math import robust_center, robust_scale, wSTD
 from .QMI import QMI
 from .LKSL import LKSL
 from .PDM import PDM
-from .MHAOV import AOV
+from .MHAOV import MHAOV
+#from joblib import Parallel, delayed
 
 #from scipy.stats import gumbel_r, genextreme
 #from .regression import find_beta_WMEE, find_beta_WMCC, find_beta_OLS, find_beta_WLS
@@ -36,11 +37,12 @@ class periodogram:
         
         Parameters
         ---------
-        method: {'PDM1', 'LKSL', 'MHAOV', 'QMICS', 'QMIEU} 
+        method: {'PDM1', 'LKSL', 'AOV', 'MHAOV', 'QMICS', 'QMIEU} 
             Method used to perform the fit
             
             PDM: Phase Dispersion Minimization
             LKSL: Lafler Kinman statistic for string length
+            AOV: Analysis of Variance Periodo
             MHAOV: Orthogonal multiharmonic AoV
             QMICS: Cauchy Schwarz Quadratic Mutual Information
             QMIEU: Euclidean Quadratic Mutual Information
@@ -50,17 +52,20 @@ class periodogram:
             
         
         """
-        if n_jobs < 1:
-            raise ValueError("Number of jobs must be greater than 0")
-        self.method = method
-        self.local_optima_index = None
         self.freq = None
         self.per = None
         self.debug = debug
+        
+        if not type(n_jobs) is int:
+            raise TypeError("Number of jobs must be an integer")
+        if n_jobs < 1:
+            raise ValueError("Number of jobs must be greater than 0")
         self.n_jobs = n_jobs
-        methods = ["QMICS", "QMIEU", "QME", "PDM1", "LKSL", "MHAOV"]
+        
+        methods = ["QMICS", "QMIEU", "QME", "PDM1", "LKSL", "MHAOV", "AOV"]
         if not method in methods:
             raise ValueError("Wrong method")
+        self.method = method
         
     def set_data(self, mjd, mag, err, whitten=False, **kwarg):
         """
@@ -90,7 +95,9 @@ class periodogram:
         self.mjd = self.mjd.astype('float32')
         self.mag = self.mag.astype('float32')
         self.err = self.err.astype('float32')
-        if self.method == 'QMICS' or self.method == 'QMIEU' or self.method == 'QME':
+
+        if self.method in ['QMICS', 'QMIEU', 'QME']:
+            
             if whitten:
                 hm = 0.9*self.N**(-0.2) # Silverman's rule, assuming data is whittened
             else:
@@ -105,19 +112,25 @@ class periodogram:
                 kernel = kwarg['kernel']
             if self.debug:
                 print("Kernel bandwidths: %f , %f" %(hm, hp))
-            self.my_QMI = QMI(self.mjd, self.mag, self.err, hm, hp, kernel)
+            if self.method == 'QMICS':
+                self.cython_per = QMI(self.mjd, self.mag, self.err, hm, hp, 0, kernel)
+            elif self.method == 'QMIEU':
+                self.cython_per = QMI(self.mjd, self.mag, self.err, hm, hp, 1, kernel)
+            else:
+                self.cython_per = QMI(self.mjd, self.mag, self.err, hm, hp, 2, kernel)
+                
         elif self.method == 'LKSL':  # Lafler-Kinman Minimum String Length
-            self.my_SL = LKSL(self.mjd, self.mag, self.err)
+            self.cython_per = LKSL(self.mjd, self.mag, self.err)
         elif self.method == 'PDM1':  # Phase Dispersion Minimization
             Nbins = int(self.N/3)
             if 'Nbins' in kwarg:
                 Nbins = kwarg['Nbins']
-            self.my_PDM = PDM(self.mjd, self.mag, self.err, Nbins)
+            self.cython_per = PDM(self.mjd, self.mag, self.err, Nbins)
         elif self.method == 'MHAOV':  # Orthogonal Multiharmonics AoV periodogram
             Nharmonics = 1
             if 'Nharmonics' in kwarg:
                 Nharmonics = kwarg["Nharmonics"]
-            self.my_AOV = AOV(self.mjd, self.mag, self.err, Nharmonics)
+            self.cython_per = MHAOV(self.mjd, self.mag, self.err, Nharmonics)
 
 
    
@@ -191,25 +204,19 @@ class periodogram:
         """
         self.fres_grid = fresolution
         freq = np.arange(np.amax([fmin, fresolution]), fmax, step=fresolution).astype('float32')
-        Nf = len(freq)
-        per = np.zeros(shape=(Nf,)).astype('float32')     
-              
-        for k in range(0, Nf):
-            per[k] = self.compute_metric(freq[k])
+        Nf = len(freq)        
+        if self.n_jobs == 1:
+            per = np.zeros(shape=(Nf,)).astype('float32')
+            for k in range(0, Nf):
+                per[k] = self.compute_metric(freq[k])
+        #else:
+        #    per = Parallel(n_jobs=self.n_jobs)(delayed(self.compute_metric)(freq_) for freq_ in freq)
         self.freq = freq
         self.per = per
 
     def compute_metric(self, freq):
-        if self.method == 'QMICS':
-            return self.my_QMI.eval_frequency(freq, 0)
-        elif self.method == 'QMIEU':
-             return self.my_QMI.eval_frequency(freq, 1)
-        elif self.method == 'QME':
-              return self.my_QMI.eval_frequency(freq, 2)
-        elif self.method == 'LKSL':
-            return -self.my_SL.eval_frequency(freq)
-        elif self.method == 'PDM1':
-            return -self.my_PDM.eval_frequency(freq)
-        elif self.method == 'MHAOV':
-            return self.my_AOV.eval_frequency(freq)
-
+        if self.method in ["PDM1", "LKSL"]:
+            return -self.cython_per.eval_frequency(freq)
+        else:
+            return self.cython_per.eval_frequency(freq)
+        
