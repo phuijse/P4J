@@ -26,6 +26,16 @@ def test_periodogram_mhaov():
     assert np.allclose(best_freq, np.array([1.23421 , 9.704909, 6.98109], dtype=np.float32))
     assert np.allclose(best_per, np.array([58.992764, 40.944824, 37.43927], dtype=np.float32))
     
+def test_periodogram_aov():
+    best_freq, best_per = fit_eval_periodogram('AOV')
+
+    assert best_freq.dtype == np.float32
+    assert best_per.dtype == np.float32
+    assert best_freq.shape == (3,)
+    assert best_per.shape == (3,)
+    assert np.allclose(best_freq, np.array([1.2354, 4.0711, 9.823629], dtype=np.float32))
+    assert np.allclose(best_per, np.array([9.8947315, 8.2189865, 8.14342], dtype=np.float32))
+    
 def test_periodogram_pdm():
     best_freq, best_per = fit_eval_periodogram('PDM1')
 
