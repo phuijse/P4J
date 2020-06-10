@@ -9,7 +9,7 @@
             "-ffast-math"
         ],
         "include_dirs": [
-            "/usr/lib/python3.8/site-packages/numpy/core/include"
+            "/home/phuijse/.conda/envs/astro/lib/python3.8/site-packages/numpy/core/include"
         ],
         "libraries": [
             "m"
@@ -32,7 +32,7 @@ END: Cython Metadata */
 #else
 #define CYTHON_ABI "0_29_17"
 #define CYTHON_HEX_VERSION 0x001D11F0
-#define CYTHON_FUTURE_DIVISION 0
+#define CYTHON_FUTURE_DIVISION 1
 #include <stddef.h>
 #ifndef offsetof
   #define offsetof(type, member) ( (size_t) & ((type*)0) -> member )
@@ -554,10 +554,10 @@ static CYTHON_INLINE void * PyThread_tss_get(Py_tss_t *key) {
 #if PY_VERSION_HEX < 0x030200A4
   typedef long Py_hash_t;
   #define __Pyx_PyInt_FromHash_t PyInt_FromLong
-  #define __Pyx_PyInt_AsHash_t   __Pyx_PyIndex_AsHash_t
+  #define __Pyx_PyInt_AsHash_t   PyInt_AsLong
 #else
   #define __Pyx_PyInt_FromHash_t PyInt_FromSsize_t
-  #define __Pyx_PyInt_AsHash_t   __Pyx_PyIndex_AsSsize_t
+  #define __Pyx_PyInt_AsHash_t   PyInt_AsSsize_t
 #endif
 #if PY_MAJOR_VERSION >= 3
   #define __Pyx_PyMethod_New(func, self, klass) ((self) ? PyMethod_New(func, self) : (Py_INCREF(func), func))
@@ -720,7 +720,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyNumber_IntOrLong(PyObject* x);
     (likely(PyTuple_CheckExact(obj)) ? __Pyx_NewRef(obj) : PySequence_Tuple(obj))
 static CYTHON_INLINE Py_ssize_t __Pyx_PyIndex_AsSsize_t(PyObject*);
 static CYTHON_INLINE PyObject * __Pyx_PyInt_FromSize_t(size_t);
-static CYTHON_INLINE Py_hash_t __Pyx_PyIndex_AsHash_t(PyObject*);
 #if CYTHON_ASSUME_SAFE_MACROS
 #define __pyx_PyFloat_AsDouble(x) (PyFloat_CheckExact(x) ? PyFloat_AS_DOUBLE(x) : PyFloat_AsDouble(x))
 #else
@@ -2414,7 +2413,7 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
  * 
  *     def eval_frequency(self, DTYPE_t freq):
  */
-  __pyx_v_self->normalizer = (1.0 / __pyx_f_3P4J_9utilities_unbiased_weighted_variance(__pyx_v_self->mag, __pyx_v_self->err2, __pyx_v_self->N));
+  __pyx_v_self->normalizer = (1.0 / ((double)__pyx_f_3P4J_9utilities_unbiased_weighted_variance(__pyx_v_self->mag, __pyx_v_self->err2, __pyx_v_self->N)));
 
   /* "P4J/LKSL.pyx":37
  *     cdef DTYPE_t normalizer
@@ -2501,7 +2500,7 @@ static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_2eval_frequency(struct __pyx_obj_3P4J
  *         argsort(self.phase, self.sorted_idx, self.N)
  *         cdef DTYPE_t err2_err2 = self.err2[self.sorted_idx[0]] + self.err2[self.sorted_idx[self.N-1]]
  */
-    (__pyx_v_self->phase[__pyx_v_i]) = (fmodf((__pyx_v_self->mjd[__pyx_v_i]), (1.0 / __pyx_v_freq)) * __pyx_v_freq);
+    (__pyx_v_self->phase[__pyx_v_i]) = (fmodf((__pyx_v_self->mjd[__pyx_v_i]), (1.0 / ((double)__pyx_v_freq))) * __pyx_v_freq);
   }
 
   /* "P4J/LKSL.pyx":65
@@ -2529,7 +2528,7 @@ static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_2eval_frequency(struct __pyx_obj_3P4J
  *         cdef DTYPE_t SL = powf(self.mag[self.sorted_idx[0]] - self.mag[self.sorted_idx[self.N-1]], 2.0)/err2_err2
  *         for i in range(1, self.N):
  */
-  __pyx_v_err2_acum = (1.0 / __pyx_v_err2_err2);
+  __pyx_v_err2_acum = (1.0 / ((double)__pyx_v_err2_err2));
 
   /* "P4J/LKSL.pyx":68
  *         cdef DTYPE_t err2_err2 = self.err2[self.sorted_idx[0]] + self.err2[self.sorted_idx[self.N-1]]
@@ -2568,7 +2567,7 @@ static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_2eval_frequency(struct __pyx_obj_3P4J
  *             SL += powf(self.mag[self.sorted_idx[i-1]] - self.mag[self.sorted_idx[i]], 2.0)/err2_err2
  *         return 0.5*SL*self.normalizer/err2_acum
  */
-    __pyx_v_err2_acum = (__pyx_v_err2_acum + (1.0 / __pyx_v_err2_err2));
+    __pyx_v_err2_acum = (__pyx_v_err2_acum + (1.0 / ((double)__pyx_v_err2_err2)));
 
     /* "P4J/LKSL.pyx":72
  *             err2_err2 = self.err2[self.sorted_idx[i-1]] + self.err2[self.sorted_idx[i]]
@@ -2588,7 +2587,7 @@ static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_2eval_frequency(struct __pyx_obj_3P4J
  *     def __dealloc__(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_4 = PyFloat_FromDouble((((0.5 * __pyx_v_SL) * __pyx_v_self->normalizer) / __pyx_v_err2_acum)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 73, __pyx_L1_error)
+  __pyx_t_4 = PyFloat_FromDouble((((0.5 * __pyx_v_SL) * __pyx_v_self->normalizer) / ((double)__pyx_v_err2_acum))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 73, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_r = __pyx_t_4;
   __pyx_t_4 = 0;
@@ -21399,23 +21398,6 @@ static CYTHON_INLINE Py_ssize_t __Pyx_PyIndex_AsSsize_t(PyObject* b) {
   ival = PyInt_AsSsize_t(x);
   Py_DECREF(x);
   return ival;
-}
-static CYTHON_INLINE Py_hash_t __Pyx_PyIndex_AsHash_t(PyObject* o) {
-  if (sizeof(Py_hash_t) == sizeof(Py_ssize_t)) {
-    return __Pyx_PyIndex_AsSsize_t(o);
-#if PY_MAJOR_VERSION < 3
-  } else if (likely(PyInt_CheckExact(o))) {
-    return PyInt_AS_LONG(o);
-#endif
-  } else {
-    Py_ssize_t ival;
-    PyObject *x;
-    x = PyNumber_Index(o);
-    if (!x) return -1;
-    ival = PyInt_AsLong(x);
-    Py_DECREF(x);
-    return ival;
-  }
 }
 static CYTHON_INLINE PyObject * __Pyx_PyBool_FromLong(long b) {
   return b ? __Pyx_NewRef(Py_True) : __Pyx_NewRef(Py_False);
