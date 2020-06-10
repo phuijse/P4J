@@ -20,6 +20,16 @@ elif os.name == 'posix':  # UNIX, assumming GCC compiler
     compiler_args = ['-O3', '-ffast-math']
 
 extensions = [
+        Extension("*",
+            sources=[os.path.join("P4J", "*.pyx")],
+            extra_compile_args=compiler_args,
+            include_dirs=include_dirs,
+            libraries=libraries,
+            library_dirs=library_dirs
+            )]
+
+"""
+extensions = [
         Extension("P4J.QMI",
             sources=[os.path.join("P4J", "QMI.pyx")],
             extra_compile_args=compiler_args,
@@ -56,6 +66,8 @@ extensions = [
             library_dirs=library_dirs
             ),
         ]
+"""
+
 
 """
 Allow users to install the module even if they do not have cython.
