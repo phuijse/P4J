@@ -7,16 +7,24 @@ from cpython.mem cimport PyMem_Malloc, PyMem_Free
 cdef extern from "math.h":
     DTYPE_t powf(DTYPE_t, DTYPE_t)
 
-"""
 
+"""
+Computes the sample mean
+"""
+cdef DTYPE_t mean(DTYPE_t* data, Py_ssize_t N):
+    cdef DTYPE_t acum = 0.0
+    cdef Py_ssize_t i
+    for i in range(N):
+        acum += data[i]
+    return acum/N
+
+"""
 Computes an unbiased estimator of the weighted variance, where w_i = (1.0/e_i**2)
-
 """
-
 cdef DTYPE_t weighted_mean(DTYPE_t* data, DTYPE_t* err, Py_ssize_t N):
     cdef DTYPE_t w_mean = 0.0
-    cdef Py_ssize_t i
     cdef DTYPE_t w_sum = 0.0
+    cdef Py_ssize_t i
     for i in range(N):
         w_sum += 1.0/powf(err[i], 2.0)
         w_mean += data[i]/powf(err[i], 2.0)

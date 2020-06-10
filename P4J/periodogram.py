@@ -7,6 +7,7 @@ from .math import robust_center, robust_scale, wSTD
 from .QMI import QMI
 from .LKSL import LKSL
 from .PDM import PDM
+from .AOV import AOV
 from .MHAOV import MHAOV
 #from joblib import Parallel, delayed
 
@@ -122,10 +123,18 @@ class periodogram:
         elif self.method == 'LKSL':  # Lafler-Kinman Minimum String Length
             self.cython_per = LKSL(self.mjd, self.mag, self.err)
         elif self.method == 'PDM1':  # Phase Dispersion Minimization
-            Nbins = int(self.N/3)
+            Nbins = 8
             if 'Nbins' in kwarg:
                 Nbins = kwarg['Nbins']
             self.cython_per = PDM(self.mjd, self.mag, self.err, Nbins)
+        elif self.method == 'AOV':  # Analysis of Variance periodogram
+            Nbins = 8
+            if 'Nbins' in kwarg:
+                Nbins = kwarg['Nbins']
+            use_errorbars = 1
+            if 'use_errorbars' in kwarg:
+                use_errorbars = kwarg['use_errorbars']
+            self.cython_per = AOV(self.mjd, self.mag, self.err, Nbins, use_errorbars)
         elif self.method == 'MHAOV':  # Orthogonal Multiharmonics AoV periodogram
             Nharmonics = 1
             if 'Nharmonics' in kwarg:
