@@ -35,7 +35,7 @@ cdef DTYPE_t* allocate_and_verify(Py_ssize_t N):
         raise MemoryError()
     return array
 
-cdef class AOV:
+cdef class MHAOV:
     cdef Py_ssize_t N
     cdef DTYPE_t* mjd
     cdef DTYPE_t* mag
