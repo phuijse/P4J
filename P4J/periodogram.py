@@ -3,7 +3,7 @@
 
 from __future__ import division, print_function
 import numpy as np
-from .math import robust_center, robust_scale, wSTD
+from .math import robust_loc, robust_scale
 from .QMI import QMI
 from .LKSL import LKSL
 from .PDM import PDM
@@ -14,6 +14,8 @@ from .MHAOV import MHAOV
 #from scipy.stats import gumbel_r, genextreme
 #from .regression import find_beta_WMEE, find_beta_WMCC, find_beta_OLS, find_beta_WLS
 #from .dictionary import harmonic_dictionary
+
+
 
 
 class periodogram:
@@ -88,7 +90,7 @@ class periodogram:
         self.weights = weights/np.sum(weights)
         self.scale = robust_scale(mag, self.weights)
         if whitten:
-            self.mag = (mag - robust_center(mag, self.weights))/self.scale
+            self.mag = (mag - robust_loc(mag, self.weights))/self.scale
             self.err = err/self.scale
         else:
             self.mag = mag

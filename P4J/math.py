@@ -59,7 +59,7 @@ def wSTD(x, weights):
 def robust_scale(x, weights):
     return np.amin([wSTD(x, weights), wIQR(x, weights)/1.349])
 
-def robust_center(x, weights):
+def robust_loc(x, weights):
     return weighted_quantile(x, weights, 0.5)
 
 
