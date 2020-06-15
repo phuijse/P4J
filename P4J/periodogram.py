@@ -84,27 +84,25 @@ class periodogram:
         TODO: verify that arrays are non empty, non constant, etc
         """
         
-        self.mjd = mjd
-        self.N = len(mjd)
+        self.mjd = mjd.astype('float32')
+        self.mag = mag.astype('float32')
+        self.err = err.astype('float32')
         weights = np.power(err, -2.0)
-        self.weights = weights/np.sum(weights)
-        self.scale = robust_scale(mag, self.weights)
+        weights = weights/np.sum(weights)
+        self.lc_stats = {'loc' : robust_loc(mag, weights), 
+                         'scale': robust_scale(mag, weights),
+                         'N': len(mjd)}        
+        
         if standardize:
-            self.mag = (mag - robust_loc(mag, self.weights))/self.scale
-            self.err = err/self.scale
-        else:
-            self.mag = mag
-            self.err = err
-        self.mjd = self.mjd.astype('float32')
-        self.mag = self.mag.astype('float32')
-        self.err = self.err.astype('float32')
-
+            self.mag = (self.mag - self.lc_stats['loc'])/self.lc_stats['scale']
+            self.err = self.err/self.lc_stats['scale']
+        
+        
         if self.method in ['QMICS', 'QMIEU', 'QME']:
             
-            if standardize:
-                hm = 0.9*self.N**(-0.2) # Silverman's rule, assuming data is whittened
-            else:
-                hm = 0.9*self.scale*self.N**(-0.2)
+            hm = 0.9*self.lc_stats['N']**(-0.2)
+            if not standardize:
+                hm = hm*self.lc_stats['scale']
             if 'h_KDE_M' in kwarg:
                 hm = hm*kwarg['h_KDE_M']
             hp = 1.0 # How to choose this more appropietly?
