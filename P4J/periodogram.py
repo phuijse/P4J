@@ -40,7 +40,7 @@ class periodogram:
         
         Parameters
         ---------
-        method: {'PDM1', 'LKSL', 'AOV', 'MHAOV', 'QMICS', 'QMIEU} 
+        method: {'PDM1', 'LKSL', 'AOV', 'MHAOV', 'QMICS', 'QMIEU'} 
             Method used to perform the fit
             
             PDM: Phase Dispersion Minimization
@@ -87,6 +87,16 @@ class periodogram:
         self.mjd = mjd.astype('float32')
         self.mag = mag.astype('float32')
         self.err = err.astype('float32')
+        
+        # Nan Filter
+        na_mask = np.isnan(self.mjd) | np.isnan(self.mag) | np.isnan(self.err)
+        if np.sum(na_mask) > 0:
+            print(f"Your data contain {np.sum(na_mask)} NaN values, cleaning")
+            self.mjd = self.mjd[~na_mask]
+            self.mag = self.mag[~na_mask]
+            self.err = self.err[~na_mask]
+        
+        # Standardization
         weights = np.power(err, -2.0)
         weights = weights/np.sum(weights)
         self.lc_stats = {'loc' : robust_loc(mag, weights), 

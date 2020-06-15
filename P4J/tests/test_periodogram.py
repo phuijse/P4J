@@ -14,6 +14,13 @@ def test_standardize():
     my_per.set_data(mjd, mag, err, standardize=True)
     assert np.allclose(my_per.mag[:3], np.array([-0.87692094, 0.44308123, 0.9481179], dtype=np.float32))
     assert np.allclose(my_per.err[:3], np.array([1.399464   , 0.70398176, 1.4657015], dtype=np.float32))
+    
+def test_removenan():
+    my_per = periodogram(method='AOV')
+    mjd, mag, err = create_test_data()
+    mjd[1], mag[5], err[8] = np.nan, np.nan, np.nan
+    my_per.set_data(mjd, mag, err, remove_nan=True)
+    assert len(my_per.mag) == len(mjd)-3    
 
 def fit_eval_periodogram(method):
     my_per = periodogram(method=method)
