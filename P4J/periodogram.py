@@ -70,15 +70,15 @@ class periodogram:
             raise ValueError("Wrong method")
         self.method = method
         
-    def set_data(self, mjd, mag, err, whitten=False, **kwarg):
+    def set_data(self, mjd, mag, err, standardize=False, **kwarg):
         """
         Saves the light curve data, where 
         mjd: modified julian date (time instants)
         mag: stellar magnitude 
         err: photometric error
         
-        If whitten is True the data is normalized to have zero
-        mean and unit standard deviation. Note that robust 
+        If standardize is True the data is transformed to have zero
+        mean and unit standard deviation. Robust 
         estimators of these quantities are used
 
         TODO: verify that arrays are non empty, non constant, etc
@@ -89,7 +89,7 @@ class periodogram:
         weights = np.power(err, -2.0)
         self.weights = weights/np.sum(weights)
         self.scale = robust_scale(mag, self.weights)
-        if whitten:
+        if standardize:
             self.mag = (mag - robust_loc(mag, self.weights))/self.scale
             self.err = err/self.scale
         else:
@@ -101,7 +101,7 @@ class periodogram:
 
         if self.method in ['QMICS', 'QMIEU', 'QME']:
             
-            if whitten:
+            if standardize:
                 hm = 0.9*self.N**(-0.2) # Silverman's rule, assuming data is whittened
             else:
                 hm = 0.9*self.scale*self.N**(-0.2)

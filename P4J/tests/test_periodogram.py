@@ -8,6 +8,13 @@ def create_test_data():
     mjd, mag, err = lc_generator.draw_noisy_time_series(SNR=2.0)
     return mjd, mag, err
 
+def test_standardize():
+    my_per = periodogram(method='AOV')
+    mjd, mag, err = create_test_data()
+    my_per.set_data(mjd, mag, err, standardize=True)
+    assert np.allclose(my_per.mag[:3], np.array([-0.87692094, 0.44308123, 0.9481179], dtype=np.float32))
+    assert np.allclose(my_per.err[:3], np.array([1.399464   , 0.70398176, 1.4657015], dtype=np.float32))
+
 def fit_eval_periodogram(method):
     my_per = periodogram(method=method)
     mjd, mag, err = create_test_data()
