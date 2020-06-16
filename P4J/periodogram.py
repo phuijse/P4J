@@ -30,11 +30,8 @@ class _Periodogram:
         return self.freq, self.per
     
     def find_local_maxima(self, n_local_optima=10):
-        local_optima_index = []
-        for k in range(1, len(self.per)-1):
-            if self.per[k-1] < self.per[k] and self.per[k+1] < self.per[k]:
-                local_optima_index.append(k)
-        #local_optima_index = 1+np.where((self.per[1:-1] > self.per[:-2]) & (self.per[1:-1] > self.per[2:]))[0]
+        
+        local_optima_index = 1+np.where((self.per[1:-1] > self.per[:-2]) & (self.per[1:-1] > self.per[2:]))[0]
         
         if(len(local_optima_index) < n_local_optima):
             print("Warning: Not enough local maxima found in the periodogram")
