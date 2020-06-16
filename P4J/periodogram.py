@@ -44,18 +44,20 @@ class _Periodogram:
             best_local_optima = best_local_optima[0]
             
         return best_local_optima
-        
-        
 
     
 class MultiBandPeriodogram(_Periodogram):
     
-    def __init__(self, method='MHAOV'):
+    def __init__(self, method='MHAOV', **kwarg):
         
         #methods = ["MHAOV"]
         #if not method in methods:
         #    raise ValueError("Wrong method")
         self.method = method
+        
+        self.Nharmonics = 1
+        if 'Nharmonics' in kwarg:
+            self.Nharmonics = kwarg["Nharmonics"]
         
     def set_data(self, mjds, mags, errs, fids):
         
@@ -85,8 +87,7 @@ class MultiBandPeriodogram(_Periodogram):
         per_single_band = {}
         per_sum = np.zeros_like(freqs)  
         
-        Nharmonics = 1
-        d1 = 2*Nharmonics*len(self.filter_names)
+        d1 = 2*self.Nharmonics*len(self.filter_names)
         d2_sum = 0.0
         wvar_sum = 0.0
         
@@ -96,7 +97,7 @@ class MultiBandPeriodogram(_Periodogram):
                 per[k] = self.cython_per[filter_name].eval_frequency(freq)
             per_single_band.update({filter_name : per})
             
-            d2 = float(self.lc_stats[filter_name].N - 2*Nharmonics - 1)  
+            d2 = float(self.lc_stats[filter_name].N - 2*self.Nharmonics - 1)  
             per_sum +=  d1*per*self.cython_per[filter_name].wvar/(d2 + d1*per)
             wvar_sum += self.cython_per[filter_name].wvar
             d2_sum += d2
@@ -108,6 +109,8 @@ class MultiBandPeriodogram(_Periodogram):
         
     def get_single_band_periodogram(self, fid):
         return self.freq, self.per_single_band[fid]
+    
+    
     
 
 class periodogram(_Periodogram):
@@ -241,10 +244,7 @@ class periodogram(_Periodogram):
             Nharmonics = 1
             if 'Nharmonics' in kwarg:
                 Nharmonics = kwarg["Nharmonics"]
-            self.cython_per = MHAOV(self.mjd, self.mag, self.err, Nharmonics)
-
-
-   
+            self.cython_per = MHAOV(self.mjd, self.mag, self.err, Nharmonics)  
         
    
     def finetune_best_frequencies(self, fresolution=1e-5, n_local_optima=10):
