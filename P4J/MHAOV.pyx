@@ -42,7 +42,7 @@ cdef class MHAOV:
     cdef DTYPE_t* err
     cdef ITYPE_t Nharmonics
     cdef DTYPE_t d1, d2
-    cdef DTYPE_t wmean, wvar
+    cdef public DTYPE_t wmean, wvar
     cdef DTYPE_t* zr 
     cdef DTYPE_t* zi
     cdef DTYPE_t* znr
