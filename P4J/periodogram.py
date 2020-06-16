@@ -16,8 +16,12 @@ Stats = namedtuple('Stats', 'loc scale N')
 
 class _Periodogram:
     
-    def get_best_frequency(self):
-        return self.freq[np.argmax(self.per)]
+    def get_best_frequency(self, fid=None):
+        if fid is None:
+            best_idx = np.argmax(self.per)
+        else:
+            best_idx = np.argmax(self.per[fid])
+        return self.freq[best_idx]
         
     def get_best_frequencies(self):
         """
@@ -26,8 +30,11 @@ class _Periodogram:
         
         return self.freq[self.best_local_optima], self.per[self.best_local_optima]
         
-    def get_periodogram(self):
-        return self.freq, self.per
+    def get_periodogram(self, fid=None):
+        if fid is None:
+            return self.freq, self.per
+        else:
+            return self.freq, self.per[fid]
     
     def find_local_maxima(self, n_local_optima=10):
         
@@ -102,15 +109,30 @@ class MultiBandPeriodogram(_Periodogram):
             wvar_sum += self.cython_per[filter_name].wvar
             d2_sum += d2
             
-        per_sum = d2_sum*per_sum/(d1*(wvar_sum - per_sum))
         self.freq = freqs
         self.per_single_band = per_single_band 
-        self.per = per_sum
+        self.per = d2_sum*per_sum/(d1*(wvar_sum - per_sum))
+    
+    
+    
+    def finetune_best_frequencies(self, fresolution=1e-5, n_local_optima=10):
         
-    def get_single_band_periodogram(self, fid):
-        return self.freq, self.per_single_band[fid]
-    
-    
+        best_local_optima = self.find_local_maxima(n_local_optima)
+        
+        for j in range(n_local_optima):
+            freq_fine = self.freq[best_local_optima[j]] - self.freq_step_coarse
+            for k in range(0, int(2.0*self.freq_step_coarse/fresolution)):
+                cost = self.compute_metric(freq_fine)
+                if cost > self.per[best_local_optima[j]]:
+                    self.per[best_local_optima[j]] = cost
+                    self.freq[best_local_optima[j]] = freq_fine
+                freq_fine += fresolution
+        # Sort them in descending order
+        idx = np.argsort(self.per[best_local_optima])[::-1]
+        if n_local_optima > 0:
+            self.best_local_optima = best_local_optima[idx]
+        else:
+            self.best_local_optima = best_local_optima
     
 
 class periodogram(_Periodogram):
