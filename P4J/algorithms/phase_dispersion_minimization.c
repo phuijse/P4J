@@ -9,17 +9,18 @@
             "-ffast-math"
         ],
         "include_dirs": [
+            ".",
             "/home/phuijse/.conda/envs/astro/lib/python3.8/site-packages/numpy/core/include"
         ],
         "libraries": [
             "m"
         ],
-        "name": "P4J.LKSL",
+        "name": "P4J.algorithms.phase_dispersion_minimization",
         "sources": [
-            "P4J/LKSL.pyx"
+            "P4J/algorithms/phase_dispersion_minimization.pyx"
         ]
     },
-    "module_name": "P4J.LKSL"
+    "module_name": "P4J.algorithms.phase_dispersion_minimization"
 }
 END: Cython Metadata */
 
@@ -615,8 +616,8 @@ static CYTHON_INLINE float __PYX_NAN() {
   #endif
 #endif
 
-#define __PYX_HAVE__P4J__LKSL
-#define __PYX_HAVE_API__P4J__LKSL
+#define __PYX_HAVE__P4J__algorithms__phase_dispersion_minimization
+#define __PYX_HAVE_API__P4J__algorithms__phase_dispersion_minimization
 /* Early includes */
 #include "math.h"
 #include "pythread.h"
@@ -832,7 +833,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "P4J/LKSL.pyx",
+  "P4J/algorithms/phase_dispersion_minimization.pyx",
   "stringsource",
 };
 /* MemviewSliceStruct.proto */
@@ -950,7 +951,7 @@ typedef struct {
  * ctypedef int ITYPE_t
  * 
  */
-typedef float __pyx_t_3P4J_9utilities_DTYPE_t;
+typedef float __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t;
 
 /* "utilities.pxd":3
  * 
@@ -959,49 +960,52 @@ typedef float __pyx_t_3P4J_9utilities_DTYPE_t;
  * 
  * cdef void argsort(DTYPE_t*, ITYPE_t*, Py_ssize_t)
  */
-typedef int __pyx_t_3P4J_9utilities_ITYPE_t;
+typedef int __pyx_t_3P4J_10algorithms_9utilities_ITYPE_t;
 
-/* "P4J/LKSL.pyx":8
+/* "P4J/algorithms/phase_dispersion_minimization.pyx":8
  * from .utilities cimport argsort, unbiased_weighted_variance
  * 
  * ctypedef float DTYPE_t             # <<<<<<<<<<<<<<
  * ctypedef int ITYPE_t
  * 
  */
-typedef float __pyx_t_3P4J_4LKSL_DTYPE_t;
+typedef float __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t;
 
-/* "P4J/LKSL.pyx":9
+/* "P4J/algorithms/phase_dispersion_minimization.pyx":9
  * 
  * ctypedef float DTYPE_t
  * ctypedef int ITYPE_t             # <<<<<<<<<<<<<<
  * 
  * cdef extern from "math.h":
  */
-typedef int __pyx_t_3P4J_4LKSL_ITYPE_t;
+typedef int __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_ITYPE_t;
 
 /*--- Type declarations ---*/
-struct __pyx_obj_3P4J_4LKSL_LKSL;
+struct __pyx_obj_3P4J_10algorithms_29phase_dispersion_minimization_PDM;
 struct __pyx_array_obj;
 struct __pyx_MemviewEnum_obj;
 struct __pyx_memoryview_obj;
 struct __pyx_memoryviewslice_obj;
 
-/* "P4J/LKSL.pyx":29
+/* "P4J/algorithms/phase_dispersion_minimization.pyx":28
+ * http://www.stellingwerf.com/rfs-bin/index.cgi?action=PageView&id=29
  * """
- * 
- * cdef class LKSL:             # <<<<<<<<<<<<<<
+ * cdef class PDM:             # <<<<<<<<<<<<<<
  *     cdef Py_ssize_t N
  *     cdef DTYPE_t* phase
  */
-struct __pyx_obj_3P4J_4LKSL_LKSL {
+struct __pyx_obj_3P4J_10algorithms_29phase_dispersion_minimization_PDM {
   PyObject_HEAD
   Py_ssize_t N;
-  __pyx_t_3P4J_4LKSL_DTYPE_t *phase;
-  __pyx_t_3P4J_4LKSL_DTYPE_t *mjd;
-  __pyx_t_3P4J_4LKSL_DTYPE_t *mag;
-  __pyx_t_3P4J_4LKSL_DTYPE_t *err2;
-  __pyx_t_3P4J_4LKSL_DTYPE_t normalizer;
-  __pyx_t_3P4J_4LKSL_ITYPE_t *sorted_idx;
+  __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t *phase;
+  __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t *mjd;
+  __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t *mag;
+  __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t *err2;
+  __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t normalizer;
+  __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_ITYPE_t *sorted_idx;
+  __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_ITYPE_t Nbins;
+  __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t *tmp_mag;
+  __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t *tmp_err2;
 };
 
 
@@ -1699,7 +1703,10 @@ static int __Pyx_ValidateAndInit_memviewslice(
                 PyObject *original_obj);
 
 /* ObjectToMemviewSlice.proto */
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_4LKSL_DTYPE_t(PyObject *, int writable_flag);
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t(PyObject *, int writable_flag);
+
+/* CIntToPy.proto */
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
 /* MemviewSliceCopyTemplate.proto */
 static __Pyx_memviewslice
@@ -1713,9 +1720,6 @@ static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *);
-
-/* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
@@ -1749,12 +1753,12 @@ static PyObject *__pyx_memoryviewslice_assign_item_from_object(struct __pyx_memo
 
 /* Module declarations from 'cpython.mem' */
 
-/* Module declarations from 'P4J.utilities' */
-static void (*__pyx_f_3P4J_9utilities_argsort)(__pyx_t_3P4J_9utilities_DTYPE_t *, __pyx_t_3P4J_9utilities_ITYPE_t *, Py_ssize_t); /*proto*/
-static __pyx_t_3P4J_9utilities_DTYPE_t (*__pyx_f_3P4J_9utilities_unbiased_weighted_variance)(__pyx_t_3P4J_9utilities_DTYPE_t *, __pyx_t_3P4J_9utilities_DTYPE_t *, Py_ssize_t); /*proto*/
+/* Module declarations from 'P4J.algorithms.utilities' */
+static void (*__pyx_f_3P4J_10algorithms_9utilities_argsort)(__pyx_t_3P4J_10algorithms_9utilities_DTYPE_t *, __pyx_t_3P4J_10algorithms_9utilities_ITYPE_t *, Py_ssize_t); /*proto*/
+static __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t (*__pyx_f_3P4J_10algorithms_9utilities_unbiased_weighted_variance)(__pyx_t_3P4J_10algorithms_9utilities_DTYPE_t *, __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t *, Py_ssize_t); /*proto*/
 
-/* Module declarations from 'P4J.LKSL' */
-static PyTypeObject *__pyx_ptype_3P4J_4LKSL_LKSL = 0;
+/* Module declarations from 'P4J.algorithms.phase_dispersion_minimization' */
+static PyTypeObject *__pyx_ptype_3P4J_10algorithms_29phase_dispersion_minimization_PDM = 0;
 static PyTypeObject *__pyx_array_type = 0;
 static PyTypeObject *__pyx_MemviewEnum_type = 0;
 static PyTypeObject *__pyx_memoryview_type = 0;
@@ -1799,12 +1803,12 @@ static void __pyx_memoryview_refcount_objects_in_slice(char *, Py_ssize_t *, Py_
 static void __pyx_memoryview_slice_assign_scalar(__Pyx_memviewslice *, int, size_t, void *, int); /*proto*/
 static void __pyx_memoryview__slice_assign_scalar(char *, Py_ssize_t *, Py_ssize_t *, int, size_t, void *); /*proto*/
 static PyObject *__pyx_unpickle_Enum__set_state(struct __pyx_MemviewEnum_obj *, PyObject *); /*proto*/
-static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_3P4J_4LKSL_DTYPE_t = { "DTYPE_t", NULL, sizeof(__pyx_t_3P4J_4LKSL_DTYPE_t), { 0 }, 0, 'R', 0, 0 };
-#define __Pyx_MODULE_NAME "P4J.LKSL"
-extern int __pyx_module_is_main_P4J__LKSL;
-int __pyx_module_is_main_P4J__LKSL = 0;
+static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t = { "DTYPE_t", NULL, sizeof(__pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t), { 0 }, 0, 'R', 0, 0 };
+#define __Pyx_MODULE_NAME "P4J.algorithms.phase_dispersion_minimization"
+extern int __pyx_module_is_main_P4J__algorithms__phase_dispersion_minimization;
+int __pyx_module_is_main_P4J__algorithms__phase_dispersion_minimization = 0;
 
-/* Implementation of 'P4J.LKSL' */
+/* Implementation of 'P4J.algorithms.phase_dispersion_minimization' */
 static PyObject *__pyx_builtin_MemoryError;
 static PyObject *__pyx_builtin_range;
 static PyObject *__pyx_builtin_TypeError;
@@ -1816,12 +1820,12 @@ static PyObject *__pyx_builtin_IndexError;
 static const char __pyx_k_O[] = "O";
 static const char __pyx_k_c[] = "c";
 static const char __pyx_k_id[] = "id";
+static const char __pyx_k_PDM[] = "PDM";
 static const char __pyx_k_err[] = "err";
 static const char __pyx_k_mag[] = "mag";
 static const char __pyx_k_mjd[] = "mjd";
 static const char __pyx_k_new[] = "__new__";
 static const char __pyx_k_obj[] = "obj";
-static const char __pyx_k_LKSL[] = "LKSL";
 static const char __pyx_k_base[] = "base";
 static const char __pyx_k_dict[] = "__dict__";
 static const char __pyx_k_main[] = "__main__";
@@ -1834,6 +1838,7 @@ static const char __pyx_k_step[] = "step";
 static const char __pyx_k_stop[] = "stop";
 static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_ASCII[] = "ASCII";
+static const char __pyx_k_Nbins[] = "Nbins";
 static const char __pyx_k_class[] = "__class__";
 static const char __pyx_k_error[] = "error";
 static const char __pyx_k_flags[] = "flags";
@@ -1900,7 +1905,7 @@ static const char __pyx_k_Out_of_bounds_on_buffer_access_a[] = "Out of bounds on
 static const char __pyx_k_Unable_to_convert_item_to_object[] = "Unable to convert item to object";
 static const char __pyx_k_got_differing_extents_in_dimensi[] = "got differing extents in dimension %d (got %d and %d)";
 static const char __pyx_k_no_default___reduce___due_to_non[] = "no default __reduce__ due to non-trivial __cinit__";
-static const char __pyx_k_self_err2_self_mag_self_mjd_self[] = "self.err2,self.mag,self.mjd,self.phase,self.sorted_idx cannot be converted to a Python object for pickling";
+static const char __pyx_k_self_err2_self_mag_self_mjd_self[] = "self.err2,self.mag,self.mjd,self.phase,self.sorted_idx,self.tmp_err2,self.tmp_mag cannot be converted to a Python object for pickling";
 static const char __pyx_k_unable_to_allocate_shape_and_str[] = "unable to allocate shape and strides.";
 static PyObject *__pyx_n_s_ASCII;
 static PyObject *__pyx_kp_s_Buffer_view_does_not_expose_stri;
@@ -1915,12 +1920,13 @@ static PyObject *__pyx_n_s_IndexError;
 static PyObject *__pyx_kp_s_Indirect_dimensions_not_supporte;
 static PyObject *__pyx_kp_s_Invalid_mode_expected_c_or_fortr;
 static PyObject *__pyx_kp_s_Invalid_shape_in_axis_d_d;
-static PyObject *__pyx_n_s_LKSL;
 static PyObject *__pyx_n_s_MemoryError;
 static PyObject *__pyx_kp_s_MemoryView_of_r_at_0x_x;
 static PyObject *__pyx_kp_s_MemoryView_of_r_object;
+static PyObject *__pyx_n_s_Nbins;
 static PyObject *__pyx_n_b_O;
 static PyObject *__pyx_kp_s_Out_of_bounds_on_buffer_access_a;
+static PyObject *__pyx_n_s_PDM;
 static PyObject *__pyx_n_s_PickleError;
 static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_kp_s_Unable_to_convert_item_to_object;
@@ -1993,11 +1999,11 @@ static PyObject *__pyx_kp_s_unable_to_allocate_array_data;
 static PyObject *__pyx_kp_s_unable_to_allocate_shape_and_str;
 static PyObject *__pyx_n_s_unpack;
 static PyObject *__pyx_n_s_update;
-static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *__pyx_v_self, __Pyx_memviewslice __pyx_v_mjd, __Pyx_memviewslice __pyx_v_mag, __Pyx_memviewslice __pyx_v_err); /* proto */
-static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_2eval_frequency(struct __pyx_obj_3P4J_4LKSL_LKSL *__pyx_v_self, __pyx_t_3P4J_4LKSL_DTYPE_t __pyx_v_freq); /* proto */
-static void __pyx_pf_3P4J_4LKSL_4LKSL_4__dealloc__(struct __pyx_obj_3P4J_4LKSL_LKSL *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_6__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_3P4J_4LKSL_LKSL *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_8__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_3P4J_4LKSL_LKSL *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static int __pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM___init__(struct __pyx_obj_3P4J_10algorithms_29phase_dispersion_minimization_PDM *__pyx_v_self, __Pyx_memviewslice __pyx_v_mjd, __Pyx_memviewslice __pyx_v_mag, __Pyx_memviewslice __pyx_v_err, __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_ITYPE_t __pyx_v_Nbins); /* proto */
+static PyObject *__pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_2eval_frequency(struct __pyx_obj_3P4J_10algorithms_29phase_dispersion_minimization_PDM *__pyx_v_self, __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t __pyx_v_freq); /* proto */
+static void __pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_4__dealloc__(struct __pyx_obj_3P4J_10algorithms_29phase_dispersion_minimization_PDM *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_6__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_3P4J_10algorithms_29phase_dispersion_minimization_PDM *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_8__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_3P4J_10algorithms_29phase_dispersion_minimization_PDM *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __pyx_array_obj *__pyx_v_self, PyObject *__pyx_v_shape, Py_ssize_t __pyx_v_itemsize, PyObject *__pyx_v_format, PyObject *__pyx_v_mode, int __pyx_v_allocate_buffer); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array_2__getbuffer__(struct __pyx_array_obj *__pyx_v_self, Py_buffer *__pyx_v_info, int __pyx_v_flags); /* proto */
 static void __pyx_array___pyx_pf_15View_dot_MemoryView_5array_4__dealloc__(struct __pyx_array_obj *__pyx_v_self); /* proto */
@@ -2040,7 +2046,7 @@ static PyObject *__pyx_pf_15View_dot_MemoryView_16_memoryviewslice_4base___get__
 static PyObject *__pyx_pf___pyx_memoryviewslice___reduce_cython__(CYTHON_UNUSED struct __pyx_memoryviewslice_obj *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf___pyx_memoryviewslice_2__setstate_cython__(CYTHON_UNUSED struct __pyx_memoryviewslice_obj *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_15View_dot_MemoryView___pyx_unpickle_Enum(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
-static PyObject *__pyx_tp_new_3P4J_4LKSL_LKSL(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_3P4J_10algorithms_29phase_dispersion_minimization_PDM(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_array(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_Enum(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_memoryview(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
@@ -2078,30 +2084,33 @@ static PyObject *__pyx_tuple__26;
 static PyObject *__pyx_codeobj__27;
 /* Late includes */
 
-/* "P4J/LKSL.pyx":37
- *     cdef DTYPE_t normalizer
- *     cdef ITYPE_t* sorted_idx
- *     def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err):             # <<<<<<<<<<<<<<
+/* "P4J/algorithms/phase_dispersion_minimization.pyx":39
+ *     cdef DTYPE_t* tmp_mag
+ *     cdef DTYPE_t* tmp_err2
+ *     def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err, ITYPE_t Nbins=10):             # <<<<<<<<<<<<<<
  *         cdef Py_ssize_t i, j, mat_idx
- *         self.N = mag.shape[0]
+ *         self.Nbins = Nbins
  */
 
 /* Python wrapper */
-static int __pyx_pw_3P4J_4LKSL_4LKSL_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static int __pyx_pw_3P4J_4LKSL_4LKSL_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static int __pyx_pw_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static int __pyx_pw_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   __Pyx_memviewslice __pyx_v_mjd = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_mag = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_err = { 0, 0, { 0 }, { 0 }, { 0 } };
+  __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_ITYPE_t __pyx_v_Nbins;
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__init__ (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_mjd,&__pyx_n_s_mag,&__pyx_n_s_err,0};
-    PyObject* values[3] = {0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_mjd,&__pyx_n_s_mag,&__pyx_n_s_err,&__pyx_n_s_Nbins,0};
+    PyObject* values[4] = {0,0,0,0};
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case  4: values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
+        CYTHON_FALLTHROUGH;
         case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
         CYTHON_FALLTHROUGH;
         case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
@@ -2120,45 +2129,60 @@ static int __pyx_pw_3P4J_4LKSL_4LKSL_1__init__(PyObject *__pyx_v_self, PyObject 
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_mag)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 1); __PYX_ERR(0, 37, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 0, 3, 4, 1); __PYX_ERR(0, 39, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_err)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 2); __PYX_ERR(0, 37, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 0, 3, 4, 2); __PYX_ERR(0, 39, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  3:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_Nbins);
+          if (value) { values[3] = value; kw_args--; }
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 37, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 39, __pyx_L3_error)
       }
-    } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
-      goto __pyx_L5_argtuple_error;
     } else {
-      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
-      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
-      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+      switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  4: values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
+        CYTHON_FALLTHROUGH;
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        break;
+        default: goto __pyx_L5_argtuple_error;
+      }
     }
-    __pyx_v_mjd = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_4LKSL_DTYPE_t(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_mjd.memview)) __PYX_ERR(0, 37, __pyx_L3_error)
-    __pyx_v_mag = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_4LKSL_DTYPE_t(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_mag.memview)) __PYX_ERR(0, 37, __pyx_L3_error)
-    __pyx_v_err = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_4LKSL_DTYPE_t(values[2], PyBUF_WRITABLE); if (unlikely(!__pyx_v_err.memview)) __PYX_ERR(0, 37, __pyx_L3_error)
+    __pyx_v_mjd = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_mjd.memview)) __PYX_ERR(0, 39, __pyx_L3_error)
+    __pyx_v_mag = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_mag.memview)) __PYX_ERR(0, 39, __pyx_L3_error)
+    __pyx_v_err = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t(values[2], PyBUF_WRITABLE); if (unlikely(!__pyx_v_err.memview)) __PYX_ERR(0, 39, __pyx_L3_error)
+    if (values[3]) {
+      __pyx_v_Nbins = __Pyx_PyInt_As_int(values[3]); if (unlikely((__pyx_v_Nbins == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 39, __pyx_L3_error)
+    } else {
+      __pyx_v_Nbins = ((__pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_ITYPE_t)10);
+    }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 37, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 3, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 39, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("P4J.LKSL.LKSL.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("P4J.algorithms.phase_dispersion_minimization.PDM.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_3P4J_4LKSL_4LKSL___init__(((struct __pyx_obj_3P4J_4LKSL_LKSL *)__pyx_v_self), __pyx_v_mjd, __pyx_v_mag, __pyx_v_err);
+  __pyx_r = __pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM___init__(((struct __pyx_obj_3P4J_10algorithms_29phase_dispersion_minimization_PDM *)__pyx_v_self), __pyx_v_mjd, __pyx_v_mag, __pyx_v_err, __pyx_v_Nbins);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *__pyx_v_self, __Pyx_memviewslice __pyx_v_mjd, __Pyx_memviewslice __pyx_v_mag, __Pyx_memviewslice __pyx_v_err) {
+static int __pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM___init__(struct __pyx_obj_3P4J_10algorithms_29phase_dispersion_minimization_PDM *__pyx_v_self, __Pyx_memviewslice __pyx_v_mjd, __Pyx_memviewslice __pyx_v_mag, __Pyx_memviewslice __pyx_v_err, __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_ITYPE_t __pyx_v_Nbins) {
   Py_ssize_t __pyx_v_i;
   int __pyx_r;
   __Pyx_RefNannyDeclarations
@@ -2169,63 +2193,90 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
   Py_ssize_t __pyx_t_5;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "P4J/LKSL.pyx":39
- *     def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err):
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":41
+ *     def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err, ITYPE_t Nbins=10):
  *         cdef Py_ssize_t i, j, mat_idx
+ *         self.Nbins = Nbins             # <<<<<<<<<<<<<<
+ *         self.N = mag.shape[0]
+ *         self.mjd = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
+ */
+  __pyx_v_self->Nbins = __pyx_v_Nbins;
+
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":42
+ *         cdef Py_ssize_t i, j, mat_idx
+ *         self.Nbins = Nbins
  *         self.N = mag.shape[0]             # <<<<<<<<<<<<<<
  *         self.mjd = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.mag = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  */
   __pyx_v_self->N = (__pyx_v_mag.shape[0]);
 
-  /* "P4J/LKSL.pyx":40
- *         cdef Py_ssize_t i, j, mat_idx
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":43
+ *         self.Nbins = Nbins
  *         self.N = mag.shape[0]
  *         self.mjd = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
  *         self.mag = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.err2 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  */
-  __pyx_v_self->mjd = ((__pyx_t_3P4J_4LKSL_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_4LKSL_DTYPE_t)))));
+  __pyx_v_self->mjd = ((__pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t)))));
 
-  /* "P4J/LKSL.pyx":41
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":44
  *         self.N = mag.shape[0]
  *         self.mjd = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.mag = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
  *         self.err2 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.phase = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  */
-  __pyx_v_self->mag = ((__pyx_t_3P4J_4LKSL_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_4LKSL_DTYPE_t)))));
+  __pyx_v_self->mag = ((__pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t)))));
 
-  /* "P4J/LKSL.pyx":42
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":45
  *         self.mjd = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.mag = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.err2 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
  *         self.phase = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.sorted_idx = <ITYPE_t*>PyMem_Malloc(self.N*sizeof(ITYPE_t))
  */
-  __pyx_v_self->err2 = ((__pyx_t_3P4J_4LKSL_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_4LKSL_DTYPE_t)))));
+  __pyx_v_self->err2 = ((__pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t)))));
 
-  /* "P4J/LKSL.pyx":43
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":46
  *         self.mag = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.err2 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.phase = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
  *         self.sorted_idx = <ITYPE_t*>PyMem_Malloc(self.N*sizeof(ITYPE_t))
- *         if not self.mjd:
+ *         self.tmp_mag = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  */
-  __pyx_v_self->phase = ((__pyx_t_3P4J_4LKSL_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_4LKSL_DTYPE_t)))));
+  __pyx_v_self->phase = ((__pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t)))));
 
-  /* "P4J/LKSL.pyx":44
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":47
  *         self.err2 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.phase = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.sorted_idx = <ITYPE_t*>PyMem_Malloc(self.N*sizeof(ITYPE_t))             # <<<<<<<<<<<<<<
+ *         self.tmp_mag = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
+ *         self.tmp_err2 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
+ */
+  __pyx_v_self->sorted_idx = ((__pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_ITYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_ITYPE_t)))));
+
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":48
+ *         self.phase = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
+ *         self.sorted_idx = <ITYPE_t*>PyMem_Malloc(self.N*sizeof(ITYPE_t))
+ *         self.tmp_mag = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
+ *         self.tmp_err2 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
+ *         if not self.mjd:
+ */
+  __pyx_v_self->tmp_mag = ((__pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t)))));
+
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":49
+ *         self.sorted_idx = <ITYPE_t*>PyMem_Malloc(self.N*sizeof(ITYPE_t))
+ *         self.tmp_mag = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
+ *         self.tmp_err2 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
  *         if not self.mjd:
  *             raise MemoryError()
  */
-  __pyx_v_self->sorted_idx = ((__pyx_t_3P4J_4LKSL_ITYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_4LKSL_ITYPE_t)))));
+  __pyx_v_self->tmp_err2 = ((__pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t)))));
 
-  /* "P4J/LKSL.pyx":45
- *         self.phase = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
- *         self.sorted_idx = <ITYPE_t*>PyMem_Malloc(self.N*sizeof(ITYPE_t))
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":50
+ *         self.tmp_mag = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
+ *         self.tmp_err2 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         if not self.mjd:             # <<<<<<<<<<<<<<
  *             raise MemoryError()
  *         if not self.phase:
@@ -2233,25 +2284,25 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
   __pyx_t_1 = ((!(__pyx_v_self->mjd != 0)) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "P4J/LKSL.pyx":46
- *         self.sorted_idx = <ITYPE_t*>PyMem_Malloc(self.N*sizeof(ITYPE_t))
+    /* "P4J/algorithms/phase_dispersion_minimization.pyx":51
+ *         self.tmp_err2 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         if not self.mjd:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  *         if not self.phase:
  *             raise MemoryError()
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 46, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 51, __pyx_L1_error)
 
-    /* "P4J/LKSL.pyx":45
- *         self.phase = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
- *         self.sorted_idx = <ITYPE_t*>PyMem_Malloc(self.N*sizeof(ITYPE_t))
+    /* "P4J/algorithms/phase_dispersion_minimization.pyx":50
+ *         self.tmp_mag = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
+ *         self.tmp_err2 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         if not self.mjd:             # <<<<<<<<<<<<<<
  *             raise MemoryError()
  *         if not self.phase:
  */
   }
 
-  /* "P4J/LKSL.pyx":47
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":52
  *         if not self.mjd:
  *             raise MemoryError()
  *         if not self.phase:             # <<<<<<<<<<<<<<
@@ -2261,16 +2312,16 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
   __pyx_t_1 = ((!(__pyx_v_self->phase != 0)) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "P4J/LKSL.pyx":48
+    /* "P4J/algorithms/phase_dispersion_minimization.pyx":53
  *             raise MemoryError()
  *         if not self.phase:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  *         if not self.mag:
  *             raise MemoryError()
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 48, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 53, __pyx_L1_error)
 
-    /* "P4J/LKSL.pyx":47
+    /* "P4J/algorithms/phase_dispersion_minimization.pyx":52
  *         if not self.mjd:
  *             raise MemoryError()
  *         if not self.phase:             # <<<<<<<<<<<<<<
@@ -2279,7 +2330,7 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
  */
   }
 
-  /* "P4J/LKSL.pyx":49
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":54
  *         if not self.phase:
  *             raise MemoryError()
  *         if not self.mag:             # <<<<<<<<<<<<<<
@@ -2289,16 +2340,16 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
   __pyx_t_1 = ((!(__pyx_v_self->mag != 0)) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "P4J/LKSL.pyx":50
+    /* "P4J/algorithms/phase_dispersion_minimization.pyx":55
  *             raise MemoryError()
  *         if not self.mag:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  *         if not self.err2:
  *             raise MemoryError()
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 50, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 55, __pyx_L1_error)
 
-    /* "P4J/LKSL.pyx":49
+    /* "P4J/algorithms/phase_dispersion_minimization.pyx":54
  *         if not self.phase:
  *             raise MemoryError()
  *         if not self.mag:             # <<<<<<<<<<<<<<
@@ -2307,7 +2358,7 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
  */
   }
 
-  /* "P4J/LKSL.pyx":51
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":56
  *         if not self.mag:
  *             raise MemoryError()
  *         if not self.err2:             # <<<<<<<<<<<<<<
@@ -2317,16 +2368,16 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
   __pyx_t_1 = ((!(__pyx_v_self->err2 != 0)) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "P4J/LKSL.pyx":52
+    /* "P4J/algorithms/phase_dispersion_minimization.pyx":57
  *             raise MemoryError()
  *         if not self.err2:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  *         if not self.sorted_idx:
  *             raise MemoryError()
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 52, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 57, __pyx_L1_error)
 
-    /* "P4J/LKSL.pyx":51
+    /* "P4J/algorithms/phase_dispersion_minimization.pyx":56
  *         if not self.mag:
  *             raise MemoryError()
  *         if not self.err2:             # <<<<<<<<<<<<<<
@@ -2335,36 +2386,92 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
  */
   }
 
-  /* "P4J/LKSL.pyx":53
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":58
  *         if not self.err2:
  *             raise MemoryError()
  *         if not self.sorted_idx:             # <<<<<<<<<<<<<<
  *             raise MemoryError()
- *         for i in range(self.N):
+ *         if not self.tmp_mag:
  */
   __pyx_t_1 = ((!(__pyx_v_self->sorted_idx != 0)) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "P4J/LKSL.pyx":54
+    /* "P4J/algorithms/phase_dispersion_minimization.pyx":59
  *             raise MemoryError()
  *         if not self.sorted_idx:
+ *             raise MemoryError()             # <<<<<<<<<<<<<<
+ *         if not self.tmp_mag:
+ *             raise MemoryError()
+ */
+    PyErr_NoMemory(); __PYX_ERR(0, 59, __pyx_L1_error)
+
+    /* "P4J/algorithms/phase_dispersion_minimization.pyx":58
+ *         if not self.err2:
+ *             raise MemoryError()
+ *         if not self.sorted_idx:             # <<<<<<<<<<<<<<
+ *             raise MemoryError()
+ *         if not self.tmp_mag:
+ */
+  }
+
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":60
+ *         if not self.sorted_idx:
+ *             raise MemoryError()
+ *         if not self.tmp_mag:             # <<<<<<<<<<<<<<
+ *             raise MemoryError()
+ *         if not self.tmp_err2:
+ */
+  __pyx_t_1 = ((!(__pyx_v_self->tmp_mag != 0)) != 0);
+  if (unlikely(__pyx_t_1)) {
+
+    /* "P4J/algorithms/phase_dispersion_minimization.pyx":61
+ *             raise MemoryError()
+ *         if not self.tmp_mag:
+ *             raise MemoryError()             # <<<<<<<<<<<<<<
+ *         if not self.tmp_err2:
+ *             raise MemoryError()
+ */
+    PyErr_NoMemory(); __PYX_ERR(0, 61, __pyx_L1_error)
+
+    /* "P4J/algorithms/phase_dispersion_minimization.pyx":60
+ *         if not self.sorted_idx:
+ *             raise MemoryError()
+ *         if not self.tmp_mag:             # <<<<<<<<<<<<<<
+ *             raise MemoryError()
+ *         if not self.tmp_err2:
+ */
+  }
+
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":62
+ *         if not self.tmp_mag:
+ *             raise MemoryError()
+ *         if not self.tmp_err2:             # <<<<<<<<<<<<<<
+ *             raise MemoryError()
+ *         for i in range(self.N):
+ */
+  __pyx_t_1 = ((!(__pyx_v_self->tmp_err2 != 0)) != 0);
+  if (unlikely(__pyx_t_1)) {
+
+    /* "P4J/algorithms/phase_dispersion_minimization.pyx":63
+ *             raise MemoryError()
+ *         if not self.tmp_err2:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  *         for i in range(self.N):
  *             self.mjd[i] = mjd[i]
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 54, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 63, __pyx_L1_error)
 
-    /* "P4J/LKSL.pyx":53
- *         if not self.err2:
+    /* "P4J/algorithms/phase_dispersion_minimization.pyx":62
+ *         if not self.tmp_mag:
  *             raise MemoryError()
- *         if not self.sorted_idx:             # <<<<<<<<<<<<<<
+ *         if not self.tmp_err2:             # <<<<<<<<<<<<<<
  *             raise MemoryError()
  *         for i in range(self.N):
  */
   }
 
-  /* "P4J/LKSL.pyx":55
- *         if not self.sorted_idx:
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":64
+ *         if not self.tmp_err2:
  *             raise MemoryError()
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
  *             self.mjd[i] = mjd[i]
@@ -2375,7 +2482,7 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
   for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_i = __pyx_t_4;
 
-    /* "P4J/LKSL.pyx":56
+    /* "P4J/algorithms/phase_dispersion_minimization.pyx":65
  *             raise MemoryError()
  *         for i in range(self.N):
  *             self.mjd[i] = mjd[i]             # <<<<<<<<<<<<<<
@@ -2383,9 +2490,9 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
  *             self.err2[i] = powf(err[i], 2.0)
  */
     __pyx_t_5 = __pyx_v_i;
-    (__pyx_v_self->mjd[__pyx_v_i]) = (*((__pyx_t_3P4J_4LKSL_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_4LKSL_DTYPE_t *) __pyx_v_mjd.data) + __pyx_t_5)) )));
+    (__pyx_v_self->mjd[__pyx_v_i]) = (*((__pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t *) __pyx_v_mjd.data) + __pyx_t_5)) )));
 
-    /* "P4J/LKSL.pyx":57
+    /* "P4J/algorithms/phase_dispersion_minimization.pyx":66
  *         for i in range(self.N):
  *             self.mjd[i] = mjd[i]
  *             self.mag[i] = mag[i]             # <<<<<<<<<<<<<<
@@ -2393,9 +2500,9 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
  *         self.normalizer = 1.0/unbiased_weighted_variance(self.mag, self.err2, self.N)
  */
     __pyx_t_5 = __pyx_v_i;
-    (__pyx_v_self->mag[__pyx_v_i]) = (*((__pyx_t_3P4J_4LKSL_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_4LKSL_DTYPE_t *) __pyx_v_mag.data) + __pyx_t_5)) )));
+    (__pyx_v_self->mag[__pyx_v_i]) = (*((__pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t *) __pyx_v_mag.data) + __pyx_t_5)) )));
 
-    /* "P4J/LKSL.pyx":58
+    /* "P4J/algorithms/phase_dispersion_minimization.pyx":67
  *             self.mjd[i] = mjd[i]
  *             self.mag[i] = mag[i]
  *             self.err2[i] = powf(err[i], 2.0)             # <<<<<<<<<<<<<<
@@ -2403,31 +2510,31 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
  * 
  */
     __pyx_t_5 = __pyx_v_i;
-    (__pyx_v_self->err2[__pyx_v_i]) = powf((*((__pyx_t_3P4J_4LKSL_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_4LKSL_DTYPE_t *) __pyx_v_err.data) + __pyx_t_5)) ))), 2.0);
+    (__pyx_v_self->err2[__pyx_v_i]) = powf((*((__pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t *) __pyx_v_err.data) + __pyx_t_5)) ))), 2.0);
   }
 
-  /* "P4J/LKSL.pyx":59
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":68
  *             self.mag[i] = mag[i]
  *             self.err2[i] = powf(err[i], 2.0)
  *         self.normalizer = 1.0/unbiased_weighted_variance(self.mag, self.err2, self.N)             # <<<<<<<<<<<<<<
  * 
  *     def eval_frequency(self, DTYPE_t freq):
  */
-  __pyx_v_self->normalizer = (1.0 / ((double)__pyx_f_3P4J_9utilities_unbiased_weighted_variance(__pyx_v_self->mag, __pyx_v_self->err2, __pyx_v_self->N)));
+  __pyx_v_self->normalizer = (1.0 / ((double)__pyx_f_3P4J_10algorithms_9utilities_unbiased_weighted_variance(__pyx_v_self->mag, __pyx_v_self->err2, __pyx_v_self->N)));
 
-  /* "P4J/LKSL.pyx":37
- *     cdef DTYPE_t normalizer
- *     cdef ITYPE_t* sorted_idx
- *     def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err):             # <<<<<<<<<<<<<<
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":39
+ *     cdef DTYPE_t* tmp_mag
+ *     cdef DTYPE_t* tmp_err2
+ *     def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err, ITYPE_t Nbins=10):             # <<<<<<<<<<<<<<
  *         cdef Py_ssize_t i, j, mat_idx
- *         self.N = mag.shape[0]
+ *         self.Nbins = Nbins
  */
 
   /* function exit code */
   __pyx_r = 0;
   goto __pyx_L0;
   __pyx_L1_error:;
-  __Pyx_AddTraceback("P4J.LKSL.LKSL.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("P4J.algorithms.phase_dispersion_minimization.PDM.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_mjd, 1);
@@ -2437,7 +2544,7 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
   return __pyx_r;
 }
 
-/* "P4J/LKSL.pyx":61
+/* "P4J/algorithms/phase_dispersion_minimization.pyx":70
  *         self.normalizer = 1.0/unbiased_weighted_variance(self.mag, self.err2, self.N)
  * 
  *     def eval_frequency(self, DTYPE_t freq):             # <<<<<<<<<<<<<<
@@ -2446,154 +2553,241 @@ static int __pyx_pf_3P4J_4LKSL_4LKSL___init__(struct __pyx_obj_3P4J_4LKSL_LKSL *
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_3P4J_4LKSL_4LKSL_3eval_frequency(PyObject *__pyx_v_self, PyObject *__pyx_arg_freq); /*proto*/
-static PyObject *__pyx_pw_3P4J_4LKSL_4LKSL_3eval_frequency(PyObject *__pyx_v_self, PyObject *__pyx_arg_freq) {
-  __pyx_t_3P4J_4LKSL_DTYPE_t __pyx_v_freq;
+static PyObject *__pyx_pw_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_3eval_frequency(PyObject *__pyx_v_self, PyObject *__pyx_arg_freq); /*proto*/
+static PyObject *__pyx_pw_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_3eval_frequency(PyObject *__pyx_v_self, PyObject *__pyx_arg_freq) {
+  __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t __pyx_v_freq;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("eval_frequency (wrapper)", 0);
   assert(__pyx_arg_freq); {
-    __pyx_v_freq = __pyx_PyFloat_AsFloat(__pyx_arg_freq); if (unlikely((__pyx_v_freq == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 61, __pyx_L3_error)
+    __pyx_v_freq = __pyx_PyFloat_AsFloat(__pyx_arg_freq); if (unlikely((__pyx_v_freq == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 70, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
-  __Pyx_AddTraceback("P4J.LKSL.LKSL.eval_frequency", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("P4J.algorithms.phase_dispersion_minimization.PDM.eval_frequency", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_3P4J_4LKSL_4LKSL_2eval_frequency(((struct __pyx_obj_3P4J_4LKSL_LKSL *)__pyx_v_self), ((__pyx_t_3P4J_4LKSL_DTYPE_t)__pyx_v_freq));
+  __pyx_r = __pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_2eval_frequency(((struct __pyx_obj_3P4J_10algorithms_29phase_dispersion_minimization_PDM *)__pyx_v_self), ((__pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t)__pyx_v_freq));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_2eval_frequency(struct __pyx_obj_3P4J_4LKSL_LKSL *__pyx_v_self, __pyx_t_3P4J_4LKSL_DTYPE_t __pyx_v_freq) {
+static PyObject *__pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_2eval_frequency(struct __pyx_obj_3P4J_10algorithms_29phase_dispersion_minimization_PDM *__pyx_v_self, __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t __pyx_v_freq) {
   Py_ssize_t __pyx_v_i;
-  __pyx_t_3P4J_4LKSL_DTYPE_t __pyx_v_err2_err2;
-  __pyx_t_3P4J_4LKSL_DTYPE_t __pyx_v_err2_acum;
-  __pyx_t_3P4J_4LKSL_DTYPE_t __pyx_v_SL;
+  Py_ssize_t __pyx_v_j;
+  __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t __pyx_v_PDM_num;
+  __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t __pyx_v_PDM_den;
+  __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_ITYPE_t __pyx_v_samples_in_bin;
+  __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t __pyx_v_V1;
+  __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t __pyx_v_V2;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   Py_ssize_t __pyx_t_1;
   Py_ssize_t __pyx_t_2;
   Py_ssize_t __pyx_t_3;
-  PyObject *__pyx_t_4 = NULL;
+  __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_ITYPE_t __pyx_t_4;
+  __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_ITYPE_t __pyx_t_5;
+  Py_ssize_t __pyx_t_6;
+  int __pyx_t_7;
+  PyObject *__pyx_t_8 = NULL;
   __Pyx_RefNannySetupContext("eval_frequency", 0);
 
-  /* "P4J/LKSL.pyx":63
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":72
  *     def eval_frequency(self, DTYPE_t freq):
  *         cdef Py_ssize_t i, j
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
  *             self.phase[i] = fmodf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]
- *         argsort(self.phase, self.sorted_idx, self.N)
+ *         # argsort(self.phase, self.sorted_idx, self.N)
  */
   __pyx_t_1 = __pyx_v_self->N;
   __pyx_t_2 = __pyx_t_1;
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/LKSL.pyx":64
+    /* "P4J/algorithms/phase_dispersion_minimization.pyx":73
  *         cdef Py_ssize_t i, j
  *         for i in range(self.N):
  *             self.phase[i] = fmodf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]             # <<<<<<<<<<<<<<
- *         argsort(self.phase, self.sorted_idx, self.N)
- *         cdef DTYPE_t err2_err2 = self.err2[self.sorted_idx[0]] + self.err2[self.sorted_idx[self.N-1]]
+ *         # argsort(self.phase, self.sorted_idx, self.N)
+ *         cdef DTYPE_t PDM_num=0.0, PDM_den=0.0
  */
     (__pyx_v_self->phase[__pyx_v_i]) = (fmodf((__pyx_v_self->mjd[__pyx_v_i]), (1.0 / ((double)__pyx_v_freq))) * __pyx_v_freq);
   }
 
-  /* "P4J/LKSL.pyx":65
- *         for i in range(self.N):
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":75
  *             self.phase[i] = fmodf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]
- *         argsort(self.phase, self.sorted_idx, self.N)             # <<<<<<<<<<<<<<
- *         cdef DTYPE_t err2_err2 = self.err2[self.sorted_idx[0]] + self.err2[self.sorted_idx[self.N-1]]
- *         cdef DTYPE_t err2_acum = 1.0/err2_err2
+ *         # argsort(self.phase, self.sorted_idx, self.N)
+ *         cdef DTYPE_t PDM_num=0.0, PDM_den=0.0             # <<<<<<<<<<<<<<
+ *         cdef ITYPE_t samples_in_bin
+ *         cdef DTYPE_t V1, V2
  */
-  __pyx_f_3P4J_9utilities_argsort(__pyx_v_self->phase, __pyx_v_self->sorted_idx, __pyx_v_self->N);
+  __pyx_v_PDM_num = 0.0;
+  __pyx_v_PDM_den = 0.0;
 
-  /* "P4J/LKSL.pyx":66
- *             self.phase[i] = fmodf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]
- *         argsort(self.phase, self.sorted_idx, self.N)
- *         cdef DTYPE_t err2_err2 = self.err2[self.sorted_idx[0]] + self.err2[self.sorted_idx[self.N-1]]             # <<<<<<<<<<<<<<
- *         cdef DTYPE_t err2_acum = 1.0/err2_err2
- *         cdef DTYPE_t SL = powf(self.mag[self.sorted_idx[0]] - self.mag[self.sorted_idx[self.N-1]], 2.0)/err2_err2
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":78
+ *         cdef ITYPE_t samples_in_bin
+ *         cdef DTYPE_t V1, V2
+ *         for j in range(self.Nbins):             # <<<<<<<<<<<<<<
+ *             samples_in_bin = 0
+ *             V1 = V2 = 0.0
  */
-  __pyx_v_err2_err2 = ((__pyx_v_self->err2[(__pyx_v_self->sorted_idx[0])]) + (__pyx_v_self->err2[(__pyx_v_self->sorted_idx[(__pyx_v_self->N - 1)])]));
+  __pyx_t_4 = __pyx_v_self->Nbins;
+  __pyx_t_5 = __pyx_t_4;
+  for (__pyx_t_1 = 0; __pyx_t_1 < __pyx_t_5; __pyx_t_1+=1) {
+    __pyx_v_j = __pyx_t_1;
 
-  /* "P4J/LKSL.pyx":67
- *         argsort(self.phase, self.sorted_idx, self.N)
- *         cdef DTYPE_t err2_err2 = self.err2[self.sorted_idx[0]] + self.err2[self.sorted_idx[self.N-1]]
- *         cdef DTYPE_t err2_acum = 1.0/err2_err2             # <<<<<<<<<<<<<<
- *         cdef DTYPE_t SL = powf(self.mag[self.sorted_idx[0]] - self.mag[self.sorted_idx[self.N-1]], 2.0)/err2_err2
- *         for i in range(1, self.N):
+    /* "P4J/algorithms/phase_dispersion_minimization.pyx":79
+ *         cdef DTYPE_t V1, V2
+ *         for j in range(self.Nbins):
+ *             samples_in_bin = 0             # <<<<<<<<<<<<<<
+ *             V1 = V2 = 0.0
+ *             for i in range(self.N):
  */
-  __pyx_v_err2_acum = (1.0 / ((double)__pyx_v_err2_err2));
+    __pyx_v_samples_in_bin = 0;
 
-  /* "P4J/LKSL.pyx":68
- *         cdef DTYPE_t err2_err2 = self.err2[self.sorted_idx[0]] + self.err2[self.sorted_idx[self.N-1]]
- *         cdef DTYPE_t err2_acum = 1.0/err2_err2
- *         cdef DTYPE_t SL = powf(self.mag[self.sorted_idx[0]] - self.mag[self.sorted_idx[self.N-1]], 2.0)/err2_err2             # <<<<<<<<<<<<<<
- *         for i in range(1, self.N):
- *             err2_err2 = self.err2[self.sorted_idx[i-1]] + self.err2[self.sorted_idx[i]]
+    /* "P4J/algorithms/phase_dispersion_minimization.pyx":80
+ *         for j in range(self.Nbins):
+ *             samples_in_bin = 0
+ *             V1 = V2 = 0.0             # <<<<<<<<<<<<<<
+ *             for i in range(self.N):
+ *                 if floorf(self.phase[i]*self.Nbins) == j:
  */
-  __pyx_v_SL = (powf(((__pyx_v_self->mag[(__pyx_v_self->sorted_idx[0])]) - (__pyx_v_self->mag[(__pyx_v_self->sorted_idx[(__pyx_v_self->N - 1)])])), 2.0) / __pyx_v_err2_err2);
+    __pyx_v_V1 = 0.0;
+    __pyx_v_V2 = 0.0;
 
-  /* "P4J/LKSL.pyx":69
- *         cdef DTYPE_t err2_acum = 1.0/err2_err2
- *         cdef DTYPE_t SL = powf(self.mag[self.sorted_idx[0]] - self.mag[self.sorted_idx[self.N-1]], 2.0)/err2_err2
- *         for i in range(1, self.N):             # <<<<<<<<<<<<<<
- *             err2_err2 = self.err2[self.sorted_idx[i-1]] + self.err2[self.sorted_idx[i]]
- *             err2_acum += 1.0/err2_err2
+    /* "P4J/algorithms/phase_dispersion_minimization.pyx":81
+ *             samples_in_bin = 0
+ *             V1 = V2 = 0.0
+ *             for i in range(self.N):             # <<<<<<<<<<<<<<
+ *                 if floorf(self.phase[i]*self.Nbins) == j:
+ *                     self.tmp_mag[samples_in_bin] = self.mag[i]
  */
-  __pyx_t_1 = __pyx_v_self->N;
-  __pyx_t_2 = __pyx_t_1;
-  for (__pyx_t_3 = 1; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
-    __pyx_v_i = __pyx_t_3;
+    __pyx_t_2 = __pyx_v_self->N;
+    __pyx_t_3 = __pyx_t_2;
+    for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_3; __pyx_t_6+=1) {
+      __pyx_v_i = __pyx_t_6;
 
-    /* "P4J/LKSL.pyx":70
- *         cdef DTYPE_t SL = powf(self.mag[self.sorted_idx[0]] - self.mag[self.sorted_idx[self.N-1]], 2.0)/err2_err2
- *         for i in range(1, self.N):
- *             err2_err2 = self.err2[self.sorted_idx[i-1]] + self.err2[self.sorted_idx[i]]             # <<<<<<<<<<<<<<
- *             err2_acum += 1.0/err2_err2
- *             SL += powf(self.mag[self.sorted_idx[i-1]] - self.mag[self.sorted_idx[i]], 2.0)/err2_err2
+      /* "P4J/algorithms/phase_dispersion_minimization.pyx":82
+ *             V1 = V2 = 0.0
+ *             for i in range(self.N):
+ *                 if floorf(self.phase[i]*self.Nbins) == j:             # <<<<<<<<<<<<<<
+ *                     self.tmp_mag[samples_in_bin] = self.mag[i]
+ *                     self.tmp_err2[samples_in_bin] = self.err2[i]
  */
-    __pyx_v_err2_err2 = ((__pyx_v_self->err2[(__pyx_v_self->sorted_idx[(__pyx_v_i - 1)])]) + (__pyx_v_self->err2[(__pyx_v_self->sorted_idx[__pyx_v_i])]));
+      __pyx_t_7 = ((floorf(((__pyx_v_self->phase[__pyx_v_i]) * __pyx_v_self->Nbins)) == __pyx_v_j) != 0);
+      if (__pyx_t_7) {
 
-    /* "P4J/LKSL.pyx":71
- *         for i in range(1, self.N):
- *             err2_err2 = self.err2[self.sorted_idx[i-1]] + self.err2[self.sorted_idx[i]]
- *             err2_acum += 1.0/err2_err2             # <<<<<<<<<<<<<<
- *             SL += powf(self.mag[self.sorted_idx[i-1]] - self.mag[self.sorted_idx[i]], 2.0)/err2_err2
- *         return 0.5*SL*self.normalizer/err2_acum
+        /* "P4J/algorithms/phase_dispersion_minimization.pyx":83
+ *             for i in range(self.N):
+ *                 if floorf(self.phase[i]*self.Nbins) == j:
+ *                     self.tmp_mag[samples_in_bin] = self.mag[i]             # <<<<<<<<<<<<<<
+ *                     self.tmp_err2[samples_in_bin] = self.err2[i]
+ *                     samples_in_bin += 1
  */
-    __pyx_v_err2_acum = (__pyx_v_err2_acum + (1.0 / ((double)__pyx_v_err2_err2)));
+        (__pyx_v_self->tmp_mag[__pyx_v_samples_in_bin]) = (__pyx_v_self->mag[__pyx_v_i]);
 
-    /* "P4J/LKSL.pyx":72
- *             err2_err2 = self.err2[self.sorted_idx[i-1]] + self.err2[self.sorted_idx[i]]
- *             err2_acum += 1.0/err2_err2
- *             SL += powf(self.mag[self.sorted_idx[i-1]] - self.mag[self.sorted_idx[i]], 2.0)/err2_err2             # <<<<<<<<<<<<<<
- *         return 0.5*SL*self.normalizer/err2_acum
+        /* "P4J/algorithms/phase_dispersion_minimization.pyx":84
+ *                 if floorf(self.phase[i]*self.Nbins) == j:
+ *                     self.tmp_mag[samples_in_bin] = self.mag[i]
+ *                     self.tmp_err2[samples_in_bin] = self.err2[i]             # <<<<<<<<<<<<<<
+ *                     samples_in_bin += 1
+ *                     V1 += 1.0/self.err2[i]
+ */
+        (__pyx_v_self->tmp_err2[__pyx_v_samples_in_bin]) = (__pyx_v_self->err2[__pyx_v_i]);
+
+        /* "P4J/algorithms/phase_dispersion_minimization.pyx":85
+ *                     self.tmp_mag[samples_in_bin] = self.mag[i]
+ *                     self.tmp_err2[samples_in_bin] = self.err2[i]
+ *                     samples_in_bin += 1             # <<<<<<<<<<<<<<
+ *                     V1 += 1.0/self.err2[i]
+ *                     V2 += 1.0/powf(self.err2[i], 2.0)
+ */
+        __pyx_v_samples_in_bin = (__pyx_v_samples_in_bin + 1);
+
+        /* "P4J/algorithms/phase_dispersion_minimization.pyx":86
+ *                     self.tmp_err2[samples_in_bin] = self.err2[i]
+ *                     samples_in_bin += 1
+ *                     V1 += 1.0/self.err2[i]             # <<<<<<<<<<<<<<
+ *                     V2 += 1.0/powf(self.err2[i], 2.0)
+ *             if samples_in_bin > 2:
+ */
+        __pyx_v_V1 = (__pyx_v_V1 + (1.0 / ((double)(__pyx_v_self->err2[__pyx_v_i]))));
+
+        /* "P4J/algorithms/phase_dispersion_minimization.pyx":87
+ *                     samples_in_bin += 1
+ *                     V1 += 1.0/self.err2[i]
+ *                     V2 += 1.0/powf(self.err2[i], 2.0)             # <<<<<<<<<<<<<<
+ *             if samples_in_bin > 2:
+ *                 PDM_num += unbiased_weighted_variance(self.tmp_mag, self.tmp_err2, samples_in_bin)*(V1 - V2/V1)
+ */
+        __pyx_v_V2 = (__pyx_v_V2 + (1.0 / ((double)powf((__pyx_v_self->err2[__pyx_v_i]), 2.0))));
+
+        /* "P4J/algorithms/phase_dispersion_minimization.pyx":82
+ *             V1 = V2 = 0.0
+ *             for i in range(self.N):
+ *                 if floorf(self.phase[i]*self.Nbins) == j:             # <<<<<<<<<<<<<<
+ *                     self.tmp_mag[samples_in_bin] = self.mag[i]
+ *                     self.tmp_err2[samples_in_bin] = self.err2[i]
+ */
+      }
+    }
+
+    /* "P4J/algorithms/phase_dispersion_minimization.pyx":88
+ *                     V1 += 1.0/self.err2[i]
+ *                     V2 += 1.0/powf(self.err2[i], 2.0)
+ *             if samples_in_bin > 2:             # <<<<<<<<<<<<<<
+ *                 PDM_num += unbiased_weighted_variance(self.tmp_mag, self.tmp_err2, samples_in_bin)*(V1 - V2/V1)
+ *                 PDM_den += (V1 - V2/V1)
+ */
+    __pyx_t_7 = ((__pyx_v_samples_in_bin > 2) != 0);
+    if (__pyx_t_7) {
+
+      /* "P4J/algorithms/phase_dispersion_minimization.pyx":89
+ *                     V2 += 1.0/powf(self.err2[i], 2.0)
+ *             if samples_in_bin > 2:
+ *                 PDM_num += unbiased_weighted_variance(self.tmp_mag, self.tmp_err2, samples_in_bin)*(V1 - V2/V1)             # <<<<<<<<<<<<<<
+ *                 PDM_den += (V1 - V2/V1)
  * 
  */
-    __pyx_v_SL = (__pyx_v_SL + (powf(((__pyx_v_self->mag[(__pyx_v_self->sorted_idx[(__pyx_v_i - 1)])]) - (__pyx_v_self->mag[(__pyx_v_self->sorted_idx[__pyx_v_i])])), 2.0) / __pyx_v_err2_err2));
+      __pyx_v_PDM_num = (__pyx_v_PDM_num + (__pyx_f_3P4J_10algorithms_9utilities_unbiased_weighted_variance(__pyx_v_self->tmp_mag, __pyx_v_self->tmp_err2, __pyx_v_samples_in_bin) * (__pyx_v_V1 - (__pyx_v_V2 / __pyx_v_V1))));
+
+      /* "P4J/algorithms/phase_dispersion_minimization.pyx":90
+ *             if samples_in_bin > 2:
+ *                 PDM_num += unbiased_weighted_variance(self.tmp_mag, self.tmp_err2, samples_in_bin)*(V1 - V2/V1)
+ *                 PDM_den += (V1 - V2/V1)             # <<<<<<<<<<<<<<
+ * 
+ *         return PDM_num*self.normalizer/PDM_den
+ */
+      __pyx_v_PDM_den = (__pyx_v_PDM_den + (__pyx_v_V1 - (__pyx_v_V2 / __pyx_v_V1)));
+
+      /* "P4J/algorithms/phase_dispersion_minimization.pyx":88
+ *                     V1 += 1.0/self.err2[i]
+ *                     V2 += 1.0/powf(self.err2[i], 2.0)
+ *             if samples_in_bin > 2:             # <<<<<<<<<<<<<<
+ *                 PDM_num += unbiased_weighted_variance(self.tmp_mag, self.tmp_err2, samples_in_bin)*(V1 - V2/V1)
+ *                 PDM_den += (V1 - V2/V1)
+ */
+    }
   }
 
-  /* "P4J/LKSL.pyx":73
- *             err2_acum += 1.0/err2_err2
- *             SL += powf(self.mag[self.sorted_idx[i-1]] - self.mag[self.sorted_idx[i]], 2.0)/err2_err2
- *         return 0.5*SL*self.normalizer/err2_acum             # <<<<<<<<<<<<<<
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":92
+ *                 PDM_den += (V1 - V2/V1)
+ * 
+ *         return PDM_num*self.normalizer/PDM_den             # <<<<<<<<<<<<<<
  * 
  *     def __dealloc__(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_4 = PyFloat_FromDouble((((0.5 * __pyx_v_SL) * __pyx_v_self->normalizer) / ((double)__pyx_v_err2_acum))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 73, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_r = __pyx_t_4;
-  __pyx_t_4 = 0;
+  __pyx_t_8 = PyFloat_FromDouble(((__pyx_v_PDM_num * __pyx_v_self->normalizer) / __pyx_v_PDM_den)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_8);
+  __pyx_r = __pyx_t_8;
+  __pyx_t_8 = 0;
   goto __pyx_L0;
 
-  /* "P4J/LKSL.pyx":61
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":70
  *         self.normalizer = 1.0/unbiased_weighted_variance(self.mag, self.err2, self.N)
  * 
  *     def eval_frequency(self, DTYPE_t freq):             # <<<<<<<<<<<<<<
@@ -2603,8 +2797,8 @@ static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_2eval_frequency(struct __pyx_obj_3P4J
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_AddTraceback("P4J.LKSL.LKSL.eval_frequency", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_XDECREF(__pyx_t_8);
+  __Pyx_AddTraceback("P4J.algorithms.phase_dispersion_minimization.PDM.eval_frequency", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -2612,8 +2806,8 @@ static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_2eval_frequency(struct __pyx_obj_3P4J
   return __pyx_r;
 }
 
-/* "P4J/LKSL.pyx":75
- *         return 0.5*SL*self.normalizer/err2_acum
+/* "P4J/algorithms/phase_dispersion_minimization.pyx":94
+ *         return PDM_num*self.normalizer/PDM_den
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         PyMem_Free(self.mjd)
@@ -2621,21 +2815,21 @@ static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_2eval_frequency(struct __pyx_obj_3P4J
  */
 
 /* Python wrapper */
-static void __pyx_pw_3P4J_4LKSL_4LKSL_5__dealloc__(PyObject *__pyx_v_self); /*proto*/
-static void __pyx_pw_3P4J_4LKSL_4LKSL_5__dealloc__(PyObject *__pyx_v_self) {
+static void __pyx_pw_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_5__dealloc__(PyObject *__pyx_v_self); /*proto*/
+static void __pyx_pw_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_5__dealloc__(PyObject *__pyx_v_self) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__ (wrapper)", 0);
-  __pyx_pf_3P4J_4LKSL_4LKSL_4__dealloc__(((struct __pyx_obj_3P4J_4LKSL_LKSL *)__pyx_v_self));
+  __pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_4__dealloc__(((struct __pyx_obj_3P4J_10algorithms_29phase_dispersion_minimization_PDM *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
 }
 
-static void __pyx_pf_3P4J_4LKSL_4LKSL_4__dealloc__(struct __pyx_obj_3P4J_4LKSL_LKSL *__pyx_v_self) {
+static void __pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_4__dealloc__(struct __pyx_obj_3P4J_10algorithms_29phase_dispersion_minimization_PDM *__pyx_v_self) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "P4J/LKSL.pyx":76
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":95
  * 
  *     def __dealloc__(self):
  *         PyMem_Free(self.mjd)             # <<<<<<<<<<<<<<
@@ -2644,7 +2838,7 @@ static void __pyx_pf_3P4J_4LKSL_4LKSL_4__dealloc__(struct __pyx_obj_3P4J_4LKSL_L
  */
   PyMem_Free(__pyx_v_self->mjd);
 
-  /* "P4J/LKSL.pyx":77
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":96
  *     def __dealloc__(self):
  *         PyMem_Free(self.mjd)
  *         PyMem_Free(self.mag)             # <<<<<<<<<<<<<<
@@ -2653,7 +2847,7 @@ static void __pyx_pf_3P4J_4LKSL_4LKSL_4__dealloc__(struct __pyx_obj_3P4J_4LKSL_L
  */
   PyMem_Free(__pyx_v_self->mag);
 
-  /* "P4J/LKSL.pyx":78
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":97
  *         PyMem_Free(self.mjd)
  *         PyMem_Free(self.mag)
  *         PyMem_Free(self.err2)             # <<<<<<<<<<<<<<
@@ -2662,26 +2856,44 @@ static void __pyx_pf_3P4J_4LKSL_4LKSL_4__dealloc__(struct __pyx_obj_3P4J_4LKSL_L
  */
   PyMem_Free(__pyx_v_self->err2);
 
-  /* "P4J/LKSL.pyx":79
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":98
  *         PyMem_Free(self.mag)
  *         PyMem_Free(self.err2)
  *         PyMem_Free(self.phase)             # <<<<<<<<<<<<<<
  *         PyMem_Free(self.sorted_idx)
- * 
+ *         PyMem_Free(self.tmp_mag)
  */
   PyMem_Free(__pyx_v_self->phase);
 
-  /* "P4J/LKSL.pyx":80
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":99
  *         PyMem_Free(self.err2)
  *         PyMem_Free(self.phase)
  *         PyMem_Free(self.sorted_idx)             # <<<<<<<<<<<<<<
- * 
- * 
+ *         PyMem_Free(self.tmp_mag)
+ *         PyMem_Free(self.tmp_err2)
  */
   PyMem_Free(__pyx_v_self->sorted_idx);
 
-  /* "P4J/LKSL.pyx":75
- *         return 0.5*SL*self.normalizer/err2_acum
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":100
+ *         PyMem_Free(self.phase)
+ *         PyMem_Free(self.sorted_idx)
+ *         PyMem_Free(self.tmp_mag)             # <<<<<<<<<<<<<<
+ *         PyMem_Free(self.tmp_err2)
+ * 
+ */
+  PyMem_Free(__pyx_v_self->tmp_mag);
+
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":101
+ *         PyMem_Free(self.sorted_idx)
+ *         PyMem_Free(self.tmp_mag)
+ *         PyMem_Free(self.tmp_err2)             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  PyMem_Free(__pyx_v_self->tmp_err2);
+
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":94
+ *         return PDM_num*self.normalizer/PDM_den
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         PyMem_Free(self.mjd)
@@ -2694,24 +2906,24 @@ static void __pyx_pf_3P4J_4LKSL_4LKSL_4__dealloc__(struct __pyx_obj_3P4J_4LKSL_L
 
 /* "(tree fragment)":1
  * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
- *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx cannot be converted to a Python object for pickling")
+ *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx,self.tmp_err2,self.tmp_mag cannot be converted to a Python object for pickling")
  * def __setstate_cython__(self, __pyx_state):
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_3P4J_4LKSL_4LKSL_7__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_3P4J_4LKSL_4LKSL_7__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_7__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_7__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_3P4J_4LKSL_4LKSL_6__reduce_cython__(((struct __pyx_obj_3P4J_4LKSL_LKSL *)__pyx_v_self));
+  __pyx_r = __pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_6__reduce_cython__(((struct __pyx_obj_3P4J_10algorithms_29phase_dispersion_minimization_PDM *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_6__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_3P4J_4LKSL_LKSL *__pyx_v_self) {
+static PyObject *__pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_6__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_3P4J_10algorithms_29phase_dispersion_minimization_PDM *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2719,9 +2931,9 @@ static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_6__reduce_cython__(CYTHON_UNUSED stru
 
   /* "(tree fragment)":2
  * def __reduce_cython__(self):
- *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx cannot be converted to a Python object for pickling")             # <<<<<<<<<<<<<<
+ *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx,self.tmp_err2,self.tmp_mag cannot be converted to a Python object for pickling")             # <<<<<<<<<<<<<<
  * def __setstate_cython__(self, __pyx_state):
- *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx cannot be converted to a Python object for pickling")
+ *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx,self.tmp_err2,self.tmp_mag cannot be converted to a Python object for pickling")
  */
   __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -2731,14 +2943,14 @@ static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_6__reduce_cython__(CYTHON_UNUSED stru
 
   /* "(tree fragment)":1
  * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
- *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx cannot be converted to a Python object for pickling")
+ *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx,self.tmp_err2,self.tmp_mag cannot be converted to a Python object for pickling")
  * def __setstate_cython__(self, __pyx_state):
  */
 
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("P4J.LKSL.LKSL.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("P4J.algorithms.phase_dispersion_minimization.PDM.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
@@ -2747,34 +2959,34 @@ static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_6__reduce_cython__(CYTHON_UNUSED stru
 
 /* "(tree fragment)":3
  * def __reduce_cython__(self):
- *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx cannot be converted to a Python object for pickling")
+ *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx,self.tmp_err2,self.tmp_mag cannot be converted to a Python object for pickling")
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
- *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx cannot be converted to a Python object for pickling")
+ *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx,self.tmp_err2,self.tmp_mag cannot be converted to a Python object for pickling")
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_3P4J_4LKSL_4LKSL_9__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
-static PyObject *__pyx_pw_3P4J_4LKSL_4LKSL_9__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pw_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_9__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_9__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_3P4J_4LKSL_4LKSL_8__setstate_cython__(((struct __pyx_obj_3P4J_4LKSL_LKSL *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+  __pyx_r = __pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_8__setstate_cython__(((struct __pyx_obj_3P4J_10algorithms_29phase_dispersion_minimization_PDM *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_8__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_3P4J_4LKSL_LKSL *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_8__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_3P4J_10algorithms_29phase_dispersion_minimization_PDM *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__setstate_cython__", 0);
 
   /* "(tree fragment)":4
- *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx cannot be converted to a Python object for pickling")
+ *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx,self.tmp_err2,self.tmp_mag cannot be converted to a Python object for pickling")
  * def __setstate_cython__(self, __pyx_state):
- *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx cannot be converted to a Python object for pickling")             # <<<<<<<<<<<<<<
+ *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx,self.tmp_err2,self.tmp_mag cannot be converted to a Python object for pickling")             # <<<<<<<<<<<<<<
  */
   __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -2784,15 +2996,15 @@ static PyObject *__pyx_pf_3P4J_4LKSL_4LKSL_8__setstate_cython__(CYTHON_UNUSED st
 
   /* "(tree fragment)":3
  * def __reduce_cython__(self):
- *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx cannot be converted to a Python object for pickling")
+ *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx,self.tmp_err2,self.tmp_mag cannot be converted to a Python object for pickling")
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
- *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx cannot be converted to a Python object for pickling")
+ *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx,self.tmp_err2,self.tmp_mag cannot be converted to a Python object for pickling")
  */
 
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("P4J.LKSL.LKSL.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("P4J.algorithms.phase_dispersion_minimization.PDM.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
@@ -15622,7 +15834,7 @@ static PyObject *__pyx_unpickle_Enum__set_state(struct __pyx_MemviewEnum_obj *__
   return __pyx_r;
 }
 
-static PyObject *__pyx_tp_new_3P4J_4LKSL_LKSL(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+static PyObject *__pyx_tp_new_3P4J_10algorithms_29phase_dispersion_minimization_PDM(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
   PyObject *o;
   if (likely((t->tp_flags & Py_TPFLAGS_IS_ABSTRACT) == 0)) {
     o = (*t->tp_alloc)(t, 0);
@@ -15633,7 +15845,7 @@ static PyObject *__pyx_tp_new_3P4J_4LKSL_LKSL(PyTypeObject *t, CYTHON_UNUSED PyO
   return o;
 }
 
-static void __pyx_tp_dealloc_3P4J_4LKSL_LKSL(PyObject *o) {
+static void __pyx_tp_dealloc_3P4J_10algorithms_29phase_dispersion_minimization_PDM(PyObject *o) {
   #if CYTHON_USE_TP_FINALIZE
   if (unlikely(PyType_HasFeature(Py_TYPE(o), Py_TPFLAGS_HAVE_FINALIZE) && Py_TYPE(o)->tp_finalize) && (!PyType_IS_GC(Py_TYPE(o)) || !_PyGC_FINALIZED(o))) {
     if (PyObject_CallFinalizerFromDealloc(o)) return;
@@ -15643,26 +15855,26 @@ static void __pyx_tp_dealloc_3P4J_4LKSL_LKSL(PyObject *o) {
     PyObject *etype, *eval, *etb;
     PyErr_Fetch(&etype, &eval, &etb);
     ++Py_REFCNT(o);
-    __pyx_pw_3P4J_4LKSL_4LKSL_5__dealloc__(o);
+    __pyx_pw_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_5__dealloc__(o);
     --Py_REFCNT(o);
     PyErr_Restore(etype, eval, etb);
   }
   (*Py_TYPE(o)->tp_free)(o);
 }
 
-static PyMethodDef __pyx_methods_3P4J_4LKSL_LKSL[] = {
-  {"eval_frequency", (PyCFunction)__pyx_pw_3P4J_4LKSL_4LKSL_3eval_frequency, METH_O, 0},
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_3P4J_4LKSL_4LKSL_7__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_3P4J_4LKSL_4LKSL_9__setstate_cython__, METH_O, 0},
+static PyMethodDef __pyx_methods_3P4J_10algorithms_29phase_dispersion_minimization_PDM[] = {
+  {"eval_frequency", (PyCFunction)__pyx_pw_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_3eval_frequency, METH_O, 0},
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_7__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_9__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
 };
 
-static PyTypeObject __pyx_type_3P4J_4LKSL_LKSL = {
+static PyTypeObject __pyx_type_3P4J_10algorithms_29phase_dispersion_minimization_PDM = {
   PyVarObject_HEAD_INIT(0, 0)
-  "P4J.LKSL.LKSL", /*tp_name*/
-  sizeof(struct __pyx_obj_3P4J_4LKSL_LKSL), /*tp_basicsize*/
+  "P4J.algorithms.phase_dispersion_minimization.PDM", /*tp_name*/
+  sizeof(struct __pyx_obj_3P4J_10algorithms_29phase_dispersion_minimization_PDM), /*tp_basicsize*/
   0, /*tp_itemsize*/
-  __pyx_tp_dealloc_3P4J_4LKSL_LKSL, /*tp_dealloc*/
+  __pyx_tp_dealloc_3P4J_10algorithms_29phase_dispersion_minimization_PDM, /*tp_dealloc*/
   #if PY_VERSION_HEX < 0x030800b4
   0, /*tp_print*/
   #endif
@@ -15695,7 +15907,7 @@ static PyTypeObject __pyx_type_3P4J_4LKSL_LKSL = {
   0, /*tp_weaklistoffset*/
   0, /*tp_iter*/
   0, /*tp_iternext*/
-  __pyx_methods_3P4J_4LKSL_LKSL, /*tp_methods*/
+  __pyx_methods_3P4J_10algorithms_29phase_dispersion_minimization_PDM, /*tp_methods*/
   0, /*tp_members*/
   0, /*tp_getset*/
   0, /*tp_base*/
@@ -15703,9 +15915,9 @@ static PyTypeObject __pyx_type_3P4J_4LKSL_LKSL = {
   0, /*tp_descr_get*/
   0, /*tp_descr_set*/
   0, /*tp_dictoffset*/
-  __pyx_pw_3P4J_4LKSL_4LKSL_1__init__, /*tp_init*/
+  __pyx_pw_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_1__init__, /*tp_init*/
   0, /*tp_alloc*/
-  __pyx_tp_new_3P4J_4LKSL_LKSL, /*tp_new*/
+  __pyx_tp_new_3P4J_10algorithms_29phase_dispersion_minimization_PDM, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -15848,7 +16060,7 @@ static PyBufferProcs __pyx_tp_as_buffer_array = {
 
 static PyTypeObject __pyx_type___pyx_array = {
   PyVarObject_HEAD_INIT(0, 0)
-  "P4J.LKSL.array", /*tp_name*/
+  "P4J.algorithms.phase_dispersion_minimization.array", /*tp_name*/
   sizeof(struct __pyx_array_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_array, /*tp_dealloc*/
@@ -15967,7 +16179,7 @@ static PyMethodDef __pyx_methods_Enum[] = {
 
 static PyTypeObject __pyx_type___pyx_MemviewEnum = {
   PyVarObject_HEAD_INIT(0, 0)
-  "P4J.LKSL.Enum", /*tp_name*/
+  "P4J.algorithms.phase_dispersion_minimization.Enum", /*tp_name*/
   sizeof(struct __pyx_MemviewEnum_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_Enum, /*tp_dealloc*/
@@ -16228,7 +16440,7 @@ static PyBufferProcs __pyx_tp_as_buffer_memoryview = {
 
 static PyTypeObject __pyx_type___pyx_memoryview = {
   PyVarObject_HEAD_INIT(0, 0)
-  "P4J.LKSL.memoryview", /*tp_name*/
+  "P4J.algorithms.phase_dispersion_minimization.memoryview", /*tp_name*/
   sizeof(struct __pyx_memoryview_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_memoryview, /*tp_dealloc*/
@@ -16366,7 +16578,7 @@ static struct PyGetSetDef __pyx_getsets__memoryviewslice[] = {
 
 static PyTypeObject __pyx_type___pyx_memoryviewslice = {
   PyVarObject_HEAD_INIT(0, 0)
-  "P4J.LKSL._memoryviewslice", /*tp_name*/
+  "P4J.algorithms.phase_dispersion_minimization._memoryviewslice", /*tp_name*/
   sizeof(struct __pyx_memoryviewslice_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc__memoryviewslice, /*tp_dealloc*/
@@ -16448,17 +16660,17 @@ static PyMethodDef __pyx_methods[] = {
 #if PY_MAJOR_VERSION >= 3
 #if CYTHON_PEP489_MULTI_PHASE_INIT
 static PyObject* __pyx_pymod_create(PyObject *spec, PyModuleDef *def); /*proto*/
-static int __pyx_pymod_exec_LKSL(PyObject* module); /*proto*/
+static int __pyx_pymod_exec_phase_dispersion_minimization(PyObject* module); /*proto*/
 static PyModuleDef_Slot __pyx_moduledef_slots[] = {
   {Py_mod_create, (void*)__pyx_pymod_create},
-  {Py_mod_exec, (void*)__pyx_pymod_exec_LKSL},
+  {Py_mod_exec, (void*)__pyx_pymod_exec_phase_dispersion_minimization},
   {0, NULL}
 };
 #endif
 
 static struct PyModuleDef __pyx_moduledef = {
     PyModuleDef_HEAD_INIT,
-    "LKSL",
+    "phase_dispersion_minimization",
     0, /* m_doc */
   #if CYTHON_PEP489_MULTI_PHASE_INIT
     0, /* m_size */
@@ -16500,12 +16712,13 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Indirect_dimensions_not_supporte, __pyx_k_Indirect_dimensions_not_supporte, sizeof(__pyx_k_Indirect_dimensions_not_supporte), 0, 0, 1, 0},
   {&__pyx_kp_s_Invalid_mode_expected_c_or_fortr, __pyx_k_Invalid_mode_expected_c_or_fortr, sizeof(__pyx_k_Invalid_mode_expected_c_or_fortr), 0, 0, 1, 0},
   {&__pyx_kp_s_Invalid_shape_in_axis_d_d, __pyx_k_Invalid_shape_in_axis_d_d, sizeof(__pyx_k_Invalid_shape_in_axis_d_d), 0, 0, 1, 0},
-  {&__pyx_n_s_LKSL, __pyx_k_LKSL, sizeof(__pyx_k_LKSL), 0, 0, 1, 1},
   {&__pyx_n_s_MemoryError, __pyx_k_MemoryError, sizeof(__pyx_k_MemoryError), 0, 0, 1, 1},
   {&__pyx_kp_s_MemoryView_of_r_at_0x_x, __pyx_k_MemoryView_of_r_at_0x_x, sizeof(__pyx_k_MemoryView_of_r_at_0x_x), 0, 0, 1, 0},
   {&__pyx_kp_s_MemoryView_of_r_object, __pyx_k_MemoryView_of_r_object, sizeof(__pyx_k_MemoryView_of_r_object), 0, 0, 1, 0},
+  {&__pyx_n_s_Nbins, __pyx_k_Nbins, sizeof(__pyx_k_Nbins), 0, 0, 1, 1},
   {&__pyx_n_b_O, __pyx_k_O, sizeof(__pyx_k_O), 0, 0, 0, 1},
   {&__pyx_kp_s_Out_of_bounds_on_buffer_access_a, __pyx_k_Out_of_bounds_on_buffer_access_a, sizeof(__pyx_k_Out_of_bounds_on_buffer_access_a), 0, 0, 1, 0},
+  {&__pyx_n_s_PDM, __pyx_k_PDM, sizeof(__pyx_k_PDM), 0, 0, 1, 1},
   {&__pyx_n_s_PickleError, __pyx_k_PickleError, sizeof(__pyx_k_PickleError), 0, 0, 1, 1},
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
   {&__pyx_kp_s_Unable_to_convert_item_to_object, __pyx_k_Unable_to_convert_item_to_object, sizeof(__pyx_k_Unable_to_convert_item_to_object), 0, 0, 1, 0},
@@ -16581,8 +16794,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(0, 46, __pyx_L1_error)
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 64, __pyx_L1_error)
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(1, 2, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 133, __pyx_L1_error)
   __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(1, 151, __pyx_L1_error)
@@ -16600,18 +16813,18 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
 
   /* "(tree fragment)":2
  * def __reduce_cython__(self):
- *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx cannot be converted to a Python object for pickling")             # <<<<<<<<<<<<<<
+ *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx,self.tmp_err2,self.tmp_mag cannot be converted to a Python object for pickling")             # <<<<<<<<<<<<<<
  * def __setstate_cython__(self, __pyx_state):
- *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx cannot be converted to a Python object for pickling")
+ *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx,self.tmp_err2,self.tmp_mag cannot be converted to a Python object for pickling")
  */
   __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_self_err2_self_mag_self_mjd_self); if (unlikely(!__pyx_tuple_)) __PYX_ERR(1, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
   /* "(tree fragment)":4
- *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx cannot be converted to a Python object for pickling")
+ *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx,self.tmp_err2,self.tmp_mag cannot be converted to a Python object for pickling")
  * def __setstate_cython__(self, __pyx_state):
- *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx cannot be converted to a Python object for pickling")             # <<<<<<<<<<<<<<
+ *     raise TypeError("self.err2,self.mag,self.mjd,self.phase,self.sorted_idx,self.tmp_err2,self.tmp_mag cannot be converted to a Python object for pickling")             # <<<<<<<<<<<<<<
  */
   __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_self_err2_self_mag_self_mjd_self); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
@@ -16932,16 +17145,16 @@ static int __Pyx_modinit_type_init_code(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_init_code", 0);
   /*--- Type init code ---*/
-  if (PyType_Ready(&__pyx_type_3P4J_4LKSL_LKSL) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_3P4J_10algorithms_29phase_dispersion_minimization_PDM) < 0) __PYX_ERR(0, 28, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
-  __pyx_type_3P4J_4LKSL_LKSL.tp_print = 0;
+  __pyx_type_3P4J_10algorithms_29phase_dispersion_minimization_PDM.tp_print = 0;
   #endif
-  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_3P4J_4LKSL_LKSL.tp_dictoffset && __pyx_type_3P4J_4LKSL_LKSL.tp_getattro == PyObject_GenericGetAttr)) {
-    __pyx_type_3P4J_4LKSL_LKSL.tp_getattro = __Pyx_PyObject_GenericGetAttr;
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_3P4J_10algorithms_29phase_dispersion_minimization_PDM.tp_dictoffset && __pyx_type_3P4J_10algorithms_29phase_dispersion_minimization_PDM.tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_type_3P4J_10algorithms_29phase_dispersion_minimization_PDM.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_LKSL, (PyObject *)&__pyx_type_3P4J_4LKSL_LKSL) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_3P4J_4LKSL_LKSL) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
-  __pyx_ptype_3P4J_4LKSL_LKSL = &__pyx_type_3P4J_4LKSL_LKSL;
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_PDM, (PyObject *)&__pyx_type_3P4J_10algorithms_29phase_dispersion_minimization_PDM) < 0) __PYX_ERR(0, 28, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_3P4J_10algorithms_29phase_dispersion_minimization_PDM) < 0) __PYX_ERR(0, 28, __pyx_L1_error)
+  __pyx_ptype_3P4J_10algorithms_29phase_dispersion_minimization_PDM = &__pyx_type_3P4J_10algorithms_29phase_dispersion_minimization_PDM;
   __pyx_vtabptr_array = &__pyx_vtable_array;
   __pyx_vtable_array.get_memview = (PyObject *(*)(struct __pyx_array_obj *))__pyx_array_get_memview;
   if (PyType_Ready(&__pyx_type___pyx_array) < 0) __PYX_ERR(1, 105, __pyx_L1_error)
@@ -17021,9 +17234,9 @@ static int __Pyx_modinit_function_import_code(void) {
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__Pyx_modinit_function_import_code", 0);
   /*--- Function import code ---*/
-  __pyx_t_1 = PyImport_ImportModule("P4J.utilities"); if (!__pyx_t_1) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (__Pyx_ImportFunction(__pyx_t_1, "argsort", (void (**)(void))&__pyx_f_3P4J_9utilities_argsort, "void (__pyx_t_3P4J_9utilities_DTYPE_t *, __pyx_t_3P4J_9utilities_ITYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (__Pyx_ImportFunction(__pyx_t_1, "unbiased_weighted_variance", (void (**)(void))&__pyx_f_3P4J_9utilities_unbiased_weighted_variance, "__pyx_t_3P4J_9utilities_DTYPE_t (__pyx_t_3P4J_9utilities_DTYPE_t *, __pyx_t_3P4J_9utilities_DTYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_t_1 = PyImport_ImportModule("P4J.algorithms.utilities"); if (!__pyx_t_1) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_ImportFunction(__pyx_t_1, "argsort", (void (**)(void))&__pyx_f_3P4J_10algorithms_9utilities_argsort, "void (__pyx_t_3P4J_10algorithms_9utilities_DTYPE_t *, __pyx_t_3P4J_10algorithms_9utilities_ITYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_ImportFunction(__pyx_t_1, "unbiased_weighted_variance", (void (**)(void))&__pyx_f_3P4J_10algorithms_9utilities_unbiased_weighted_variance, "__pyx_t_3P4J_10algorithms_9utilities_DTYPE_t (__pyx_t_3P4J_10algorithms_9utilities_DTYPE_t *, __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   Py_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -17050,11 +17263,11 @@ static int __Pyx_modinit_function_import_code(void) {
 
 
 #if PY_MAJOR_VERSION < 3
-__Pyx_PyMODINIT_FUNC initLKSL(void) CYTHON_SMALL_CODE; /*proto*/
-__Pyx_PyMODINIT_FUNC initLKSL(void)
+__Pyx_PyMODINIT_FUNC initphase_dispersion_minimization(void) CYTHON_SMALL_CODE; /*proto*/
+__Pyx_PyMODINIT_FUNC initphase_dispersion_minimization(void)
 #else
-__Pyx_PyMODINIT_FUNC PyInit_LKSL(void) CYTHON_SMALL_CODE; /*proto*/
-__Pyx_PyMODINIT_FUNC PyInit_LKSL(void)
+__Pyx_PyMODINIT_FUNC PyInit_phase_dispersion_minimization(void) CYTHON_SMALL_CODE; /*proto*/
+__Pyx_PyMODINIT_FUNC PyInit_phase_dispersion_minimization(void)
 #if CYTHON_PEP489_MULTI_PHASE_INIT
 {
   return PyModuleDef_Init(&__pyx_moduledef);
@@ -17121,7 +17334,7 @@ bad:
 }
 
 
-static CYTHON_SMALL_CODE int __pyx_pymod_exec_LKSL(PyObject *__pyx_pyinit_module)
+static CYTHON_SMALL_CODE int __pyx_pymod_exec_phase_dispersion_minimization(PyObject *__pyx_pyinit_module)
 #endif
 #endif
 {
@@ -17131,7 +17344,7 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_LKSL(PyObject *__pyx_pyinit_module
   #if CYTHON_PEP489_MULTI_PHASE_INIT
   if (__pyx_m) {
     if (__pyx_m == __pyx_pyinit_module) return 0;
-    PyErr_SetString(PyExc_RuntimeError, "Module 'LKSL' has already been imported. Re-initialisation is not supported.");
+    PyErr_SetString(PyExc_RuntimeError, "Module 'phase_dispersion_minimization' has already been imported. Re-initialisation is not supported.");
     return -1;
   }
   #elif PY_MAJOR_VERSION >= 3
@@ -17146,7 +17359,7 @@ if (!__Pyx_RefNanny) {
       Py_FatalError("failed to import 'refnanny' module");
 }
 #endif
-  __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_LKSL(void)", 0);
+  __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_phase_dispersion_minimization(void)", 0);
   if (__Pyx_check_binary_version() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #ifdef __Pxy_PyFrame_Initialize_Offsets
   __Pxy_PyFrame_Initialize_Offsets();
@@ -17185,7 +17398,7 @@ if (!__Pyx_RefNanny) {
   Py_INCREF(__pyx_m);
   #else
   #if PY_MAJOR_VERSION < 3
-  __pyx_m = Py_InitModule4("LKSL", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
+  __pyx_m = Py_InitModule4("phase_dispersion_minimization", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
   #else
   __pyx_m = PyModule_Create(&__pyx_moduledef);
   #endif
@@ -17203,14 +17416,14 @@ if (!__Pyx_RefNanny) {
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
-  if (__pyx_module_is_main_P4J__LKSL) {
+  if (__pyx_module_is_main_P4J__algorithms__phase_dispersion_minimization) {
     if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name_2, __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 1, __pyx_L1_error)
-    if (!PyDict_GetItemString(modules, "P4J.LKSL")) {
-      if (unlikely(PyDict_SetItemString(modules, "P4J.LKSL", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
+    if (!PyDict_GetItemString(modules, "P4J.algorithms.phase_dispersion_minimization")) {
+      if (unlikely(PyDict_SetItemString(modules, "P4J.algorithms.phase_dispersion_minimization", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
     }
   }
   #endif
@@ -17231,7 +17444,7 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "P4J/LKSL.pyx":1
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":1
  * #!/usr/bin/python             # <<<<<<<<<<<<<<
  * #cython: initializedcheck=False, boundscheck=False, wraparound=False, cdivision=True, profile=False
  * 
@@ -17401,11 +17614,11 @@ if (!__Pyx_RefNanny) {
   __Pyx_XDECREF(__pyx_t_1);
   if (__pyx_m) {
     if (__pyx_d) {
-      __Pyx_AddTraceback("init P4J.LKSL", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init P4J.algorithms.phase_dispersion_minimization", __pyx_clineno, __pyx_lineno, __pyx_filename);
     }
     Py_CLEAR(__pyx_m);
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init P4J.LKSL");
+    PyErr_SetString(PyExc_ImportError, "init P4J.algorithms.phase_dispersion_minimization");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -20341,7 +20554,7 @@ no_fail:
 }
 
 /* ObjectToMemviewSlice */
-  static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_4LKSL_DTYPE_t(PyObject *obj, int writable_flag) {
+  static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t(PyObject *obj, int writable_flag) {
     __Pyx_memviewslice result = { 0, 0, { 0 }, { 0 }, { 0 } };
     __Pyx_BufFmt_StackElem stack[1];
     int axes_specs[] = { (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_CONTIG) };
@@ -20352,7 +20565,7 @@ no_fail:
     }
     retcode = __Pyx_ValidateAndInit_memviewslice(axes_specs, __Pyx_IS_C_CONTIG,
                                                  (PyBUF_C_CONTIGUOUS | PyBUF_FORMAT) | writable_flag, 1,
-                                                 &__Pyx_TypeInfo_nn___pyx_t_3P4J_4LKSL_DTYPE_t, stack,
+                                                 &__Pyx_TypeInfo_nn___pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t, stack,
                                                  &result, obj);
     if (unlikely(retcode == -1))
         goto __pyx_fail;
@@ -20361,6 +20574,59 @@ __pyx_fail:
     result.memview = NULL;
     result.data = NULL;
     return result;
+}
+
+/* CIntFromPyVerify */
+  #define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)\
+    __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 0)
+#define __PYX_VERIFY_RETURN_INT_EXC(target_type, func_type, func_value)\
+    __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 1)
+#define __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, exc)\
+    {\
+        func_type value = func_value;\
+        if (sizeof(target_type) < sizeof(func_type)) {\
+            if (unlikely(value != (func_type) (target_type) value)) {\
+                func_type zero = 0;\
+                if (exc && unlikely(value == (func_type)-1 && PyErr_Occurred()))\
+                    return (target_type) -1;\
+                if (is_unsigned && unlikely(value < zero))\
+                    goto raise_neg_overflow;\
+                else\
+                    goto raise_overflow;\
+            }\
+        }\
+        return (target_type) value;\
+    }
+
+/* CIntToPy */
+  static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
+    const int neg_one = (int) ((int) 0 - (int) 1), const_zero = (int) 0;
+    const int is_unsigned = neg_one > const_zero;
+    if (is_unsigned) {
+        if (sizeof(int) < sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(int) <= sizeof(unsigned long)) {
+            return PyLong_FromUnsignedLong((unsigned long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(int) <= sizeof(unsigned PY_LONG_LONG)) {
+            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
+#endif
+        }
+    } else {
+        if (sizeof(int) <= sizeof(long)) {
+            return PyInt_FromLong((long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(int) <= sizeof(PY_LONG_LONG)) {
+            return PyLong_FromLongLong((PY_LONG_LONG) value);
+#endif
+        }
+    }
+    {
+        int one = 1; int little = (int)*(unsigned char *)&one;
+        unsigned char *bytes = (unsigned char *)&value;
+        return _PyLong_FromByteArray(bytes, sizeof(int),
+                                     little, !is_unsigned);
+    }
 }
 
 /* MemviewSliceCopyTemplate */
@@ -20429,28 +20695,6 @@ no_fail:
     __Pyx_RefNannyFinishContext();
     return new_mvs;
 }
-
-/* CIntFromPyVerify */
-  #define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)\
-    __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 0)
-#define __PYX_VERIFY_RETURN_INT_EXC(target_type, func_type, func_value)\
-    __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 1)
-#define __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, exc)\
-    {\
-        func_type value = func_value;\
-        if (sizeof(target_type) < sizeof(func_type)) {\
-            if (unlikely(value != (func_type) (target_type) value)) {\
-                func_type zero = 0;\
-                if (exc && unlikely(value == (func_type)-1 && PyErr_Occurred()))\
-                    return (target_type) -1;\
-                if (is_unsigned && unlikely(value < zero))\
-                    goto raise_neg_overflow;\
-                else\
-                    goto raise_overflow;\
-            }\
-        }\
-        return (target_type) value;\
-    }
 
 /* CIntFromPy */
   static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *x) {
@@ -20828,37 +21072,6 @@ raise_neg_overflow:
     PyErr_SetString(PyExc_OverflowError,
         "can't convert negative value to long");
     return (long) -1;
-}
-
-/* CIntToPy */
-  static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
-    const int neg_one = (int) ((int) 0 - (int) 1), const_zero = (int) 0;
-    const int is_unsigned = neg_one > const_zero;
-    if (is_unsigned) {
-        if (sizeof(int) < sizeof(long)) {
-            return PyInt_FromLong((long) value);
-        } else if (sizeof(int) <= sizeof(unsigned long)) {
-            return PyLong_FromUnsignedLong((unsigned long) value);
-#ifdef HAVE_LONG_LONG
-        } else if (sizeof(int) <= sizeof(unsigned PY_LONG_LONG)) {
-            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
-#endif
-        }
-    } else {
-        if (sizeof(int) <= sizeof(long)) {
-            return PyInt_FromLong((long) value);
-#ifdef HAVE_LONG_LONG
-        } else if (sizeof(int) <= sizeof(PY_LONG_LONG)) {
-            return PyLong_FromLongLong((PY_LONG_LONG) value);
-#endif
-        }
-    }
-    {
-        int one = 1; int little = (int)*(unsigned char *)&one;
-        unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(int),
-                                     little, !is_unsigned);
-    }
 }
 
 /* CIntToPy */

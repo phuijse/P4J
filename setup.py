@@ -10,7 +10,7 @@ except ImportError:
     raise ImportError("Please install Numpy before installing P4J")
 
 
-include_dirs = [np.get_include()]
+include_dirs = ['.', np.get_include()]
 library_dirs = []
 if os.name == 'nt':  # Windows, assumming MSVC compiler
     libraries = []
@@ -21,53 +21,12 @@ elif os.name == 'posix':  # UNIX, assumming GCC compiler
 
 extensions = [
         Extension("*",
-            sources=[os.path.join("P4J", "*.pyx")],
+            sources=[os.path.join("P4J", "algorithms", "*.pyx")],
             extra_compile_args=compiler_args,
             include_dirs=include_dirs,
             libraries=libraries,
             library_dirs=library_dirs
             )]
-
-"""
-extensions = [
-        Extension("P4J.QMI",
-            sources=[os.path.join("P4J", "QMI.pyx")],
-            extra_compile_args=compiler_args,
-            include_dirs=include_dirs,
-            libraries=libraries,
-            library_dirs=library_dirs
-            ),
-        Extension("P4J.LKSL",
-            sources=[os.path.join("P4J", "LKSL.pyx")],
-            extra_compile_args=compiler_args,
-            include_dirs=include_dirs,
-            libraries=libraries,
-            library_dirs=library_dirs
-            ),
-        Extension("P4J.MHAOV",
-            sources=[os.path.join("P4J", "MHAOV.pyx")],
-            extra_compile_args=compiler_args,
-            include_dirs=include_dirs,
-            libraries=libraries,
-            library_dirs=library_dirs
-            ),
-        Extension("P4J.PDM",
-            sources=[os.path.join("P4J", "PDM.pyx")],
-            extra_compile_args=compiler_args,
-            include_dirs=include_dirs,
-            libraries=libraries,
-            library_dirs=library_dirs
-            ),
-        Extension("P4J.utilities",
-            sources=[os.path.join("P4J", "utilities.pyx")],
-            extra_compile_args=compiler_args,
-            include_dirs=include_dirs,
-            libraries=libraries,
-            library_dirs=library_dirs
-            ),
-        ]
-"""
-
 
 """
 Allow users to install the module even if they do not have cython.
@@ -141,7 +100,6 @@ setup(
     keywords = ['astronomy periodic time series correntropy'],
     install_requires=[
         'numpy >=1.9.0',
-        #'scipy',
     ],
     classifiers = [
         'Natural Language :: English',

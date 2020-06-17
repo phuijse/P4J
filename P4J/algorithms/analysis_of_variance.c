@@ -9,17 +9,18 @@
             "-ffast-math"
         ],
         "include_dirs": [
+            ".",
             "/home/phuijse/.conda/envs/astro/lib/python3.8/site-packages/numpy/core/include"
         ],
         "libraries": [
             "m"
         ],
-        "name": "P4J.AOV",
+        "name": "P4J.algorithms.analysis_of_variance",
         "sources": [
-            "P4J/AOV.pyx"
+            "P4J/algorithms/analysis_of_variance.pyx"
         ]
     },
-    "module_name": "P4J.AOV"
+    "module_name": "P4J.algorithms.analysis_of_variance"
 }
 END: Cython Metadata */
 
@@ -615,8 +616,8 @@ static CYTHON_INLINE float __PYX_NAN() {
   #endif
 #endif
 
-#define __PYX_HAVE__P4J__AOV
-#define __PYX_HAVE_API__P4J__AOV
+#define __PYX_HAVE__P4J__algorithms__analysis_of_variance
+#define __PYX_HAVE_API__P4J__algorithms__analysis_of_variance
 /* Early includes */
 #include "math.h"
 #include "pythread.h"
@@ -832,7 +833,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "P4J/AOV.pyx",
+  "P4J/algorithms/analysis_of_variance.pyx",
   "stringsource",
 };
 /* MemviewSliceStruct.proto */
@@ -950,7 +951,7 @@ typedef struct {
  * ctypedef int ITYPE_t
  * 
  */
-typedef float __pyx_t_3P4J_9utilities_DTYPE_t;
+typedef float __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t;
 
 /* "utilities.pxd":3
  * 
@@ -959,53 +960,53 @@ typedef float __pyx_t_3P4J_9utilities_DTYPE_t;
  * 
  * cdef void argsort(DTYPE_t*, ITYPE_t*, Py_ssize_t)
  */
-typedef int __pyx_t_3P4J_9utilities_ITYPE_t;
+typedef int __pyx_t_3P4J_10algorithms_9utilities_ITYPE_t;
 
-/* "P4J/AOV.pyx":9
+/* "P4J/algorithms/analysis_of_variance.pyx":9
  * from .utilities cimport argsort, mean, weighted_mean, unbiased_weighted_variance
  * 
  * ctypedef float DTYPE_t             # <<<<<<<<<<<<<<
  * ctypedef int ITYPE_t
  * 
  */
-typedef float __pyx_t_3P4J_3AOV_DTYPE_t;
+typedef float __pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t;
 
-/* "P4J/AOV.pyx":10
+/* "P4J/algorithms/analysis_of_variance.pyx":10
  * 
  * ctypedef float DTYPE_t
  * ctypedef int ITYPE_t             # <<<<<<<<<<<<<<
  * 
  * cdef extern from "math.h":
  */
-typedef int __pyx_t_3P4J_3AOV_ITYPE_t;
+typedef int __pyx_t_3P4J_10algorithms_20analysis_of_variance_ITYPE_t;
 
 /*--- Type declarations ---*/
-struct __pyx_obj_3P4J_3AOV_AOV;
+struct __pyx_obj_3P4J_10algorithms_20analysis_of_variance_AOV;
 struct __pyx_array_obj;
 struct __pyx_MemviewEnum_obj;
 struct __pyx_memoryview_obj;
 struct __pyx_memoryviewslice_obj;
 
-/* "P4J/AOV.pyx":26
+/* "P4J/algorithms/analysis_of_variance.pyx":26
  * """
  * 
  * cdef class AOV:             # <<<<<<<<<<<<<<
  *     cdef Py_ssize_t N
  *     cdef DTYPE_t* phase
  */
-struct __pyx_obj_3P4J_3AOV_AOV {
+struct __pyx_obj_3P4J_10algorithms_20analysis_of_variance_AOV {
   PyObject_HEAD
   Py_ssize_t N;
-  __pyx_t_3P4J_3AOV_DTYPE_t *phase;
-  __pyx_t_3P4J_3AOV_DTYPE_t *mjd;
-  __pyx_t_3P4J_3AOV_DTYPE_t *mag;
-  __pyx_t_3P4J_3AOV_DTYPE_t *err;
-  __pyx_t_3P4J_3AOV_DTYPE_t normalizer;
-  __pyx_t_3P4J_3AOV_DTYPE_t barx;
-  __pyx_t_3P4J_3AOV_ITYPE_t Nbins;
-  __pyx_t_3P4J_3AOV_DTYPE_t *tmp_mag;
-  __pyx_t_3P4J_3AOV_DTYPE_t *tmp_err;
-  __pyx_t_3P4J_3AOV_ITYPE_t *tmp_sizes;
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t *phase;
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t *mjd;
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t *mag;
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t *err;
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t normalizer;
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t barx;
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_ITYPE_t Nbins;
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t *tmp_mag;
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t *tmp_err;
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_ITYPE_t *tmp_sizes;
   int use_errorbars;
 };
 
@@ -1704,7 +1705,7 @@ static int __Pyx_ValidateAndInit_memviewslice(
                 PyObject *original_obj);
 
 /* ObjectToMemviewSlice.proto */
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_3AOV_DTYPE_t(PyObject *, int writable_flag);
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t(PyObject *, int writable_flag);
 
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
@@ -1754,14 +1755,14 @@ static PyObject *__pyx_memoryviewslice_assign_item_from_object(struct __pyx_memo
 
 /* Module declarations from 'cpython.mem' */
 
-/* Module declarations from 'P4J.utilities' */
-static void (*__pyx_f_3P4J_9utilities_argsort)(__pyx_t_3P4J_9utilities_DTYPE_t *, __pyx_t_3P4J_9utilities_ITYPE_t *, Py_ssize_t); /*proto*/
-static __pyx_t_3P4J_9utilities_DTYPE_t (*__pyx_f_3P4J_9utilities_mean)(__pyx_t_3P4J_9utilities_DTYPE_t *, Py_ssize_t); /*proto*/
-static __pyx_t_3P4J_9utilities_DTYPE_t (*__pyx_f_3P4J_9utilities_weighted_mean)(__pyx_t_3P4J_9utilities_DTYPE_t *, __pyx_t_3P4J_9utilities_DTYPE_t *, Py_ssize_t); /*proto*/
-static __pyx_t_3P4J_9utilities_DTYPE_t (*__pyx_f_3P4J_9utilities_unbiased_weighted_variance)(__pyx_t_3P4J_9utilities_DTYPE_t *, __pyx_t_3P4J_9utilities_DTYPE_t *, Py_ssize_t); /*proto*/
+/* Module declarations from 'P4J.algorithms.utilities' */
+static void (*__pyx_f_3P4J_10algorithms_9utilities_argsort)(__pyx_t_3P4J_10algorithms_9utilities_DTYPE_t *, __pyx_t_3P4J_10algorithms_9utilities_ITYPE_t *, Py_ssize_t); /*proto*/
+static __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t (*__pyx_f_3P4J_10algorithms_9utilities_mean)(__pyx_t_3P4J_10algorithms_9utilities_DTYPE_t *, Py_ssize_t); /*proto*/
+static __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t (*__pyx_f_3P4J_10algorithms_9utilities_weighted_mean)(__pyx_t_3P4J_10algorithms_9utilities_DTYPE_t *, __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t *, Py_ssize_t); /*proto*/
+static __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t (*__pyx_f_3P4J_10algorithms_9utilities_unbiased_weighted_variance)(__pyx_t_3P4J_10algorithms_9utilities_DTYPE_t *, __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t *, Py_ssize_t); /*proto*/
 
-/* Module declarations from 'P4J.AOV' */
-static PyTypeObject *__pyx_ptype_3P4J_3AOV_AOV = 0;
+/* Module declarations from 'P4J.algorithms.analysis_of_variance' */
+static PyTypeObject *__pyx_ptype_3P4J_10algorithms_20analysis_of_variance_AOV = 0;
 static PyTypeObject *__pyx_array_type = 0;
 static PyTypeObject *__pyx_MemviewEnum_type = 0;
 static PyTypeObject *__pyx_memoryview_type = 0;
@@ -1806,12 +1807,12 @@ static void __pyx_memoryview_refcount_objects_in_slice(char *, Py_ssize_t *, Py_
 static void __pyx_memoryview_slice_assign_scalar(__Pyx_memviewslice *, int, size_t, void *, int); /*proto*/
 static void __pyx_memoryview__slice_assign_scalar(char *, Py_ssize_t *, Py_ssize_t *, int, size_t, void *); /*proto*/
 static PyObject *__pyx_unpickle_Enum__set_state(struct __pyx_MemviewEnum_obj *, PyObject *); /*proto*/
-static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_3P4J_3AOV_DTYPE_t = { "DTYPE_t", NULL, sizeof(__pyx_t_3P4J_3AOV_DTYPE_t), { 0 }, 0, 'R', 0, 0 };
-#define __Pyx_MODULE_NAME "P4J.AOV"
-extern int __pyx_module_is_main_P4J__AOV;
-int __pyx_module_is_main_P4J__AOV = 0;
+static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t = { "DTYPE_t", NULL, sizeof(__pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t), { 0 }, 0, 'R', 0, 0 };
+#define __Pyx_MODULE_NAME "P4J.algorithms.analysis_of_variance"
+extern int __pyx_module_is_main_P4J__algorithms__analysis_of_variance;
+int __pyx_module_is_main_P4J__algorithms__analysis_of_variance = 0;
 
-/* Implementation of 'P4J.AOV' */
+/* Implementation of 'P4J.algorithms.analysis_of_variance' */
 static PyObject *__pyx_builtin_MemoryError;
 static PyObject *__pyx_builtin_range;
 static PyObject *__pyx_builtin_TypeError;
@@ -2004,12 +2005,12 @@ static PyObject *__pyx_kp_s_unable_to_allocate_shape_and_str;
 static PyObject *__pyx_n_s_unpack;
 static PyObject *__pyx_n_s_update;
 static PyObject *__pyx_n_s_use_errorbars;
-static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__pyx_v_self, __Pyx_memviewslice __pyx_v_mjd, __Pyx_memviewslice __pyx_v_mag, __Pyx_memviewslice __pyx_v_err, __pyx_t_3P4J_3AOV_ITYPE_t __pyx_v_Nbins, PyObject *__pyx_v_use_errorbars); /* proto */
-static PyObject *__pyx_pf_3P4J_3AOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J_3AOV_AOV *__pyx_v_self, __pyx_t_3P4J_3AOV_DTYPE_t __pyx_v_freq); /* proto */
-static PyObject *__pyx_pf_3P4J_3AOV_3AOV_4eval_frequency_old(struct __pyx_obj_3P4J_3AOV_AOV *__pyx_v_self, __pyx_t_3P4J_3AOV_DTYPE_t __pyx_v_freq); /* proto */
-static void __pyx_pf_3P4J_3AOV_3AOV_6__dealloc__(struct __pyx_obj_3P4J_3AOV_AOV *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_3P4J_3AOV_3AOV_8__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_3P4J_3AOV_AOV *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_3P4J_3AOV_3AOV_10__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_3P4J_3AOV_AOV *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static int __pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV___init__(struct __pyx_obj_3P4J_10algorithms_20analysis_of_variance_AOV *__pyx_v_self, __Pyx_memviewslice __pyx_v_mjd, __Pyx_memviewslice __pyx_v_mag, __Pyx_memviewslice __pyx_v_err, __pyx_t_3P4J_10algorithms_20analysis_of_variance_ITYPE_t __pyx_v_Nbins, PyObject *__pyx_v_use_errorbars); /* proto */
+static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_2eval_frequency(struct __pyx_obj_3P4J_10algorithms_20analysis_of_variance_AOV *__pyx_v_self, __pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t __pyx_v_freq); /* proto */
+static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_frequency_old(struct __pyx_obj_3P4J_10algorithms_20analysis_of_variance_AOV *__pyx_v_self, __pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t __pyx_v_freq); /* proto */
+static void __pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_6__dealloc__(struct __pyx_obj_3P4J_10algorithms_20analysis_of_variance_AOV *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_8__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_3P4J_10algorithms_20analysis_of_variance_AOV *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_10__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_3P4J_10algorithms_20analysis_of_variance_AOV *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __pyx_array_obj *__pyx_v_self, PyObject *__pyx_v_shape, Py_ssize_t __pyx_v_itemsize, PyObject *__pyx_v_format, PyObject *__pyx_v_mode, int __pyx_v_allocate_buffer); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array_2__getbuffer__(struct __pyx_array_obj *__pyx_v_self, Py_buffer *__pyx_v_info, int __pyx_v_flags); /* proto */
 static void __pyx_array___pyx_pf_15View_dot_MemoryView_5array_4__dealloc__(struct __pyx_array_obj *__pyx_v_self); /* proto */
@@ -2052,7 +2053,7 @@ static PyObject *__pyx_pf_15View_dot_MemoryView_16_memoryviewslice_4base___get__
 static PyObject *__pyx_pf___pyx_memoryviewslice___reduce_cython__(CYTHON_UNUSED struct __pyx_memoryviewslice_obj *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf___pyx_memoryviewslice_2__setstate_cython__(CYTHON_UNUSED struct __pyx_memoryviewslice_obj *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_15View_dot_MemoryView___pyx_unpickle_Enum(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
-static PyObject *__pyx_tp_new_3P4J_3AOV_AOV(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_3P4J_10algorithms_20analysis_of_variance_AOV(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_array(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_Enum(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_memoryview(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
@@ -2090,7 +2091,7 @@ static PyObject *__pyx_tuple__26;
 static PyObject *__pyx_codeobj__27;
 /* Late includes */
 
-/* "P4J/AOV.pyx":39
+/* "P4J/algorithms/analysis_of_variance.pyx":39
  *     cdef int use_errorbars
  * 
  *     def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err, ITYPE_t Nbins=10, use_errorbars=1):             # <<<<<<<<<<<<<<
@@ -2099,12 +2100,12 @@ static PyObject *__pyx_codeobj__27;
  */
 
 /* Python wrapper */
-static int __pyx_pw_3P4J_3AOV_3AOV_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static int __pyx_pw_3P4J_3AOV_3AOV_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static int __pyx_pw_3P4J_10algorithms_20analysis_of_variance_3AOV_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static int __pyx_pw_3P4J_10algorithms_20analysis_of_variance_3AOV_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   __Pyx_memviewslice __pyx_v_mjd = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_mag = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_err = { 0, 0, { 0 }, { 0 }, { 0 } };
-  __pyx_t_3P4J_3AOV_ITYPE_t __pyx_v_Nbins;
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_ITYPE_t __pyx_v_Nbins;
   PyObject *__pyx_v_use_errorbars = 0;
   int __pyx_r;
   __Pyx_RefNannyDeclarations
@@ -2176,13 +2177,13 @@ static int __pyx_pw_3P4J_3AOV_3AOV_1__init__(PyObject *__pyx_v_self, PyObject *_
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_mjd = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_3AOV_DTYPE_t(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_mjd.memview)) __PYX_ERR(0, 39, __pyx_L3_error)
-    __pyx_v_mag = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_3AOV_DTYPE_t(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_mag.memview)) __PYX_ERR(0, 39, __pyx_L3_error)
-    __pyx_v_err = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_3AOV_DTYPE_t(values[2], PyBUF_WRITABLE); if (unlikely(!__pyx_v_err.memview)) __PYX_ERR(0, 39, __pyx_L3_error)
+    __pyx_v_mjd = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_mjd.memview)) __PYX_ERR(0, 39, __pyx_L3_error)
+    __pyx_v_mag = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_mag.memview)) __PYX_ERR(0, 39, __pyx_L3_error)
+    __pyx_v_err = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t(values[2], PyBUF_WRITABLE); if (unlikely(!__pyx_v_err.memview)) __PYX_ERR(0, 39, __pyx_L3_error)
     if (values[3]) {
       __pyx_v_Nbins = __Pyx_PyInt_As_int(values[3]); if (unlikely((__pyx_v_Nbins == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 39, __pyx_L3_error)
     } else {
-      __pyx_v_Nbins = ((__pyx_t_3P4J_3AOV_ITYPE_t)10);
+      __pyx_v_Nbins = ((__pyx_t_3P4J_10algorithms_20analysis_of_variance_ITYPE_t)10);
     }
     __pyx_v_use_errorbars = values[4];
   }
@@ -2190,18 +2191,18 @@ static int __pyx_pw_3P4J_3AOV_3AOV_1__init__(PyObject *__pyx_v_self, PyObject *_
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("__init__", 0, 3, 5, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 39, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("P4J.AOV.AOV.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("P4J.algorithms.analysis_of_variance.AOV.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_3P4J_3AOV_3AOV___init__(((struct __pyx_obj_3P4J_3AOV_AOV *)__pyx_v_self), __pyx_v_mjd, __pyx_v_mag, __pyx_v_err, __pyx_v_Nbins, __pyx_v_use_errorbars);
+  __pyx_r = __pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV___init__(((struct __pyx_obj_3P4J_10algorithms_20analysis_of_variance_AOV *)__pyx_v_self), __pyx_v_mjd, __pyx_v_mag, __pyx_v_err, __pyx_v_Nbins, __pyx_v_use_errorbars);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__pyx_v_self, __Pyx_memviewslice __pyx_v_mjd, __Pyx_memviewslice __pyx_v_mag, __Pyx_memviewslice __pyx_v_err, __pyx_t_3P4J_3AOV_ITYPE_t __pyx_v_Nbins, PyObject *__pyx_v_use_errorbars) {
+static int __pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV___init__(struct __pyx_obj_3P4J_10algorithms_20analysis_of_variance_AOV *__pyx_v_self, __Pyx_memviewslice __pyx_v_mjd, __Pyx_memviewslice __pyx_v_mag, __Pyx_memviewslice __pyx_v_err, __pyx_t_3P4J_10algorithms_20analysis_of_variance_ITYPE_t __pyx_v_Nbins, PyObject *__pyx_v_use_errorbars) {
   Py_ssize_t __pyx_v_i;
   int __pyx_r;
   __Pyx_RefNannyDeclarations
@@ -2213,7 +2214,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
   Py_ssize_t __pyx_t_6;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "P4J/AOV.pyx":41
+  /* "P4J/algorithms/analysis_of_variance.pyx":41
  *     def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err, ITYPE_t Nbins=10, use_errorbars=1):
  *         cdef Py_ssize_t i, j, mat_idx
  *         self.Nbins = Nbins             # <<<<<<<<<<<<<<
@@ -2222,7 +2223,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
  */
   __pyx_v_self->Nbins = __pyx_v_Nbins;
 
-  /* "P4J/AOV.pyx":42
+  /* "P4J/algorithms/analysis_of_variance.pyx":42
  *         cdef Py_ssize_t i, j, mat_idx
  *         self.Nbins = Nbins
  *         self.use_errorbars = use_errorbars             # <<<<<<<<<<<<<<
@@ -2232,7 +2233,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
   __pyx_t_1 = __Pyx_PyInt_As_int(__pyx_v_use_errorbars); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 42, __pyx_L1_error)
   __pyx_v_self->use_errorbars = __pyx_t_1;
 
-  /* "P4J/AOV.pyx":43
+  /* "P4J/algorithms/analysis_of_variance.pyx":43
  *         self.Nbins = Nbins
  *         self.use_errorbars = use_errorbars
  *         self.N = mag.shape[0]             # <<<<<<<<<<<<<<
@@ -2241,70 +2242,70 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
  */
   __pyx_v_self->N = (__pyx_v_mag.shape[0]);
 
-  /* "P4J/AOV.pyx":44
+  /* "P4J/algorithms/analysis_of_variance.pyx":44
  *         self.use_errorbars = use_errorbars
  *         self.N = mag.shape[0]
  *         self.mjd = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
  *         self.mag = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.err = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  */
-  __pyx_v_self->mjd = ((__pyx_t_3P4J_3AOV_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_3AOV_DTYPE_t)))));
+  __pyx_v_self->mjd = ((__pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t)))));
 
-  /* "P4J/AOV.pyx":45
+  /* "P4J/algorithms/analysis_of_variance.pyx":45
  *         self.N = mag.shape[0]
  *         self.mjd = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.mag = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
  *         self.err = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.phase = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  */
-  __pyx_v_self->mag = ((__pyx_t_3P4J_3AOV_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_3AOV_DTYPE_t)))));
+  __pyx_v_self->mag = ((__pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t)))));
 
-  /* "P4J/AOV.pyx":46
+  /* "P4J/algorithms/analysis_of_variance.pyx":46
  *         self.mjd = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.mag = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.err = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
  *         self.phase = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         #self.tmp_mag = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  */
-  __pyx_v_self->err = ((__pyx_t_3P4J_3AOV_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_3AOV_DTYPE_t)))));
+  __pyx_v_self->err = ((__pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t)))));
 
-  /* "P4J/AOV.pyx":47
+  /* "P4J/algorithms/analysis_of_variance.pyx":47
  *         self.mag = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.err = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.phase = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
  *         #self.tmp_mag = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         #self.tmp_err = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  */
-  __pyx_v_self->phase = ((__pyx_t_3P4J_3AOV_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_3AOV_DTYPE_t)))));
+  __pyx_v_self->phase = ((__pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t)))));
 
-  /* "P4J/AOV.pyx":50
+  /* "P4J/algorithms/analysis_of_variance.pyx":50
  *         #self.tmp_mag = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         #self.tmp_err = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.tmp_mag = <DTYPE_t*>PyMem_Malloc(self.N*self.Nbins*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
  *         self.tmp_err = <DTYPE_t*>PyMem_Malloc(self.N*self.Nbins*sizeof(DTYPE_t))
  *         self.tmp_sizes = <ITYPE_t*>PyMem_Malloc(self.Nbins*sizeof(ITYPE_t))
  */
-  __pyx_v_self->tmp_mag = ((__pyx_t_3P4J_3AOV_DTYPE_t *)PyMem_Malloc(((__pyx_v_self->N * __pyx_v_self->Nbins) * (sizeof(__pyx_t_3P4J_3AOV_DTYPE_t)))));
+  __pyx_v_self->tmp_mag = ((__pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t *)PyMem_Malloc(((__pyx_v_self->N * __pyx_v_self->Nbins) * (sizeof(__pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t)))));
 
-  /* "P4J/AOV.pyx":51
+  /* "P4J/algorithms/analysis_of_variance.pyx":51
  *         #self.tmp_err = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.tmp_mag = <DTYPE_t*>PyMem_Malloc(self.N*self.Nbins*sizeof(DTYPE_t))
  *         self.tmp_err = <DTYPE_t*>PyMem_Malloc(self.N*self.Nbins*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
  *         self.tmp_sizes = <ITYPE_t*>PyMem_Malloc(self.Nbins*sizeof(ITYPE_t))
  *         if not self.mjd:
  */
-  __pyx_v_self->tmp_err = ((__pyx_t_3P4J_3AOV_DTYPE_t *)PyMem_Malloc(((__pyx_v_self->N * __pyx_v_self->Nbins) * (sizeof(__pyx_t_3P4J_3AOV_DTYPE_t)))));
+  __pyx_v_self->tmp_err = ((__pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t *)PyMem_Malloc(((__pyx_v_self->N * __pyx_v_self->Nbins) * (sizeof(__pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t)))));
 
-  /* "P4J/AOV.pyx":52
+  /* "P4J/algorithms/analysis_of_variance.pyx":52
  *         self.tmp_mag = <DTYPE_t*>PyMem_Malloc(self.N*self.Nbins*sizeof(DTYPE_t))
  *         self.tmp_err = <DTYPE_t*>PyMem_Malloc(self.N*self.Nbins*sizeof(DTYPE_t))
  *         self.tmp_sizes = <ITYPE_t*>PyMem_Malloc(self.Nbins*sizeof(ITYPE_t))             # <<<<<<<<<<<<<<
  *         if not self.mjd:
  *             raise MemoryError()
  */
-  __pyx_v_self->tmp_sizes = ((__pyx_t_3P4J_3AOV_ITYPE_t *)PyMem_Malloc((__pyx_v_self->Nbins * (sizeof(__pyx_t_3P4J_3AOV_ITYPE_t)))));
+  __pyx_v_self->tmp_sizes = ((__pyx_t_3P4J_10algorithms_20analysis_of_variance_ITYPE_t *)PyMem_Malloc((__pyx_v_self->Nbins * (sizeof(__pyx_t_3P4J_10algorithms_20analysis_of_variance_ITYPE_t)))));
 
-  /* "P4J/AOV.pyx":53
+  /* "P4J/algorithms/analysis_of_variance.pyx":53
  *         self.tmp_err = <DTYPE_t*>PyMem_Malloc(self.N*self.Nbins*sizeof(DTYPE_t))
  *         self.tmp_sizes = <ITYPE_t*>PyMem_Malloc(self.Nbins*sizeof(ITYPE_t))
  *         if not self.mjd:             # <<<<<<<<<<<<<<
@@ -2314,7 +2315,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
   __pyx_t_2 = ((!(__pyx_v_self->mjd != 0)) != 0);
   if (unlikely(__pyx_t_2)) {
 
-    /* "P4J/AOV.pyx":54
+    /* "P4J/algorithms/analysis_of_variance.pyx":54
  *         self.tmp_sizes = <ITYPE_t*>PyMem_Malloc(self.Nbins*sizeof(ITYPE_t))
  *         if not self.mjd:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
@@ -2323,7 +2324,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
  */
     PyErr_NoMemory(); __PYX_ERR(0, 54, __pyx_L1_error)
 
-    /* "P4J/AOV.pyx":53
+    /* "P4J/algorithms/analysis_of_variance.pyx":53
  *         self.tmp_err = <DTYPE_t*>PyMem_Malloc(self.N*self.Nbins*sizeof(DTYPE_t))
  *         self.tmp_sizes = <ITYPE_t*>PyMem_Malloc(self.Nbins*sizeof(ITYPE_t))
  *         if not self.mjd:             # <<<<<<<<<<<<<<
@@ -2332,7 +2333,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
  */
   }
 
-  /* "P4J/AOV.pyx":55
+  /* "P4J/algorithms/analysis_of_variance.pyx":55
  *         if not self.mjd:
  *             raise MemoryError()
  *         if not self.phase:             # <<<<<<<<<<<<<<
@@ -2342,7 +2343,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
   __pyx_t_2 = ((!(__pyx_v_self->phase != 0)) != 0);
   if (unlikely(__pyx_t_2)) {
 
-    /* "P4J/AOV.pyx":56
+    /* "P4J/algorithms/analysis_of_variance.pyx":56
  *             raise MemoryError()
  *         if not self.phase:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
@@ -2351,7 +2352,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
  */
     PyErr_NoMemory(); __PYX_ERR(0, 56, __pyx_L1_error)
 
-    /* "P4J/AOV.pyx":55
+    /* "P4J/algorithms/analysis_of_variance.pyx":55
  *         if not self.mjd:
  *             raise MemoryError()
  *         if not self.phase:             # <<<<<<<<<<<<<<
@@ -2360,7 +2361,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
  */
   }
 
-  /* "P4J/AOV.pyx":57
+  /* "P4J/algorithms/analysis_of_variance.pyx":57
  *         if not self.phase:
  *             raise MemoryError()
  *         if not self.mag:             # <<<<<<<<<<<<<<
@@ -2370,7 +2371,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
   __pyx_t_2 = ((!(__pyx_v_self->mag != 0)) != 0);
   if (unlikely(__pyx_t_2)) {
 
-    /* "P4J/AOV.pyx":58
+    /* "P4J/algorithms/analysis_of_variance.pyx":58
  *             raise MemoryError()
  *         if not self.mag:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
@@ -2379,7 +2380,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
  */
     PyErr_NoMemory(); __PYX_ERR(0, 58, __pyx_L1_error)
 
-    /* "P4J/AOV.pyx":57
+    /* "P4J/algorithms/analysis_of_variance.pyx":57
  *         if not self.phase:
  *             raise MemoryError()
  *         if not self.mag:             # <<<<<<<<<<<<<<
@@ -2388,7 +2389,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
  */
   }
 
-  /* "P4J/AOV.pyx":59
+  /* "P4J/algorithms/analysis_of_variance.pyx":59
  *         if not self.mag:
  *             raise MemoryError()
  *         if not self.err:             # <<<<<<<<<<<<<<
@@ -2398,7 +2399,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
   __pyx_t_2 = ((!(__pyx_v_self->err != 0)) != 0);
   if (unlikely(__pyx_t_2)) {
 
-    /* "P4J/AOV.pyx":60
+    /* "P4J/algorithms/analysis_of_variance.pyx":60
  *             raise MemoryError()
  *         if not self.err:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
@@ -2407,7 +2408,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
  */
     PyErr_NoMemory(); __PYX_ERR(0, 60, __pyx_L1_error)
 
-    /* "P4J/AOV.pyx":59
+    /* "P4J/algorithms/analysis_of_variance.pyx":59
  *         if not self.mag:
  *             raise MemoryError()
  *         if not self.err:             # <<<<<<<<<<<<<<
@@ -2416,7 +2417,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
  */
   }
 
-  /* "P4J/AOV.pyx":61
+  /* "P4J/algorithms/analysis_of_variance.pyx":61
  *         if not self.err:
  *             raise MemoryError()
  *         if not self.tmp_mag:             # <<<<<<<<<<<<<<
@@ -2426,7 +2427,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
   __pyx_t_2 = ((!(__pyx_v_self->tmp_mag != 0)) != 0);
   if (unlikely(__pyx_t_2)) {
 
-    /* "P4J/AOV.pyx":62
+    /* "P4J/algorithms/analysis_of_variance.pyx":62
  *             raise MemoryError()
  *         if not self.tmp_mag:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
@@ -2435,7 +2436,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
  */
     PyErr_NoMemory(); __PYX_ERR(0, 62, __pyx_L1_error)
 
-    /* "P4J/AOV.pyx":61
+    /* "P4J/algorithms/analysis_of_variance.pyx":61
  *         if not self.err:
  *             raise MemoryError()
  *         if not self.tmp_mag:             # <<<<<<<<<<<<<<
@@ -2444,7 +2445,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
  */
   }
 
-  /* "P4J/AOV.pyx":63
+  /* "P4J/algorithms/analysis_of_variance.pyx":63
  *         if not self.tmp_mag:
  *             raise MemoryError()
  *         if not self.tmp_err:             # <<<<<<<<<<<<<<
@@ -2454,7 +2455,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
   __pyx_t_2 = ((!(__pyx_v_self->tmp_err != 0)) != 0);
   if (unlikely(__pyx_t_2)) {
 
-    /* "P4J/AOV.pyx":64
+    /* "P4J/algorithms/analysis_of_variance.pyx":64
  *             raise MemoryError()
  *         if not self.tmp_err:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
@@ -2463,7 +2464,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
  */
     PyErr_NoMemory(); __PYX_ERR(0, 64, __pyx_L1_error)
 
-    /* "P4J/AOV.pyx":63
+    /* "P4J/algorithms/analysis_of_variance.pyx":63
  *         if not self.tmp_mag:
  *             raise MemoryError()
  *         if not self.tmp_err:             # <<<<<<<<<<<<<<
@@ -2472,7 +2473,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
  */
   }
 
-  /* "P4J/AOV.pyx":65
+  /* "P4J/algorithms/analysis_of_variance.pyx":65
  *         if not self.tmp_err:
  *             raise MemoryError()
  *         if not self.tmp_sizes:             # <<<<<<<<<<<<<<
@@ -2482,7 +2483,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
   __pyx_t_2 = ((!(__pyx_v_self->tmp_sizes != 0)) != 0);
   if (unlikely(__pyx_t_2)) {
 
-    /* "P4J/AOV.pyx":66
+    /* "P4J/algorithms/analysis_of_variance.pyx":66
  *             raise MemoryError()
  *         if not self.tmp_sizes:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
@@ -2491,7 +2492,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
  */
     PyErr_NoMemory(); __PYX_ERR(0, 66, __pyx_L1_error)
 
-    /* "P4J/AOV.pyx":65
+    /* "P4J/algorithms/analysis_of_variance.pyx":65
  *         if not self.tmp_err:
  *             raise MemoryError()
  *         if not self.tmp_sizes:             # <<<<<<<<<<<<<<
@@ -2500,7 +2501,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
  */
   }
 
-  /* "P4J/AOV.pyx":67
+  /* "P4J/algorithms/analysis_of_variance.pyx":67
  *         if not self.tmp_sizes:
  *             raise MemoryError()
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -2512,7 +2513,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
   for (__pyx_t_5 = 0; __pyx_t_5 < __pyx_t_4; __pyx_t_5+=1) {
     __pyx_v_i = __pyx_t_5;
 
-    /* "P4J/AOV.pyx":68
+    /* "P4J/algorithms/analysis_of_variance.pyx":68
  *             raise MemoryError()
  *         for i in range(self.N):
  *             self.mjd[i] = mjd[i]             # <<<<<<<<<<<<<<
@@ -2520,9 +2521,9 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
  *             self.err[i] = err[i]
  */
     __pyx_t_6 = __pyx_v_i;
-    (__pyx_v_self->mjd[__pyx_v_i]) = (*((__pyx_t_3P4J_3AOV_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_3AOV_DTYPE_t *) __pyx_v_mjd.data) + __pyx_t_6)) )));
+    (__pyx_v_self->mjd[__pyx_v_i]) = (*((__pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t *) __pyx_v_mjd.data) + __pyx_t_6)) )));
 
-    /* "P4J/AOV.pyx":69
+    /* "P4J/algorithms/analysis_of_variance.pyx":69
  *         for i in range(self.N):
  *             self.mjd[i] = mjd[i]
  *             self.mag[i] = mag[i]             # <<<<<<<<<<<<<<
@@ -2530,9 +2531,9 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
  *         self.normalizer = (self.N - Nbins)/(Nbins-1)
  */
     __pyx_t_6 = __pyx_v_i;
-    (__pyx_v_self->mag[__pyx_v_i]) = (*((__pyx_t_3P4J_3AOV_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_3AOV_DTYPE_t *) __pyx_v_mag.data) + __pyx_t_6)) )));
+    (__pyx_v_self->mag[__pyx_v_i]) = (*((__pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t *) __pyx_v_mag.data) + __pyx_t_6)) )));
 
-    /* "P4J/AOV.pyx":70
+    /* "P4J/algorithms/analysis_of_variance.pyx":70
  *             self.mjd[i] = mjd[i]
  *             self.mag[i] = mag[i]
  *             self.err[i] = err[i]             # <<<<<<<<<<<<<<
@@ -2540,10 +2541,10 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
  *         if self.use_errorbars:
  */
     __pyx_t_6 = __pyx_v_i;
-    (__pyx_v_self->err[__pyx_v_i]) = (*((__pyx_t_3P4J_3AOV_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_3AOV_DTYPE_t *) __pyx_v_err.data) + __pyx_t_6)) )));
+    (__pyx_v_self->err[__pyx_v_i]) = (*((__pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t *) __pyx_v_err.data) + __pyx_t_6)) )));
   }
 
-  /* "P4J/AOV.pyx":71
+  /* "P4J/algorithms/analysis_of_variance.pyx":71
  *             self.mag[i] = mag[i]
  *             self.err[i] = err[i]
  *         self.normalizer = (self.N - Nbins)/(Nbins-1)             # <<<<<<<<<<<<<<
@@ -2552,7 +2553,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
  */
   __pyx_v_self->normalizer = ((__pyx_v_self->N - __pyx_v_Nbins) / ((Py_ssize_t)(__pyx_v_Nbins - 1)));
 
-  /* "P4J/AOV.pyx":72
+  /* "P4J/algorithms/analysis_of_variance.pyx":72
  *             self.err[i] = err[i]
  *         self.normalizer = (self.N - Nbins)/(Nbins-1)
  *         if self.use_errorbars:             # <<<<<<<<<<<<<<
@@ -2562,16 +2563,16 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
   __pyx_t_2 = (__pyx_v_self->use_errorbars != 0);
   if (__pyx_t_2) {
 
-    /* "P4J/AOV.pyx":73
+    /* "P4J/algorithms/analysis_of_variance.pyx":73
  *         self.normalizer = (self.N - Nbins)/(Nbins-1)
  *         if self.use_errorbars:
  *             self.barx = weighted_mean(self.mag, self.err, self.N)             # <<<<<<<<<<<<<<
  *         else:
  *             self.barx = mean(self.mag, self.N)
  */
-    __pyx_v_self->barx = __pyx_f_3P4J_9utilities_weighted_mean(__pyx_v_self->mag, __pyx_v_self->err, __pyx_v_self->N);
+    __pyx_v_self->barx = __pyx_f_3P4J_10algorithms_9utilities_weighted_mean(__pyx_v_self->mag, __pyx_v_self->err, __pyx_v_self->N);
 
-    /* "P4J/AOV.pyx":72
+    /* "P4J/algorithms/analysis_of_variance.pyx":72
  *             self.err[i] = err[i]
  *         self.normalizer = (self.N - Nbins)/(Nbins-1)
  *         if self.use_errorbars:             # <<<<<<<<<<<<<<
@@ -2581,7 +2582,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
     goto __pyx_L12;
   }
 
-  /* "P4J/AOV.pyx":75
+  /* "P4J/algorithms/analysis_of_variance.pyx":75
  *             self.barx = weighted_mean(self.mag, self.err, self.N)
  *         else:
  *             self.barx = mean(self.mag, self.N)             # <<<<<<<<<<<<<<
@@ -2589,11 +2590,11 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
  * 
  */
   /*else*/ {
-    __pyx_v_self->barx = __pyx_f_3P4J_9utilities_mean(__pyx_v_self->mag, __pyx_v_self->N);
+    __pyx_v_self->barx = __pyx_f_3P4J_10algorithms_9utilities_mean(__pyx_v_self->mag, __pyx_v_self->N);
   }
   __pyx_L12:;
 
-  /* "P4J/AOV.pyx":39
+  /* "P4J/algorithms/analysis_of_variance.pyx":39
  *     cdef int use_errorbars
  * 
  *     def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err, ITYPE_t Nbins=10, use_errorbars=1):             # <<<<<<<<<<<<<<
@@ -2605,7 +2606,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
   __pyx_r = 0;
   goto __pyx_L0;
   __pyx_L1_error:;
-  __Pyx_AddTraceback("P4J.AOV.AOV.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("P4J.algorithms.analysis_of_variance.AOV.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_mjd, 1);
@@ -2615,7 +2616,7 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
   return __pyx_r;
 }
 
-/* "P4J/AOV.pyx":78
+/* "P4J/algorithms/analysis_of_variance.pyx":78
  * 
  * 
  *     def eval_frequency(self, DTYPE_t freq):             # <<<<<<<<<<<<<<
@@ -2624,9 +2625,9 @@ static int __pyx_pf_3P4J_3AOV_3AOV___init__(struct __pyx_obj_3P4J_3AOV_AOV *__py
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_3P4J_3AOV_3AOV_3eval_frequency(PyObject *__pyx_v_self, PyObject *__pyx_arg_freq); /*proto*/
-static PyObject *__pyx_pw_3P4J_3AOV_3AOV_3eval_frequency(PyObject *__pyx_v_self, PyObject *__pyx_arg_freq) {
-  __pyx_t_3P4J_3AOV_DTYPE_t __pyx_v_freq;
+static PyObject *__pyx_pw_3P4J_10algorithms_20analysis_of_variance_3AOV_3eval_frequency(PyObject *__pyx_v_self, PyObject *__pyx_arg_freq); /*proto*/
+static PyObject *__pyx_pw_3P4J_10algorithms_20analysis_of_variance_3AOV_3eval_frequency(PyObject *__pyx_v_self, PyObject *__pyx_arg_freq) {
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t __pyx_v_freq;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("eval_frequency (wrapper)", 0);
@@ -2635,38 +2636,38 @@ static PyObject *__pyx_pw_3P4J_3AOV_3AOV_3eval_frequency(PyObject *__pyx_v_self,
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
-  __Pyx_AddTraceback("P4J.AOV.AOV.eval_frequency", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("P4J.algorithms.analysis_of_variance.AOV.eval_frequency", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_3P4J_3AOV_3AOV_2eval_frequency(((struct __pyx_obj_3P4J_3AOV_AOV *)__pyx_v_self), ((__pyx_t_3P4J_3AOV_DTYPE_t)__pyx_v_freq));
+  __pyx_r = __pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_2eval_frequency(((struct __pyx_obj_3P4J_10algorithms_20analysis_of_variance_AOV *)__pyx_v_self), ((__pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t)__pyx_v_freq));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_3P4J_3AOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J_3AOV_AOV *__pyx_v_self, __pyx_t_3P4J_3AOV_DTYPE_t __pyx_v_freq) {
+static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_2eval_frequency(struct __pyx_obj_3P4J_10algorithms_20analysis_of_variance_AOV *__pyx_v_self, __pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t __pyx_v_freq) {
   Py_ssize_t __pyx_v_i;
   Py_ssize_t __pyx_v_j;
-  __pyx_t_3P4J_3AOV_DTYPE_t __pyx_v_num;
-  __pyx_t_3P4J_3AOV_DTYPE_t __pyx_v_den;
-  __pyx_t_3P4J_3AOV_DTYPE_t __pyx_v_barxi;
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t __pyx_v_num;
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t __pyx_v_den;
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t __pyx_v_barxi;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   Py_ssize_t __pyx_t_1;
   Py_ssize_t __pyx_t_2;
   Py_ssize_t __pyx_t_3;
-  __pyx_t_3P4J_3AOV_ITYPE_t __pyx_t_4;
-  __pyx_t_3P4J_3AOV_ITYPE_t __pyx_t_5;
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_ITYPE_t __pyx_t_4;
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_ITYPE_t __pyx_t_5;
   Py_ssize_t __pyx_t_6;
   int __pyx_t_7;
-  __pyx_t_3P4J_3AOV_ITYPE_t __pyx_t_8;
-  __pyx_t_3P4J_3AOV_ITYPE_t __pyx_t_9;
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_ITYPE_t __pyx_t_8;
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_ITYPE_t __pyx_t_9;
   PyObject *__pyx_t_10 = NULL;
   __Pyx_RefNannySetupContext("eval_frequency", 0);
 
-  /* "P4J/AOV.pyx":81
+  /* "P4J/algorithms/analysis_of_variance.pyx":81
  *         # More memory consuming but almost twice as fast!
  *         cdef Py_ssize_t i, j
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -2678,7 +2679,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J_3
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/AOV.pyx":82
+    /* "P4J/algorithms/analysis_of_variance.pyx":82
  *         cdef Py_ssize_t i, j
  *         for i in range(self.N):
  *             self.phase[i] = fmodf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]             # <<<<<<<<<<<<<<
@@ -2688,7 +2689,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J_3
     (__pyx_v_self->phase[__pyx_v_i]) = (fmodf((__pyx_v_self->mjd[__pyx_v_i]), (1.0 / ((double)__pyx_v_freq))) * __pyx_v_freq);
   }
 
-  /* "P4J/AOV.pyx":83
+  /* "P4J/algorithms/analysis_of_variance.pyx":83
  *         for i in range(self.N):
  *             self.phase[i] = fmodf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]
  *         cdef DTYPE_t num=0.0, den=0.0             # <<<<<<<<<<<<<<
@@ -2698,7 +2699,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J_3
   __pyx_v_num = 0.0;
   __pyx_v_den = 0.0;
 
-  /* "P4J/AOV.pyx":87
+  /* "P4J/algorithms/analysis_of_variance.pyx":87
  *         cdef DTYPE_t barxi
  * 
  *         for j in range(self.Nbins):             # <<<<<<<<<<<<<<
@@ -2710,7 +2711,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J_3
   for (__pyx_t_1 = 0; __pyx_t_1 < __pyx_t_5; __pyx_t_1+=1) {
     __pyx_v_j = __pyx_t_1;
 
-    /* "P4J/AOV.pyx":88
+    /* "P4J/algorithms/analysis_of_variance.pyx":88
  * 
  *         for j in range(self.Nbins):
  *             self.tmp_sizes[j] = 0             # <<<<<<<<<<<<<<
@@ -2720,7 +2721,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J_3
     (__pyx_v_self->tmp_sizes[__pyx_v_j]) = 0;
   }
 
-  /* "P4J/AOV.pyx":90
+  /* "P4J/algorithms/analysis_of_variance.pyx":90
  *             self.tmp_sizes[j] = 0
  * 
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -2732,7 +2733,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J_3
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/AOV.pyx":91
+    /* "P4J/algorithms/analysis_of_variance.pyx":91
  * 
  *         for i in range(self.N):
  *             j = (int)(floorf(self.phase[i]*self.Nbins))             # <<<<<<<<<<<<<<
@@ -2741,7 +2742,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J_3
  */
     __pyx_v_j = ((Py_ssize_t)floorf(((__pyx_v_self->phase[__pyx_v_i]) * __pyx_v_self->Nbins)));
 
-    /* "P4J/AOV.pyx":92
+    /* "P4J/algorithms/analysis_of_variance.pyx":92
  *         for i in range(self.N):
  *             j = (int)(floorf(self.phase[i]*self.Nbins))
  *             self.tmp_mag[self.tmp_sizes[j] + self.N*j] = self.mag[i]             # <<<<<<<<<<<<<<
@@ -2750,7 +2751,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J_3
  */
     (__pyx_v_self->tmp_mag[((__pyx_v_self->tmp_sizes[__pyx_v_j]) + (__pyx_v_self->N * __pyx_v_j))]) = (__pyx_v_self->mag[__pyx_v_i]);
 
-    /* "P4J/AOV.pyx":93
+    /* "P4J/algorithms/analysis_of_variance.pyx":93
  *             j = (int)(floorf(self.phase[i]*self.Nbins))
  *             self.tmp_mag[self.tmp_sizes[j] + self.N*j] = self.mag[i]
  *             self.tmp_err[self.tmp_sizes[j] + self.N*j] = self.err[i]             # <<<<<<<<<<<<<<
@@ -2759,7 +2760,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J_3
  */
     (__pyx_v_self->tmp_err[((__pyx_v_self->tmp_sizes[__pyx_v_j]) + (__pyx_v_self->N * __pyx_v_j))]) = (__pyx_v_self->err[__pyx_v_i]);
 
-    /* "P4J/AOV.pyx":94
+    /* "P4J/algorithms/analysis_of_variance.pyx":94
  *             self.tmp_mag[self.tmp_sizes[j] + self.N*j] = self.mag[i]
  *             self.tmp_err[self.tmp_sizes[j] + self.N*j] = self.err[i]
  *             self.tmp_sizes[j] += 1             # <<<<<<<<<<<<<<
@@ -2770,7 +2771,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J_3
     (__pyx_v_self->tmp_sizes[__pyx_t_6]) = ((__pyx_v_self->tmp_sizes[__pyx_t_6]) + 1);
   }
 
-  /* "P4J/AOV.pyx":96
+  /* "P4J/algorithms/analysis_of_variance.pyx":96
  *             self.tmp_sizes[j] += 1
  * 
  *         for j in range(self.Nbins):             # <<<<<<<<<<<<<<
@@ -2782,7 +2783,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J_3
   for (__pyx_t_1 = 0; __pyx_t_1 < __pyx_t_5; __pyx_t_1+=1) {
     __pyx_v_j = __pyx_t_1;
 
-    /* "P4J/AOV.pyx":97
+    /* "P4J/algorithms/analysis_of_variance.pyx":97
  * 
  *         for j in range(self.Nbins):
  *             if self.tmp_sizes[j] > 1:             # <<<<<<<<<<<<<<
@@ -2792,7 +2793,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J_3
     __pyx_t_7 = (((__pyx_v_self->tmp_sizes[__pyx_v_j]) > 1) != 0);
     if (__pyx_t_7) {
 
-      /* "P4J/AOV.pyx":98
+      /* "P4J/algorithms/analysis_of_variance.pyx":98
  *         for j in range(self.Nbins):
  *             if self.tmp_sizes[j] > 1:
  *                 if self.use_errorbars:             # <<<<<<<<<<<<<<
@@ -2802,16 +2803,16 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J_3
       __pyx_t_7 = (__pyx_v_self->use_errorbars != 0);
       if (__pyx_t_7) {
 
-        /* "P4J/AOV.pyx":99
+        /* "P4J/algorithms/analysis_of_variance.pyx":99
  *             if self.tmp_sizes[j] > 1:
  *                 if self.use_errorbars:
  *                     barxi = weighted_mean((self.tmp_mag + self.N*j),             # <<<<<<<<<<<<<<
  *                                           (self.tmp_err + self.N*j),
  *                                           self.tmp_sizes[j])
  */
-        __pyx_v_barxi = __pyx_f_3P4J_9utilities_weighted_mean((__pyx_v_self->tmp_mag + (__pyx_v_self->N * __pyx_v_j)), (__pyx_v_self->tmp_err + (__pyx_v_self->N * __pyx_v_j)), (__pyx_v_self->tmp_sizes[__pyx_v_j]));
+        __pyx_v_barxi = __pyx_f_3P4J_10algorithms_9utilities_weighted_mean((__pyx_v_self->tmp_mag + (__pyx_v_self->N * __pyx_v_j)), (__pyx_v_self->tmp_err + (__pyx_v_self->N * __pyx_v_j)), (__pyx_v_self->tmp_sizes[__pyx_v_j]));
 
-        /* "P4J/AOV.pyx":98
+        /* "P4J/algorithms/analysis_of_variance.pyx":98
  *         for j in range(self.Nbins):
  *             if self.tmp_sizes[j] > 1:
  *                 if self.use_errorbars:             # <<<<<<<<<<<<<<
@@ -2821,7 +2822,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J_3
         goto __pyx_L12;
       }
 
-      /* "P4J/AOV.pyx":103
+      /* "P4J/algorithms/analysis_of_variance.pyx":103
  *                                           self.tmp_sizes[j])
  *                 else:
  *                     barxi = mean((self.tmp_mag + self.N*j), self.tmp_sizes[j])             # <<<<<<<<<<<<<<
@@ -2829,11 +2830,11 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J_3
  *                     den += (self.tmp_mag[i + self.N*j] - barxi)**2
  */
       /*else*/ {
-        __pyx_v_barxi = __pyx_f_3P4J_9utilities_mean((__pyx_v_self->tmp_mag + (__pyx_v_self->N * __pyx_v_j)), (__pyx_v_self->tmp_sizes[__pyx_v_j]));
+        __pyx_v_barxi = __pyx_f_3P4J_10algorithms_9utilities_mean((__pyx_v_self->tmp_mag + (__pyx_v_self->N * __pyx_v_j)), (__pyx_v_self->tmp_sizes[__pyx_v_j]));
       }
       __pyx_L12:;
 
-      /* "P4J/AOV.pyx":104
+      /* "P4J/algorithms/analysis_of_variance.pyx":104
  *                 else:
  *                     barxi = mean((self.tmp_mag + self.N*j), self.tmp_sizes[j])
  *                 for i in range(self.tmp_sizes[j]):             # <<<<<<<<<<<<<<
@@ -2845,7 +2846,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J_3
       for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_9; __pyx_t_2+=1) {
         __pyx_v_i = __pyx_t_2;
 
-        /* "P4J/AOV.pyx":105
+        /* "P4J/algorithms/analysis_of_variance.pyx":105
  *                     barxi = mean((self.tmp_mag + self.N*j), self.tmp_sizes[j])
  *                 for i in range(self.tmp_sizes[j]):
  *                     den += (self.tmp_mag[i + self.N*j] - barxi)**2             # <<<<<<<<<<<<<<
@@ -2855,7 +2856,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J_3
         __pyx_v_den = (__pyx_v_den + powf(((__pyx_v_self->tmp_mag[(__pyx_v_i + (__pyx_v_self->N * __pyx_v_j))]) - __pyx_v_barxi), 2.0));
       }
 
-      /* "P4J/AOV.pyx":106
+      /* "P4J/algorithms/analysis_of_variance.pyx":106
  *                 for i in range(self.tmp_sizes[j]):
  *                     den += (self.tmp_mag[i + self.N*j] - barxi)**2
  *                 num += self.tmp_sizes[j]*(barxi - self.barx)**2             # <<<<<<<<<<<<<<
@@ -2864,7 +2865,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J_3
  */
       __pyx_v_num = (__pyx_v_num + ((__pyx_v_self->tmp_sizes[__pyx_v_j]) * powf((__pyx_v_barxi - __pyx_v_self->barx), 2.0)));
 
-      /* "P4J/AOV.pyx":97
+      /* "P4J/algorithms/analysis_of_variance.pyx":97
  * 
  *         for j in range(self.Nbins):
  *             if self.tmp_sizes[j] > 1:             # <<<<<<<<<<<<<<
@@ -2874,7 +2875,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J_3
     }
   }
 
-  /* "P4J/AOV.pyx":108
+  /* "P4J/algorithms/analysis_of_variance.pyx":108
  *                 num += self.tmp_sizes[j]*(barxi - self.barx)**2
  * 
  *         return self.normalizer*num/den             # <<<<<<<<<<<<<<
@@ -2888,7 +2889,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J_3
   __pyx_t_10 = 0;
   goto __pyx_L0;
 
-  /* "P4J/AOV.pyx":78
+  /* "P4J/algorithms/analysis_of_variance.pyx":78
  * 
  * 
  *     def eval_frequency(self, DTYPE_t freq):             # <<<<<<<<<<<<<<
@@ -2899,7 +2900,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J_3
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_10);
-  __Pyx_AddTraceback("P4J.AOV.AOV.eval_frequency", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("P4J.algorithms.analysis_of_variance.AOV.eval_frequency", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -2907,7 +2908,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J_3
   return __pyx_r;
 }
 
-/* "P4J/AOV.pyx":111
+/* "P4J/algorithms/analysis_of_variance.pyx":111
  * 
  * 
  *     def eval_frequency_old(self, DTYPE_t freq):             # <<<<<<<<<<<<<<
@@ -2916,9 +2917,9 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_2eval_frequency(struct __pyx_obj_3P4J_3
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_3P4J_3AOV_3AOV_5eval_frequency_old(PyObject *__pyx_v_self, PyObject *__pyx_arg_freq); /*proto*/
-static PyObject *__pyx_pw_3P4J_3AOV_3AOV_5eval_frequency_old(PyObject *__pyx_v_self, PyObject *__pyx_arg_freq) {
-  __pyx_t_3P4J_3AOV_DTYPE_t __pyx_v_freq;
+static PyObject *__pyx_pw_3P4J_10algorithms_20analysis_of_variance_3AOV_5eval_frequency_old(PyObject *__pyx_v_self, PyObject *__pyx_arg_freq); /*proto*/
+static PyObject *__pyx_pw_3P4J_10algorithms_20analysis_of_variance_3AOV_5eval_frequency_old(PyObject *__pyx_v_self, PyObject *__pyx_arg_freq) {
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t __pyx_v_freq;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("eval_frequency_old (wrapper)", 0);
@@ -2927,39 +2928,39 @@ static PyObject *__pyx_pw_3P4J_3AOV_3AOV_5eval_frequency_old(PyObject *__pyx_v_s
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
-  __Pyx_AddTraceback("P4J.AOV.AOV.eval_frequency_old", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("P4J.algorithms.analysis_of_variance.AOV.eval_frequency_old", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_3P4J_3AOV_3AOV_4eval_frequency_old(((struct __pyx_obj_3P4J_3AOV_AOV *)__pyx_v_self), ((__pyx_t_3P4J_3AOV_DTYPE_t)__pyx_v_freq));
+  __pyx_r = __pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_frequency_old(((struct __pyx_obj_3P4J_10algorithms_20analysis_of_variance_AOV *)__pyx_v_self), ((__pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t)__pyx_v_freq));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_3P4J_3AOV_3AOV_4eval_frequency_old(struct __pyx_obj_3P4J_3AOV_AOV *__pyx_v_self, __pyx_t_3P4J_3AOV_DTYPE_t __pyx_v_freq) {
+static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_frequency_old(struct __pyx_obj_3P4J_10algorithms_20analysis_of_variance_AOV *__pyx_v_self, __pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t __pyx_v_freq) {
   Py_ssize_t __pyx_v_i;
   Py_ssize_t __pyx_v_j;
-  __pyx_t_3P4J_3AOV_DTYPE_t __pyx_v_num;
-  __pyx_t_3P4J_3AOV_DTYPE_t __pyx_v_den;
-  __pyx_t_3P4J_3AOV_ITYPE_t __pyx_v_samples_in_bin;
-  __pyx_t_3P4J_3AOV_DTYPE_t __pyx_v_barxi;
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t __pyx_v_num;
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t __pyx_v_den;
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_ITYPE_t __pyx_v_samples_in_bin;
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t __pyx_v_barxi;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   Py_ssize_t __pyx_t_1;
   Py_ssize_t __pyx_t_2;
   Py_ssize_t __pyx_t_3;
-  __pyx_t_3P4J_3AOV_ITYPE_t __pyx_t_4;
-  __pyx_t_3P4J_3AOV_ITYPE_t __pyx_t_5;
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_ITYPE_t __pyx_t_4;
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_ITYPE_t __pyx_t_5;
   Py_ssize_t __pyx_t_6;
   int __pyx_t_7;
-  __pyx_t_3P4J_3AOV_ITYPE_t __pyx_t_8;
-  __pyx_t_3P4J_3AOV_ITYPE_t __pyx_t_9;
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_ITYPE_t __pyx_t_8;
+  __pyx_t_3P4J_10algorithms_20analysis_of_variance_ITYPE_t __pyx_t_9;
   PyObject *__pyx_t_10 = NULL;
   __Pyx_RefNannySetupContext("eval_frequency_old", 0);
 
-  /* "P4J/AOV.pyx":113
+  /* "P4J/algorithms/analysis_of_variance.pyx":113
  *     def eval_frequency_old(self, DTYPE_t freq):
  *         cdef Py_ssize_t i, j
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -2971,7 +2972,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_4eval_frequency_old(struct __pyx_obj_3P
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/AOV.pyx":114
+    /* "P4J/algorithms/analysis_of_variance.pyx":114
  *         cdef Py_ssize_t i, j
  *         for i in range(self.N):
  *             self.phase[i] = fmodf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]             # <<<<<<<<<<<<<<
@@ -2981,7 +2982,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_4eval_frequency_old(struct __pyx_obj_3P
     (__pyx_v_self->phase[__pyx_v_i]) = (fmodf((__pyx_v_self->mjd[__pyx_v_i]), (1.0 / ((double)__pyx_v_freq))) * __pyx_v_freq);
   }
 
-  /* "P4J/AOV.pyx":115
+  /* "P4J/algorithms/analysis_of_variance.pyx":115
  *         for i in range(self.N):
  *             self.phase[i] = fmodf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]
  *         cdef DTYPE_t num=0.0, den=0.0 # These are the unormalized s1 and s2 in the paper             # <<<<<<<<<<<<<<
@@ -2991,7 +2992,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_4eval_frequency_old(struct __pyx_obj_3P
   __pyx_v_num = 0.0;
   __pyx_v_den = 0.0;
 
-  /* "P4J/AOV.pyx":118
+  /* "P4J/algorithms/analysis_of_variance.pyx":118
  *         cdef ITYPE_t samples_in_bin
  *         cdef DTYPE_t barxi
  *         for j in range(self.Nbins):             # <<<<<<<<<<<<<<
@@ -3003,7 +3004,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_4eval_frequency_old(struct __pyx_obj_3P
   for (__pyx_t_1 = 0; __pyx_t_1 < __pyx_t_5; __pyx_t_1+=1) {
     __pyx_v_j = __pyx_t_1;
 
-    /* "P4J/AOV.pyx":119
+    /* "P4J/algorithms/analysis_of_variance.pyx":119
  *         cdef DTYPE_t barxi
  *         for j in range(self.Nbins):
  *             samples_in_bin = 0             # <<<<<<<<<<<<<<
@@ -3012,7 +3013,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_4eval_frequency_old(struct __pyx_obj_3P
  */
     __pyx_v_samples_in_bin = 0;
 
-    /* "P4J/AOV.pyx":120
+    /* "P4J/algorithms/analysis_of_variance.pyx":120
  *         for j in range(self.Nbins):
  *             samples_in_bin = 0
  *             for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -3024,7 +3025,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_4eval_frequency_old(struct __pyx_obj_3P
     for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_3; __pyx_t_6+=1) {
       __pyx_v_i = __pyx_t_6;
 
-      /* "P4J/AOV.pyx":121
+      /* "P4J/algorithms/analysis_of_variance.pyx":121
  *             samples_in_bin = 0
  *             for i in range(self.N):
  *                 if floorf(self.phase[i]*self.Nbins) == j:             # <<<<<<<<<<<<<<
@@ -3034,7 +3035,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_4eval_frequency_old(struct __pyx_obj_3P
       __pyx_t_7 = ((floorf(((__pyx_v_self->phase[__pyx_v_i]) * __pyx_v_self->Nbins)) == __pyx_v_j) != 0);
       if (__pyx_t_7) {
 
-        /* "P4J/AOV.pyx":122
+        /* "P4J/algorithms/analysis_of_variance.pyx":122
  *             for i in range(self.N):
  *                 if floorf(self.phase[i]*self.Nbins) == j:
  *                     self.tmp_mag[samples_in_bin] = self.mag[i]             # <<<<<<<<<<<<<<
@@ -3043,7 +3044,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_4eval_frequency_old(struct __pyx_obj_3P
  */
         (__pyx_v_self->tmp_mag[__pyx_v_samples_in_bin]) = (__pyx_v_self->mag[__pyx_v_i]);
 
-        /* "P4J/AOV.pyx":123
+        /* "P4J/algorithms/analysis_of_variance.pyx":123
  *                 if floorf(self.phase[i]*self.Nbins) == j:
  *                     self.tmp_mag[samples_in_bin] = self.mag[i]
  *                     self.tmp_err[samples_in_bin] = self.err[i]             # <<<<<<<<<<<<<<
@@ -3052,7 +3053,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_4eval_frequency_old(struct __pyx_obj_3P
  */
         (__pyx_v_self->tmp_err[__pyx_v_samples_in_bin]) = (__pyx_v_self->err[__pyx_v_i]);
 
-        /* "P4J/AOV.pyx":124
+        /* "P4J/algorithms/analysis_of_variance.pyx":124
  *                     self.tmp_mag[samples_in_bin] = self.mag[i]
  *                     self.tmp_err[samples_in_bin] = self.err[i]
  *                     samples_in_bin += 1             # <<<<<<<<<<<<<<
@@ -3061,7 +3062,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_4eval_frequency_old(struct __pyx_obj_3P
  */
         __pyx_v_samples_in_bin = (__pyx_v_samples_in_bin + 1);
 
-        /* "P4J/AOV.pyx":121
+        /* "P4J/algorithms/analysis_of_variance.pyx":121
  *             samples_in_bin = 0
  *             for i in range(self.N):
  *                 if floorf(self.phase[i]*self.Nbins) == j:             # <<<<<<<<<<<<<<
@@ -3071,7 +3072,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_4eval_frequency_old(struct __pyx_obj_3P
       }
     }
 
-    /* "P4J/AOV.pyx":126
+    /* "P4J/algorithms/analysis_of_variance.pyx":126
  *                     samples_in_bin += 1
  * 
  *             if samples_in_bin > 1:             # <<<<<<<<<<<<<<
@@ -3081,7 +3082,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_4eval_frequency_old(struct __pyx_obj_3P
     __pyx_t_7 = ((__pyx_v_samples_in_bin > 1) != 0);
     if (__pyx_t_7) {
 
-      /* "P4J/AOV.pyx":127
+      /* "P4J/algorithms/analysis_of_variance.pyx":127
  * 
  *             if samples_in_bin > 1:
  *                 if self.use_errorbars:             # <<<<<<<<<<<<<<
@@ -3091,16 +3092,16 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_4eval_frequency_old(struct __pyx_obj_3P
       __pyx_t_7 = (__pyx_v_self->use_errorbars != 0);
       if (__pyx_t_7) {
 
-        /* "P4J/AOV.pyx":128
+        /* "P4J/algorithms/analysis_of_variance.pyx":128
  *             if samples_in_bin > 1:
  *                 if self.use_errorbars:
  *                     barxi = weighted_mean(self.tmp_mag, self.tmp_err, samples_in_bin)             # <<<<<<<<<<<<<<
  *                 else:
  *                     barxi = mean(self.tmp_mag, samples_in_bin)
  */
-        __pyx_v_barxi = __pyx_f_3P4J_9utilities_weighted_mean(__pyx_v_self->tmp_mag, __pyx_v_self->tmp_err, __pyx_v_samples_in_bin);
+        __pyx_v_barxi = __pyx_f_3P4J_10algorithms_9utilities_weighted_mean(__pyx_v_self->tmp_mag, __pyx_v_self->tmp_err, __pyx_v_samples_in_bin);
 
-        /* "P4J/AOV.pyx":127
+        /* "P4J/algorithms/analysis_of_variance.pyx":127
  * 
  *             if samples_in_bin > 1:
  *                 if self.use_errorbars:             # <<<<<<<<<<<<<<
@@ -3110,7 +3111,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_4eval_frequency_old(struct __pyx_obj_3P
         goto __pyx_L11;
       }
 
-      /* "P4J/AOV.pyx":130
+      /* "P4J/algorithms/analysis_of_variance.pyx":130
  *                     barxi = weighted_mean(self.tmp_mag, self.tmp_err, samples_in_bin)
  *                 else:
  *                     barxi = mean(self.tmp_mag, samples_in_bin)             # <<<<<<<<<<<<<<
@@ -3118,11 +3119,11 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_4eval_frequency_old(struct __pyx_obj_3P
  *                     den += (self.tmp_mag[i] - barxi)**2
  */
       /*else*/ {
-        __pyx_v_barxi = __pyx_f_3P4J_9utilities_mean(__pyx_v_self->tmp_mag, __pyx_v_samples_in_bin);
+        __pyx_v_barxi = __pyx_f_3P4J_10algorithms_9utilities_mean(__pyx_v_self->tmp_mag, __pyx_v_samples_in_bin);
       }
       __pyx_L11:;
 
-      /* "P4J/AOV.pyx":131
+      /* "P4J/algorithms/analysis_of_variance.pyx":131
  *                 else:
  *                     barxi = mean(self.tmp_mag, samples_in_bin)
  *                 for i in range(samples_in_bin):             # <<<<<<<<<<<<<<
@@ -3134,7 +3135,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_4eval_frequency_old(struct __pyx_obj_3P
       for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_9; __pyx_t_2+=1) {
         __pyx_v_i = __pyx_t_2;
 
-        /* "P4J/AOV.pyx":132
+        /* "P4J/algorithms/analysis_of_variance.pyx":132
  *                     barxi = mean(self.tmp_mag, samples_in_bin)
  *                 for i in range(samples_in_bin):
  *                     den += (self.tmp_mag[i] - barxi)**2             # <<<<<<<<<<<<<<
@@ -3144,7 +3145,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_4eval_frequency_old(struct __pyx_obj_3P
         __pyx_v_den = (__pyx_v_den + powf(((__pyx_v_self->tmp_mag[__pyx_v_i]) - __pyx_v_barxi), 2.0));
       }
 
-      /* "P4J/AOV.pyx":133
+      /* "P4J/algorithms/analysis_of_variance.pyx":133
  *                 for i in range(samples_in_bin):
  *                     den += (self.tmp_mag[i] - barxi)**2
  *                 num += samples_in_bin*(barxi - self.barx)**2             # <<<<<<<<<<<<<<
@@ -3153,7 +3154,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_4eval_frequency_old(struct __pyx_obj_3P
  */
       __pyx_v_num = (__pyx_v_num + (__pyx_v_samples_in_bin * powf((__pyx_v_barxi - __pyx_v_self->barx), 2.0)));
 
-      /* "P4J/AOV.pyx":126
+      /* "P4J/algorithms/analysis_of_variance.pyx":126
  *                     samples_in_bin += 1
  * 
  *             if samples_in_bin > 1:             # <<<<<<<<<<<<<<
@@ -3163,7 +3164,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_4eval_frequency_old(struct __pyx_obj_3P
     }
   }
 
-  /* "P4J/AOV.pyx":135
+  /* "P4J/algorithms/analysis_of_variance.pyx":135
  *                 num += samples_in_bin*(barxi - self.barx)**2
  * 
  *         return self.normalizer*num/den             # <<<<<<<<<<<<<<
@@ -3177,7 +3178,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_4eval_frequency_old(struct __pyx_obj_3P
   __pyx_t_10 = 0;
   goto __pyx_L0;
 
-  /* "P4J/AOV.pyx":111
+  /* "P4J/algorithms/analysis_of_variance.pyx":111
  * 
  * 
  *     def eval_frequency_old(self, DTYPE_t freq):             # <<<<<<<<<<<<<<
@@ -3188,7 +3189,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_4eval_frequency_old(struct __pyx_obj_3P
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_10);
-  __Pyx_AddTraceback("P4J.AOV.AOV.eval_frequency_old", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("P4J.algorithms.analysis_of_variance.AOV.eval_frequency_old", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -3196,7 +3197,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_4eval_frequency_old(struct __pyx_obj_3P
   return __pyx_r;
 }
 
-/* "P4J/AOV.pyx":137
+/* "P4J/algorithms/analysis_of_variance.pyx":137
  *         return self.normalizer*num/den
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -3205,21 +3206,21 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_4eval_frequency_old(struct __pyx_obj_3P
  */
 
 /* Python wrapper */
-static void __pyx_pw_3P4J_3AOV_3AOV_7__dealloc__(PyObject *__pyx_v_self); /*proto*/
-static void __pyx_pw_3P4J_3AOV_3AOV_7__dealloc__(PyObject *__pyx_v_self) {
+static void __pyx_pw_3P4J_10algorithms_20analysis_of_variance_3AOV_7__dealloc__(PyObject *__pyx_v_self); /*proto*/
+static void __pyx_pw_3P4J_10algorithms_20analysis_of_variance_3AOV_7__dealloc__(PyObject *__pyx_v_self) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__ (wrapper)", 0);
-  __pyx_pf_3P4J_3AOV_3AOV_6__dealloc__(((struct __pyx_obj_3P4J_3AOV_AOV *)__pyx_v_self));
+  __pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_6__dealloc__(((struct __pyx_obj_3P4J_10algorithms_20analysis_of_variance_AOV *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
 }
 
-static void __pyx_pf_3P4J_3AOV_3AOV_6__dealloc__(struct __pyx_obj_3P4J_3AOV_AOV *__pyx_v_self) {
+static void __pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_6__dealloc__(struct __pyx_obj_3P4J_10algorithms_20analysis_of_variance_AOV *__pyx_v_self) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "P4J/AOV.pyx":138
+  /* "P4J/algorithms/analysis_of_variance.pyx":138
  * 
  *     def __dealloc__(self):
  *         PyMem_Free(self.mjd)             # <<<<<<<<<<<<<<
@@ -3228,7 +3229,7 @@ static void __pyx_pf_3P4J_3AOV_3AOV_6__dealloc__(struct __pyx_obj_3P4J_3AOV_AOV 
  */
   PyMem_Free(__pyx_v_self->mjd);
 
-  /* "P4J/AOV.pyx":139
+  /* "P4J/algorithms/analysis_of_variance.pyx":139
  *     def __dealloc__(self):
  *         PyMem_Free(self.mjd)
  *         PyMem_Free(self.mag)             # <<<<<<<<<<<<<<
@@ -3237,7 +3238,7 @@ static void __pyx_pf_3P4J_3AOV_3AOV_6__dealloc__(struct __pyx_obj_3P4J_3AOV_AOV 
  */
   PyMem_Free(__pyx_v_self->mag);
 
-  /* "P4J/AOV.pyx":140
+  /* "P4J/algorithms/analysis_of_variance.pyx":140
  *         PyMem_Free(self.mjd)
  *         PyMem_Free(self.mag)
  *         PyMem_Free(self.err)             # <<<<<<<<<<<<<<
@@ -3246,7 +3247,7 @@ static void __pyx_pf_3P4J_3AOV_3AOV_6__dealloc__(struct __pyx_obj_3P4J_3AOV_AOV 
  */
   PyMem_Free(__pyx_v_self->err);
 
-  /* "P4J/AOV.pyx":141
+  /* "P4J/algorithms/analysis_of_variance.pyx":141
  *         PyMem_Free(self.mag)
  *         PyMem_Free(self.err)
  *         PyMem_Free(self.phase)             # <<<<<<<<<<<<<<
@@ -3255,7 +3256,7 @@ static void __pyx_pf_3P4J_3AOV_3AOV_6__dealloc__(struct __pyx_obj_3P4J_3AOV_AOV 
  */
   PyMem_Free(__pyx_v_self->phase);
 
-  /* "P4J/AOV.pyx":142
+  /* "P4J/algorithms/analysis_of_variance.pyx":142
  *         PyMem_Free(self.err)
  *         PyMem_Free(self.phase)
  *         PyMem_Free(self.tmp_mag)             # <<<<<<<<<<<<<<
@@ -3264,7 +3265,7 @@ static void __pyx_pf_3P4J_3AOV_3AOV_6__dealloc__(struct __pyx_obj_3P4J_3AOV_AOV 
  */
   PyMem_Free(__pyx_v_self->tmp_mag);
 
-  /* "P4J/AOV.pyx":143
+  /* "P4J/algorithms/analysis_of_variance.pyx":143
  *         PyMem_Free(self.phase)
  *         PyMem_Free(self.tmp_mag)
  *         PyMem_Free(self.tmp_err)             # <<<<<<<<<<<<<<
@@ -3273,7 +3274,7 @@ static void __pyx_pf_3P4J_3AOV_3AOV_6__dealloc__(struct __pyx_obj_3P4J_3AOV_AOV 
  */
   PyMem_Free(__pyx_v_self->tmp_err);
 
-  /* "P4J/AOV.pyx":144
+  /* "P4J/algorithms/analysis_of_variance.pyx":144
  *         PyMem_Free(self.tmp_mag)
  *         PyMem_Free(self.tmp_err)
  *         PyMem_Free(self.tmp_sizes)             # <<<<<<<<<<<<<<
@@ -3282,7 +3283,7 @@ static void __pyx_pf_3P4J_3AOV_3AOV_6__dealloc__(struct __pyx_obj_3P4J_3AOV_AOV 
  */
   PyMem_Free(__pyx_v_self->tmp_sizes);
 
-  /* "P4J/AOV.pyx":137
+  /* "P4J/algorithms/analysis_of_variance.pyx":137
  *         return self.normalizer*num/den
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -3301,19 +3302,19 @@ static void __pyx_pf_3P4J_3AOV_3AOV_6__dealloc__(struct __pyx_obj_3P4J_3AOV_AOV 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_3P4J_3AOV_3AOV_9__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_3P4J_3AOV_3AOV_9__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_3P4J_10algorithms_20analysis_of_variance_3AOV_9__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_3P4J_10algorithms_20analysis_of_variance_3AOV_9__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_3P4J_3AOV_3AOV_8__reduce_cython__(((struct __pyx_obj_3P4J_3AOV_AOV *)__pyx_v_self));
+  __pyx_r = __pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_8__reduce_cython__(((struct __pyx_obj_3P4J_10algorithms_20analysis_of_variance_AOV *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_3P4J_3AOV_3AOV_8__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_3P4J_3AOV_AOV *__pyx_v_self) {
+static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_8__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_3P4J_10algorithms_20analysis_of_variance_AOV *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3340,7 +3341,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_8__reduce_cython__(CYTHON_UNUSED struct
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("P4J.AOV.AOV.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("P4J.algorithms.analysis_of_variance.AOV.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
@@ -3355,19 +3356,19 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_8__reduce_cython__(CYTHON_UNUSED struct
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_3P4J_3AOV_3AOV_11__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
-static PyObject *__pyx_pw_3P4J_3AOV_3AOV_11__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pw_3P4J_10algorithms_20analysis_of_variance_3AOV_11__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_3P4J_10algorithms_20analysis_of_variance_3AOV_11__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_3P4J_3AOV_3AOV_10__setstate_cython__(((struct __pyx_obj_3P4J_3AOV_AOV *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+  __pyx_r = __pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_10__setstate_cython__(((struct __pyx_obj_3P4J_10algorithms_20analysis_of_variance_AOV *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_3P4J_3AOV_3AOV_10__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_3P4J_3AOV_AOV *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_10__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_3P4J_10algorithms_20analysis_of_variance_AOV *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3394,7 +3395,7 @@ static PyObject *__pyx_pf_3P4J_3AOV_3AOV_10__setstate_cython__(CYTHON_UNUSED str
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("P4J.AOV.AOV.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("P4J.algorithms.analysis_of_variance.AOV.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
@@ -16224,7 +16225,7 @@ static PyObject *__pyx_unpickle_Enum__set_state(struct __pyx_MemviewEnum_obj *__
   return __pyx_r;
 }
 
-static PyObject *__pyx_tp_new_3P4J_3AOV_AOV(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+static PyObject *__pyx_tp_new_3P4J_10algorithms_20analysis_of_variance_AOV(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
   PyObject *o;
   if (likely((t->tp_flags & Py_TPFLAGS_IS_ABSTRACT) == 0)) {
     o = (*t->tp_alloc)(t, 0);
@@ -16235,7 +16236,7 @@ static PyObject *__pyx_tp_new_3P4J_3AOV_AOV(PyTypeObject *t, CYTHON_UNUSED PyObj
   return o;
 }
 
-static void __pyx_tp_dealloc_3P4J_3AOV_AOV(PyObject *o) {
+static void __pyx_tp_dealloc_3P4J_10algorithms_20analysis_of_variance_AOV(PyObject *o) {
   #if CYTHON_USE_TP_FINALIZE
   if (unlikely(PyType_HasFeature(Py_TYPE(o), Py_TPFLAGS_HAVE_FINALIZE) && Py_TYPE(o)->tp_finalize) && (!PyType_IS_GC(Py_TYPE(o)) || !_PyGC_FINALIZED(o))) {
     if (PyObject_CallFinalizerFromDealloc(o)) return;
@@ -16245,27 +16246,27 @@ static void __pyx_tp_dealloc_3P4J_3AOV_AOV(PyObject *o) {
     PyObject *etype, *eval, *etb;
     PyErr_Fetch(&etype, &eval, &etb);
     ++Py_REFCNT(o);
-    __pyx_pw_3P4J_3AOV_3AOV_7__dealloc__(o);
+    __pyx_pw_3P4J_10algorithms_20analysis_of_variance_3AOV_7__dealloc__(o);
     --Py_REFCNT(o);
     PyErr_Restore(etype, eval, etb);
   }
   (*Py_TYPE(o)->tp_free)(o);
 }
 
-static PyMethodDef __pyx_methods_3P4J_3AOV_AOV[] = {
-  {"eval_frequency", (PyCFunction)__pyx_pw_3P4J_3AOV_3AOV_3eval_frequency, METH_O, 0},
-  {"eval_frequency_old", (PyCFunction)__pyx_pw_3P4J_3AOV_3AOV_5eval_frequency_old, METH_O, 0},
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_3P4J_3AOV_3AOV_9__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_3P4J_3AOV_3AOV_11__setstate_cython__, METH_O, 0},
+static PyMethodDef __pyx_methods_3P4J_10algorithms_20analysis_of_variance_AOV[] = {
+  {"eval_frequency", (PyCFunction)__pyx_pw_3P4J_10algorithms_20analysis_of_variance_3AOV_3eval_frequency, METH_O, 0},
+  {"eval_frequency_old", (PyCFunction)__pyx_pw_3P4J_10algorithms_20analysis_of_variance_3AOV_5eval_frequency_old, METH_O, 0},
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_3P4J_10algorithms_20analysis_of_variance_3AOV_9__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_3P4J_10algorithms_20analysis_of_variance_3AOV_11__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
 };
 
-static PyTypeObject __pyx_type_3P4J_3AOV_AOV = {
+static PyTypeObject __pyx_type_3P4J_10algorithms_20analysis_of_variance_AOV = {
   PyVarObject_HEAD_INIT(0, 0)
-  "P4J.AOV.AOV", /*tp_name*/
-  sizeof(struct __pyx_obj_3P4J_3AOV_AOV), /*tp_basicsize*/
+  "P4J.algorithms.analysis_of_variance.AOV", /*tp_name*/
+  sizeof(struct __pyx_obj_3P4J_10algorithms_20analysis_of_variance_AOV), /*tp_basicsize*/
   0, /*tp_itemsize*/
-  __pyx_tp_dealloc_3P4J_3AOV_AOV, /*tp_dealloc*/
+  __pyx_tp_dealloc_3P4J_10algorithms_20analysis_of_variance_AOV, /*tp_dealloc*/
   #if PY_VERSION_HEX < 0x030800b4
   0, /*tp_print*/
   #endif
@@ -16298,7 +16299,7 @@ static PyTypeObject __pyx_type_3P4J_3AOV_AOV = {
   0, /*tp_weaklistoffset*/
   0, /*tp_iter*/
   0, /*tp_iternext*/
-  __pyx_methods_3P4J_3AOV_AOV, /*tp_methods*/
+  __pyx_methods_3P4J_10algorithms_20analysis_of_variance_AOV, /*tp_methods*/
   0, /*tp_members*/
   0, /*tp_getset*/
   0, /*tp_base*/
@@ -16306,9 +16307,9 @@ static PyTypeObject __pyx_type_3P4J_3AOV_AOV = {
   0, /*tp_descr_get*/
   0, /*tp_descr_set*/
   0, /*tp_dictoffset*/
-  __pyx_pw_3P4J_3AOV_3AOV_1__init__, /*tp_init*/
+  __pyx_pw_3P4J_10algorithms_20analysis_of_variance_3AOV_1__init__, /*tp_init*/
   0, /*tp_alloc*/
-  __pyx_tp_new_3P4J_3AOV_AOV, /*tp_new*/
+  __pyx_tp_new_3P4J_10algorithms_20analysis_of_variance_AOV, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -16451,7 +16452,7 @@ static PyBufferProcs __pyx_tp_as_buffer_array = {
 
 static PyTypeObject __pyx_type___pyx_array = {
   PyVarObject_HEAD_INIT(0, 0)
-  "P4J.AOV.array", /*tp_name*/
+  "P4J.algorithms.analysis_of_variance.array", /*tp_name*/
   sizeof(struct __pyx_array_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_array, /*tp_dealloc*/
@@ -16570,7 +16571,7 @@ static PyMethodDef __pyx_methods_Enum[] = {
 
 static PyTypeObject __pyx_type___pyx_MemviewEnum = {
   PyVarObject_HEAD_INIT(0, 0)
-  "P4J.AOV.Enum", /*tp_name*/
+  "P4J.algorithms.analysis_of_variance.Enum", /*tp_name*/
   sizeof(struct __pyx_MemviewEnum_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_Enum, /*tp_dealloc*/
@@ -16831,7 +16832,7 @@ static PyBufferProcs __pyx_tp_as_buffer_memoryview = {
 
 static PyTypeObject __pyx_type___pyx_memoryview = {
   PyVarObject_HEAD_INIT(0, 0)
-  "P4J.AOV.memoryview", /*tp_name*/
+  "P4J.algorithms.analysis_of_variance.memoryview", /*tp_name*/
   sizeof(struct __pyx_memoryview_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_memoryview, /*tp_dealloc*/
@@ -16969,7 +16970,7 @@ static struct PyGetSetDef __pyx_getsets__memoryviewslice[] = {
 
 static PyTypeObject __pyx_type___pyx_memoryviewslice = {
   PyVarObject_HEAD_INIT(0, 0)
-  "P4J.AOV._memoryviewslice", /*tp_name*/
+  "P4J.algorithms.analysis_of_variance._memoryviewslice", /*tp_name*/
   sizeof(struct __pyx_memoryviewslice_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc__memoryviewslice, /*tp_dealloc*/
@@ -17051,17 +17052,17 @@ static PyMethodDef __pyx_methods[] = {
 #if PY_MAJOR_VERSION >= 3
 #if CYTHON_PEP489_MULTI_PHASE_INIT
 static PyObject* __pyx_pymod_create(PyObject *spec, PyModuleDef *def); /*proto*/
-static int __pyx_pymod_exec_AOV(PyObject* module); /*proto*/
+static int __pyx_pymod_exec_analysis_of_variance(PyObject* module); /*proto*/
 static PyModuleDef_Slot __pyx_moduledef_slots[] = {
   {Py_mod_create, (void*)__pyx_pymod_create},
-  {Py_mod_exec, (void*)__pyx_pymod_exec_AOV},
+  {Py_mod_exec, (void*)__pyx_pymod_exec_analysis_of_variance},
   {0, NULL}
 };
 #endif
 
 static struct PyModuleDef __pyx_moduledef = {
     PyModuleDef_HEAD_INIT,
-    "AOV",
+    "analysis_of_variance",
     0, /* m_doc */
   #if CYTHON_PEP489_MULTI_PHASE_INIT
     0, /* m_size */
@@ -17537,16 +17538,16 @@ static int __Pyx_modinit_type_init_code(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_init_code", 0);
   /*--- Type init code ---*/
-  if (PyType_Ready(&__pyx_type_3P4J_3AOV_AOV) < 0) __PYX_ERR(0, 26, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_3P4J_10algorithms_20analysis_of_variance_AOV) < 0) __PYX_ERR(0, 26, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
-  __pyx_type_3P4J_3AOV_AOV.tp_print = 0;
+  __pyx_type_3P4J_10algorithms_20analysis_of_variance_AOV.tp_print = 0;
   #endif
-  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_3P4J_3AOV_AOV.tp_dictoffset && __pyx_type_3P4J_3AOV_AOV.tp_getattro == PyObject_GenericGetAttr)) {
-    __pyx_type_3P4J_3AOV_AOV.tp_getattro = __Pyx_PyObject_GenericGetAttr;
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_3P4J_10algorithms_20analysis_of_variance_AOV.tp_dictoffset && __pyx_type_3P4J_10algorithms_20analysis_of_variance_AOV.tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_type_3P4J_10algorithms_20analysis_of_variance_AOV.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_AOV, (PyObject *)&__pyx_type_3P4J_3AOV_AOV) < 0) __PYX_ERR(0, 26, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_3P4J_3AOV_AOV) < 0) __PYX_ERR(0, 26, __pyx_L1_error)
-  __pyx_ptype_3P4J_3AOV_AOV = &__pyx_type_3P4J_3AOV_AOV;
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_AOV, (PyObject *)&__pyx_type_3P4J_10algorithms_20analysis_of_variance_AOV) < 0) __PYX_ERR(0, 26, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_3P4J_10algorithms_20analysis_of_variance_AOV) < 0) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_ptype_3P4J_10algorithms_20analysis_of_variance_AOV = &__pyx_type_3P4J_10algorithms_20analysis_of_variance_AOV;
   __pyx_vtabptr_array = &__pyx_vtable_array;
   __pyx_vtable_array.get_memview = (PyObject *(*)(struct __pyx_array_obj *))__pyx_array_get_memview;
   if (PyType_Ready(&__pyx_type___pyx_array) < 0) __PYX_ERR(1, 105, __pyx_L1_error)
@@ -17626,11 +17627,11 @@ static int __Pyx_modinit_function_import_code(void) {
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__Pyx_modinit_function_import_code", 0);
   /*--- Function import code ---*/
-  __pyx_t_1 = PyImport_ImportModule("P4J.utilities"); if (!__pyx_t_1) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (__Pyx_ImportFunction(__pyx_t_1, "argsort", (void (**)(void))&__pyx_f_3P4J_9utilities_argsort, "void (__pyx_t_3P4J_9utilities_DTYPE_t *, __pyx_t_3P4J_9utilities_ITYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (__Pyx_ImportFunction(__pyx_t_1, "mean", (void (**)(void))&__pyx_f_3P4J_9utilities_mean, "__pyx_t_3P4J_9utilities_DTYPE_t (__pyx_t_3P4J_9utilities_DTYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (__Pyx_ImportFunction(__pyx_t_1, "weighted_mean", (void (**)(void))&__pyx_f_3P4J_9utilities_weighted_mean, "__pyx_t_3P4J_9utilities_DTYPE_t (__pyx_t_3P4J_9utilities_DTYPE_t *, __pyx_t_3P4J_9utilities_DTYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (__Pyx_ImportFunction(__pyx_t_1, "unbiased_weighted_variance", (void (**)(void))&__pyx_f_3P4J_9utilities_unbiased_weighted_variance, "__pyx_t_3P4J_9utilities_DTYPE_t (__pyx_t_3P4J_9utilities_DTYPE_t *, __pyx_t_3P4J_9utilities_DTYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_t_1 = PyImport_ImportModule("P4J.algorithms.utilities"); if (!__pyx_t_1) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_ImportFunction(__pyx_t_1, "argsort", (void (**)(void))&__pyx_f_3P4J_10algorithms_9utilities_argsort, "void (__pyx_t_3P4J_10algorithms_9utilities_DTYPE_t *, __pyx_t_3P4J_10algorithms_9utilities_ITYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_ImportFunction(__pyx_t_1, "mean", (void (**)(void))&__pyx_f_3P4J_10algorithms_9utilities_mean, "__pyx_t_3P4J_10algorithms_9utilities_DTYPE_t (__pyx_t_3P4J_10algorithms_9utilities_DTYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_ImportFunction(__pyx_t_1, "weighted_mean", (void (**)(void))&__pyx_f_3P4J_10algorithms_9utilities_weighted_mean, "__pyx_t_3P4J_10algorithms_9utilities_DTYPE_t (__pyx_t_3P4J_10algorithms_9utilities_DTYPE_t *, __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_ImportFunction(__pyx_t_1, "unbiased_weighted_variance", (void (**)(void))&__pyx_f_3P4J_10algorithms_9utilities_unbiased_weighted_variance, "__pyx_t_3P4J_10algorithms_9utilities_DTYPE_t (__pyx_t_3P4J_10algorithms_9utilities_DTYPE_t *, __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t *, Py_ssize_t)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   Py_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -17657,11 +17658,11 @@ static int __Pyx_modinit_function_import_code(void) {
 
 
 #if PY_MAJOR_VERSION < 3
-__Pyx_PyMODINIT_FUNC initAOV(void) CYTHON_SMALL_CODE; /*proto*/
-__Pyx_PyMODINIT_FUNC initAOV(void)
+__Pyx_PyMODINIT_FUNC initanalysis_of_variance(void) CYTHON_SMALL_CODE; /*proto*/
+__Pyx_PyMODINIT_FUNC initanalysis_of_variance(void)
 #else
-__Pyx_PyMODINIT_FUNC PyInit_AOV(void) CYTHON_SMALL_CODE; /*proto*/
-__Pyx_PyMODINIT_FUNC PyInit_AOV(void)
+__Pyx_PyMODINIT_FUNC PyInit_analysis_of_variance(void) CYTHON_SMALL_CODE; /*proto*/
+__Pyx_PyMODINIT_FUNC PyInit_analysis_of_variance(void)
 #if CYTHON_PEP489_MULTI_PHASE_INIT
 {
   return PyModuleDef_Init(&__pyx_moduledef);
@@ -17728,7 +17729,7 @@ bad:
 }
 
 
-static CYTHON_SMALL_CODE int __pyx_pymod_exec_AOV(PyObject *__pyx_pyinit_module)
+static CYTHON_SMALL_CODE int __pyx_pymod_exec_analysis_of_variance(PyObject *__pyx_pyinit_module)
 #endif
 #endif
 {
@@ -17738,7 +17739,7 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_AOV(PyObject *__pyx_pyinit_module)
   #if CYTHON_PEP489_MULTI_PHASE_INIT
   if (__pyx_m) {
     if (__pyx_m == __pyx_pyinit_module) return 0;
-    PyErr_SetString(PyExc_RuntimeError, "Module 'AOV' has already been imported. Re-initialisation is not supported.");
+    PyErr_SetString(PyExc_RuntimeError, "Module 'analysis_of_variance' has already been imported. Re-initialisation is not supported.");
     return -1;
   }
   #elif PY_MAJOR_VERSION >= 3
@@ -17753,7 +17754,7 @@ if (!__Pyx_RefNanny) {
       Py_FatalError("failed to import 'refnanny' module");
 }
 #endif
-  __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_AOV(void)", 0);
+  __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_analysis_of_variance(void)", 0);
   if (__Pyx_check_binary_version() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #ifdef __Pxy_PyFrame_Initialize_Offsets
   __Pxy_PyFrame_Initialize_Offsets();
@@ -17792,7 +17793,7 @@ if (!__Pyx_RefNanny) {
   Py_INCREF(__pyx_m);
   #else
   #if PY_MAJOR_VERSION < 3
-  __pyx_m = Py_InitModule4("AOV", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
+  __pyx_m = Py_InitModule4("analysis_of_variance", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
   #else
   __pyx_m = PyModule_Create(&__pyx_moduledef);
   #endif
@@ -17810,14 +17811,14 @@ if (!__Pyx_RefNanny) {
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
-  if (__pyx_module_is_main_P4J__AOV) {
+  if (__pyx_module_is_main_P4J__algorithms__analysis_of_variance) {
     if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name_2, __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 1, __pyx_L1_error)
-    if (!PyDict_GetItemString(modules, "P4J.AOV")) {
-      if (unlikely(PyDict_SetItemString(modules, "P4J.AOV", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
+    if (!PyDict_GetItemString(modules, "P4J.algorithms.analysis_of_variance")) {
+      if (unlikely(PyDict_SetItemString(modules, "P4J.algorithms.analysis_of_variance", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
     }
   }
   #endif
@@ -17838,7 +17839,7 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "P4J/AOV.pyx":1
+  /* "P4J/algorithms/analysis_of_variance.pyx":1
  * #!/usr/bin/python             # <<<<<<<<<<<<<<
  * #cython: initializedcheck=False, boundscheck=False, wraparound=False, cdivision=True, profile=False
  * 
@@ -18008,11 +18009,11 @@ if (!__Pyx_RefNanny) {
   __Pyx_XDECREF(__pyx_t_1);
   if (__pyx_m) {
     if (__pyx_d) {
-      __Pyx_AddTraceback("init P4J.AOV", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init P4J.algorithms.analysis_of_variance", __pyx_clineno, __pyx_lineno, __pyx_filename);
     }
     Py_CLEAR(__pyx_m);
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init P4J.AOV");
+    PyErr_SetString(PyExc_ImportError, "init P4J.algorithms.analysis_of_variance");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -20948,7 +20949,7 @@ no_fail:
 }
 
 /* ObjectToMemviewSlice */
-  static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_3AOV_DTYPE_t(PyObject *obj, int writable_flag) {
+  static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t(PyObject *obj, int writable_flag) {
     __Pyx_memviewslice result = { 0, 0, { 0 }, { 0 }, { 0 } };
     __Pyx_BufFmt_StackElem stack[1];
     int axes_specs[] = { (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_CONTIG) };
@@ -20959,7 +20960,7 @@ no_fail:
     }
     retcode = __Pyx_ValidateAndInit_memviewslice(axes_specs, __Pyx_IS_C_CONTIG,
                                                  (PyBUF_C_CONTIGUOUS | PyBUF_FORMAT) | writable_flag, 1,
-                                                 &__Pyx_TypeInfo_nn___pyx_t_3P4J_3AOV_DTYPE_t, stack,
+                                                 &__Pyx_TypeInfo_nn___pyx_t_3P4J_10algorithms_20analysis_of_variance_DTYPE_t, stack,
                                                  &result, obj);
     if (unlikely(retcode == -1))
         goto __pyx_fail;

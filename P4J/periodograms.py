@@ -4,11 +4,11 @@
 from __future__ import division, print_function
 import numpy as np
 from .base_periodogram import BasePeriodogram
-from .QMI import QMI
-from .LKSL import LKSL
-from .PDM import PDM
-from .AOV import AOV
-from .MHAOV import MHAOV
+from .algorithms.mutual_information import QMI
+from .algorithms.string_length import LKSL
+from .algorithms.phase_dispersion_minimization import PDM
+from .algorithms.analysis_of_variance import AOV
+from .algorithms.multiharmonic_aov import MHAOV
 from .math import robust_loc, robust_scale
 #from joblib import Parallel, delayed
 
