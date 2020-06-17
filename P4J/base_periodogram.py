@@ -6,7 +6,7 @@ class BasePeriodogram:
         if fid is None:
             best_idx = np.argmax(self.per)
         else:
-            best_idx = np.argmax(self.per[fid])
+            best_idx = np.argmax(self.per_single_band[fid])
         return self.freq[best_idx]
         
     def get_best_frequencies(self):
@@ -20,7 +20,7 @@ class BasePeriodogram:
         if fid is None:
             return self.freq, self.per
         else:
-            return self.freq, self.per[fid]
+            return self.freq, self.per_single_band[fid]
         
     def frequency_grid_evaluation(self, fmin=0.0, fmax=1.0, fresolution=1e-4):
         """ 
