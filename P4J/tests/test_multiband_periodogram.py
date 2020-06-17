@@ -19,6 +19,9 @@ def test_mbperiodogram():
     mjds, mags, errs, fids = create_test_data()
     my_per.set_data(mjds, mags, errs, fids)
     my_per.frequency_grid_evaluation(fmin=0.01, fmax=10., fresolution=1e-4)
-    #my_per.finetune_best_frequencies(n_local_optima=3, fresolution=1e-5)
+    my_per.finetune_best_frequencies(n_local_optima=3, fresolution=1e-5)
+    best_freq, best_per = my_per.get_best_frequencies()
     assert len(my_per.per_single_band) == len(np.unique(fids))
+    assert np.allclose(best_freq, np.array([1.2341979, 9.704924, 0.86988854], dtype=np.float32))
+    assert np.allclose(best_per, np.array([125.56125, 81.32643, 74.50646], dtype=np.float32))
 

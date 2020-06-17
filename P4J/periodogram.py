@@ -50,7 +50,7 @@ class _Periodogram:
         else:
             best_local_optima = best_local_optima[0]
             
-        return best_local_optima
+        return best_local_optima    
 
     
 class MultiBandPeriodogram(_Periodogram):
@@ -65,6 +65,8 @@ class MultiBandPeriodogram(_Periodogram):
         self.Nharmonics = 1
         if 'Nharmonics' in kwarg:
             self.Nharmonics = kwarg["Nharmonics"]
+            
+        
         
     def set_data(self, mjds, mags, errs, fids):
         
@@ -89,50 +91,50 @@ class MultiBandPeriodogram(_Periodogram):
             
     def frequency_grid_evaluation(self, fmin=0.0, fmax=1.0, fresolution=1e-4):
         
+        self.freq_step_coarse = fresolution
         freqs = np.arange(start=np.amax([fmin, fresolution]), stop=fmax, 
                           step=fresolution, dtype=np.float32)
-        per_single_band = {}
-        per_sum = np.zeros_like(freqs)  
+        self.per, self.per_single_band = self._compute_periodogram_multiband(freqs)
+        self.freq = freqs 
         
+    def finetune_best_frequencies(self, fresolution=1e-5, n_local_optima=10):
+        local_optima_index = self.find_local_maxima(n_local_optima)
+        
+        for local_optimum_index in local_optima_index:
+            fmin = self.freq[local_optimum_index] - self.freq_step_coarse
+            fmax = self.freq[local_optimum_index] + self.freq_step_coarse
+            freqs_fine = np.arange(fmin, fmax, step=fresolution).astype('float32')
+            pers_fine, _ = self._compute_periodogram_multiband(freqs_fine)
+            new_best = np.argmax(pers_fine)
+            if pers_fine[new_best] > self.per[local_optimum_index]:
+                self.per[local_optimum_index] = pers_fine[new_best]
+                self.freq[local_optimum_index] = freqs_fine[new_best]
+        # Sort them in descending order
+        idx = np.argsort(self.per[local_optima_index])[::-1]
+        if n_local_optima > 0:
+            self.best_local_optima = local_optima_index[idx]
+        else:
+            self.best_local_optima = local_optima_index
+            
+    def _compute_periodogram_multiband(self, freqs):        
+        per_single_band = {}
+        per_sum = np.zeros_like(freqs) 
         d1 = 2*self.Nharmonics*len(self.filter_names)
         d2_sum = 0.0
         wvar_sum = 0.0
         
         for filter_name in self.filter_names:
-            per = np.zeros_like(freqs)  
-            for k, freq in enumerate(freqs):
-                per[k] = self.cython_per[filter_name].eval_frequency(freq)
+            per = np.array([self.cython_per[filter_name].eval_frequency(freq) for freq in freqs], dtype=np.float32)
             per_single_band.update({filter_name : per})
-            
             d2 = float(self.lc_stats[filter_name].N - 2*self.Nharmonics - 1)  
             per_sum +=  d1*per*self.cython_per[filter_name].wvar/(d2 + d1*per)
             wvar_sum += self.cython_per[filter_name].wvar
             d2_sum += d2
             
-        self.freq = freqs
-        self.per_single_band = per_single_band 
-        self.per = d2_sum*per_sum/(d1*(wvar_sum - per_sum))
+        return d2_sum*per_sum/(d1*(wvar_sum - per_sum)), per_single_band
     
     
     
-    def finetune_best_frequencies(self, fresolution=1e-5, n_local_optima=10):
-        
-        best_local_optima = self.find_local_maxima(n_local_optima)
-        
-        for j in range(n_local_optima):
-            freq_fine = self.freq[best_local_optima[j]] - self.freq_step_coarse
-            for k in range(0, int(2.0*self.freq_step_coarse/fresolution)):
-                cost = self.compute_metric(freq_fine)
-                if cost > self.per[best_local_optima[j]]:
-                    self.per[best_local_optima[j]] = cost
-                    self.freq[best_local_optima[j]] = freq_fine
-                freq_fine += fresolution
-        # Sort them in descending order
-        idx = np.argsort(self.per[best_local_optima])[::-1]
-        if n_local_optima > 0:
-            self.best_local_optima = best_local_optima[idx]
-        else:
-            self.best_local_optima = best_local_optima
     
 
 class periodogram(_Periodogram):
@@ -315,17 +317,15 @@ class periodogram(_Periodogram):
         freqs = np.arange(np.amax([fmin, fresolution]), fmax, step=fresolution).astype('float32')
         self.per = self._compute_periodogram(freqs)
         self.freq = freqs
-        
+
     def _compute_periodogram(self, freqs):
+     
         if self.n_jobs == 1:
-            pers = np.array([self.compute_metric(freq) for freq in freqs], dtype=np.float32)            
+            pers = np.array([ self.cython_per.eval_frequency(freq) for freq in freqs], dtype=np.float32)            
         #else:
         #    pers = Parallel(n_jobs=self.n_jobs)(delayed(self.compute_metric)(freq) for freq in freqs)
-        return pers
 
-    def compute_metric(self, freq):
-        if self.method in ["PDM1", "LKSL"]:
-            return -self.cython_per.eval_frequency(freq)
-        else:
-            return self.cython_per.eval_frequency(freq)
-        
+        if self.method in ["PDM1", "LKSL"]: # Minima are best
+            pers = -pers
+        return pers
+    
