@@ -16,7 +16,7 @@ orthogonal multiharmonic AoV periodogram [7].
 Contents:
 
 -  Quadratic Mutual Information periodogram for light curves 
--  Phase Dispersion Minimization, String Length, Orthogonal Multiharmonic AoV
+-  Phase Dispersion Minimization, String Length, Analysis of Variance and Orthogonal Multiharmonic AoV
 -  Basic synthetic light curve generator
 
 
@@ -24,7 +24,7 @@ https://github.com/phuijse/P4J
 
 """
 
-__version__ = '0.27'
+__version__ = '1.0.0'
 
 from .generator import synthetic_light_curve_generator
 from .periodograms import periodogram, MultiBandPeriodogram
