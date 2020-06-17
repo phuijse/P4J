@@ -276,25 +276,26 @@ class periodogram(_Periodogram):
         function is intended for additional fine tuning of the results obtained
         with grid_search
         """
-        best_local_optima = self.find_local_maxima(n_local_optima)
+        local_optima_index = self.find_local_maxima(n_local_optima)
         
-        for j in range(n_local_optima):
-            freq_fine = self.freq[best_local_optima[j]] - self.freq_step_coarse
-            for k in range(0, int(2.0*self.freq_step_coarse/fresolution)):
-                cost = self.compute_metric(freq_fine)
-                if cost > self.per[best_local_optima[j]]:
-                    self.per[best_local_optima[j]] = cost
-                    self.freq[best_local_optima[j]] = freq_fine
-                freq_fine += fresolution
+        for local_optimum_index in local_optima_index:
+            fmin = self.freq[local_optimum_index] - self.freq_step_coarse
+            fmax = self.freq[local_optimum_index] + self.freq_step_coarse
+            freqs_fine = np.arange(fmin, fmax, step=fresolution).astype('float32')
+            pers_fine = self._compute_periodogram(freqs_fine)
+            new_best = np.argmax(pers_fine)
+            if pers_fine[new_best] > self.per[local_optimum_index]:
+                self.per[local_optimum_index] = pers_fine[new_best]
+                self.freq[local_optimum_index] = freqs_fine[new_best]
         # Sort them in descending order
-        idx = np.argsort(self.per[best_local_optima])[::-1]
+        idx = np.argsort(self.per[local_optima_index])[::-1]
         if n_local_optima > 0:
-            self.best_local_optima = best_local_optima[idx]
+            self.best_local_optima = local_optima_index[idx]
         else:
-            self.best_local_optima = best_local_optima
+            self.best_local_optima = local_optima_index
  
 
-    def frequency_grid_evaluation(self, fmin=0.0, fmax=1.0, fresolution=1e-4, n_local_max=10):
+    def frequency_grid_evaluation(self, fmin=0.0, fmax=1.0, fresolution=1e-4):
         """ 
         Computes the selected criterion over a grid of frequencies 
         with limits and resolution specified by the inputs. After that
@@ -311,16 +312,16 @@ class periodogram(_Periodogram):
         
         """
         self.freq_step_coarse = fresolution
-        freq = np.arange(np.amax([fmin, fresolution]), fmax, step=fresolution).astype('float32')
-        Nf = len(freq)        
+        freqs = np.arange(np.amax([fmin, fresolution]), fmax, step=fresolution).astype('float32')
+        self.per = self._compute_periodogram(freqs)
+        self.freq = freqs
+        
+    def _compute_periodogram(self, freqs):
         if self.n_jobs == 1:
-            per = np.zeros(shape=(Nf,)).astype('float32')
-            for k in range(0, Nf):
-                per[k] = self.compute_metric(freq[k])
+            pers = np.array([self.compute_metric(freq) for freq in freqs], dtype=np.float32)            
         #else:
-        #    per = Parallel(n_jobs=self.n_jobs)(delayed(self.compute_metric)(freq_) for freq_ in freq)
-        self.freq = freq
-        self.per = per
+        #    pers = Parallel(n_jobs=self.n_jobs)(delayed(self.compute_metric)(freq) for freq in freqs)
+        return pers
 
     def compute_metric(self, freq):
         if self.method in ["PDM1", "LKSL"]:
