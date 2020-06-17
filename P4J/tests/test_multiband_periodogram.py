@@ -23,5 +23,5 @@ def test_mbperiodogram():
     best_freq, best_per = my_per.get_best_frequencies()
     assert len(my_per.per_single_band) == len(np.unique(fids))
     assert np.allclose(best_freq, np.array([1.2341979, 9.704924, 0.86988854], dtype=np.float32))
-    assert np.allclose(best_per, np.array([125.56125, 81.32643, 74.50646], dtype=np.float32))
+    assert np.allclose(best_per, np.array([125.56125,  81.32925,  74.50633], dtype=np.float32))
 

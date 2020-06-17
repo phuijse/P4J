@@ -57,18 +57,18 @@ def test_periodogram_pdm():
     assert best_per.dtype == np.float32
     assert best_freq.shape == (3,)
     assert best_per.shape == (3,)
-    assert np.allclose(best_freq, np.array([1.23531, 1.2345, 1.4456], dtype=np.float32))
-    assert np.allclose(best_per, np.array([-0.1723166 , -0.18674569, -0.1979735], dtype=np.float32))
+    assert np.allclose(best_freq, np.array([1.2352979, 1.235708, 1.234098], dtype=np.float32))
+    assert np.allclose(best_per, np.array([-0.19907248, -0.23332588, -0.28197145], dtype=np.float32))
 
-def test_periodogram_pdm():
+def test_periodogram_qmi():
     best_freq, best_per = fit_eval_periodogram('QMIEU')
     
     assert best_freq.dtype == np.float32
     assert best_per.dtype == np.float32
     assert best_freq.shape == (3,)
     assert best_per.shape == (3,)
-    assert np.allclose(best_freq, np.array([1.23488, 6.06321, 3.489], dtype=np.float32))
-    assert np.allclose(best_per, np.array([0.03774682, 0.02947513, 0.02880505], dtype=np.float32))
+    assert np.allclose(best_freq, np.array([1.234878, 6.06321, 3.4890144], dtype=np.float32))
+    assert np.allclose(best_per, np.array([0.03774722, 0.02947513, 0.02880485], dtype=np.float32))
 
 
 
