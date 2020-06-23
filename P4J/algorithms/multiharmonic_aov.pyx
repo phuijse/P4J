@@ -35,14 +35,15 @@ cdef DTYPE_t* allocate_and_verify(Py_ssize_t N):
         raise MemoryError()
     return array
 
-cdef class AOV:
+cdef class MHAOV:
     cdef Py_ssize_t N
     cdef DTYPE_t* mjd
     cdef DTYPE_t* mag
     cdef DTYPE_t* err
     cdef ITYPE_t Nharmonics
+    cdef ITYPE_t mode
     cdef DTYPE_t d1, d2
-    cdef DTYPE_t wmean, wvar
+    cdef public DTYPE_t wmean, wvar
     cdef DTYPE_t* zr 
     cdef DTYPE_t* zi
     cdef DTYPE_t* znr
@@ -52,7 +53,7 @@ cdef class AOV:
     cdef DTYPE_t* cfr
     cdef DTYPE_t* cfi
 
-    def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err, ITYPE_t Nharmonics=1):
+    def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err, ITYPE_t Nharmonics=1, ITYPE_t mode=1):
         cdef Py_ssize_t i
         if Nharmonics < 1:
             raise ValueError("Number of harmonics has to be greater or equal to 1")
@@ -81,6 +82,8 @@ cdef class AOV:
         self.wvar = 0.0
         for i in range(self.N):
             self.wvar += powf(self.mag[i] - self.wmean, 2.)/powf(self.err[i], 2.)
+            
+        self.mode = mode # 0: RAW, 1: F
         
 
     def eval_frequency(self, DTYPE_t freq):
@@ -107,12 +110,9 @@ cdef class AOV:
                 ali += (self.zr[i]*self.pi[i] + self.zi[i]*self.pr[i])/self.err[i]
                 scr += self.pr[i]*self.cfr[i] + self.pi[i]*self.cfi[i]
                 sci += self.pr[i]*self.cfi[i] - self.pi[i]*self.cfr[i]
-            if sn > 1e-31:
-                alr = alr/sn
-                ali = ali/sn
-            else:
-                alr = alr/1e-31
-                ali = ali/1e-31
+            sn = max(sn, 1e-9)
+            alr = alr/sn
+            ali = ali/sn
             aov += (scr**2 + sci**2)/sn
             for i in range(self.N):
                 sr = alr*self.znr[i] - ali*self.zni[i]
@@ -123,11 +123,11 @@ cdef class AOV:
                 tmp = self.znr[i]*self.zr[i] - self.zni[i]*self.zi[i]
                 self.zni[i] = self.zni[i]*self.zr[i] + self.znr[i]*self.zi[i]
                 self.znr[i] = tmp
-        if self.wvar - aov > 1e-32:
-            return self.d2*aov/(self.d1*(self.wvar - aov))
-        else:
-            return self.d2*aov/(self.d1*1e-32)
-
+        if self.mode == 0:
+            return aov
+        elif self.mode == 1:        
+            return (self.d2/self.d1)*aov/max(self.wvar - aov, 1e-9)
+            
     def __dealloc__(self):
         PyMem_Free(self.mjd)
         PyMem_Free(self.mag)
