@@ -1,4 +1,5 @@
 import numpy as np
+from numpy.testing import assert_allclose
 from P4J import periodogram
 from P4J.generator import synthetic_light_curve_generator
 
@@ -8,12 +9,12 @@ def create_test_data():
     mjd, mag, err = lc_generator.draw_noisy_time_series(SNR=2.0)
     return mjd, mag, err
 
-def test_standardize():
+def test_standardize(tol=1e-7):
     my_per = periodogram(method='AOV')
     mjd, mag, err = create_test_data()
     my_per.set_data(mjd, mag, err, standardize=True)
-    assert np.allclose(my_per.mag[:3], np.array([-0.87692094, 0.44308123, 0.9481179], dtype=np.float32))
-    assert np.allclose(my_per.err[:3], np.array([1.399464   , 0.70398176, 1.4657015], dtype=np.float32))
+    assert_allclose(my_per.mag[:3], np.array([-0.87692106, 0.44308114, 0.94811785], dtype=np.float32), atol=tol)
+    assert_allclose(my_per.err[:3], np.array([1.399464   , 0.70398176, 1.4657015], dtype=np.float32), atol=tol)
     
 def test_removenan():
     my_per = periodogram(method='AOV')
@@ -37,8 +38,8 @@ def test_periodogram_mhaov():
     assert best_per.dtype == np.float32
     assert best_freq.shape == (3,)
     assert best_per.shape == (3,)
-    assert np.allclose(best_freq, np.array([1.23421 , 9.704909, 6.98109], dtype=np.float32))
-    assert np.allclose(best_per, np.array([58.992764, 40.944824, 37.43927], dtype=np.float32))
+    assert_allclose(best_freq, np.array([1.234198 , 9.704909, 6.981068], dtype=np.float32))
+    assert_allclose(best_per, np.array([58.99221, 40.944813, 37.43901], dtype=np.float32))
     
 def test_periodogram_aov():
     best_freq, best_per = fit_eval_periodogram('AOV')
@@ -47,8 +48,8 @@ def test_periodogram_aov():
     assert best_per.dtype == np.float32
     assert best_freq.shape == (3,)
     assert best_per.shape == (3,)
-    assert np.allclose(best_freq, np.array([1.2354, 4.0711, 9.823629], dtype=np.float32))
-    assert np.allclose(best_per, np.array([9.8947315, 8.2189865, 8.14342], dtype=np.float32))
+    assert_allclose(best_freq, np.array([1.2353979, 4.0710936, 9.823684], dtype=np.float32))
+    assert_allclose(best_per, np.array([9.8947315, 8.2189865, 8.14342], dtype=np.float32))
     
 def test_periodogram_pdm():
     best_freq, best_per = fit_eval_periodogram('PDM1')
@@ -57,8 +58,8 @@ def test_periodogram_pdm():
     assert best_per.dtype == np.float32
     assert best_freq.shape == (3,)
     assert best_per.shape == (3,)
-    assert np.allclose(best_freq, np.array([1.2352979, 1.235708, 1.234098], dtype=np.float32))
-    assert np.allclose(best_per, np.array([-0.19907248, -0.23332588, -0.28197145], dtype=np.float32))
+    assert_allclose(best_freq, np.array([1.2352979, 1.235708, 1.234098], dtype=np.float32))
+    assert_allclose(best_per, np.array([-0.19907248, -0.23332588, -0.28197145], dtype=np.float32))
 
 def test_periodogram_qmi():
     best_freq, best_per = fit_eval_periodogram('QMIEU')
@@ -67,8 +68,8 @@ def test_periodogram_qmi():
     assert best_per.dtype == np.float32
     assert best_freq.shape == (3,)
     assert best_per.shape == (3,)
-    assert np.allclose(best_freq, np.array([1.234878, 6.06321, 3.4890144], dtype=np.float32))
-    assert np.allclose(best_per, np.array([0.03774722, 0.02947513, 0.02880485], dtype=np.float32))
+    assert_allclose(best_freq, np.array([1.234878, 6.06321, 3.4890144], dtype=np.float32))
+    assert_allclose(best_per, np.array([0.03774722, 0.029475132, 0.028804852], dtype=np.float32))
 
 
 

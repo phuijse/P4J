@@ -1,4 +1,5 @@
 import numpy as np
+from numpy.testing import assert_allclose
 from P4J import MultiBandPeriodogram
 from P4J.generator import synthetic_light_curve_generator
 
@@ -22,6 +23,6 @@ def test_mbperiodogram():
     my_per.finetune_best_frequencies(n_local_optima=3, fresolution=1e-5)
     best_freq, best_per = my_per.get_best_frequencies()
     assert len(my_per.per_single_band) == len(np.unique(fids))
-    assert np.allclose(best_freq, np.array([1.2341979, 9.704924, 0.86988854], dtype=np.float32))
-    assert np.allclose(best_per, np.array([125.56125,  81.32925,  74.50633], dtype=np.float32))
+    assert_allclose(best_freq, np.array([1.2341979, 9.704909, 0.86988866], dtype=np.float32))
+    assert_allclose(best_per, np.array([125.610535,  81.329666,  74.506386], dtype=np.float32))
 
