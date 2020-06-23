@@ -1,7 +1,8 @@
 import numpy as np
+import abc
 
-class BasePeriodogram:
-    
+
+class BasePeriodogram(abc.ABC):
     def get_best_frequency(self, fid=None):
         if fid is None:
             best_idx = np.argmax(self.per)
@@ -48,7 +49,7 @@ class BasePeriodogram:
         
         local_optima_index = 1+np.where((self.per[1:-1] > self.per[:-2]) & (self.per[1:-1] > self.per[2:]))[0]
         
-        if(len(local_optima_index) < n_local_optima):
+        if len(local_optima_index) < n_local_optima:
             print("Warning: Not enough local maxima found in the periodogram")
             return
         # Keep only n_local_optima
@@ -83,3 +84,11 @@ class BasePeriodogram:
             self.best_local_optima = local_optima_index[idx]
         else:
             self.best_local_optima = local_optima_index
+
+    @abc.abstractmethod
+    def _update_periodogram(self, local_optimum_index, freqs_fine, pers_fine):
+        pass
+
+    @abc.abstractmethod
+    def _compute_periodogram(self, freqs_fine):
+        pass

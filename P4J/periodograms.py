@@ -14,9 +14,9 @@ from .math import robust_loc, robust_scale
 
 from collections import namedtuple
 Stats = namedtuple('Stats', 'loc scale N')
-    
+
+
 class MultiBandPeriodogram(BasePeriodogram):
-    
     def __init__(self, method='MHAOV', **kwarg):
         
         #methods = ["MHAOV"]
@@ -27,11 +27,8 @@ class MultiBandPeriodogram(BasePeriodogram):
         self.Nharmonics = 1
         if 'Nharmonics' in kwarg:
             self.Nharmonics = kwarg["Nharmonics"]
-            
-        
-        
+
     def set_data(self, mjds, mags, errs, fids):
-        
         self.filter_names = np.unique(fids)
         self.mjds = mjds.astype('float32')
         self.mags = mags.astype('float32')
@@ -42,13 +39,17 @@ class MultiBandPeriodogram(BasePeriodogram):
             mask = fids == filter_name
             weights = np.power(self.errs[mask], -2.0)
             weights = weights/np.sum(weights)
-            self.lc_stats.update({filter_name : Stats(loc=robust_loc(self.mags[mask], weights),
-                                                      scale=robust_scale(self.mags[mask], weights),
-                                                      N=len(self.mjds[mask]))})
+            self.lc_stats.update({
+                filter_name:
+                    Stats(loc=robust_loc(self.mags[mask], weights),
+                          scale=robust_scale(self.mags[mask], weights),
+                          N=len(self.mjds[mask]))})
                              
-            self.cython_per.update({filter_name : MHAOV(self.mjds[mask], 
-                                                       self.mags[mask]- self.lc_stats[filter_name].loc, 
-                                                       self.errs[mask], Nharmonics=1, mode=0)})
+            self.cython_per.update({
+                filter_name:
+                    MHAOV(self.mjds[mask],
+                          self.mags[mask] - self.lc_stats[filter_name].loc,
+                          self.errs[mask], Nharmonics=1, mode=0)})
             
     def _compute_periodogram(self, freqs):        
         per_single_band = {}
@@ -62,14 +63,12 @@ class MultiBandPeriodogram(BasePeriodogram):
             per = np.array([self.cython_per[filter_name].eval_frequency(freq) for freq in freqs], dtype=np.float32)
             d2 = float(self.lc_stats[filter_name].N - 2*self.Nharmonics - 1)  
             per_single_band.update({filter_name : (d2/d1)*per/(self.cython_per[filter_name].wvar-per)})
-            #per_single_band.update({filter_name : per})            
+            #per_single_band.update({filter_name : per})
             per_sum += per
-            #per_sum +=  d1*per*self.cython_per[filter_name].wvar/(d2 + d1*per)            
+            #per_sum +=  d1*per*self.cython_per[filter_name].wvar/(d2 + d1*per)
             wvar_sum += self.cython_per[filter_name].wvar
             d2_sum += d2
-            
-            
-            
+
         return d2_sum*per_sum/(d1*(wvar_sum - per_sum)), per_single_band
     
     def _update_periodogram(self, replace_idx, freqs_fine, pers_fine):
@@ -79,7 +78,6 @@ class MultiBandPeriodogram(BasePeriodogram):
             self.per[replace_idx] = pers_fine[0][new_best] # multiband
             for filter_name in self.filter_names: # single band
                 self.per_single_band[filter_name][replace_idx] = pers_fine[1][filter_name][new_best]
-    
     
 
 class periodogram(BasePeriodogram):
@@ -130,10 +128,10 @@ class periodogram(BasePeriodogram):
         self.n_jobs = n_jobs
         
         methods = ["QMICS", "QMIEU", "QME", "PDM1", "LKSL", "MHAOV", "AOV"]
-        if not method in methods:
+        if method not in methods:
             raise ValueError("Wrong method")
         self.method = method
-        
+
     def set_data(self, mjd, mag, err, standardize=False, **kwarg):
         """
         Saves the light curve data, where 
@@ -170,10 +168,8 @@ class periodogram(BasePeriodogram):
         if standardize:
             self.mag = (self.mag - self.lc_stats['loc'])/self.lc_stats['scale']
             self.err = self.err/self.lc_stats['scale']
-        
-        
+
         if self.method in ['QMICS', 'QMIEU', 'QME']:
-            
             hm = 0.9*self.lc_stats['N']**(-0.2)
             if not standardize:
                 hm = hm*self.lc_stats['scale']
@@ -216,20 +212,17 @@ class periodogram(BasePeriodogram):
             self.cython_per = MHAOV(self.mjd, self.mag, self.err, Nharmonics)  
 
     def _compute_periodogram(self, freqs):
-     
         if self.n_jobs == 1:
-            pers = np.array([ self.cython_per.eval_frequency(freq) for freq in freqs], dtype=np.float32)            
+            pers = np.array([self.cython_per.eval_frequency(freq) for freq in freqs], dtype=np.float32)
         #else:
         #    pers = Parallel(n_jobs=self.n_jobs)(delayed(self.compute_metric)(freq) for freq in freqs)
 
         if self.method in ["PDM1", "LKSL"]: # Minima are best
             pers = -pers
-        return pers, None # TODO: THIS IS UGLY!!
+        return pers, None  # TODO: THIS IS UGLY!!
     
     def _update_periodogram(self, replace_idx, freqs_fine, pers_fine):
         new_best = np.argmax(pers_fine[0])
         if pers_fine[0][new_best] > self.per[replace_idx]:
             self.freq[replace_idx] = freqs_fine[new_best] 
             self.per[replace_idx] = pers_fine[0][new_best]
-           
-    
