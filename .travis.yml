@@ -1,0 +1,8 @@
+language: python
+
+install:
+  - pip install Cython
+  - pip install -e .
+
+script:
+  - python -m unittest discover
