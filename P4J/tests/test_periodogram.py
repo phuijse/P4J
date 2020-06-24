@@ -19,12 +19,12 @@ class TestPeriodogram(unittest.TestCase):
         self.assertTrue(
             np.allclose(
                 my_per.mag[:3],
-                np.array([-0.8581345, 0.48400727, 0.9975146], dtype=np.float32),
+                np.array([-0.885704, 0.47217235, 0.9916998], dtype=np.float32),
                 atol=1e-7))
         self.assertTrue(
             np.allclose(
                 my_per.err[:3],
-                np.array([1.4229363, 0.7157892, 1.4902847], dtype=np.float32),
+                np.array([1.439618, 0.72418076, 1.507756], dtype=np.float32),
                 atol=1e-7))
 
     def test_removenan(self):
@@ -51,11 +51,11 @@ class TestPeriodogram(unittest.TestCase):
         self.assertTrue(
             np.allclose(
                 best_freq,
-                np.array([1.234318, 9.704909, 0.8698987], dtype=np.float32), rtol=1e-5))
+                np.array([1.234198, 9.704867, 3.4884243], dtype=np.float32), rtol=1e-5))
         self.assertTrue(
             np.allclose(
                 best_per,
-                np.array([61.650833, 43.19652, 38.42799], dtype=np.float32), rtol=1e-5))
+                np.array([66.69726, 42.329742, 38.671776], dtype=np.float32), rtol=1e-5))
 
     def test_periodogram_aov(self):
         best_freq, best_per = self.fit_eval_periodogram('AOV')
@@ -73,7 +73,7 @@ class TestPeriodogram(unittest.TestCase):
         self.assertTrue(
             np.allclose(
                 best_per,
-                np.array([9.660553, 8.129338, 8.114369], dtype=np.float32),
+                np.array([9.226295, 8.598029, 7.567729], dtype=np.float32),
                 rtol=1e-5))
 
     def test_periodogram_pdm(self):
@@ -92,7 +92,7 @@ class TestPeriodogram(unittest.TestCase):
         self.assertTrue(
             np.allclose(
                 best_per,
-                np.array([-0.2118774, -0.23026793, -0.27066943], dtype=np.float32),
+                np.array([-0.20746106, -0.23871078, -0.27404344], dtype=np.float32),
                 rtol=1e-5))
 
     def test_periodogram_qmi(self):
@@ -106,12 +106,12 @@ class TestPeriodogram(unittest.TestCase):
         self.assertTrue(
             np.allclose(
                 best_freq,
-                np.array([1.235058, 6.06309, 3.4891343], dtype=np.float32),
+                np.array([1.234968, 3.4893143, 6.06346], dtype=np.float32),
                 rtol=1e-5))
         self.assertTrue(
             np.allclose(
                 best_per,
-                np.array([0.03991941, 0.03095864, 0.02975664], dtype=np.float32),
+                np.array([0.03973941, 0.03063367, 0.02963623], dtype=np.float32),
                 rtol=1e-5))
 
 
