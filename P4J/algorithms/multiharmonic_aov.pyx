@@ -94,38 +94,63 @@ cdef class MHAOV:
         for i in range(self.N):
             arg = self.mjd[i]*freq
             arg = 2.0*M_PI*(arg - floorf(arg))
+
+            # z = exp(j*arg), complex exp with f=freq eval at times mjd[i]
             self.zr[i] = cosf(arg)
             self.zi[i] = sinf(arg)
+
+            # zn = 1, bias basis?
             self.znr[i] = 1.
-            self.pr[i] = 1./self.err[i]
             self.zni[i] = 0.
+
+            # p = 1/err
+            self.pr[i] = 1./self.err[i]
             self.pi[i] = 0.
+
+            # cf = (mag-wmean)*exp(j*n_harmonics*arg)/err
             self.cfr[i] = (self.mag[i] - self.wmean)*cosf(self.Nharmonics*arg)/self.err[i]
             self.cfi[i] = (self.mag[i] - self.wmean)*sinf(self.Nharmonics*arg)/self.err[i]
         for j in range(2*self.Nharmonics+1):
             sn = alr = ali = scr = sci = 0.0
             for i in range(self.N):
+                # += |p|^2
                 sn += self.pr[i]**2 + self.pi[i]**2
+
+                # al += z*p/err
                 alr += (self.zr[i]*self.pr[i] - self.zi[i]*self.pi[i])/self.err[i]
                 ali += (self.zr[i]*self.pi[i] + self.zi[i]*self.pr[i])/self.err[i]
+
+                # sc += conj(p)*cr
                 scr += self.pr[i]*self.cfr[i] + self.pi[i]*self.cfi[i]
                 sci += self.pr[i]*self.cfi[i] - self.pi[i]*self.cfr[i]
             sn = max(sn, 1e-9)
+
+            # al = al/sn
             alr = alr/sn
             ali = ali/sn
+
+            # aov += |sc|^2 / sn
             aov += (scr**2 + sci**2)/sn
             for i in range(self.N):
+                # s = al*zn
                 sr = alr*self.znr[i] - ali*self.zni[i]
                 si = alr*self.zni[i] + ali*self.znr[i]
+
+
+                # updating p = p*z - s*conj(p)
+                # tmp = re(p*z)-re(s*conj(p))
                 tmp = self.pr[i]*self.zr[i] - self.pi[i]*self.zi[i] - sr*self.pr[i] - si*self.pi[i]
+                # im(p) = im(p*z)-im(s*conj(p))
                 self.pi[i] = self.pr[i]*self.zi[i] + self.pi[i]*self.zr[i] + sr*self.pi[i] - si*self.pr[i]
                 self.pr[i] = tmp
+
+                # updating zn = zn * z
                 tmp = self.znr[i]*self.zr[i] - self.zni[i]*self.zi[i]
                 self.zni[i] = self.zni[i]*self.zr[i] + self.znr[i]*self.zi[i]
                 self.znr[i] = tmp
         if self.mode == 0:
             return aov
-        elif self.mode == 1:        
+        elif self.mode == 1:
             return (self.d2/self.d1)*aov/max(self.wvar - aov, 1e-9)
             
     def __dealloc__(self):

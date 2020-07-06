@@ -55,7 +55,6 @@ class MultiBandPeriodogram(BasePeriodogram):
         per_single_band = {}
         per_sum = np.zeros_like(freqs) 
         d1 = 2 * self.Nharmonics
-        #d1 = 2*self.Nharmonics*len(self.filter_names)
         d2_sum = 0.0
         wvar_sum = 0.0
         
@@ -66,9 +65,7 @@ class MultiBandPeriodogram(BasePeriodogram):
             d2 = float(self.lc_stats[filter_name].N - 2*self.Nharmonics - 1)  
             per_single_band.update(
                 {filter_name: (d2/d1)*per/(self.cython_per[filter_name].wvar-per)})
-            #per_single_band.update({filter_name : per})
             per_sum += per
-            #per_sum +=  d1*per*self.cython_per[filter_name].wvar/(d2 + d1*per)
             wvar_sum += self.cython_per[filter_name].wvar
             d2_sum += d2
 
