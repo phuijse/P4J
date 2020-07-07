@@ -74,9 +74,9 @@ class MultiBandPeriodogram(BasePeriodogram):
     def _update_periodogram(self, replace_idx, freqs_fine, pers_fine):
         new_best = np.argmax(pers_fine[0])
         if pers_fine[0][new_best] > self.per[replace_idx]:
-            self.freq[replace_idx] = freqs_fine[new_best] # frequency
-            self.per[replace_idx] = pers_fine[0][new_best] # multiband
-            for filter_name in self.filter_names: # single band
+            self.freq[replace_idx] = freqs_fine[new_best]  # frequency
+            self.per[replace_idx] = pers_fine[0][new_best]  # multiband
+            for filter_name in self.filter_names:  # single band
                 self.per_single_band[filter_name][replace_idx] = pers_fine[1][filter_name][new_best]
     
 

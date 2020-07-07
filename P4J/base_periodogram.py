@@ -46,8 +46,8 @@ class BasePeriodogram(abc.ABC):
         self.freq = freqs 
     
     def find_local_maxima(self, n_local_optima=10):
-        
-        local_optima_index = 1+np.where((self.per[1:-1] > self.per[:-2]) & (self.per[1:-1] > self.per[2:]))[0]
+        local_optima_index = 1+np.where(
+            (self.per[1:-1] > self.per[:-2]) & (self.per[1:-1] > self.per[2:]))[0]
         
         if len(local_optima_index) < n_local_optima:
             print("Warning: Not enough local maxima found in the periodogram")
