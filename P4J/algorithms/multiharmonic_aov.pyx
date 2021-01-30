@@ -38,7 +38,7 @@ cdef DTYPE_t* allocate_and_verify(Py_ssize_t N):
 cdef class MHAOV:
     cdef Py_ssize_t N
     cdef DTYPE_t* mjd
-    cdef DTYPE_t* mag
+    cdef DTYPE_t* mag_minus_wmean
     cdef DTYPE_t* err
     cdef ITYPE_t Nharmonics
     cdef ITYPE_t mode
@@ -60,7 +60,7 @@ cdef class MHAOV:
         self.Nharmonics = Nharmonics
         self.N = mag.shape[0]
         self.mjd = allocate_and_verify(self.N)
-        self.mag = allocate_and_verify(self.N)
+        self.mag_minus_wmean = allocate_and_verify(self.N)
         self.err = allocate_and_verify(self.N)
         self.zr = allocate_and_verify(self.N)
         self.zi = allocate_and_verify(self.N)
@@ -71,17 +71,18 @@ cdef class MHAOV:
         self.cfr = allocate_and_verify(self.N)
         self.cfi = allocate_and_verify(self.N)
         
+        self.wmean = weighted_mean(&mag[0], &err[0], self.N)
+
         for i in range(self.N):
             self.mjd[i] = mjd[i]
-            self.mag[i] = mag[i]
+            self.mag_minus_wmean[i] = mag[i] - self.wmean
             self.err[i] = err[i]
-        
-        self.wmean = weighted_mean(self.mag, self.err, self.N)
+
         self.d1 = Nharmonics*2.0
         self.d2 = self.N - Nharmonics*2 - 1
         self.wvar = 0.0
         for i in range(self.N):
-            self.wvar += powf(self.mag[i] - self.wmean, 2.)/powf(self.err[i], 2.)
+            self.wvar += powf(self.mag_minus_wmean[i], 2.)/powf(self.err[i], 2.)
             
         self.mode = mode # 0: RAW, 1: F
         
@@ -108,8 +109,8 @@ cdef class MHAOV:
             self.pi[i] = 0.
 
             # cf = (mag-wmean)*exp(j*n_harmonics*arg)/err
-            self.cfr[i] = (self.mag[i] - self.wmean)*cosf(self.Nharmonics*arg)/self.err[i]
-            self.cfi[i] = (self.mag[i] - self.wmean)*sinf(self.Nharmonics*arg)/self.err[i]
+            self.cfr[i] = self.mag_minus_wmean[i]*cosf(self.Nharmonics*arg)/self.err[i]
+            self.cfi[i] = self.mag_minus_wmean[i]*sinf(self.Nharmonics*arg)/self.err[i]
         for j in range(2*self.Nharmonics+1):
             sn = alr = ali = scr = sci = 0.0
             for i in range(self.N):
@@ -155,7 +156,7 @@ cdef class MHAOV:
             
     def __dealloc__(self):
         PyMem_Free(self.mjd)
-        PyMem_Free(self.mag)
+        PyMem_Free(self.mag_minus_wmean)
         PyMem_Free(self.err)
         PyMem_Free(self.zr)
         PyMem_Free(self.zi)
