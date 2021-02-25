@@ -92,9 +92,12 @@ cdef class MHAOV:
         cdef DTYPE_t sn, alr, ali, scr, sci
         cdef DTYPE_t aov=0.0
         cdef DTYPE_t arg, tmp, sr, si
+        cdef DTYPE_t two_float = 2.0
+        cdef DTYPE_t one_float = 1.0
+        
         for i in range(self.N):
             arg = self.mjd[i]*freq
-            arg = 2.0*M_PI*(arg - floorf(arg))
+            arg = two_float*M_PI*(arg - floorf(arg))
 
             # z = exp(j*arg), complex exp with f=freq eval at times mjd[i]
             self.zr[i] = cosf(arg)
@@ -105,7 +108,7 @@ cdef class MHAOV:
             self.zni[i] = 0.
 
             # p = 1/err
-            self.pr[i] = 1./self.err[i]
+            self.pr[i] = one_float/self.err[i]
             self.pi[i] = 0.
 
             # cf = (mag-wmean)*exp(j*n_harmonics*arg)/err

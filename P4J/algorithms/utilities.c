@@ -863,7 +863,7 @@ typedef int __pyx_t_3P4J_10algorithms_9utilities_ITYPE_t;
 /*--- Type declarations ---*/
 struct __pyx_t_3P4J_10algorithms_9utilities_Sorter;
 
-/* "P4J/algorithms/utilities.pyx":58
+/* "P4J/algorithms/utilities.pyx":62
  *             int(*compar)(const_void *, const_void *)) nogil
  * 
  * cdef struct Sorter:             # <<<<<<<<<<<<<<
@@ -1179,6 +1179,8 @@ static __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t __pyx_f_3P4J_10algorithms_9u
   __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t __pyx_v_w_mean;
   __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t __pyx_v_w_sum;
   Py_ssize_t __pyx_v_i;
+  __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t __pyx_v_one_float;
+  __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t __pyx_v_two_float;
   __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t __pyx_r;
   __Pyx_RefNannyDeclarations
   Py_ssize_t __pyx_t_1;
@@ -1200,44 +1202,62 @@ static __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t __pyx_f_3P4J_10algorithms_9u
  *     cdef DTYPE_t w_mean = 0.0
  *     cdef DTYPE_t w_sum = 0.0             # <<<<<<<<<<<<<<
  *     cdef Py_ssize_t i
- *     for i in range(N):
+ *     cdef DTYPE_t one_float = 1.0
  */
   __pyx_v_w_sum = 0.0;
 
   /* "P4J/algorithms/utilities.pyx":28
  *     cdef DTYPE_t w_sum = 0.0
  *     cdef Py_ssize_t i
+ *     cdef DTYPE_t one_float = 1.0             # <<<<<<<<<<<<<<
+ *     cdef DTYPE_t two_float = 2.0
+ *     for i in range(N):
+ */
+  __pyx_v_one_float = 1.0;
+
+  /* "P4J/algorithms/utilities.pyx":29
+ *     cdef Py_ssize_t i
+ *     cdef DTYPE_t one_float = 1.0
+ *     cdef DTYPE_t two_float = 2.0             # <<<<<<<<<<<<<<
+ *     for i in range(N):
+ *         w_sum += one_float/powf(err[i], two_float)
+ */
+  __pyx_v_two_float = 2.0;
+
+  /* "P4J/algorithms/utilities.pyx":30
+ *     cdef DTYPE_t one_float = 1.0
+ *     cdef DTYPE_t two_float = 2.0
  *     for i in range(N):             # <<<<<<<<<<<<<<
- *         w_sum += 1.0/powf(err[i], 2.0)
- *         w_mean += data[i]/powf(err[i], 2.0)
+ *         w_sum += one_float/powf(err[i], two_float)
+ *         w_mean += data[i]/powf(err[i], two_float)
  */
   __pyx_t_1 = __pyx_v_N;
   __pyx_t_2 = __pyx_t_1;
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/algorithms/utilities.pyx":29
- *     cdef Py_ssize_t i
+    /* "P4J/algorithms/utilities.pyx":31
+ *     cdef DTYPE_t two_float = 2.0
  *     for i in range(N):
- *         w_sum += 1.0/powf(err[i], 2.0)             # <<<<<<<<<<<<<<
- *         w_mean += data[i]/powf(err[i], 2.0)
+ *         w_sum += one_float/powf(err[i], two_float)             # <<<<<<<<<<<<<<
+ *         w_mean += data[i]/powf(err[i], two_float)
  *     return w_mean/w_sum
  */
-    __pyx_v_w_sum = (__pyx_v_w_sum + (1.0 / ((double)powf((__pyx_v_err[__pyx_v_i]), 2.0))));
+    __pyx_v_w_sum = (__pyx_v_w_sum + (__pyx_v_one_float / powf((__pyx_v_err[__pyx_v_i]), __pyx_v_two_float)));
 
-    /* "P4J/algorithms/utilities.pyx":30
+    /* "P4J/algorithms/utilities.pyx":32
  *     for i in range(N):
- *         w_sum += 1.0/powf(err[i], 2.0)
- *         w_mean += data[i]/powf(err[i], 2.0)             # <<<<<<<<<<<<<<
+ *         w_sum += one_float/powf(err[i], two_float)
+ *         w_mean += data[i]/powf(err[i], two_float)             # <<<<<<<<<<<<<<
  *     return w_mean/w_sum
  * 
  */
-    __pyx_v_w_mean = (__pyx_v_w_mean + ((__pyx_v_data[__pyx_v_i]) / powf((__pyx_v_err[__pyx_v_i]), 2.0)));
+    __pyx_v_w_mean = (__pyx_v_w_mean + ((__pyx_v_data[__pyx_v_i]) / powf((__pyx_v_err[__pyx_v_i]), __pyx_v_two_float)));
   }
 
-  /* "P4J/algorithms/utilities.pyx":31
- *         w_sum += 1.0/powf(err[i], 2.0)
- *         w_mean += data[i]/powf(err[i], 2.0)
+  /* "P4J/algorithms/utilities.pyx":33
+ *         w_sum += one_float/powf(err[i], two_float)
+ *         w_mean += data[i]/powf(err[i], two_float)
  *     return w_mean/w_sum             # <<<<<<<<<<<<<<
  * 
  * cdef DTYPE_t unbiased_weighted_variance(DTYPE_t* data, DTYPE_t* err2, Py_ssize_t N):
@@ -1259,7 +1279,7 @@ static __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t __pyx_f_3P4J_10algorithms_9u
   return __pyx_r;
 }
 
-/* "P4J/algorithms/utilities.pyx":33
+/* "P4J/algorithms/utilities.pyx":35
  *     return w_mean/w_sum
  * 
  * cdef DTYPE_t unbiased_weighted_variance(DTYPE_t* data, DTYPE_t* err2, Py_ssize_t N):             # <<<<<<<<<<<<<<
@@ -1273,6 +1293,8 @@ static __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t __pyx_f_3P4J_10algorithms_9u
   __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t __pyx_v_V1;
   __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t __pyx_v_V2;
   Py_ssize_t __pyx_v_i;
+  __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t __pyx_v_one_float;
+  __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t __pyx_v_two_float;
   __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t __pyx_r;
   __Pyx_RefNannyDeclarations
   Py_ssize_t __pyx_t_1;
@@ -1280,7 +1302,7 @@ static __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t __pyx_f_3P4J_10algorithms_9u
   Py_ssize_t __pyx_t_3;
   __Pyx_RefNannySetupContext("unbiased_weighted_variance", 0);
 
-  /* "P4J/algorithms/utilities.pyx":34
+  /* "P4J/algorithms/utilities.pyx":36
  * 
  * cdef DTYPE_t unbiased_weighted_variance(DTYPE_t* data, DTYPE_t* err2, Py_ssize_t N):
  *     cdef DTYPE_t w_mean = 0.0             # <<<<<<<<<<<<<<
@@ -1289,7 +1311,7 @@ static __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t __pyx_f_3P4J_10algorithms_9u
  */
   __pyx_v_w_mean = 0.0;
 
-  /* "P4J/algorithms/utilities.pyx":35
+  /* "P4J/algorithms/utilities.pyx":37
  * cdef DTYPE_t unbiased_weighted_variance(DTYPE_t* data, DTYPE_t* err2, Py_ssize_t N):
  *     cdef DTYPE_t w_mean = 0.0
  *     cdef DTYPE_t w_var = 0.0             # <<<<<<<<<<<<<<
@@ -1298,62 +1320,40 @@ static __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t __pyx_f_3P4J_10algorithms_9u
  */
   __pyx_v_w_var = 0.0;
 
-  /* "P4J/algorithms/utilities.pyx":36
+  /* "P4J/algorithms/utilities.pyx":38
  *     cdef DTYPE_t w_mean = 0.0
  *     cdef DTYPE_t w_var = 0.0
  *     cdef DTYPE_t V1 = 0.0, V2 = 0.0             # <<<<<<<<<<<<<<
  *     cdef Py_ssize_t i
- *     for i in range(N):
+ *     cdef DTYPE_t one_float = 1.0
  */
   __pyx_v_V1 = 0.0;
   __pyx_v_V2 = 0.0;
 
-  /* "P4J/algorithms/utilities.pyx":38
+  /* "P4J/algorithms/utilities.pyx":40
  *     cdef DTYPE_t V1 = 0.0, V2 = 0.0
  *     cdef Py_ssize_t i
- *     for i in range(N):             # <<<<<<<<<<<<<<
- *         V1 += 1.0/err2[i]
- *         V2 += 1.0/powf(err2[i], 2.0)
+ *     cdef DTYPE_t one_float = 1.0             # <<<<<<<<<<<<<<
+ *     cdef DTYPE_t two_float = 2.0
+ *     for i in range(N):
  */
-  __pyx_t_1 = __pyx_v_N;
-  __pyx_t_2 = __pyx_t_1;
-  for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
-    __pyx_v_i = __pyx_t_3;
+  __pyx_v_one_float = 1.0;
 
-    /* "P4J/algorithms/utilities.pyx":39
+  /* "P4J/algorithms/utilities.pyx":41
  *     cdef Py_ssize_t i
+ *     cdef DTYPE_t one_float = 1.0
+ *     cdef DTYPE_t two_float = 2.0             # <<<<<<<<<<<<<<
  *     for i in range(N):
- *         V1 += 1.0/err2[i]             # <<<<<<<<<<<<<<
- *         V2 += 1.0/powf(err2[i], 2.0)
- *         w_mean += data[i]/err2[i]
+ *         V1 += one_float/err2[i]
  */
-    __pyx_v_V1 = (__pyx_v_V1 + (1.0 / ((double)(__pyx_v_err2[__pyx_v_i]))));
-
-    /* "P4J/algorithms/utilities.pyx":40
- *     for i in range(N):
- *         V1 += 1.0/err2[i]
- *         V2 += 1.0/powf(err2[i], 2.0)             # <<<<<<<<<<<<<<
- *         w_mean += data[i]/err2[i]
- *     for i in range(N):
- */
-    __pyx_v_V2 = (__pyx_v_V2 + (1.0 / ((double)powf((__pyx_v_err2[__pyx_v_i]), 2.0))));
-
-    /* "P4J/algorithms/utilities.pyx":41
- *         V1 += 1.0/err2[i]
- *         V2 += 1.0/powf(err2[i], 2.0)
- *         w_mean += data[i]/err2[i]             # <<<<<<<<<<<<<<
- *     for i in range(N):
- *         w_var += powf(data[i] - w_mean/V1, 2.0)/err2[i]
- */
-    __pyx_v_w_mean = (__pyx_v_w_mean + ((__pyx_v_data[__pyx_v_i]) / (__pyx_v_err2[__pyx_v_i])));
-  }
+  __pyx_v_two_float = 2.0;
 
   /* "P4J/algorithms/utilities.pyx":42
- *         V2 += 1.0/powf(err2[i], 2.0)
- *         w_mean += data[i]/err2[i]
+ *     cdef DTYPE_t one_float = 1.0
+ *     cdef DTYPE_t two_float = 2.0
  *     for i in range(N):             # <<<<<<<<<<<<<<
- *         w_var += powf(data[i] - w_mean/V1, 2.0)/err2[i]
- *     return w_var/(V1 - V2/V1)
+ *         V1 += one_float/err2[i]
+ *         V2 += one_float/powf(err2[i], two_float)
  */
   __pyx_t_1 = __pyx_v_N;
   __pyx_t_2 = __pyx_t_1;
@@ -1361,18 +1361,58 @@ static __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t __pyx_f_3P4J_10algorithms_9u
     __pyx_v_i = __pyx_t_3;
 
     /* "P4J/algorithms/utilities.pyx":43
+ *     cdef DTYPE_t two_float = 2.0
+ *     for i in range(N):
+ *         V1 += one_float/err2[i]             # <<<<<<<<<<<<<<
+ *         V2 += one_float/powf(err2[i], two_float)
+ *         w_mean += data[i]/err2[i]
+ */
+    __pyx_v_V1 = (__pyx_v_V1 + (__pyx_v_one_float / (__pyx_v_err2[__pyx_v_i])));
+
+    /* "P4J/algorithms/utilities.pyx":44
+ *     for i in range(N):
+ *         V1 += one_float/err2[i]
+ *         V2 += one_float/powf(err2[i], two_float)             # <<<<<<<<<<<<<<
  *         w_mean += data[i]/err2[i]
  *     for i in range(N):
- *         w_var += powf(data[i] - w_mean/V1, 2.0)/err2[i]             # <<<<<<<<<<<<<<
+ */
+    __pyx_v_V2 = (__pyx_v_V2 + (__pyx_v_one_float / powf((__pyx_v_err2[__pyx_v_i]), __pyx_v_two_float)));
+
+    /* "P4J/algorithms/utilities.pyx":45
+ *         V1 += one_float/err2[i]
+ *         V2 += one_float/powf(err2[i], two_float)
+ *         w_mean += data[i]/err2[i]             # <<<<<<<<<<<<<<
+ *     for i in range(N):
+ *         w_var += powf(data[i] - w_mean/V1, two_float)/err2[i]
+ */
+    __pyx_v_w_mean = (__pyx_v_w_mean + ((__pyx_v_data[__pyx_v_i]) / (__pyx_v_err2[__pyx_v_i])));
+  }
+
+  /* "P4J/algorithms/utilities.pyx":46
+ *         V2 += one_float/powf(err2[i], two_float)
+ *         w_mean += data[i]/err2[i]
+ *     for i in range(N):             # <<<<<<<<<<<<<<
+ *         w_var += powf(data[i] - w_mean/V1, two_float)/err2[i]
+ *     return w_var/(V1 - V2/V1)
+ */
+  __pyx_t_1 = __pyx_v_N;
+  __pyx_t_2 = __pyx_t_1;
+  for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
+    __pyx_v_i = __pyx_t_3;
+
+    /* "P4J/algorithms/utilities.pyx":47
+ *         w_mean += data[i]/err2[i]
+ *     for i in range(N):
+ *         w_var += powf(data[i] - w_mean/V1, two_float)/err2[i]             # <<<<<<<<<<<<<<
  *     return w_var/(V1 - V2/V1)
  * 
  */
-    __pyx_v_w_var = (__pyx_v_w_var + (powf(((__pyx_v_data[__pyx_v_i]) - (__pyx_v_w_mean / __pyx_v_V1)), 2.0) / (__pyx_v_err2[__pyx_v_i])));
+    __pyx_v_w_var = (__pyx_v_w_var + (powf(((__pyx_v_data[__pyx_v_i]) - (__pyx_v_w_mean / __pyx_v_V1)), __pyx_v_two_float) / (__pyx_v_err2[__pyx_v_i])));
   }
 
-  /* "P4J/algorithms/utilities.pyx":44
+  /* "P4J/algorithms/utilities.pyx":48
  *     for i in range(N):
- *         w_var += powf(data[i] - w_mean/V1, 2.0)/err2[i]
+ *         w_var += powf(data[i] - w_mean/V1, two_float)/err2[i]
  *     return w_var/(V1 - V2/V1)             # <<<<<<<<<<<<<<
  * 
  * 
@@ -1380,7 +1420,7 @@ static __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t __pyx_f_3P4J_10algorithms_9u
   __pyx_r = (__pyx_v_w_var / (__pyx_v_V1 - (__pyx_v_V2 / __pyx_v_V1)));
   goto __pyx_L0;
 
-  /* "P4J/algorithms/utilities.pyx":33
+  /* "P4J/algorithms/utilities.pyx":35
  *     return w_mean/w_sum
  * 
  * cdef DTYPE_t unbiased_weighted_variance(DTYPE_t* data, DTYPE_t* err2, Py_ssize_t N):             # <<<<<<<<<<<<<<
@@ -1394,7 +1434,7 @@ static __pyx_t_3P4J_10algorithms_9utilities_DTYPE_t __pyx_f_3P4J_10algorithms_9u
   return __pyx_r;
 }
 
-/* "P4J/algorithms/utilities.pyx":62
+/* "P4J/algorithms/utilities.pyx":66
  *     DTYPE_t value
  * 
  * cdef int _compare(const_void *a, const_void *b):             # <<<<<<<<<<<<<<
@@ -1409,7 +1449,7 @@ static int __pyx_f_3P4J_10algorithms_9utilities__compare(const void *__pyx_v_a, 
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("_compare", 0);
 
-  /* "P4J/algorithms/utilities.pyx":63
+  /* "P4J/algorithms/utilities.pyx":67
  * 
  * cdef int _compare(const_void *a, const_void *b):
  *     cdef DTYPE_t v = ((<Sorter*>a)).value-((<Sorter*>b)).value             # <<<<<<<<<<<<<<
@@ -1418,7 +1458,7 @@ static int __pyx_f_3P4J_10algorithms_9utilities__compare(const void *__pyx_v_a, 
  */
   __pyx_v_v = (((struct __pyx_t_3P4J_10algorithms_9utilities_Sorter *)__pyx_v_a)->value - ((struct __pyx_t_3P4J_10algorithms_9utilities_Sorter *)__pyx_v_b)->value);
 
-  /* "P4J/algorithms/utilities.pyx":64
+  /* "P4J/algorithms/utilities.pyx":68
  * cdef int _compare(const_void *a, const_void *b):
  *     cdef DTYPE_t v = ((<Sorter*>a)).value-((<Sorter*>b)).value
  *     if v < 0: return -1             # <<<<<<<<<<<<<<
@@ -1431,7 +1471,7 @@ static int __pyx_f_3P4J_10algorithms_9utilities__compare(const void *__pyx_v_a, 
     goto __pyx_L0;
   }
 
-  /* "P4J/algorithms/utilities.pyx":65
+  /* "P4J/algorithms/utilities.pyx":69
  *     cdef DTYPE_t v = ((<Sorter*>a)).value-((<Sorter*>b)).value
  *     if v < 0: return -1
  *     if v >= 0: return 1             # <<<<<<<<<<<<<<
@@ -1444,7 +1484,7 @@ static int __pyx_f_3P4J_10algorithms_9utilities__compare(const void *__pyx_v_a, 
     goto __pyx_L0;
   }
 
-  /* "P4J/algorithms/utilities.pyx":62
+  /* "P4J/algorithms/utilities.pyx":66
  *     DTYPE_t value
  * 
  * cdef int _compare(const_void *a, const_void *b):             # <<<<<<<<<<<<<<
@@ -1459,7 +1499,7 @@ static int __pyx_f_3P4J_10algorithms_9utilities__compare(const void *__pyx_v_a, 
   return __pyx_r;
 }
 
-/* "P4J/algorithms/utilities.pyx":67
+/* "P4J/algorithms/utilities.pyx":71
  *     if v >= 0: return 1
  * 
  * cdef void cyargsort(DTYPE_t* data, Sorter * order, Py_ssize_t N):             # <<<<<<<<<<<<<<
@@ -1475,7 +1515,7 @@ static void __pyx_f_3P4J_10algorithms_9utilities_cyargsort(__pyx_t_3P4J_10algori
   Py_ssize_t __pyx_t_3;
   __Pyx_RefNannySetupContext("cyargsort", 0);
 
-  /* "P4J/algorithms/utilities.pyx":69
+  /* "P4J/algorithms/utilities.pyx":73
  * cdef void cyargsort(DTYPE_t* data, Sorter * order, Py_ssize_t N):
  *     cdef Py_ssize_t i
  *     for i in range(N):             # <<<<<<<<<<<<<<
@@ -1487,7 +1527,7 @@ static void __pyx_f_3P4J_10algorithms_9utilities_cyargsort(__pyx_t_3P4J_10algori
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/algorithms/utilities.pyx":70
+    /* "P4J/algorithms/utilities.pyx":74
  *     cdef Py_ssize_t i
  *     for i in range(N):
  *         order[i].index = i             # <<<<<<<<<<<<<<
@@ -1496,7 +1536,7 @@ static void __pyx_f_3P4J_10algorithms_9utilities_cyargsort(__pyx_t_3P4J_10algori
  */
     (__pyx_v_order[__pyx_v_i]).index = __pyx_v_i;
 
-    /* "P4J/algorithms/utilities.pyx":71
+    /* "P4J/algorithms/utilities.pyx":75
  *     for i in range(N):
  *         order[i].index = i
  *         order[i].value = data[i]             # <<<<<<<<<<<<<<
@@ -1506,7 +1546,7 @@ static void __pyx_f_3P4J_10algorithms_9utilities_cyargsort(__pyx_t_3P4J_10algori
     (__pyx_v_order[__pyx_v_i]).value = (__pyx_v_data[__pyx_v_i]);
   }
 
-  /* "P4J/algorithms/utilities.pyx":72
+  /* "P4J/algorithms/utilities.pyx":76
  *         order[i].index = i
  *         order[i].value = data[i]
  *     qsort(<void *> order, N, sizeof(Sorter), _compare)             # <<<<<<<<<<<<<<
@@ -1515,7 +1555,7 @@ static void __pyx_f_3P4J_10algorithms_9utilities_cyargsort(__pyx_t_3P4J_10algori
  */
   qsort(((void *)__pyx_v_order), __pyx_v_N, (sizeof(struct __pyx_t_3P4J_10algorithms_9utilities_Sorter)), __pyx_f_3P4J_10algorithms_9utilities__compare);
 
-  /* "P4J/algorithms/utilities.pyx":67
+  /* "P4J/algorithms/utilities.pyx":71
  *     if v >= 0: return 1
  * 
  * cdef void cyargsort(DTYPE_t* data, Sorter * order, Py_ssize_t N):             # <<<<<<<<<<<<<<
@@ -1527,7 +1567,7 @@ static void __pyx_f_3P4J_10algorithms_9utilities_cyargsort(__pyx_t_3P4J_10algori
   __Pyx_RefNannyFinishContext();
 }
 
-/* "P4J/algorithms/utilities.pyx":74
+/* "P4J/algorithms/utilities.pyx":78
  *     qsort(<void *> order, N, sizeof(Sorter), _compare)
  * 
  * cdef void argsort(DTYPE_t* data, ITYPE_t* order, Py_ssize_t N):             # <<<<<<<<<<<<<<
@@ -1545,7 +1585,7 @@ static void __pyx_f_3P4J_10algorithms_9utilities_argsort(__pyx_t_3P4J_10algorith
   Py_ssize_t __pyx_t_4;
   __Pyx_RefNannySetupContext("argsort", 0);
 
-  /* "P4J/algorithms/utilities.pyx":76
+  /* "P4J/algorithms/utilities.pyx":80
  * cdef void argsort(DTYPE_t* data, ITYPE_t* order, Py_ssize_t N):
  *     cdef Py_ssize_t i
  *     cdef Sorter *order_struct = <Sorter *> PyMem_Malloc(N*sizeof(Sorter))             # <<<<<<<<<<<<<<
@@ -1554,7 +1594,7 @@ static void __pyx_f_3P4J_10algorithms_9utilities_argsort(__pyx_t_3P4J_10algorith
  */
   __pyx_v_order_struct = ((struct __pyx_t_3P4J_10algorithms_9utilities_Sorter *)PyMem_Malloc((__pyx_v_N * (sizeof(struct __pyx_t_3P4J_10algorithms_9utilities_Sorter)))));
 
-  /* "P4J/algorithms/utilities.pyx":77
+  /* "P4J/algorithms/utilities.pyx":81
  *     cdef Py_ssize_t i
  *     cdef Sorter *order_struct = <Sorter *> PyMem_Malloc(N*sizeof(Sorter))
  *     cyargsort(data, order_struct, N)             # <<<<<<<<<<<<<<
@@ -1563,7 +1603,7 @@ static void __pyx_f_3P4J_10algorithms_9utilities_argsort(__pyx_t_3P4J_10algorith
  */
   __pyx_f_3P4J_10algorithms_9utilities_cyargsort(__pyx_v_data, __pyx_v_order_struct, __pyx_v_N);
 
-  /* "P4J/algorithms/utilities.pyx":78
+  /* "P4J/algorithms/utilities.pyx":82
  *     cdef Sorter *order_struct = <Sorter *> PyMem_Malloc(N*sizeof(Sorter))
  *     cyargsort(data, order_struct, N)
  *     for i in range(N):             # <<<<<<<<<<<<<<
@@ -1575,7 +1615,7 @@ static void __pyx_f_3P4J_10algorithms_9utilities_argsort(__pyx_t_3P4J_10algorith
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/algorithms/utilities.pyx":79
+    /* "P4J/algorithms/utilities.pyx":83
  *     cyargsort(data, order_struct, N)
  *     for i in range(N):
  *         order[i] = order_struct[i].index             # <<<<<<<<<<<<<<
@@ -1586,7 +1626,7 @@ static void __pyx_f_3P4J_10algorithms_9utilities_argsort(__pyx_t_3P4J_10algorith
     (__pyx_v_order[__pyx_v_i]) = __pyx_t_4;
   }
 
-  /* "P4J/algorithms/utilities.pyx":80
+  /* "P4J/algorithms/utilities.pyx":84
  *     for i in range(N):
  *         order[i] = order_struct[i].index
  *     PyMem_Free(order_struct)             # <<<<<<<<<<<<<<
@@ -1594,7 +1634,7 @@ static void __pyx_f_3P4J_10algorithms_9utilities_argsort(__pyx_t_3P4J_10algorith
  */
   PyMem_Free(__pyx_v_order_struct);
 
-  /* "P4J/algorithms/utilities.pyx":74
+  /* "P4J/algorithms/utilities.pyx":78
  *     qsort(<void *> order, N, sizeof(Sorter), _compare)
  * 
  * cdef void argsort(DTYPE_t* data, ITYPE_t* order, Py_ssize_t N):             # <<<<<<<<<<<<<<

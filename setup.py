@@ -64,9 +64,10 @@ def no_cythonize(extensions, **_ignore):
 if USE_CYTHON:
     extensions = cythonize(
         extensions,
-        annotate=False,
+        annotate=True,
         compiler_directives={'language_level': "3"},
-        force=True)
+        force=True,
+        nthreads=4)
 else:
     extensions = no_cythonize(extensions)
 

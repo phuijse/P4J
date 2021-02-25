@@ -2460,7 +2460,7 @@ static int __pyx_pf_3P4J_10algorithms_13string_length_4LKSL___init__(struct __py
  * 
  *     def eval_frequency(self, DTYPE_t freq):             # <<<<<<<<<<<<<<
  *         cdef Py_ssize_t i, j
- *         for i in range(self.N):
+ *         cdef DTYPE_t one_float = 1.0
  */
 
 /* Python wrapper */
@@ -2491,6 +2491,9 @@ static PyObject *__pyx_pw_3P4J_10algorithms_13string_length_4LKSL_3eval_frequenc
 
 static PyObject *__pyx_pf_3P4J_10algorithms_13string_length_4LKSL_2eval_frequency(struct __pyx_obj_3P4J_10algorithms_13string_length_LKSL *__pyx_v_self, __pyx_t_3P4J_10algorithms_13string_length_DTYPE_t __pyx_v_freq) {
   Py_ssize_t __pyx_v_i;
+  __pyx_t_3P4J_10algorithms_13string_length_DTYPE_t __pyx_v_one_float;
+  __pyx_t_3P4J_10algorithms_13string_length_DTYPE_t __pyx_v_two_float;
+  __pyx_t_3P4J_10algorithms_13string_length_DTYPE_t __pyx_v_half_float;
   __pyx_t_3P4J_10algorithms_13string_length_DTYPE_t __pyx_v_err2_err2;
   __pyx_t_3P4J_10algorithms_13string_length_DTYPE_t __pyx_v_err2_acum;
   __pyx_t_3P4J_10algorithms_13string_length_DTYPE_t __pyx_v_SL;
@@ -2508,8 +2511,35 @@ static PyObject *__pyx_pf_3P4J_10algorithms_13string_length_4LKSL_2eval_frequenc
   /* "P4J/algorithms/string_length.pyx":63
  *     def eval_frequency(self, DTYPE_t freq):
  *         cdef Py_ssize_t i, j
+ *         cdef DTYPE_t one_float = 1.0             # <<<<<<<<<<<<<<
+ *         cdef DTYPE_t two_float = 2.0
+ *         cdef DTYPE_t half_float = 0.5
+ */
+  __pyx_v_one_float = 1.0;
+
+  /* "P4J/algorithms/string_length.pyx":64
+ *         cdef Py_ssize_t i, j
+ *         cdef DTYPE_t one_float = 1.0
+ *         cdef DTYPE_t two_float = 2.0             # <<<<<<<<<<<<<<
+ *         cdef DTYPE_t half_float = 0.5
+ *         for i in range(self.N):
+ */
+  __pyx_v_two_float = 2.0;
+
+  /* "P4J/algorithms/string_length.pyx":65
+ *         cdef DTYPE_t one_float = 1.0
+ *         cdef DTYPE_t two_float = 2.0
+ *         cdef DTYPE_t half_float = 0.5             # <<<<<<<<<<<<<<
+ *         for i in range(self.N):
+ *             self.phase[i] = fmodf(self.mjd[i], one_float/freq)*freq  # output in [0.0, 1.0]
+ */
+  __pyx_v_half_float = 0.5;
+
+  /* "P4J/algorithms/string_length.pyx":66
+ *         cdef DTYPE_t two_float = 2.0
+ *         cdef DTYPE_t half_float = 0.5
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
- *             self.phase[i] = fmodf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]
+ *             self.phase[i] = fmodf(self.mjd[i], one_float/freq)*freq  # output in [0.0, 1.0]
  *         argsort(self.phase, self.sorted_idx, self.N)
  */
   __pyx_t_1 = __pyx_v_self->N;
@@ -2517,101 +2547,101 @@ static PyObject *__pyx_pf_3P4J_10algorithms_13string_length_4LKSL_2eval_frequenc
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/algorithms/string_length.pyx":64
- *         cdef Py_ssize_t i, j
+    /* "P4J/algorithms/string_length.pyx":67
+ *         cdef DTYPE_t half_float = 0.5
  *         for i in range(self.N):
- *             self.phase[i] = fmodf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]             # <<<<<<<<<<<<<<
+ *             self.phase[i] = fmodf(self.mjd[i], one_float/freq)*freq  # output in [0.0, 1.0]             # <<<<<<<<<<<<<<
  *         argsort(self.phase, self.sorted_idx, self.N)
  *         cdef DTYPE_t err2_err2 = self.err2[self.sorted_idx[0]] + self.err2[self.sorted_idx[self.N-1]]
  */
-    (__pyx_v_self->phase[__pyx_v_i]) = (fmodf((__pyx_v_self->mjd[__pyx_v_i]), (1.0 / ((double)__pyx_v_freq))) * __pyx_v_freq);
+    (__pyx_v_self->phase[__pyx_v_i]) = (fmodf((__pyx_v_self->mjd[__pyx_v_i]), (__pyx_v_one_float / __pyx_v_freq)) * __pyx_v_freq);
   }
 
-  /* "P4J/algorithms/string_length.pyx":65
+  /* "P4J/algorithms/string_length.pyx":68
  *         for i in range(self.N):
- *             self.phase[i] = fmodf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]
+ *             self.phase[i] = fmodf(self.mjd[i], one_float/freq)*freq  # output in [0.0, 1.0]
  *         argsort(self.phase, self.sorted_idx, self.N)             # <<<<<<<<<<<<<<
  *         cdef DTYPE_t err2_err2 = self.err2[self.sorted_idx[0]] + self.err2[self.sorted_idx[self.N-1]]
- *         cdef DTYPE_t err2_acum = 1.0/err2_err2
+ *         cdef DTYPE_t err2_acum = one_float/err2_err2
  */
   __pyx_f_3P4J_10algorithms_9utilities_argsort(__pyx_v_self->phase, __pyx_v_self->sorted_idx, __pyx_v_self->N);
 
-  /* "P4J/algorithms/string_length.pyx":66
- *             self.phase[i] = fmodf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]
+  /* "P4J/algorithms/string_length.pyx":69
+ *             self.phase[i] = fmodf(self.mjd[i], one_float/freq)*freq  # output in [0.0, 1.0]
  *         argsort(self.phase, self.sorted_idx, self.N)
  *         cdef DTYPE_t err2_err2 = self.err2[self.sorted_idx[0]] + self.err2[self.sorted_idx[self.N-1]]             # <<<<<<<<<<<<<<
- *         cdef DTYPE_t err2_acum = 1.0/err2_err2
- *         cdef DTYPE_t SL = powf(self.mag[self.sorted_idx[0]] - self.mag[self.sorted_idx[self.N-1]], 2.0)/err2_err2
+ *         cdef DTYPE_t err2_acum = one_float/err2_err2
+ *         cdef DTYPE_t SL = powf(
  */
   __pyx_v_err2_err2 = ((__pyx_v_self->err2[(__pyx_v_self->sorted_idx[0])]) + (__pyx_v_self->err2[(__pyx_v_self->sorted_idx[(__pyx_v_self->N - 1)])]));
 
-  /* "P4J/algorithms/string_length.pyx":67
+  /* "P4J/algorithms/string_length.pyx":70
  *         argsort(self.phase, self.sorted_idx, self.N)
  *         cdef DTYPE_t err2_err2 = self.err2[self.sorted_idx[0]] + self.err2[self.sorted_idx[self.N-1]]
- *         cdef DTYPE_t err2_acum = 1.0/err2_err2             # <<<<<<<<<<<<<<
- *         cdef DTYPE_t SL = powf(self.mag[self.sorted_idx[0]] - self.mag[self.sorted_idx[self.N-1]], 2.0)/err2_err2
- *         for i in range(1, self.N):
+ *         cdef DTYPE_t err2_acum = one_float/err2_err2             # <<<<<<<<<<<<<<
+ *         cdef DTYPE_t SL = powf(
+ *             self.mag[self.sorted_idx[0]] - self.mag[self.sorted_idx[self.N-1]], two_float)/err2_err2
  */
-  __pyx_v_err2_acum = (1.0 / ((double)__pyx_v_err2_err2));
+  __pyx_v_err2_acum = (__pyx_v_one_float / __pyx_v_err2_err2);
 
-  /* "P4J/algorithms/string_length.pyx":68
- *         cdef DTYPE_t err2_err2 = self.err2[self.sorted_idx[0]] + self.err2[self.sorted_idx[self.N-1]]
- *         cdef DTYPE_t err2_acum = 1.0/err2_err2
- *         cdef DTYPE_t SL = powf(self.mag[self.sorted_idx[0]] - self.mag[self.sorted_idx[self.N-1]], 2.0)/err2_err2             # <<<<<<<<<<<<<<
+  /* "P4J/algorithms/string_length.pyx":72
+ *         cdef DTYPE_t err2_acum = one_float/err2_err2
+ *         cdef DTYPE_t SL = powf(
+ *             self.mag[self.sorted_idx[0]] - self.mag[self.sorted_idx[self.N-1]], two_float)/err2_err2             # <<<<<<<<<<<<<<
  *         for i in range(1, self.N):
  *             err2_err2 = self.err2[self.sorted_idx[i-1]] + self.err2[self.sorted_idx[i]]
  */
-  __pyx_v_SL = (powf(((__pyx_v_self->mag[(__pyx_v_self->sorted_idx[0])]) - (__pyx_v_self->mag[(__pyx_v_self->sorted_idx[(__pyx_v_self->N - 1)])])), 2.0) / __pyx_v_err2_err2);
+  __pyx_v_SL = (powf(((__pyx_v_self->mag[(__pyx_v_self->sorted_idx[0])]) - (__pyx_v_self->mag[(__pyx_v_self->sorted_idx[(__pyx_v_self->N - 1)])])), __pyx_v_two_float) / __pyx_v_err2_err2);
 
-  /* "P4J/algorithms/string_length.pyx":69
- *         cdef DTYPE_t err2_acum = 1.0/err2_err2
- *         cdef DTYPE_t SL = powf(self.mag[self.sorted_idx[0]] - self.mag[self.sorted_idx[self.N-1]], 2.0)/err2_err2
+  /* "P4J/algorithms/string_length.pyx":73
+ *         cdef DTYPE_t SL = powf(
+ *             self.mag[self.sorted_idx[0]] - self.mag[self.sorted_idx[self.N-1]], two_float)/err2_err2
  *         for i in range(1, self.N):             # <<<<<<<<<<<<<<
  *             err2_err2 = self.err2[self.sorted_idx[i-1]] + self.err2[self.sorted_idx[i]]
- *             err2_acum += 1.0/err2_err2
+ *             err2_acum += one_float/err2_err2
  */
   __pyx_t_1 = __pyx_v_self->N;
   __pyx_t_2 = __pyx_t_1;
   for (__pyx_t_3 = 1; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/algorithms/string_length.pyx":70
- *         cdef DTYPE_t SL = powf(self.mag[self.sorted_idx[0]] - self.mag[self.sorted_idx[self.N-1]], 2.0)/err2_err2
+    /* "P4J/algorithms/string_length.pyx":74
+ *             self.mag[self.sorted_idx[0]] - self.mag[self.sorted_idx[self.N-1]], two_float)/err2_err2
  *         for i in range(1, self.N):
  *             err2_err2 = self.err2[self.sorted_idx[i-1]] + self.err2[self.sorted_idx[i]]             # <<<<<<<<<<<<<<
- *             err2_acum += 1.0/err2_err2
- *             SL += powf(self.mag[self.sorted_idx[i-1]] - self.mag[self.sorted_idx[i]], 2.0)/err2_err2
+ *             err2_acum += one_float/err2_err2
+ *             SL += powf(
  */
     __pyx_v_err2_err2 = ((__pyx_v_self->err2[(__pyx_v_self->sorted_idx[(__pyx_v_i - 1)])]) + (__pyx_v_self->err2[(__pyx_v_self->sorted_idx[__pyx_v_i])]));
 
-    /* "P4J/algorithms/string_length.pyx":71
+    /* "P4J/algorithms/string_length.pyx":75
  *         for i in range(1, self.N):
  *             err2_err2 = self.err2[self.sorted_idx[i-1]] + self.err2[self.sorted_idx[i]]
- *             err2_acum += 1.0/err2_err2             # <<<<<<<<<<<<<<
- *             SL += powf(self.mag[self.sorted_idx[i-1]] - self.mag[self.sorted_idx[i]], 2.0)/err2_err2
- *         return 0.5*SL*self.normalizer/err2_acum
+ *             err2_acum += one_float/err2_err2             # <<<<<<<<<<<<<<
+ *             SL += powf(
+ *                 self.mag[self.sorted_idx[i-1]] - self.mag[self.sorted_idx[i]], two_float)/err2_err2
  */
-    __pyx_v_err2_acum = (__pyx_v_err2_acum + (1.0 / ((double)__pyx_v_err2_err2)));
+    __pyx_v_err2_acum = (__pyx_v_err2_acum + (__pyx_v_one_float / __pyx_v_err2_err2));
 
-    /* "P4J/algorithms/string_length.pyx":72
+    /* "P4J/algorithms/string_length.pyx":76
  *             err2_err2 = self.err2[self.sorted_idx[i-1]] + self.err2[self.sorted_idx[i]]
- *             err2_acum += 1.0/err2_err2
- *             SL += powf(self.mag[self.sorted_idx[i-1]] - self.mag[self.sorted_idx[i]], 2.0)/err2_err2             # <<<<<<<<<<<<<<
- *         return 0.5*SL*self.normalizer/err2_acum
- * 
+ *             err2_acum += one_float/err2_err2
+ *             SL += powf(             # <<<<<<<<<<<<<<
+ *                 self.mag[self.sorted_idx[i-1]] - self.mag[self.sorted_idx[i]], two_float)/err2_err2
+ *         return half_float*SL*self.normalizer/err2_acum
  */
-    __pyx_v_SL = (__pyx_v_SL + (powf(((__pyx_v_self->mag[(__pyx_v_self->sorted_idx[(__pyx_v_i - 1)])]) - (__pyx_v_self->mag[(__pyx_v_self->sorted_idx[__pyx_v_i])])), 2.0) / __pyx_v_err2_err2));
+    __pyx_v_SL = (__pyx_v_SL + (powf(((__pyx_v_self->mag[(__pyx_v_self->sorted_idx[(__pyx_v_i - 1)])]) - (__pyx_v_self->mag[(__pyx_v_self->sorted_idx[__pyx_v_i])])), __pyx_v_two_float) / __pyx_v_err2_err2));
   }
 
-  /* "P4J/algorithms/string_length.pyx":73
- *             err2_acum += 1.0/err2_err2
- *             SL += powf(self.mag[self.sorted_idx[i-1]] - self.mag[self.sorted_idx[i]], 2.0)/err2_err2
- *         return 0.5*SL*self.normalizer/err2_acum             # <<<<<<<<<<<<<<
+  /* "P4J/algorithms/string_length.pyx":78
+ *             SL += powf(
+ *                 self.mag[self.sorted_idx[i-1]] - self.mag[self.sorted_idx[i]], two_float)/err2_err2
+ *         return half_float*SL*self.normalizer/err2_acum             # <<<<<<<<<<<<<<
  * 
  *     def __dealloc__(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_4 = PyFloat_FromDouble((((0.5 * __pyx_v_SL) * __pyx_v_self->normalizer) / ((double)__pyx_v_err2_acum))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 73, __pyx_L1_error)
+  __pyx_t_4 = PyFloat_FromDouble((((__pyx_v_half_float * __pyx_v_SL) * __pyx_v_self->normalizer) / __pyx_v_err2_acum)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 78, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_r = __pyx_t_4;
   __pyx_t_4 = 0;
@@ -2622,7 +2652,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_13string_length_4LKSL_2eval_frequenc
  * 
  *     def eval_frequency(self, DTYPE_t freq):             # <<<<<<<<<<<<<<
  *         cdef Py_ssize_t i, j
- *         for i in range(self.N):
+ *         cdef DTYPE_t one_float = 1.0
  */
 
   /* function exit code */
@@ -2636,8 +2666,8 @@ static PyObject *__pyx_pf_3P4J_10algorithms_13string_length_4LKSL_2eval_frequenc
   return __pyx_r;
 }
 
-/* "P4J/algorithms/string_length.pyx":75
- *         return 0.5*SL*self.normalizer/err2_acum
+/* "P4J/algorithms/string_length.pyx":80
+ *         return half_float*SL*self.normalizer/err2_acum
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         PyMem_Free(self.mjd)
@@ -2659,7 +2689,7 @@ static void __pyx_pf_3P4J_10algorithms_13string_length_4LKSL_4__dealloc__(struct
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "P4J/algorithms/string_length.pyx":76
+  /* "P4J/algorithms/string_length.pyx":81
  * 
  *     def __dealloc__(self):
  *         PyMem_Free(self.mjd)             # <<<<<<<<<<<<<<
@@ -2668,7 +2698,7 @@ static void __pyx_pf_3P4J_10algorithms_13string_length_4LKSL_4__dealloc__(struct
  */
   PyMem_Free(__pyx_v_self->mjd);
 
-  /* "P4J/algorithms/string_length.pyx":77
+  /* "P4J/algorithms/string_length.pyx":82
  *     def __dealloc__(self):
  *         PyMem_Free(self.mjd)
  *         PyMem_Free(self.mag)             # <<<<<<<<<<<<<<
@@ -2677,7 +2707,7 @@ static void __pyx_pf_3P4J_10algorithms_13string_length_4LKSL_4__dealloc__(struct
  */
   PyMem_Free(__pyx_v_self->mag);
 
-  /* "P4J/algorithms/string_length.pyx":78
+  /* "P4J/algorithms/string_length.pyx":83
  *         PyMem_Free(self.mjd)
  *         PyMem_Free(self.mag)
  *         PyMem_Free(self.err2)             # <<<<<<<<<<<<<<
@@ -2686,7 +2716,7 @@ static void __pyx_pf_3P4J_10algorithms_13string_length_4LKSL_4__dealloc__(struct
  */
   PyMem_Free(__pyx_v_self->err2);
 
-  /* "P4J/algorithms/string_length.pyx":79
+  /* "P4J/algorithms/string_length.pyx":84
  *         PyMem_Free(self.mag)
  *         PyMem_Free(self.err2)
  *         PyMem_Free(self.phase)             # <<<<<<<<<<<<<<
@@ -2695,7 +2725,7 @@ static void __pyx_pf_3P4J_10algorithms_13string_length_4LKSL_4__dealloc__(struct
  */
   PyMem_Free(__pyx_v_self->phase);
 
-  /* "P4J/algorithms/string_length.pyx":80
+  /* "P4J/algorithms/string_length.pyx":85
  *         PyMem_Free(self.err2)
  *         PyMem_Free(self.phase)
  *         PyMem_Free(self.sorted_idx)             # <<<<<<<<<<<<<<
@@ -2704,8 +2734,8 @@ static void __pyx_pf_3P4J_10algorithms_13string_length_4LKSL_4__dealloc__(struct
  */
   PyMem_Free(__pyx_v_self->sorted_idx);
 
-  /* "P4J/algorithms/string_length.pyx":75
- *         return 0.5*SL*self.normalizer/err2_acum
+  /* "P4J/algorithms/string_length.pyx":80
+ *         return half_float*SL*self.normalizer/err2_acum
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         PyMem_Free(self.mjd)

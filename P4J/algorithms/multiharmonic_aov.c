@@ -2662,6 +2662,8 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
   __pyx_t_3P4J_10algorithms_17multiharmonic_aov_DTYPE_t __pyx_v_tmp;
   __pyx_t_3P4J_10algorithms_17multiharmonic_aov_DTYPE_t __pyx_v_sr;
   __pyx_t_3P4J_10algorithms_17multiharmonic_aov_DTYPE_t __pyx_v_si;
+  __pyx_t_3P4J_10algorithms_17multiharmonic_aov_DTYPE_t __pyx_v_two_float;
+  __pyx_t_3P4J_10algorithms_17multiharmonic_aov_DTYPE_t __pyx_v_one_float;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   Py_ssize_t __pyx_t_1;
@@ -2684,41 +2686,59 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
  *         cdef DTYPE_t sn, alr, ali, scr, sci
  *         cdef DTYPE_t aov=0.0             # <<<<<<<<<<<<<<
  *         cdef DTYPE_t arg, tmp, sr, si
- *         for i in range(self.N):
+ *         cdef DTYPE_t two_float = 2.0
  */
   __pyx_v_aov = 0.0;
 
   /* "P4J/algorithms/multiharmonic_aov.pyx":95
  *         cdef DTYPE_t aov=0.0
  *         cdef DTYPE_t arg, tmp, sr, si
+ *         cdef DTYPE_t two_float = 2.0             # <<<<<<<<<<<<<<
+ *         cdef DTYPE_t one_float = 1.0
+ * 
+ */
+  __pyx_v_two_float = 2.0;
+
+  /* "P4J/algorithms/multiharmonic_aov.pyx":96
+ *         cdef DTYPE_t arg, tmp, sr, si
+ *         cdef DTYPE_t two_float = 2.0
+ *         cdef DTYPE_t one_float = 1.0             # <<<<<<<<<<<<<<
+ * 
+ *         for i in range(self.N):
+ */
+  __pyx_v_one_float = 1.0;
+
+  /* "P4J/algorithms/multiharmonic_aov.pyx":98
+ *         cdef DTYPE_t one_float = 1.0
+ * 
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
  *             arg = self.mjd[i]*freq
- *             arg = 2.0*M_PI*(arg - floorf(arg))
+ *             arg = two_float*M_PI*(arg - floorf(arg))
  */
   __pyx_t_1 = __pyx_v_self->N;
   __pyx_t_2 = __pyx_t_1;
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/algorithms/multiharmonic_aov.pyx":96
- *         cdef DTYPE_t arg, tmp, sr, si
+    /* "P4J/algorithms/multiharmonic_aov.pyx":99
+ * 
  *         for i in range(self.N):
  *             arg = self.mjd[i]*freq             # <<<<<<<<<<<<<<
- *             arg = 2.0*M_PI*(arg - floorf(arg))
+ *             arg = two_float*M_PI*(arg - floorf(arg))
  * 
  */
     __pyx_v_arg = ((__pyx_v_self->mjd[__pyx_v_i]) * __pyx_v_freq);
 
-    /* "P4J/algorithms/multiharmonic_aov.pyx":97
+    /* "P4J/algorithms/multiharmonic_aov.pyx":100
  *         for i in range(self.N):
  *             arg = self.mjd[i]*freq
- *             arg = 2.0*M_PI*(arg - floorf(arg))             # <<<<<<<<<<<<<<
+ *             arg = two_float*M_PI*(arg - floorf(arg))             # <<<<<<<<<<<<<<
  * 
  *             # z = exp(j*arg), complex exp with f=freq eval at times mjd[i]
  */
-    __pyx_v_arg = ((2.0 * __pyx_v_3P4J_10algorithms_17multiharmonic_aov_M_PI) * (__pyx_v_arg - floorf(__pyx_v_arg)));
+    __pyx_v_arg = ((__pyx_v_two_float * __pyx_v_3P4J_10algorithms_17multiharmonic_aov_M_PI) * (__pyx_v_arg - floorf(__pyx_v_arg)));
 
-    /* "P4J/algorithms/multiharmonic_aov.pyx":100
+    /* "P4J/algorithms/multiharmonic_aov.pyx":103
  * 
  *             # z = exp(j*arg), complex exp with f=freq eval at times mjd[i]
  *             self.zr[i] = cosf(arg)             # <<<<<<<<<<<<<<
@@ -2727,7 +2747,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
  */
     (__pyx_v_self->zr[__pyx_v_i]) = cosf(__pyx_v_arg);
 
-    /* "P4J/algorithms/multiharmonic_aov.pyx":101
+    /* "P4J/algorithms/multiharmonic_aov.pyx":104
  *             # z = exp(j*arg), complex exp with f=freq eval at times mjd[i]
  *             self.zr[i] = cosf(arg)
  *             self.zi[i] = sinf(arg)             # <<<<<<<<<<<<<<
@@ -2736,7 +2756,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
  */
     (__pyx_v_self->zi[__pyx_v_i]) = sinf(__pyx_v_arg);
 
-    /* "P4J/algorithms/multiharmonic_aov.pyx":104
+    /* "P4J/algorithms/multiharmonic_aov.pyx":107
  * 
  *             # zn = 1, bias basis?
  *             self.znr[i] = 1.             # <<<<<<<<<<<<<<
@@ -2745,7 +2765,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
  */
     (__pyx_v_self->znr[__pyx_v_i]) = 1.;
 
-    /* "P4J/algorithms/multiharmonic_aov.pyx":105
+    /* "P4J/algorithms/multiharmonic_aov.pyx":108
  *             # zn = 1, bias basis?
  *             self.znr[i] = 1.
  *             self.zni[i] = 0.             # <<<<<<<<<<<<<<
@@ -2754,25 +2774,25 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
  */
     (__pyx_v_self->zni[__pyx_v_i]) = 0.;
 
-    /* "P4J/algorithms/multiharmonic_aov.pyx":108
+    /* "P4J/algorithms/multiharmonic_aov.pyx":111
  * 
  *             # p = 1/err
- *             self.pr[i] = 1./self.err[i]             # <<<<<<<<<<<<<<
+ *             self.pr[i] = one_float/self.err[i]             # <<<<<<<<<<<<<<
  *             self.pi[i] = 0.
  * 
  */
-    (__pyx_v_self->pr[__pyx_v_i]) = (1. / ((double)(__pyx_v_self->err[__pyx_v_i])));
+    (__pyx_v_self->pr[__pyx_v_i]) = (__pyx_v_one_float / (__pyx_v_self->err[__pyx_v_i]));
 
-    /* "P4J/algorithms/multiharmonic_aov.pyx":109
+    /* "P4J/algorithms/multiharmonic_aov.pyx":112
  *             # p = 1/err
- *             self.pr[i] = 1./self.err[i]
+ *             self.pr[i] = one_float/self.err[i]
  *             self.pi[i] = 0.             # <<<<<<<<<<<<<<
  * 
  *             # cf = (mag-wmean)*exp(j*n_harmonics*arg)/err
  */
     (__pyx_v_self->pi[__pyx_v_i]) = 0.;
 
-    /* "P4J/algorithms/multiharmonic_aov.pyx":112
+    /* "P4J/algorithms/multiharmonic_aov.pyx":115
  * 
  *             # cf = (mag-wmean)*exp(j*n_harmonics*arg)/err
  *             self.cfr[i] = self.mag_minus_wmean[i]*cosf(self.Nharmonics*arg)/self.err[i]             # <<<<<<<<<<<<<<
@@ -2781,7 +2801,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
  */
     (__pyx_v_self->cfr[__pyx_v_i]) = (((__pyx_v_self->mag_minus_wmean[__pyx_v_i]) * cosf((__pyx_v_self->Nharmonics * __pyx_v_arg))) / (__pyx_v_self->err[__pyx_v_i]));
 
-    /* "P4J/algorithms/multiharmonic_aov.pyx":113
+    /* "P4J/algorithms/multiharmonic_aov.pyx":116
  *             # cf = (mag-wmean)*exp(j*n_harmonics*arg)/err
  *             self.cfr[i] = self.mag_minus_wmean[i]*cosf(self.Nharmonics*arg)/self.err[i]
  *             self.cfi[i] = self.mag_minus_wmean[i]*sinf(self.Nharmonics*arg)/self.err[i]             # <<<<<<<<<<<<<<
@@ -2791,7 +2811,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
     (__pyx_v_self->cfi[__pyx_v_i]) = (((__pyx_v_self->mag_minus_wmean[__pyx_v_i]) * sinf((__pyx_v_self->Nharmonics * __pyx_v_arg))) / (__pyx_v_self->err[__pyx_v_i]));
   }
 
-  /* "P4J/algorithms/multiharmonic_aov.pyx":114
+  /* "P4J/algorithms/multiharmonic_aov.pyx":117
  *             self.cfr[i] = self.mag_minus_wmean[i]*cosf(self.Nharmonics*arg)/self.err[i]
  *             self.cfi[i] = self.mag_minus_wmean[i]*sinf(self.Nharmonics*arg)/self.err[i]
  *         for j in range(2*self.Nharmonics+1):             # <<<<<<<<<<<<<<
@@ -2803,7 +2823,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
   for (__pyx_t_1 = 0; __pyx_t_1 < __pyx_t_5; __pyx_t_1+=1) {
     __pyx_v_j = __pyx_t_1;
 
-    /* "P4J/algorithms/multiharmonic_aov.pyx":115
+    /* "P4J/algorithms/multiharmonic_aov.pyx":118
  *             self.cfi[i] = self.mag_minus_wmean[i]*sinf(self.Nharmonics*arg)/self.err[i]
  *         for j in range(2*self.Nharmonics+1):
  *             sn = alr = ali = scr = sci = 0.0             # <<<<<<<<<<<<<<
@@ -2816,7 +2836,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
     __pyx_v_scr = 0.0;
     __pyx_v_sci = 0.0;
 
-    /* "P4J/algorithms/multiharmonic_aov.pyx":116
+    /* "P4J/algorithms/multiharmonic_aov.pyx":119
  *         for j in range(2*self.Nharmonics+1):
  *             sn = alr = ali = scr = sci = 0.0
  *             for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -2828,7 +2848,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
     for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_3; __pyx_t_6+=1) {
       __pyx_v_i = __pyx_t_6;
 
-      /* "P4J/algorithms/multiharmonic_aov.pyx":118
+      /* "P4J/algorithms/multiharmonic_aov.pyx":121
  *             for i in range(self.N):
  *                 # += |p|^2
  *                 sn += self.pr[i]**2 + self.pi[i]**2             # <<<<<<<<<<<<<<
@@ -2837,7 +2857,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
  */
       __pyx_v_sn = (__pyx_v_sn + (powf((__pyx_v_self->pr[__pyx_v_i]), 2.0) + powf((__pyx_v_self->pi[__pyx_v_i]), 2.0)));
 
-      /* "P4J/algorithms/multiharmonic_aov.pyx":121
+      /* "P4J/algorithms/multiharmonic_aov.pyx":124
  * 
  *                 # al += z*p/err
  *                 alr += (self.zr[i]*self.pr[i] - self.zi[i]*self.pi[i])/self.err[i]             # <<<<<<<<<<<<<<
@@ -2846,7 +2866,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
  */
       __pyx_v_alr = (__pyx_v_alr + ((((__pyx_v_self->zr[__pyx_v_i]) * (__pyx_v_self->pr[__pyx_v_i])) - ((__pyx_v_self->zi[__pyx_v_i]) * (__pyx_v_self->pi[__pyx_v_i]))) / (__pyx_v_self->err[__pyx_v_i])));
 
-      /* "P4J/algorithms/multiharmonic_aov.pyx":122
+      /* "P4J/algorithms/multiharmonic_aov.pyx":125
  *                 # al += z*p/err
  *                 alr += (self.zr[i]*self.pr[i] - self.zi[i]*self.pi[i])/self.err[i]
  *                 ali += (self.zr[i]*self.pi[i] + self.zi[i]*self.pr[i])/self.err[i]             # <<<<<<<<<<<<<<
@@ -2855,7 +2875,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
  */
       __pyx_v_ali = (__pyx_v_ali + ((((__pyx_v_self->zr[__pyx_v_i]) * (__pyx_v_self->pi[__pyx_v_i])) + ((__pyx_v_self->zi[__pyx_v_i]) * (__pyx_v_self->pr[__pyx_v_i]))) / (__pyx_v_self->err[__pyx_v_i])));
 
-      /* "P4J/algorithms/multiharmonic_aov.pyx":125
+      /* "P4J/algorithms/multiharmonic_aov.pyx":128
  * 
  *                 # sc += conj(p)*cr
  *                 scr += self.pr[i]*self.cfr[i] + self.pi[i]*self.cfi[i]             # <<<<<<<<<<<<<<
@@ -2864,7 +2884,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
  */
       __pyx_v_scr = (__pyx_v_scr + (((__pyx_v_self->pr[__pyx_v_i]) * (__pyx_v_self->cfr[__pyx_v_i])) + ((__pyx_v_self->pi[__pyx_v_i]) * (__pyx_v_self->cfi[__pyx_v_i]))));
 
-      /* "P4J/algorithms/multiharmonic_aov.pyx":126
+      /* "P4J/algorithms/multiharmonic_aov.pyx":129
  *                 # sc += conj(p)*cr
  *                 scr += self.pr[i]*self.cfr[i] + self.pi[i]*self.cfi[i]
  *                 sci += self.pr[i]*self.cfi[i] - self.pi[i]*self.cfr[i]             # <<<<<<<<<<<<<<
@@ -2874,7 +2894,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
       __pyx_v_sci = (__pyx_v_sci + (((__pyx_v_self->pr[__pyx_v_i]) * (__pyx_v_self->cfi[__pyx_v_i])) - ((__pyx_v_self->pi[__pyx_v_i]) * (__pyx_v_self->cfr[__pyx_v_i]))));
     }
 
-    /* "P4J/algorithms/multiharmonic_aov.pyx":127
+    /* "P4J/algorithms/multiharmonic_aov.pyx":130
  *                 scr += self.pr[i]*self.cfr[i] + self.pi[i]*self.cfi[i]
  *                 sci += self.pr[i]*self.cfi[i] - self.pi[i]*self.cfr[i]
  *             sn = max(sn, 1e-9)             # <<<<<<<<<<<<<<
@@ -2890,7 +2910,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
     }
     __pyx_v_sn = __pyx_t_9;
 
-    /* "P4J/algorithms/multiharmonic_aov.pyx":130
+    /* "P4J/algorithms/multiharmonic_aov.pyx":133
  * 
  *             # al = al/sn
  *             alr = alr/sn             # <<<<<<<<<<<<<<
@@ -2899,7 +2919,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
  */
     __pyx_v_alr = (__pyx_v_alr / __pyx_v_sn);
 
-    /* "P4J/algorithms/multiharmonic_aov.pyx":131
+    /* "P4J/algorithms/multiharmonic_aov.pyx":134
  *             # al = al/sn
  *             alr = alr/sn
  *             ali = ali/sn             # <<<<<<<<<<<<<<
@@ -2908,7 +2928,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
  */
     __pyx_v_ali = (__pyx_v_ali / __pyx_v_sn);
 
-    /* "P4J/algorithms/multiharmonic_aov.pyx":134
+    /* "P4J/algorithms/multiharmonic_aov.pyx":137
  * 
  *             # aov += |sc|^2 / sn
  *             aov += (scr**2 + sci**2)/sn             # <<<<<<<<<<<<<<
@@ -2917,7 +2937,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
  */
     __pyx_v_aov = (__pyx_v_aov + ((powf(__pyx_v_scr, 2.0) + powf(__pyx_v_sci, 2.0)) / __pyx_v_sn));
 
-    /* "P4J/algorithms/multiharmonic_aov.pyx":135
+    /* "P4J/algorithms/multiharmonic_aov.pyx":138
  *             # aov += |sc|^2 / sn
  *             aov += (scr**2 + sci**2)/sn
  *             for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -2929,7 +2949,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
     for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_3; __pyx_t_6+=1) {
       __pyx_v_i = __pyx_t_6;
 
-      /* "P4J/algorithms/multiharmonic_aov.pyx":137
+      /* "P4J/algorithms/multiharmonic_aov.pyx":140
  *             for i in range(self.N):
  *                 # s = al*zn
  *                 sr = alr*self.znr[i] - ali*self.zni[i]             # <<<<<<<<<<<<<<
@@ -2938,7 +2958,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
  */
       __pyx_v_sr = ((__pyx_v_alr * (__pyx_v_self->znr[__pyx_v_i])) - (__pyx_v_ali * (__pyx_v_self->zni[__pyx_v_i])));
 
-      /* "P4J/algorithms/multiharmonic_aov.pyx":138
+      /* "P4J/algorithms/multiharmonic_aov.pyx":141
  *                 # s = al*zn
  *                 sr = alr*self.znr[i] - ali*self.zni[i]
  *                 si = alr*self.zni[i] + ali*self.znr[i]             # <<<<<<<<<<<<<<
@@ -2947,7 +2967,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
  */
       __pyx_v_si = ((__pyx_v_alr * (__pyx_v_self->zni[__pyx_v_i])) + (__pyx_v_ali * (__pyx_v_self->znr[__pyx_v_i])));
 
-      /* "P4J/algorithms/multiharmonic_aov.pyx":143
+      /* "P4J/algorithms/multiharmonic_aov.pyx":146
  *                 # updating p = p*z - s*conj(p)
  *                 # tmp = re(p*z)-re(s*conj(p))
  *                 tmp = self.pr[i]*self.zr[i] - self.pi[i]*self.zi[i] - sr*self.pr[i] - si*self.pi[i]             # <<<<<<<<<<<<<<
@@ -2956,7 +2976,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
  */
       __pyx_v_tmp = (((((__pyx_v_self->pr[__pyx_v_i]) * (__pyx_v_self->zr[__pyx_v_i])) - ((__pyx_v_self->pi[__pyx_v_i]) * (__pyx_v_self->zi[__pyx_v_i]))) - (__pyx_v_sr * (__pyx_v_self->pr[__pyx_v_i]))) - (__pyx_v_si * (__pyx_v_self->pi[__pyx_v_i])));
 
-      /* "P4J/algorithms/multiharmonic_aov.pyx":145
+      /* "P4J/algorithms/multiharmonic_aov.pyx":148
  *                 tmp = self.pr[i]*self.zr[i] - self.pi[i]*self.zi[i] - sr*self.pr[i] - si*self.pi[i]
  *                 # im(p) = im(p*z)-im(s*conj(p))
  *                 self.pi[i] = self.pr[i]*self.zi[i] + self.pi[i]*self.zr[i] + sr*self.pi[i] - si*self.pr[i]             # <<<<<<<<<<<<<<
@@ -2965,7 +2985,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
  */
       (__pyx_v_self->pi[__pyx_v_i]) = (((((__pyx_v_self->pr[__pyx_v_i]) * (__pyx_v_self->zi[__pyx_v_i])) + ((__pyx_v_self->pi[__pyx_v_i]) * (__pyx_v_self->zr[__pyx_v_i]))) + (__pyx_v_sr * (__pyx_v_self->pi[__pyx_v_i]))) - (__pyx_v_si * (__pyx_v_self->pr[__pyx_v_i])));
 
-      /* "P4J/algorithms/multiharmonic_aov.pyx":146
+      /* "P4J/algorithms/multiharmonic_aov.pyx":149
  *                 # im(p) = im(p*z)-im(s*conj(p))
  *                 self.pi[i] = self.pr[i]*self.zi[i] + self.pi[i]*self.zr[i] + sr*self.pi[i] - si*self.pr[i]
  *                 self.pr[i] = tmp             # <<<<<<<<<<<<<<
@@ -2974,7 +2994,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
  */
       (__pyx_v_self->pr[__pyx_v_i]) = __pyx_v_tmp;
 
-      /* "P4J/algorithms/multiharmonic_aov.pyx":149
+      /* "P4J/algorithms/multiharmonic_aov.pyx":152
  * 
  *                 # updating zn = zn * z
  *                 tmp = self.znr[i]*self.zr[i] - self.zni[i]*self.zi[i]             # <<<<<<<<<<<<<<
@@ -2983,7 +3003,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
  */
       __pyx_v_tmp = (((__pyx_v_self->znr[__pyx_v_i]) * (__pyx_v_self->zr[__pyx_v_i])) - ((__pyx_v_self->zni[__pyx_v_i]) * (__pyx_v_self->zi[__pyx_v_i])));
 
-      /* "P4J/algorithms/multiharmonic_aov.pyx":150
+      /* "P4J/algorithms/multiharmonic_aov.pyx":153
  *                 # updating zn = zn * z
  *                 tmp = self.znr[i]*self.zr[i] - self.zni[i]*self.zi[i]
  *                 self.zni[i] = self.zni[i]*self.zr[i] + self.znr[i]*self.zi[i]             # <<<<<<<<<<<<<<
@@ -2992,7 +3012,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
  */
       (__pyx_v_self->zni[__pyx_v_i]) = (((__pyx_v_self->zni[__pyx_v_i]) * (__pyx_v_self->zr[__pyx_v_i])) + ((__pyx_v_self->znr[__pyx_v_i]) * (__pyx_v_self->zi[__pyx_v_i])));
 
-      /* "P4J/algorithms/multiharmonic_aov.pyx":151
+      /* "P4J/algorithms/multiharmonic_aov.pyx":154
  *                 tmp = self.znr[i]*self.zr[i] - self.zni[i]*self.zi[i]
  *                 self.zni[i] = self.zni[i]*self.zr[i] + self.znr[i]*self.zi[i]
  *                 self.znr[i] = tmp             # <<<<<<<<<<<<<<
@@ -3003,7 +3023,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
     }
   }
 
-  /* "P4J/algorithms/multiharmonic_aov.pyx":152
+  /* "P4J/algorithms/multiharmonic_aov.pyx":155
  *                 self.zni[i] = self.zni[i]*self.zr[i] + self.znr[i]*self.zi[i]
  *                 self.znr[i] = tmp
  *         if self.mode == 0:             # <<<<<<<<<<<<<<
@@ -3013,7 +3033,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
   switch (__pyx_v_self->mode) {
     case 0:
 
-    /* "P4J/algorithms/multiharmonic_aov.pyx":153
+    /* "P4J/algorithms/multiharmonic_aov.pyx":156
  *                 self.znr[i] = tmp
  *         if self.mode == 0:
  *             return aov             # <<<<<<<<<<<<<<
@@ -3021,13 +3041,13 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
  *             return (self.d2/self.d1)*aov/max(self.wvar - aov, 1e-9)
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_10 = PyFloat_FromDouble(__pyx_v_aov); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 153, __pyx_L1_error)
+    __pyx_t_10 = PyFloat_FromDouble(__pyx_v_aov); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 156, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __pyx_r = __pyx_t_10;
     __pyx_t_10 = 0;
     goto __pyx_L0;
 
-    /* "P4J/algorithms/multiharmonic_aov.pyx":152
+    /* "P4J/algorithms/multiharmonic_aov.pyx":155
  *                 self.zni[i] = self.zni[i]*self.zr[i] + self.znr[i]*self.zi[i]
  *                 self.znr[i] = tmp
  *         if self.mode == 0:             # <<<<<<<<<<<<<<
@@ -3037,7 +3057,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
     break;
     case 1:
 
-    /* "P4J/algorithms/multiharmonic_aov.pyx":155
+    /* "P4J/algorithms/multiharmonic_aov.pyx":158
  *             return aov
  *         elif self.mode == 1:
  *             return (self.d2/self.d1)*aov/max(self.wvar - aov, 1e-9)             # <<<<<<<<<<<<<<
@@ -3052,13 +3072,13 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
     } else {
       __pyx_t_7 = __pyx_t_8;
     }
-    __pyx_t_10 = PyFloat_FromDouble((((double)((__pyx_v_self->d2 / __pyx_v_self->d1) * __pyx_v_aov)) / __pyx_t_7)); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 155, __pyx_L1_error)
+    __pyx_t_10 = PyFloat_FromDouble((((double)((__pyx_v_self->d2 / __pyx_v_self->d1) * __pyx_v_aov)) / __pyx_t_7)); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 158, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __pyx_r = __pyx_t_10;
     __pyx_t_10 = 0;
     goto __pyx_L0;
 
-    /* "P4J/algorithms/multiharmonic_aov.pyx":154
+    /* "P4J/algorithms/multiharmonic_aov.pyx":157
  *         if self.mode == 0:
  *             return aov
  *         elif self.mode == 1:             # <<<<<<<<<<<<<<
@@ -3090,7 +3110,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_2eval_fre
   return __pyx_r;
 }
 
-/* "P4J/algorithms/multiharmonic_aov.pyx":157
+/* "P4J/algorithms/multiharmonic_aov.pyx":160
  *             return (self.d2/self.d1)*aov/max(self.wvar - aov, 1e-9)
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -3113,7 +3133,7 @@ static void __pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_4__dealloc__(s
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "P4J/algorithms/multiharmonic_aov.pyx":158
+  /* "P4J/algorithms/multiharmonic_aov.pyx":161
  * 
  *     def __dealloc__(self):
  *         PyMem_Free(self.mjd)             # <<<<<<<<<<<<<<
@@ -3122,7 +3142,7 @@ static void __pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_4__dealloc__(s
  */
   PyMem_Free(__pyx_v_self->mjd);
 
-  /* "P4J/algorithms/multiharmonic_aov.pyx":159
+  /* "P4J/algorithms/multiharmonic_aov.pyx":162
  *     def __dealloc__(self):
  *         PyMem_Free(self.mjd)
  *         PyMem_Free(self.mag_minus_wmean)             # <<<<<<<<<<<<<<
@@ -3131,7 +3151,7 @@ static void __pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_4__dealloc__(s
  */
   PyMem_Free(__pyx_v_self->mag_minus_wmean);
 
-  /* "P4J/algorithms/multiharmonic_aov.pyx":160
+  /* "P4J/algorithms/multiharmonic_aov.pyx":163
  *         PyMem_Free(self.mjd)
  *         PyMem_Free(self.mag_minus_wmean)
  *         PyMem_Free(self.err)             # <<<<<<<<<<<<<<
@@ -3140,7 +3160,7 @@ static void __pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_4__dealloc__(s
  */
   PyMem_Free(__pyx_v_self->err);
 
-  /* "P4J/algorithms/multiharmonic_aov.pyx":161
+  /* "P4J/algorithms/multiharmonic_aov.pyx":164
  *         PyMem_Free(self.mag_minus_wmean)
  *         PyMem_Free(self.err)
  *         PyMem_Free(self.zr)             # <<<<<<<<<<<<<<
@@ -3149,7 +3169,7 @@ static void __pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_4__dealloc__(s
  */
   PyMem_Free(__pyx_v_self->zr);
 
-  /* "P4J/algorithms/multiharmonic_aov.pyx":162
+  /* "P4J/algorithms/multiharmonic_aov.pyx":165
  *         PyMem_Free(self.err)
  *         PyMem_Free(self.zr)
  *         PyMem_Free(self.zi)             # <<<<<<<<<<<<<<
@@ -3158,7 +3178,7 @@ static void __pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_4__dealloc__(s
  */
   PyMem_Free(__pyx_v_self->zi);
 
-  /* "P4J/algorithms/multiharmonic_aov.pyx":163
+  /* "P4J/algorithms/multiharmonic_aov.pyx":166
  *         PyMem_Free(self.zr)
  *         PyMem_Free(self.zi)
  *         PyMem_Free(self.znr)             # <<<<<<<<<<<<<<
@@ -3167,7 +3187,7 @@ static void __pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_4__dealloc__(s
  */
   PyMem_Free(__pyx_v_self->znr);
 
-  /* "P4J/algorithms/multiharmonic_aov.pyx":164
+  /* "P4J/algorithms/multiharmonic_aov.pyx":167
  *         PyMem_Free(self.zi)
  *         PyMem_Free(self.znr)
  *         PyMem_Free(self.zni)             # <<<<<<<<<<<<<<
@@ -3176,7 +3196,7 @@ static void __pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_4__dealloc__(s
  */
   PyMem_Free(__pyx_v_self->zni);
 
-  /* "P4J/algorithms/multiharmonic_aov.pyx":165
+  /* "P4J/algorithms/multiharmonic_aov.pyx":168
  *         PyMem_Free(self.znr)
  *         PyMem_Free(self.zni)
  *         PyMem_Free(self.pr)             # <<<<<<<<<<<<<<
@@ -3185,7 +3205,7 @@ static void __pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_4__dealloc__(s
  */
   PyMem_Free(__pyx_v_self->pr);
 
-  /* "P4J/algorithms/multiharmonic_aov.pyx":166
+  /* "P4J/algorithms/multiharmonic_aov.pyx":169
  *         PyMem_Free(self.zni)
  *         PyMem_Free(self.pr)
  *         PyMem_Free(self.pi)             # <<<<<<<<<<<<<<
@@ -3194,7 +3214,7 @@ static void __pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_4__dealloc__(s
  */
   PyMem_Free(__pyx_v_self->pi);
 
-  /* "P4J/algorithms/multiharmonic_aov.pyx":167
+  /* "P4J/algorithms/multiharmonic_aov.pyx":170
  *         PyMem_Free(self.pr)
  *         PyMem_Free(self.pi)
  *         PyMem_Free(self.cfr)             # <<<<<<<<<<<<<<
@@ -3203,7 +3223,7 @@ static void __pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_4__dealloc__(s
  */
   PyMem_Free(__pyx_v_self->cfr);
 
-  /* "P4J/algorithms/multiharmonic_aov.pyx":168
+  /* "P4J/algorithms/multiharmonic_aov.pyx":171
  *         PyMem_Free(self.pi)
  *         PyMem_Free(self.cfr)
  *         PyMem_Free(self.cfi)             # <<<<<<<<<<<<<<
@@ -3212,7 +3232,7 @@ static void __pyx_pf_3P4J_10algorithms_17multiharmonic_aov_5MHAOV_4__dealloc__(s
  */
   PyMem_Free(__pyx_v_self->cfi);
 
-  /* "P4J/algorithms/multiharmonic_aov.pyx":157
+  /* "P4J/algorithms/multiharmonic_aov.pyx":160
  *             return (self.d2/self.d1)*aov/max(self.wvar - aov, 1e-9)
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<

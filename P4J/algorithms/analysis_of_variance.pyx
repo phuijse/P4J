@@ -78,8 +78,9 @@ cdef class AOV:
     def eval_frequency(self, DTYPE_t freq):
         # More memory consuming but almost twice as fast!
         cdef Py_ssize_t i, j
+        cdef DTYPE_t one_float = 1.0
         for i in range(self.N):
-            self.phase[i] = fmodf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]
+            self.phase[i] = fmodf(self.mjd[i], one_float/freq)*freq  # output in [0.0, 1.0]
         cdef DTYPE_t num=0.0, den=0.0
         cdef ITYPE_t samples_in_bin
         cdef DTYPE_t barxi
@@ -110,8 +111,9 @@ cdef class AOV:
     
     def eval_frequency_old(self, DTYPE_t freq):
         cdef Py_ssize_t i, j
+        cdef DTYPE_t one_float = 1.0
         for i in range(self.N):
-            self.phase[i] = fmodf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]
+            self.phase[i] = fmodf(self.mjd[i], one_float/freq)*freq  # output in [0.0, 1.0]
         cdef DTYPE_t num=0.0, den=0.0 # These are the unormalized s1 and s2 in the paper
         cdef ITYPE_t samples_in_bin
         cdef DTYPE_t barxi

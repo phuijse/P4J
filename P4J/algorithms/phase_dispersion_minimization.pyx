@@ -75,6 +75,8 @@ cdef class PDM:
         cdef DTYPE_t PDM_num=0.0, PDM_den=0.0
         cdef ITYPE_t samples_in_bin
         cdef DTYPE_t V1, V2
+        cdef DTYPE_t one_float = 1.0
+        cdef DTYPE_t two_float = 2.0
         for j in range(self.Nbins):
             samples_in_bin = 0
             V1 = V2 = 0.0
@@ -83,10 +85,11 @@ cdef class PDM:
                     self.tmp_mag[samples_in_bin] = self.mag[i]
                     self.tmp_err2[samples_in_bin] = self.err2[i]
                     samples_in_bin += 1
-                    V1 += 1.0/self.err2[i]
-                    V2 += 1.0/powf(self.err2[i], 2.0)
+                    V1 += one_float/self.err2[i]
+                    V2 += one_float/powf(self.err2[i], two_float)
             if samples_in_bin > 2:
-                PDM_num += unbiased_weighted_variance(self.tmp_mag, self.tmp_err2, samples_in_bin)*(V1 - V2/V1)
+                PDM_num += unbiased_weighted_variance(
+                    self.tmp_mag, self.tmp_err2, samples_in_bin)*(V1 - V2/V1)
                 PDM_den += (V1 - V2/V1)
 
         return PDM_num*self.normalizer/PDM_den

@@ -33,15 +33,18 @@ Wrapped kernels are meant for angle data.
 cdef inline void IP_wrappednormal(DTYPE_t* IP, DTYPE_t* angle, DTYPE_t h_KDE, Py_ssize_t N):
     cdef Py_ssize_t i, j
     cdef DTYPE_t distance
-    cdef DTYPE_t denominator = sqrtf(2.0*M_PI*2.0)*h_KDE
+    cdef DTYPE_t one_float = 1.0
+    cdef DTYPE_t two_float = 2.0
+    cdef DTYPE_t quarter_float = 0.25
+    cdef DTYPE_t denominator = sqrtf(two_float*M_PI*two_float)*h_KDE
     for i in range(N):
-        IP[indexMatrixToVector(i, i, N)] = 1.0/denominator
+        IP[indexMatrixToVector(i, i, N)] = one_float/denominator
         for j in range(i+1, N):
             # This is not quite right, it should be an infinite sum of |a_i - a_j - k2PI|
             distance = fabsf(angle[i]-angle[j])
             if distance > M_PI:
-                distance -= 2.0*M_PI
-            IP[indexMatrixToVector(i, j, N)] = expf(-0.25*powf(distance/h_KDE, 2))/denominator
+                distance -= two_float*M_PI
+            IP[indexMatrixToVector(i, j, N)] = expf(-quarter_float*powf(distance/h_KDE, 2))/denominator
 
 """
 cdef inline void IP_vonmises(DTYPE_t* IP, DTYPE_t* angle, DTYPE_t h_KDE, Py_ssize_t N):
@@ -57,24 +60,31 @@ cdef inline void IP_vonmises(DTYPE_t* IP, DTYPE_t* angle, DTYPE_t h_KDE, Py_ssiz
 cdef inline void IP_wrappedcauchy(DTYPE_t* IP, DTYPE_t* angle, DTYPE_t h_KDE, Py_ssize_t N):
     cdef Py_ssize_t i, j
     cdef DTYPE_t rho = expf(-h_KDE)
+    cdef DTYPE_t one_float = 1.0
+    cdef DTYPE_t two_float = 2.0
     for i in range(N):
-        IP[indexMatrixToVector(i, i, N)] = (1.+rho)/(2.*M_PI*(1.-rho))
+        IP[indexMatrixToVector(i, i, N)] = (one_float+rho)/(two_float*M_PI*(one_float-rho))
         for j in range(i+1, N):
-            IP[indexMatrixToVector(i, j, N)] = (1.-rho**2)/(2.*M_PI*(1.+rho**2-2.*rho*cosf(angle[i]-angle[j])))
+            IP[indexMatrixToVector(i, j, N)] = (one_float-rho**2)/(
+                two_float*M_PI*(one_float+rho**2-two_float*rho*cosf(angle[i]-angle[j])))
  
 cdef inline void IP_gaussian(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] h_data, DTYPE_t h_KDE, Py_ssize_t N):
     cdef Py_ssize_t i, j
-    cdef DTYPE_t gauss_var, delta2, h_KDE2 = 2.0*powf(h_KDE, 2.0)
+    cdef DTYPE_t one_float = 1.0
+    cdef DTYPE_t two_float = 2.0
+    cdef DTYPE_t half_float = 0.5
+    cdef DTYPE_t gauss_var, delta2, h_KDE2 = two_float*powf(h_KDE, two_float)
     cdef DTYPE_t* h_data2 = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))
     for i in range(N):
-        h_data2[i] = powf(h_data[i], 2.0)
+        h_data2[i] = powf(h_data[i], two_float)
     for i in range(N):
-        gauss_var = h_KDE2 + 2.0*h_data2[i]
-        IP[indexMatrixToVector(i, i, N)] = 1.0/sqrtf(2.0*M_PI*gauss_var)
+        gauss_var = h_KDE2 + two_float*h_data2[i]
+        IP[indexMatrixToVector(i, i, N)] = one_float/sqrtf(two_float*M_PI*gauss_var)
         for j in range(i+1, N):
-            delta2 = powf(data[i] - data[j], 2.0)
+            delta2 = powf(data[i] - data[j], two_float)
             gauss_var = h_KDE2 + h_data2[i] + h_data2[j]
-            IP[indexMatrixToVector(i, j, N)] = expf(-0.5*delta2/gauss_var)/sqrtf(2.0*M_PI*gauss_var)
+            IP[indexMatrixToVector(i, j, N)] = expf(
+                -half_float*delta2/gauss_var)/sqrtf(two_float*M_PI*gauss_var)
     PyMem_Free(h_data2)
 
 
@@ -83,21 +93,25 @@ cdef inline void IP_gaussian(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] h_da
 """
 cdef inline void IP_gaussian2(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] h_data, DTYPE_t h_KDE, Py_ssize_t N):
     cdef Py_ssize_t i, j
-    cdef DTYPE_t gauss_var, delta2, h_KDE2 = 2.0*powf(h_KDE, 2.0)
+    cdef DTYPE_t one_float = 1.0
+    cdef DTYPE_t two_float = 2.0
+    cdef DTYPE_t half_float = 0.5
+    cdef DTYPE_t gauss_var, delta2, h_KDE2 = two_float*powf(h_KDE, two_float)
     cdef DTYPE_t* w = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))
     cdef DTYPE_t sum_w = 0.0
     for i in range(N):
-        w[i] = 1.0/powf(h_data[i], 2.0)
+        w[i] = one_float/powf(h_data[i], two_float)
         sum_w += w[i]
     for i in range(N):
         w[i] = w[i]/sum_w
     for i in range(N):
         gauss_var = h_KDE2
-        IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/sqrtf(2.0*M_PI*gauss_var)
+        IP[indexMatrixToVector(i, i, N)] = powf(w[i], two_float)/sqrtf(two_float*M_PI*gauss_var)
         for j in range(i+1, N):
-            delta2 = powf(data[i] - data[j], 2.0)
+            delta2 = powf(data[i] - data[j], two_float)
             gauss_var = h_KDE2
-            IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]*expf(-0.5*delta2/gauss_var)/sqrtf(2.0*M_PI*gauss_var)
+            IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]*expf(
+                -half_float*delta2/gauss_var)/sqrtf(two_float*M_PI*gauss_var)
     PyMem_Free(w)
 
 
@@ -106,16 +120,18 @@ cdef inline void IP_cauchy(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] err, D
     cdef DTYPE_t delta2
     cdef DTYPE_t* w = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))
     cdef DTYPE_t w_sum = 0.0
+    cdef DTYPE_t one_float = 1.0
+    cdef DTYPE_t two_float = 2.0
     for i in range(N):
-        w[i] = 1.0/powf(err[i], 2.0)
+        w[i] = one_float/powf(err[i], two_float)
         w_sum += w[i]
     for i in range(N):
         w[i] = w[i]/w_sum
     for i in range(N):
-        IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/(M_PI*2.0*h_KDE)
+        IP[indexMatrixToVector(i, i, N)] = powf(w[i], two_float)/(M_PI*two_float*h_KDE)
         for j in range(i+1, N):
-            delta2 = powf((data[i] - data[j])/(2.0*h_KDE), 2.0)
-            IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]/(M_PI*2.0*h_KDE*(1.0 + delta2))
+            delta2 = powf((data[i] - data[j])/(two_float*h_KDE), two_float)
+            IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]/(M_PI*two_float*h_KDE*(one_float + delta2))
     PyMem_Free(w)
 
 cdef inline Py_ssize_t indexMatrixToVector(Py_ssize_t i, Py_ssize_t j, Py_ssize_t N):
@@ -184,8 +200,10 @@ cdef class QMI:
 
     def eval_frequency(self, DTYPE_t freq):
         cdef Py_ssize_t i, j
+        cdef DTYPE_t one_float = 1.0
+        cdef DTYPE_t two_float = 2.0
         for i in range(self.N):
-            self.angle[i] = 2.0*M_PI*fmodf(self.mjd[i], 1.0/freq)*freq # output in [0.0, 2.0*pi]
+            self.angle[i] = two_float*M_PI*fmodf(self.mjd[i], one_float/freq)*freq # output in [0.0, 2.0*pi]
 #        IP_wrappednormal(self.IP_P, self.angle, self.h_KDE_P, self.N)
         IP_wrappedcauchy(self.IP_P, self.angle, self.h_KDE_P, self.N)
         cdef Py_ssize_t mat_idx
@@ -199,20 +217,20 @@ cdef class QMI:
             VJ += self.IP_M[mat_idx]*self.IP_P[mat_idx]
             for j in range(i+1, self.N):
                 mat_idx = indexMatrixToVector(i, j, self.N)
-                VM2 += 2.0*self.IP_P[mat_idx]
+                VM2 += two_float*self.IP_P[mat_idx]
                 self.VC2[j] += self.IP_P[mat_idx]
                 self.VC2[i] += self.IP_P[mat_idx]
-                VJ += 2.0*self.IP_M[mat_idx]*self.IP_P[mat_idx]
+                VJ += two_float*self.IP_M[mat_idx]*self.IP_P[mat_idx]
         for i in range(self.N):
             VC += self.VC1[i]*self.VC2[i]
         if self.mode == 0:  # Cauchy-Schwarz MI
             # The log(N) terms cancel out in this sum
-            return logf(self.VM1*VM2) + logf(VJ) - 2.0*logf(VC)
+            return logf(self.VM1*VM2) + logf(VJ) - two_float*logf(VC)
         elif self.mode == 1:  # Euclidean MI
-            return (self.VM1*VM2/self.N**2 + VJ - 2.0*VC/self.N)/self.N**2
+            return (self.VM1*VM2/self.N**2 + VJ - two_float*VC/self.N)/self.N**2
         elif self.mode == 2:  # Quadratic Mutual Entropy, not safe yet
             # Using Renyi's formulation
-            return fabsf(-logf(self.VM1) - logf(VM2) + logf(VJ) + 2*logf(self.N))
+            return fabsf(-logf(self.VM1) - logf(VM2) + logf(VJ) + two_float*logf(self.N))
             # Using Tsallis' formulation
             # return 1.0 - (self.VM1 + VM2 - VJ)/self.N**2  # Tsallis
 

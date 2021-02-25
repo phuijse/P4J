@@ -2603,6 +2603,8 @@ static PyObject *__pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM
   __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_ITYPE_t __pyx_v_samples_in_bin;
   __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t __pyx_v_V1;
   __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t __pyx_v_V2;
+  __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t __pyx_v_one_float;
+  __pyx_t_3P4J_10algorithms_29phase_dispersion_minimization_DTYPE_t __pyx_v_two_float;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   Py_ssize_t __pyx_t_1;
@@ -2653,6 +2655,24 @@ static PyObject *__pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM
   /* "P4J/algorithms/phase_dispersion_minimization.pyx":78
  *         cdef ITYPE_t samples_in_bin
  *         cdef DTYPE_t V1, V2
+ *         cdef DTYPE_t one_float = 1.0             # <<<<<<<<<<<<<<
+ *         cdef DTYPE_t two_float = 2.0
+ *         for j in range(self.Nbins):
+ */
+  __pyx_v_one_float = 1.0;
+
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":79
+ *         cdef DTYPE_t V1, V2
+ *         cdef DTYPE_t one_float = 1.0
+ *         cdef DTYPE_t two_float = 2.0             # <<<<<<<<<<<<<<
+ *         for j in range(self.Nbins):
+ *             samples_in_bin = 0
+ */
+  __pyx_v_two_float = 2.0;
+
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":80
+ *         cdef DTYPE_t one_float = 1.0
+ *         cdef DTYPE_t two_float = 2.0
  *         for j in range(self.Nbins):             # <<<<<<<<<<<<<<
  *             samples_in_bin = 0
  *             V1 = V2 = 0.0
@@ -2662,8 +2682,8 @@ static PyObject *__pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM
   for (__pyx_t_1 = 0; __pyx_t_1 < __pyx_t_5; __pyx_t_1+=1) {
     __pyx_v_j = __pyx_t_1;
 
-    /* "P4J/algorithms/phase_dispersion_minimization.pyx":79
- *         cdef DTYPE_t V1, V2
+    /* "P4J/algorithms/phase_dispersion_minimization.pyx":81
+ *         cdef DTYPE_t two_float = 2.0
  *         for j in range(self.Nbins):
  *             samples_in_bin = 0             # <<<<<<<<<<<<<<
  *             V1 = V2 = 0.0
@@ -2671,7 +2691,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM
  */
     __pyx_v_samples_in_bin = 0;
 
-    /* "P4J/algorithms/phase_dispersion_minimization.pyx":80
+    /* "P4J/algorithms/phase_dispersion_minimization.pyx":82
  *         for j in range(self.Nbins):
  *             samples_in_bin = 0
  *             V1 = V2 = 0.0             # <<<<<<<<<<<<<<
@@ -2681,7 +2701,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM
     __pyx_v_V1 = 0.0;
     __pyx_v_V2 = 0.0;
 
-    /* "P4J/algorithms/phase_dispersion_minimization.pyx":81
+    /* "P4J/algorithms/phase_dispersion_minimization.pyx":83
  *             samples_in_bin = 0
  *             V1 = V2 = 0.0
  *             for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -2693,7 +2713,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM
     for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_3; __pyx_t_6+=1) {
       __pyx_v_i = __pyx_t_6;
 
-      /* "P4J/algorithms/phase_dispersion_minimization.pyx":82
+      /* "P4J/algorithms/phase_dispersion_minimization.pyx":84
  *             V1 = V2 = 0.0
  *             for i in range(self.N):
  *                 if floorf(self.phase[i]*self.Nbins) == j:             # <<<<<<<<<<<<<<
@@ -2703,7 +2723,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM
       __pyx_t_7 = ((floorf(((__pyx_v_self->phase[__pyx_v_i]) * __pyx_v_self->Nbins)) == __pyx_v_j) != 0);
       if (__pyx_t_7) {
 
-        /* "P4J/algorithms/phase_dispersion_minimization.pyx":83
+        /* "P4J/algorithms/phase_dispersion_minimization.pyx":85
  *             for i in range(self.N):
  *                 if floorf(self.phase[i]*self.Nbins) == j:
  *                     self.tmp_mag[samples_in_bin] = self.mag[i]             # <<<<<<<<<<<<<<
@@ -2712,43 +2732,43 @@ static PyObject *__pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM
  */
         (__pyx_v_self->tmp_mag[__pyx_v_samples_in_bin]) = (__pyx_v_self->mag[__pyx_v_i]);
 
-        /* "P4J/algorithms/phase_dispersion_minimization.pyx":84
+        /* "P4J/algorithms/phase_dispersion_minimization.pyx":86
  *                 if floorf(self.phase[i]*self.Nbins) == j:
  *                     self.tmp_mag[samples_in_bin] = self.mag[i]
  *                     self.tmp_err2[samples_in_bin] = self.err2[i]             # <<<<<<<<<<<<<<
  *                     samples_in_bin += 1
- *                     V1 += 1.0/self.err2[i]
+ *                     V1 += one_float/self.err2[i]
  */
         (__pyx_v_self->tmp_err2[__pyx_v_samples_in_bin]) = (__pyx_v_self->err2[__pyx_v_i]);
 
-        /* "P4J/algorithms/phase_dispersion_minimization.pyx":85
+        /* "P4J/algorithms/phase_dispersion_minimization.pyx":87
  *                     self.tmp_mag[samples_in_bin] = self.mag[i]
  *                     self.tmp_err2[samples_in_bin] = self.err2[i]
  *                     samples_in_bin += 1             # <<<<<<<<<<<<<<
- *                     V1 += 1.0/self.err2[i]
- *                     V2 += 1.0/powf(self.err2[i], 2.0)
+ *                     V1 += one_float/self.err2[i]
+ *                     V2 += one_float/powf(self.err2[i], two_float)
  */
         __pyx_v_samples_in_bin = (__pyx_v_samples_in_bin + 1);
 
-        /* "P4J/algorithms/phase_dispersion_minimization.pyx":86
+        /* "P4J/algorithms/phase_dispersion_minimization.pyx":88
  *                     self.tmp_err2[samples_in_bin] = self.err2[i]
  *                     samples_in_bin += 1
- *                     V1 += 1.0/self.err2[i]             # <<<<<<<<<<<<<<
- *                     V2 += 1.0/powf(self.err2[i], 2.0)
+ *                     V1 += one_float/self.err2[i]             # <<<<<<<<<<<<<<
+ *                     V2 += one_float/powf(self.err2[i], two_float)
  *             if samples_in_bin > 2:
  */
-        __pyx_v_V1 = (__pyx_v_V1 + (1.0 / ((double)(__pyx_v_self->err2[__pyx_v_i]))));
+        __pyx_v_V1 = (__pyx_v_V1 + (__pyx_v_one_float / (__pyx_v_self->err2[__pyx_v_i])));
 
-        /* "P4J/algorithms/phase_dispersion_minimization.pyx":87
+        /* "P4J/algorithms/phase_dispersion_minimization.pyx":89
  *                     samples_in_bin += 1
- *                     V1 += 1.0/self.err2[i]
- *                     V2 += 1.0/powf(self.err2[i], 2.0)             # <<<<<<<<<<<<<<
+ *                     V1 += one_float/self.err2[i]
+ *                     V2 += one_float/powf(self.err2[i], two_float)             # <<<<<<<<<<<<<<
  *             if samples_in_bin > 2:
- *                 PDM_num += unbiased_weighted_variance(self.tmp_mag, self.tmp_err2, samples_in_bin)*(V1 - V2/V1)
+ *                 PDM_num += unbiased_weighted_variance(
  */
-        __pyx_v_V2 = (__pyx_v_V2 + (1.0 / ((double)powf((__pyx_v_self->err2[__pyx_v_i]), 2.0))));
+        __pyx_v_V2 = (__pyx_v_V2 + (__pyx_v_one_float / powf((__pyx_v_self->err2[__pyx_v_i]), __pyx_v_two_float)));
 
-        /* "P4J/algorithms/phase_dispersion_minimization.pyx":82
+        /* "P4J/algorithms/phase_dispersion_minimization.pyx":84
  *             V1 = V2 = 0.0
  *             for i in range(self.N):
  *                 if floorf(self.phase[i]*self.Nbins) == j:             # <<<<<<<<<<<<<<
@@ -2758,45 +2778,45 @@ static PyObject *__pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM
       }
     }
 
-    /* "P4J/algorithms/phase_dispersion_minimization.pyx":88
- *                     V1 += 1.0/self.err2[i]
- *                     V2 += 1.0/powf(self.err2[i], 2.0)
+    /* "P4J/algorithms/phase_dispersion_minimization.pyx":90
+ *                     V1 += one_float/self.err2[i]
+ *                     V2 += one_float/powf(self.err2[i], two_float)
  *             if samples_in_bin > 2:             # <<<<<<<<<<<<<<
- *                 PDM_num += unbiased_weighted_variance(self.tmp_mag, self.tmp_err2, samples_in_bin)*(V1 - V2/V1)
- *                 PDM_den += (V1 - V2/V1)
+ *                 PDM_num += unbiased_weighted_variance(
+ *                     self.tmp_mag, self.tmp_err2, samples_in_bin)*(V1 - V2/V1)
  */
     __pyx_t_7 = ((__pyx_v_samples_in_bin > 2) != 0);
     if (__pyx_t_7) {
 
-      /* "P4J/algorithms/phase_dispersion_minimization.pyx":89
- *                     V2 += 1.0/powf(self.err2[i], 2.0)
+      /* "P4J/algorithms/phase_dispersion_minimization.pyx":91
+ *                     V2 += one_float/powf(self.err2[i], two_float)
  *             if samples_in_bin > 2:
- *                 PDM_num += unbiased_weighted_variance(self.tmp_mag, self.tmp_err2, samples_in_bin)*(V1 - V2/V1)             # <<<<<<<<<<<<<<
+ *                 PDM_num += unbiased_weighted_variance(             # <<<<<<<<<<<<<<
+ *                     self.tmp_mag, self.tmp_err2, samples_in_bin)*(V1 - V2/V1)
  *                 PDM_den += (V1 - V2/V1)
- * 
  */
       __pyx_v_PDM_num = (__pyx_v_PDM_num + (__pyx_f_3P4J_10algorithms_9utilities_unbiased_weighted_variance(__pyx_v_self->tmp_mag, __pyx_v_self->tmp_err2, __pyx_v_samples_in_bin) * (__pyx_v_V1 - (__pyx_v_V2 / __pyx_v_V1))));
 
-      /* "P4J/algorithms/phase_dispersion_minimization.pyx":90
- *             if samples_in_bin > 2:
- *                 PDM_num += unbiased_weighted_variance(self.tmp_mag, self.tmp_err2, samples_in_bin)*(V1 - V2/V1)
+      /* "P4J/algorithms/phase_dispersion_minimization.pyx":93
+ *                 PDM_num += unbiased_weighted_variance(
+ *                     self.tmp_mag, self.tmp_err2, samples_in_bin)*(V1 - V2/V1)
  *                 PDM_den += (V1 - V2/V1)             # <<<<<<<<<<<<<<
  * 
  *         return PDM_num*self.normalizer/PDM_den
  */
       __pyx_v_PDM_den = (__pyx_v_PDM_den + (__pyx_v_V1 - (__pyx_v_V2 / __pyx_v_V1)));
 
-      /* "P4J/algorithms/phase_dispersion_minimization.pyx":88
- *                     V1 += 1.0/self.err2[i]
- *                     V2 += 1.0/powf(self.err2[i], 2.0)
+      /* "P4J/algorithms/phase_dispersion_minimization.pyx":90
+ *                     V1 += one_float/self.err2[i]
+ *                     V2 += one_float/powf(self.err2[i], two_float)
  *             if samples_in_bin > 2:             # <<<<<<<<<<<<<<
- *                 PDM_num += unbiased_weighted_variance(self.tmp_mag, self.tmp_err2, samples_in_bin)*(V1 - V2/V1)
- *                 PDM_den += (V1 - V2/V1)
+ *                 PDM_num += unbiased_weighted_variance(
+ *                     self.tmp_mag, self.tmp_err2, samples_in_bin)*(V1 - V2/V1)
  */
     }
   }
 
-  /* "P4J/algorithms/phase_dispersion_minimization.pyx":92
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":95
  *                 PDM_den += (V1 - V2/V1)
  * 
  *         return PDM_num*self.normalizer/PDM_den             # <<<<<<<<<<<<<<
@@ -2804,7 +2824,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM
  *     def __dealloc__(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_8 = PyFloat_FromDouble(((__pyx_v_PDM_num * __pyx_v_self->normalizer) / __pyx_v_PDM_den)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __pyx_t_8 = PyFloat_FromDouble(((__pyx_v_PDM_num * __pyx_v_self->normalizer) / __pyx_v_PDM_den)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __pyx_r = __pyx_t_8;
   __pyx_t_8 = 0;
@@ -2829,7 +2849,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM
   return __pyx_r;
 }
 
-/* "P4J/algorithms/phase_dispersion_minimization.pyx":94
+/* "P4J/algorithms/phase_dispersion_minimization.pyx":97
  *         return PDM_num*self.normalizer/PDM_den
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -2852,7 +2872,7 @@ static void __pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_4__d
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "P4J/algorithms/phase_dispersion_minimization.pyx":95
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":98
  * 
  *     def __dealloc__(self):
  *         PyMem_Free(self.mjd)             # <<<<<<<<<<<<<<
@@ -2861,7 +2881,7 @@ static void __pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_4__d
  */
   PyMem_Free(__pyx_v_self->mjd);
 
-  /* "P4J/algorithms/phase_dispersion_minimization.pyx":96
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":99
  *     def __dealloc__(self):
  *         PyMem_Free(self.mjd)
  *         PyMem_Free(self.mag)             # <<<<<<<<<<<<<<
@@ -2870,7 +2890,7 @@ static void __pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_4__d
  */
   PyMem_Free(__pyx_v_self->mag);
 
-  /* "P4J/algorithms/phase_dispersion_minimization.pyx":97
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":100
  *         PyMem_Free(self.mjd)
  *         PyMem_Free(self.mag)
  *         PyMem_Free(self.err2)             # <<<<<<<<<<<<<<
@@ -2879,7 +2899,7 @@ static void __pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_4__d
  */
   PyMem_Free(__pyx_v_self->err2);
 
-  /* "P4J/algorithms/phase_dispersion_minimization.pyx":98
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":101
  *         PyMem_Free(self.mag)
  *         PyMem_Free(self.err2)
  *         PyMem_Free(self.phase)             # <<<<<<<<<<<<<<
@@ -2888,7 +2908,7 @@ static void __pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_4__d
  */
   PyMem_Free(__pyx_v_self->phase);
 
-  /* "P4J/algorithms/phase_dispersion_minimization.pyx":99
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":102
  *         PyMem_Free(self.err2)
  *         PyMem_Free(self.phase)
  *         PyMem_Free(self.sorted_idx)             # <<<<<<<<<<<<<<
@@ -2897,7 +2917,7 @@ static void __pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_4__d
  */
   PyMem_Free(__pyx_v_self->sorted_idx);
 
-  /* "P4J/algorithms/phase_dispersion_minimization.pyx":100
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":103
  *         PyMem_Free(self.phase)
  *         PyMem_Free(self.sorted_idx)
  *         PyMem_Free(self.tmp_mag)             # <<<<<<<<<<<<<<
@@ -2906,7 +2926,7 @@ static void __pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_4__d
  */
   PyMem_Free(__pyx_v_self->tmp_mag);
 
-  /* "P4J/algorithms/phase_dispersion_minimization.pyx":101
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":104
  *         PyMem_Free(self.sorted_idx)
  *         PyMem_Free(self.tmp_mag)
  *         PyMem_Free(self.tmp_err2)             # <<<<<<<<<<<<<<
@@ -2915,7 +2935,7 @@ static void __pyx_pf_3P4J_10algorithms_29phase_dispersion_minimization_3PDM_4__d
  */
   PyMem_Free(__pyx_v_self->tmp_err2);
 
-  /* "P4J/algorithms/phase_dispersion_minimization.pyx":94
+  /* "P4J/algorithms/phase_dispersion_minimization.pyx":97
  *         return PDM_num*self.normalizer/PDM_den
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<

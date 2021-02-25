@@ -25,9 +25,11 @@ cdef DTYPE_t weighted_mean(DTYPE_t* data, DTYPE_t* err, Py_ssize_t N):
     cdef DTYPE_t w_mean = 0.0
     cdef DTYPE_t w_sum = 0.0
     cdef Py_ssize_t i
+    cdef DTYPE_t one_float = 1.0
+    cdef DTYPE_t two_float = 2.0
     for i in range(N):
-        w_sum += 1.0/powf(err[i], 2.0)
-        w_mean += data[i]/powf(err[i], 2.0)
+        w_sum += one_float/powf(err[i], two_float)
+        w_mean += data[i]/powf(err[i], two_float)
     return w_mean/w_sum
 
 cdef DTYPE_t unbiased_weighted_variance(DTYPE_t* data, DTYPE_t* err2, Py_ssize_t N):
@@ -35,12 +37,14 @@ cdef DTYPE_t unbiased_weighted_variance(DTYPE_t* data, DTYPE_t* err2, Py_ssize_t
     cdef DTYPE_t w_var = 0.0
     cdef DTYPE_t V1 = 0.0, V2 = 0.0
     cdef Py_ssize_t i
+    cdef DTYPE_t one_float = 1.0
+    cdef DTYPE_t two_float = 2.0
     for i in range(N):
-        V1 += 1.0/err2[i]
-        V2 += 1.0/powf(err2[i], 2.0)
+        V1 += one_float/err2[i]
+        V2 += one_float/powf(err2[i], two_float)
         w_mean += data[i]/err2[i]
     for i in range(N):
-        w_var += powf(data[i] - w_mean/V1, 2.0)/err2[i]
+        w_var += powf(data[i] - w_mean/V1, two_float)/err2[i]
     return w_var/(V1 - V2/V1)
 
 

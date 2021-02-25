@@ -972,7 +972,7 @@ struct __pyx_MemviewEnum_obj;
 struct __pyx_memoryview_obj;
 struct __pyx_memoryviewslice_obj;
 
-/* "P4J/algorithms/mutual_information.pyx":125
+/* "P4J/algorithms/mutual_information.pyx":141
  *     return i*N - (i-1)*i/2 + j - i
  * 
  * cdef class QMI:             # <<<<<<<<<<<<<<
@@ -2087,6 +2087,9 @@ static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_wrap
   Py_ssize_t __pyx_v_i;
   Py_ssize_t __pyx_v_j;
   __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_distance;
+  __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_one_float;
+  __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_two_float;
+  __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_quarter_float;
   __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_denominator;
   __Pyx_RefNannyDeclarations
   Py_ssize_t __pyx_t_1;
@@ -2101,17 +2104,44 @@ static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_wrap
   /* "P4J/algorithms/mutual_information.pyx":36
  *     cdef Py_ssize_t i, j
  *     cdef DTYPE_t distance
- *     cdef DTYPE_t denominator = sqrtf(2.0*M_PI*2.0)*h_KDE             # <<<<<<<<<<<<<<
- *     for i in range(N):
- *         IP[indexMatrixToVector(i, i, N)] = 1.0/denominator
+ *     cdef DTYPE_t one_float = 1.0             # <<<<<<<<<<<<<<
+ *     cdef DTYPE_t two_float = 2.0
+ *     cdef DTYPE_t quarter_float = 0.25
  */
-  __pyx_v_denominator = (sqrtf(((2.0 * __pyx_v_3P4J_10algorithms_18mutual_information_M_PI) * 2.0)) * __pyx_v_h_KDE);
+  __pyx_v_one_float = 1.0;
 
   /* "P4J/algorithms/mutual_information.pyx":37
  *     cdef DTYPE_t distance
- *     cdef DTYPE_t denominator = sqrtf(2.0*M_PI*2.0)*h_KDE
+ *     cdef DTYPE_t one_float = 1.0
+ *     cdef DTYPE_t two_float = 2.0             # <<<<<<<<<<<<<<
+ *     cdef DTYPE_t quarter_float = 0.25
+ *     cdef DTYPE_t denominator = sqrtf(two_float*M_PI*two_float)*h_KDE
+ */
+  __pyx_v_two_float = 2.0;
+
+  /* "P4J/algorithms/mutual_information.pyx":38
+ *     cdef DTYPE_t one_float = 1.0
+ *     cdef DTYPE_t two_float = 2.0
+ *     cdef DTYPE_t quarter_float = 0.25             # <<<<<<<<<<<<<<
+ *     cdef DTYPE_t denominator = sqrtf(two_float*M_PI*two_float)*h_KDE
+ *     for i in range(N):
+ */
+  __pyx_v_quarter_float = 0.25;
+
+  /* "P4J/algorithms/mutual_information.pyx":39
+ *     cdef DTYPE_t two_float = 2.0
+ *     cdef DTYPE_t quarter_float = 0.25
+ *     cdef DTYPE_t denominator = sqrtf(two_float*M_PI*two_float)*h_KDE             # <<<<<<<<<<<<<<
+ *     for i in range(N):
+ *         IP[indexMatrixToVector(i, i, N)] = one_float/denominator
+ */
+  __pyx_v_denominator = (sqrtf(((__pyx_v_two_float * __pyx_v_3P4J_10algorithms_18mutual_information_M_PI) * __pyx_v_two_float)) * __pyx_v_h_KDE);
+
+  /* "P4J/algorithms/mutual_information.pyx":40
+ *     cdef DTYPE_t quarter_float = 0.25
+ *     cdef DTYPE_t denominator = sqrtf(two_float*M_PI*two_float)*h_KDE
  *     for i in range(N):             # <<<<<<<<<<<<<<
- *         IP[indexMatrixToVector(i, i, N)] = 1.0/denominator
+ *         IP[indexMatrixToVector(i, i, N)] = one_float/denominator
  *         for j in range(i+1, N):
  */
   __pyx_t_1 = __pyx_v_N;
@@ -2119,18 +2149,18 @@ static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_wrap
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/algorithms/mutual_information.pyx":38
- *     cdef DTYPE_t denominator = sqrtf(2.0*M_PI*2.0)*h_KDE
+    /* "P4J/algorithms/mutual_information.pyx":41
+ *     cdef DTYPE_t denominator = sqrtf(two_float*M_PI*two_float)*h_KDE
  *     for i in range(N):
- *         IP[indexMatrixToVector(i, i, N)] = 1.0/denominator             # <<<<<<<<<<<<<<
+ *         IP[indexMatrixToVector(i, i, N)] = one_float/denominator             # <<<<<<<<<<<<<<
  *         for j in range(i+1, N):
  *             # This is not quite right, it should be an infinite sum of |a_i - a_j - k2PI|
  */
-    (__pyx_v_IP[__pyx_f_3P4J_10algorithms_18mutual_information_indexMatrixToVector(__pyx_v_i, __pyx_v_i, __pyx_v_N)]) = (1.0 / ((double)__pyx_v_denominator));
+    (__pyx_v_IP[__pyx_f_3P4J_10algorithms_18mutual_information_indexMatrixToVector(__pyx_v_i, __pyx_v_i, __pyx_v_N)]) = (__pyx_v_one_float / __pyx_v_denominator);
 
-    /* "P4J/algorithms/mutual_information.pyx":39
+    /* "P4J/algorithms/mutual_information.pyx":42
  *     for i in range(N):
- *         IP[indexMatrixToVector(i, i, N)] = 1.0/denominator
+ *         IP[indexMatrixToVector(i, i, N)] = one_float/denominator
  *         for j in range(i+1, N):             # <<<<<<<<<<<<<<
  *             # This is not quite right, it should be an infinite sum of |a_i - a_j - k2PI|
  *             distance = fabsf(angle[i]-angle[j])
@@ -2140,51 +2170,51 @@ static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_wrap
     for (__pyx_t_6 = (__pyx_v_i + 1); __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
-      /* "P4J/algorithms/mutual_information.pyx":41
+      /* "P4J/algorithms/mutual_information.pyx":44
  *         for j in range(i+1, N):
  *             # This is not quite right, it should be an infinite sum of |a_i - a_j - k2PI|
  *             distance = fabsf(angle[i]-angle[j])             # <<<<<<<<<<<<<<
  *             if distance > M_PI:
- *                 distance -= 2.0*M_PI
+ *                 distance -= two_float*M_PI
  */
       __pyx_v_distance = fabsf(((__pyx_v_angle[__pyx_v_i]) - (__pyx_v_angle[__pyx_v_j])));
 
-      /* "P4J/algorithms/mutual_information.pyx":42
+      /* "P4J/algorithms/mutual_information.pyx":45
  *             # This is not quite right, it should be an infinite sum of |a_i - a_j - k2PI|
  *             distance = fabsf(angle[i]-angle[j])
  *             if distance > M_PI:             # <<<<<<<<<<<<<<
- *                 distance -= 2.0*M_PI
- *             IP[indexMatrixToVector(i, j, N)] = expf(-0.25*powf(distance/h_KDE, 2))/denominator
+ *                 distance -= two_float*M_PI
+ *             IP[indexMatrixToVector(i, j, N)] = expf(-quarter_float*powf(distance/h_KDE, 2))/denominator
  */
       __pyx_t_7 = ((__pyx_v_distance > __pyx_v_3P4J_10algorithms_18mutual_information_M_PI) != 0);
       if (__pyx_t_7) {
 
-        /* "P4J/algorithms/mutual_information.pyx":43
+        /* "P4J/algorithms/mutual_information.pyx":46
  *             distance = fabsf(angle[i]-angle[j])
  *             if distance > M_PI:
- *                 distance -= 2.0*M_PI             # <<<<<<<<<<<<<<
- *             IP[indexMatrixToVector(i, j, N)] = expf(-0.25*powf(distance/h_KDE, 2))/denominator
+ *                 distance -= two_float*M_PI             # <<<<<<<<<<<<<<
+ *             IP[indexMatrixToVector(i, j, N)] = expf(-quarter_float*powf(distance/h_KDE, 2))/denominator
  * 
  */
-        __pyx_v_distance = (__pyx_v_distance - (2.0 * __pyx_v_3P4J_10algorithms_18mutual_information_M_PI));
+        __pyx_v_distance = (__pyx_v_distance - (__pyx_v_two_float * __pyx_v_3P4J_10algorithms_18mutual_information_M_PI));
 
-        /* "P4J/algorithms/mutual_information.pyx":42
+        /* "P4J/algorithms/mutual_information.pyx":45
  *             # This is not quite right, it should be an infinite sum of |a_i - a_j - k2PI|
  *             distance = fabsf(angle[i]-angle[j])
  *             if distance > M_PI:             # <<<<<<<<<<<<<<
- *                 distance -= 2.0*M_PI
- *             IP[indexMatrixToVector(i, j, N)] = expf(-0.25*powf(distance/h_KDE, 2))/denominator
+ *                 distance -= two_float*M_PI
+ *             IP[indexMatrixToVector(i, j, N)] = expf(-quarter_float*powf(distance/h_KDE, 2))/denominator
  */
       }
 
-      /* "P4J/algorithms/mutual_information.pyx":44
+      /* "P4J/algorithms/mutual_information.pyx":47
  *             if distance > M_PI:
- *                 distance -= 2.0*M_PI
- *             IP[indexMatrixToVector(i, j, N)] = expf(-0.25*powf(distance/h_KDE, 2))/denominator             # <<<<<<<<<<<<<<
+ *                 distance -= two_float*M_PI
+ *             IP[indexMatrixToVector(i, j, N)] = expf(-quarter_float*powf(distance/h_KDE, 2))/denominator             # <<<<<<<<<<<<<<
  * 
  * """
  */
-      (__pyx_v_IP[__pyx_f_3P4J_10algorithms_18mutual_information_indexMatrixToVector(__pyx_v_i, __pyx_v_j, __pyx_v_N)]) = (expf((-0.25 * powf((__pyx_v_distance / __pyx_v_h_KDE), 2.0))) / __pyx_v_denominator);
+      (__pyx_v_IP[__pyx_f_3P4J_10algorithms_18mutual_information_indexMatrixToVector(__pyx_v_i, __pyx_v_j, __pyx_v_N)]) = (expf(((-__pyx_v_quarter_float) * powf((__pyx_v_distance / __pyx_v_h_KDE), 2.0))) / __pyx_v_denominator);
     }
   }
 
@@ -2200,7 +2230,7 @@ static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_wrap
   __Pyx_RefNannyFinishContext();
 }
 
-/* "P4J/algorithms/mutual_information.pyx":57
+/* "P4J/algorithms/mutual_information.pyx":60
  * """
  * 
  * cdef inline void IP_wrappedcauchy(DTYPE_t* IP, DTYPE_t* angle, DTYPE_t h_KDE, Py_ssize_t N):             # <<<<<<<<<<<<<<
@@ -2212,6 +2242,8 @@ static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_wrap
   Py_ssize_t __pyx_v_i;
   Py_ssize_t __pyx_v_j;
   __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_rho;
+  __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_one_float;
+  __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_two_float;
   __Pyx_RefNannyDeclarations
   Py_ssize_t __pyx_t_1;
   Py_ssize_t __pyx_t_2;
@@ -2221,20 +2253,38 @@ static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_wrap
   Py_ssize_t __pyx_t_6;
   __Pyx_RefNannySetupContext("IP_wrappedcauchy", 0);
 
-  /* "P4J/algorithms/mutual_information.pyx":59
+  /* "P4J/algorithms/mutual_information.pyx":62
  * cdef inline void IP_wrappedcauchy(DTYPE_t* IP, DTYPE_t* angle, DTYPE_t h_KDE, Py_ssize_t N):
  *     cdef Py_ssize_t i, j
  *     cdef DTYPE_t rho = expf(-h_KDE)             # <<<<<<<<<<<<<<
- *     for i in range(N):
- *         IP[indexMatrixToVector(i, i, N)] = (1.+rho)/(2.*M_PI*(1.-rho))
+ *     cdef DTYPE_t one_float = 1.0
+ *     cdef DTYPE_t two_float = 2.0
  */
   __pyx_v_rho = expf((-__pyx_v_h_KDE));
 
-  /* "P4J/algorithms/mutual_information.pyx":60
+  /* "P4J/algorithms/mutual_information.pyx":63
  *     cdef Py_ssize_t i, j
  *     cdef DTYPE_t rho = expf(-h_KDE)
+ *     cdef DTYPE_t one_float = 1.0             # <<<<<<<<<<<<<<
+ *     cdef DTYPE_t two_float = 2.0
+ *     for i in range(N):
+ */
+  __pyx_v_one_float = 1.0;
+
+  /* "P4J/algorithms/mutual_information.pyx":64
+ *     cdef DTYPE_t rho = expf(-h_KDE)
+ *     cdef DTYPE_t one_float = 1.0
+ *     cdef DTYPE_t two_float = 2.0             # <<<<<<<<<<<<<<
+ *     for i in range(N):
+ *         IP[indexMatrixToVector(i, i, N)] = (one_float+rho)/(two_float*M_PI*(one_float-rho))
+ */
+  __pyx_v_two_float = 2.0;
+
+  /* "P4J/algorithms/mutual_information.pyx":65
+ *     cdef DTYPE_t one_float = 1.0
+ *     cdef DTYPE_t two_float = 2.0
  *     for i in range(N):             # <<<<<<<<<<<<<<
- *         IP[indexMatrixToVector(i, i, N)] = (1.+rho)/(2.*M_PI*(1.-rho))
+ *         IP[indexMatrixToVector(i, i, N)] = (one_float+rho)/(two_float*M_PI*(one_float-rho))
  *         for j in range(i+1, N):
  */
   __pyx_t_1 = __pyx_v_N;
@@ -2242,39 +2292,39 @@ static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_wrap
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/algorithms/mutual_information.pyx":61
- *     cdef DTYPE_t rho = expf(-h_KDE)
+    /* "P4J/algorithms/mutual_information.pyx":66
+ *     cdef DTYPE_t two_float = 2.0
  *     for i in range(N):
- *         IP[indexMatrixToVector(i, i, N)] = (1.+rho)/(2.*M_PI*(1.-rho))             # <<<<<<<<<<<<<<
+ *         IP[indexMatrixToVector(i, i, N)] = (one_float+rho)/(two_float*M_PI*(one_float-rho))             # <<<<<<<<<<<<<<
  *         for j in range(i+1, N):
- *             IP[indexMatrixToVector(i, j, N)] = (1.-rho**2)/(2.*M_PI*(1.+rho**2-2.*rho*cosf(angle[i]-angle[j])))
+ *             IP[indexMatrixToVector(i, j, N)] = (one_float-rho**2)/(
  */
-    (__pyx_v_IP[__pyx_f_3P4J_10algorithms_18mutual_information_indexMatrixToVector(__pyx_v_i, __pyx_v_i, __pyx_v_N)]) = ((1. + __pyx_v_rho) / ((2. * __pyx_v_3P4J_10algorithms_18mutual_information_M_PI) * (1. - __pyx_v_rho)));
+    (__pyx_v_IP[__pyx_f_3P4J_10algorithms_18mutual_information_indexMatrixToVector(__pyx_v_i, __pyx_v_i, __pyx_v_N)]) = ((__pyx_v_one_float + __pyx_v_rho) / ((__pyx_v_two_float * __pyx_v_3P4J_10algorithms_18mutual_information_M_PI) * (__pyx_v_one_float - __pyx_v_rho)));
 
-    /* "P4J/algorithms/mutual_information.pyx":62
+    /* "P4J/algorithms/mutual_information.pyx":67
  *     for i in range(N):
- *         IP[indexMatrixToVector(i, i, N)] = (1.+rho)/(2.*M_PI*(1.-rho))
+ *         IP[indexMatrixToVector(i, i, N)] = (one_float+rho)/(two_float*M_PI*(one_float-rho))
  *         for j in range(i+1, N):             # <<<<<<<<<<<<<<
- *             IP[indexMatrixToVector(i, j, N)] = (1.-rho**2)/(2.*M_PI*(1.+rho**2-2.*rho*cosf(angle[i]-angle[j])))
- * 
+ *             IP[indexMatrixToVector(i, j, N)] = (one_float-rho**2)/(
+ *                 two_float*M_PI*(one_float+rho**2-two_float*rho*cosf(angle[i]-angle[j])))
  */
     __pyx_t_4 = __pyx_v_N;
     __pyx_t_5 = __pyx_t_4;
     for (__pyx_t_6 = (__pyx_v_i + 1); __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
-      /* "P4J/algorithms/mutual_information.pyx":63
- *         IP[indexMatrixToVector(i, i, N)] = (1.+rho)/(2.*M_PI*(1.-rho))
+      /* "P4J/algorithms/mutual_information.pyx":68
+ *         IP[indexMatrixToVector(i, i, N)] = (one_float+rho)/(two_float*M_PI*(one_float-rho))
  *         for j in range(i+1, N):
- *             IP[indexMatrixToVector(i, j, N)] = (1.-rho**2)/(2.*M_PI*(1.+rho**2-2.*rho*cosf(angle[i]-angle[j])))             # <<<<<<<<<<<<<<
+ *             IP[indexMatrixToVector(i, j, N)] = (one_float-rho**2)/(             # <<<<<<<<<<<<<<
+ *                 two_float*M_PI*(one_float+rho**2-two_float*rho*cosf(angle[i]-angle[j])))
  * 
- * cdef inline void IP_gaussian(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] h_data, DTYPE_t h_KDE, Py_ssize_t N):
  */
-      (__pyx_v_IP[__pyx_f_3P4J_10algorithms_18mutual_information_indexMatrixToVector(__pyx_v_i, __pyx_v_j, __pyx_v_N)]) = ((1. - powf(__pyx_v_rho, 2.0)) / ((2. * __pyx_v_3P4J_10algorithms_18mutual_information_M_PI) * ((1. + powf(__pyx_v_rho, 2.0)) - ((2. * __pyx_v_rho) * cosf(((__pyx_v_angle[__pyx_v_i]) - (__pyx_v_angle[__pyx_v_j])))))));
+      (__pyx_v_IP[__pyx_f_3P4J_10algorithms_18mutual_information_indexMatrixToVector(__pyx_v_i, __pyx_v_j, __pyx_v_N)]) = ((__pyx_v_one_float - powf(__pyx_v_rho, 2.0)) / ((__pyx_v_two_float * __pyx_v_3P4J_10algorithms_18mutual_information_M_PI) * ((__pyx_v_one_float + powf(__pyx_v_rho, 2.0)) - ((__pyx_v_two_float * __pyx_v_rho) * cosf(((__pyx_v_angle[__pyx_v_i]) - (__pyx_v_angle[__pyx_v_j])))))));
     }
   }
 
-  /* "P4J/algorithms/mutual_information.pyx":57
+  /* "P4J/algorithms/mutual_information.pyx":60
  * """
  * 
  * cdef inline void IP_wrappedcauchy(DTYPE_t* IP, DTYPE_t* angle, DTYPE_t h_KDE, Py_ssize_t N):             # <<<<<<<<<<<<<<
@@ -2286,17 +2336,20 @@ static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_wrap
   __Pyx_RefNannyFinishContext();
 }
 
-/* "P4J/algorithms/mutual_information.pyx":65
- *             IP[indexMatrixToVector(i, j, N)] = (1.-rho**2)/(2.*M_PI*(1.+rho**2-2.*rho*cosf(angle[i]-angle[j])))
+/* "P4J/algorithms/mutual_information.pyx":71
+ *                 two_float*M_PI*(one_float+rho**2-two_float*rho*cosf(angle[i]-angle[j])))
  * 
  * cdef inline void IP_gaussian(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] h_data, DTYPE_t h_KDE, Py_ssize_t N):             # <<<<<<<<<<<<<<
  *     cdef Py_ssize_t i, j
- *     cdef DTYPE_t gauss_var, delta2, h_KDE2 = 2.0*powf(h_KDE, 2.0)
+ *     cdef DTYPE_t one_float = 1.0
  */
 
 static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_gaussian(__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *__pyx_v_IP, __Pyx_memviewslice __pyx_v_data, __Pyx_memviewslice __pyx_v_h_data, __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_h_KDE, Py_ssize_t __pyx_v_N) {
   Py_ssize_t __pyx_v_i;
   Py_ssize_t __pyx_v_j;
+  __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_one_float;
+  __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_two_float;
+  __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_half_float;
   __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_gauss_var;
   __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_delta2;
   __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_h_KDE2;
@@ -2312,29 +2365,56 @@ static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_gaus
   Py_ssize_t __pyx_t_8;
   __Pyx_RefNannySetupContext("IP_gaussian", 0);
 
-  /* "P4J/algorithms/mutual_information.pyx":67
+  /* "P4J/algorithms/mutual_information.pyx":73
  * cdef inline void IP_gaussian(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] h_data, DTYPE_t h_KDE, Py_ssize_t N):
  *     cdef Py_ssize_t i, j
- *     cdef DTYPE_t gauss_var, delta2, h_KDE2 = 2.0*powf(h_KDE, 2.0)             # <<<<<<<<<<<<<<
+ *     cdef DTYPE_t one_float = 1.0             # <<<<<<<<<<<<<<
+ *     cdef DTYPE_t two_float = 2.0
+ *     cdef DTYPE_t half_float = 0.5
+ */
+  __pyx_v_one_float = 1.0;
+
+  /* "P4J/algorithms/mutual_information.pyx":74
+ *     cdef Py_ssize_t i, j
+ *     cdef DTYPE_t one_float = 1.0
+ *     cdef DTYPE_t two_float = 2.0             # <<<<<<<<<<<<<<
+ *     cdef DTYPE_t half_float = 0.5
+ *     cdef DTYPE_t gauss_var, delta2, h_KDE2 = two_float*powf(h_KDE, two_float)
+ */
+  __pyx_v_two_float = 2.0;
+
+  /* "P4J/algorithms/mutual_information.pyx":75
+ *     cdef DTYPE_t one_float = 1.0
+ *     cdef DTYPE_t two_float = 2.0
+ *     cdef DTYPE_t half_float = 0.5             # <<<<<<<<<<<<<<
+ *     cdef DTYPE_t gauss_var, delta2, h_KDE2 = two_float*powf(h_KDE, two_float)
+ *     cdef DTYPE_t* h_data2 = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))
+ */
+  __pyx_v_half_float = 0.5;
+
+  /* "P4J/algorithms/mutual_information.pyx":76
+ *     cdef DTYPE_t two_float = 2.0
+ *     cdef DTYPE_t half_float = 0.5
+ *     cdef DTYPE_t gauss_var, delta2, h_KDE2 = two_float*powf(h_KDE, two_float)             # <<<<<<<<<<<<<<
  *     cdef DTYPE_t* h_data2 = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))
  *     for i in range(N):
  */
-  __pyx_v_h_KDE2 = (2.0 * powf(__pyx_v_h_KDE, 2.0));
+  __pyx_v_h_KDE2 = (__pyx_v_two_float * powf(__pyx_v_h_KDE, __pyx_v_two_float));
 
-  /* "P4J/algorithms/mutual_information.pyx":68
- *     cdef Py_ssize_t i, j
- *     cdef DTYPE_t gauss_var, delta2, h_KDE2 = 2.0*powf(h_KDE, 2.0)
+  /* "P4J/algorithms/mutual_information.pyx":77
+ *     cdef DTYPE_t half_float = 0.5
+ *     cdef DTYPE_t gauss_var, delta2, h_KDE2 = two_float*powf(h_KDE, two_float)
  *     cdef DTYPE_t* h_data2 = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
  *     for i in range(N):
- *         h_data2[i] = powf(h_data[i], 2.0)
+ *         h_data2[i] = powf(h_data[i], two_float)
  */
   __pyx_v_h_data2 = ((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *)PyMem_Malloc((__pyx_v_N * (sizeof(__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t)))));
 
-  /* "P4J/algorithms/mutual_information.pyx":69
- *     cdef DTYPE_t gauss_var, delta2, h_KDE2 = 2.0*powf(h_KDE, 2.0)
+  /* "P4J/algorithms/mutual_information.pyx":78
+ *     cdef DTYPE_t gauss_var, delta2, h_KDE2 = two_float*powf(h_KDE, two_float)
  *     cdef DTYPE_t* h_data2 = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))
  *     for i in range(N):             # <<<<<<<<<<<<<<
- *         h_data2[i] = powf(h_data[i], 2.0)
+ *         h_data2[i] = powf(h_data[i], two_float)
  *     for i in range(N):
  */
   __pyx_t_1 = __pyx_v_N;
@@ -2342,52 +2422,52 @@ static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_gaus
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/algorithms/mutual_information.pyx":70
+    /* "P4J/algorithms/mutual_information.pyx":79
  *     cdef DTYPE_t* h_data2 = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))
  *     for i in range(N):
- *         h_data2[i] = powf(h_data[i], 2.0)             # <<<<<<<<<<<<<<
+ *         h_data2[i] = powf(h_data[i], two_float)             # <<<<<<<<<<<<<<
  *     for i in range(N):
- *         gauss_var = h_KDE2 + 2.0*h_data2[i]
+ *         gauss_var = h_KDE2 + two_float*h_data2[i]
  */
     __pyx_t_4 = __pyx_v_i;
-    (__pyx_v_h_data2[__pyx_v_i]) = powf((*((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) __pyx_v_h_data.data) + __pyx_t_4)) ))), 2.0);
+    (__pyx_v_h_data2[__pyx_v_i]) = powf((*((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) __pyx_v_h_data.data) + __pyx_t_4)) ))), __pyx_v_two_float);
   }
 
-  /* "P4J/algorithms/mutual_information.pyx":71
+  /* "P4J/algorithms/mutual_information.pyx":80
  *     for i in range(N):
- *         h_data2[i] = powf(h_data[i], 2.0)
+ *         h_data2[i] = powf(h_data[i], two_float)
  *     for i in range(N):             # <<<<<<<<<<<<<<
- *         gauss_var = h_KDE2 + 2.0*h_data2[i]
- *         IP[indexMatrixToVector(i, i, N)] = 1.0/sqrtf(2.0*M_PI*gauss_var)
+ *         gauss_var = h_KDE2 + two_float*h_data2[i]
+ *         IP[indexMatrixToVector(i, i, N)] = one_float/sqrtf(two_float*M_PI*gauss_var)
  */
   __pyx_t_1 = __pyx_v_N;
   __pyx_t_2 = __pyx_t_1;
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/algorithms/mutual_information.pyx":72
- *         h_data2[i] = powf(h_data[i], 2.0)
+    /* "P4J/algorithms/mutual_information.pyx":81
+ *         h_data2[i] = powf(h_data[i], two_float)
  *     for i in range(N):
- *         gauss_var = h_KDE2 + 2.0*h_data2[i]             # <<<<<<<<<<<<<<
- *         IP[indexMatrixToVector(i, i, N)] = 1.0/sqrtf(2.0*M_PI*gauss_var)
+ *         gauss_var = h_KDE2 + two_float*h_data2[i]             # <<<<<<<<<<<<<<
+ *         IP[indexMatrixToVector(i, i, N)] = one_float/sqrtf(two_float*M_PI*gauss_var)
  *         for j in range(i+1, N):
  */
-    __pyx_v_gauss_var = (__pyx_v_h_KDE2 + (2.0 * (__pyx_v_h_data2[__pyx_v_i])));
+    __pyx_v_gauss_var = (__pyx_v_h_KDE2 + (__pyx_v_two_float * (__pyx_v_h_data2[__pyx_v_i])));
 
-    /* "P4J/algorithms/mutual_information.pyx":73
+    /* "P4J/algorithms/mutual_information.pyx":82
  *     for i in range(N):
- *         gauss_var = h_KDE2 + 2.0*h_data2[i]
- *         IP[indexMatrixToVector(i, i, N)] = 1.0/sqrtf(2.0*M_PI*gauss_var)             # <<<<<<<<<<<<<<
+ *         gauss_var = h_KDE2 + two_float*h_data2[i]
+ *         IP[indexMatrixToVector(i, i, N)] = one_float/sqrtf(two_float*M_PI*gauss_var)             # <<<<<<<<<<<<<<
  *         for j in range(i+1, N):
- *             delta2 = powf(data[i] - data[j], 2.0)
+ *             delta2 = powf(data[i] - data[j], two_float)
  */
-    (__pyx_v_IP[__pyx_f_3P4J_10algorithms_18mutual_information_indexMatrixToVector(__pyx_v_i, __pyx_v_i, __pyx_v_N)]) = (1.0 / ((double)sqrtf(((2.0 * __pyx_v_3P4J_10algorithms_18mutual_information_M_PI) * __pyx_v_gauss_var))));
+    (__pyx_v_IP[__pyx_f_3P4J_10algorithms_18mutual_information_indexMatrixToVector(__pyx_v_i, __pyx_v_i, __pyx_v_N)]) = (__pyx_v_one_float / sqrtf(((__pyx_v_two_float * __pyx_v_3P4J_10algorithms_18mutual_information_M_PI) * __pyx_v_gauss_var)));
 
-    /* "P4J/algorithms/mutual_information.pyx":74
- *         gauss_var = h_KDE2 + 2.0*h_data2[i]
- *         IP[indexMatrixToVector(i, i, N)] = 1.0/sqrtf(2.0*M_PI*gauss_var)
+    /* "P4J/algorithms/mutual_information.pyx":83
+ *         gauss_var = h_KDE2 + two_float*h_data2[i]
+ *         IP[indexMatrixToVector(i, i, N)] = one_float/sqrtf(two_float*M_PI*gauss_var)
  *         for j in range(i+1, N):             # <<<<<<<<<<<<<<
- *             delta2 = powf(data[i] - data[j], 2.0)
+ *             delta2 = powf(data[i] - data[j], two_float)
  *             gauss_var = h_KDE2 + h_data2[i] + h_data2[j]
  */
     __pyx_t_5 = __pyx_v_N;
@@ -2395,69 +2475,72 @@ static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_gaus
     for (__pyx_t_7 = (__pyx_v_i + 1); __pyx_t_7 < __pyx_t_6; __pyx_t_7+=1) {
       __pyx_v_j = __pyx_t_7;
 
-      /* "P4J/algorithms/mutual_information.pyx":75
- *         IP[indexMatrixToVector(i, i, N)] = 1.0/sqrtf(2.0*M_PI*gauss_var)
+      /* "P4J/algorithms/mutual_information.pyx":84
+ *         IP[indexMatrixToVector(i, i, N)] = one_float/sqrtf(two_float*M_PI*gauss_var)
  *         for j in range(i+1, N):
- *             delta2 = powf(data[i] - data[j], 2.0)             # <<<<<<<<<<<<<<
+ *             delta2 = powf(data[i] - data[j], two_float)             # <<<<<<<<<<<<<<
  *             gauss_var = h_KDE2 + h_data2[i] + h_data2[j]
- *             IP[indexMatrixToVector(i, j, N)] = expf(-0.5*delta2/gauss_var)/sqrtf(2.0*M_PI*gauss_var)
+ *             IP[indexMatrixToVector(i, j, N)] = expf(
  */
       __pyx_t_4 = __pyx_v_i;
       __pyx_t_8 = __pyx_v_j;
-      __pyx_v_delta2 = powf(((*((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) __pyx_v_data.data) + __pyx_t_4)) ))) - (*((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) __pyx_v_data.data) + __pyx_t_8)) )))), 2.0);
+      __pyx_v_delta2 = powf(((*((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) __pyx_v_data.data) + __pyx_t_4)) ))) - (*((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) __pyx_v_data.data) + __pyx_t_8)) )))), __pyx_v_two_float);
 
-      /* "P4J/algorithms/mutual_information.pyx":76
+      /* "P4J/algorithms/mutual_information.pyx":85
  *         for j in range(i+1, N):
- *             delta2 = powf(data[i] - data[j], 2.0)
+ *             delta2 = powf(data[i] - data[j], two_float)
  *             gauss_var = h_KDE2 + h_data2[i] + h_data2[j]             # <<<<<<<<<<<<<<
- *             IP[indexMatrixToVector(i, j, N)] = expf(-0.5*delta2/gauss_var)/sqrtf(2.0*M_PI*gauss_var)
- *     PyMem_Free(h_data2)
+ *             IP[indexMatrixToVector(i, j, N)] = expf(
+ *                 -half_float*delta2/gauss_var)/sqrtf(two_float*M_PI*gauss_var)
  */
       __pyx_v_gauss_var = ((__pyx_v_h_KDE2 + (__pyx_v_h_data2[__pyx_v_i])) + (__pyx_v_h_data2[__pyx_v_j]));
 
-      /* "P4J/algorithms/mutual_information.pyx":77
- *             delta2 = powf(data[i] - data[j], 2.0)
+      /* "P4J/algorithms/mutual_information.pyx":86
+ *             delta2 = powf(data[i] - data[j], two_float)
  *             gauss_var = h_KDE2 + h_data2[i] + h_data2[j]
- *             IP[indexMatrixToVector(i, j, N)] = expf(-0.5*delta2/gauss_var)/sqrtf(2.0*M_PI*gauss_var)             # <<<<<<<<<<<<<<
+ *             IP[indexMatrixToVector(i, j, N)] = expf(             # <<<<<<<<<<<<<<
+ *                 -half_float*delta2/gauss_var)/sqrtf(two_float*M_PI*gauss_var)
  *     PyMem_Free(h_data2)
- * 
  */
-      (__pyx_v_IP[__pyx_f_3P4J_10algorithms_18mutual_information_indexMatrixToVector(__pyx_v_i, __pyx_v_j, __pyx_v_N)]) = (expf(((-0.5 * __pyx_v_delta2) / ((double)__pyx_v_gauss_var))) / sqrtf(((2.0 * __pyx_v_3P4J_10algorithms_18mutual_information_M_PI) * __pyx_v_gauss_var)));
+      (__pyx_v_IP[__pyx_f_3P4J_10algorithms_18mutual_information_indexMatrixToVector(__pyx_v_i, __pyx_v_j, __pyx_v_N)]) = (expf((((-__pyx_v_half_float) * __pyx_v_delta2) / __pyx_v_gauss_var)) / sqrtf(((__pyx_v_two_float * __pyx_v_3P4J_10algorithms_18mutual_information_M_PI) * __pyx_v_gauss_var)));
     }
   }
 
-  /* "P4J/algorithms/mutual_information.pyx":78
- *             gauss_var = h_KDE2 + h_data2[i] + h_data2[j]
- *             IP[indexMatrixToVector(i, j, N)] = expf(-0.5*delta2/gauss_var)/sqrtf(2.0*M_PI*gauss_var)
+  /* "P4J/algorithms/mutual_information.pyx":88
+ *             IP[indexMatrixToVector(i, j, N)] = expf(
+ *                 -half_float*delta2/gauss_var)/sqrtf(two_float*M_PI*gauss_var)
  *     PyMem_Free(h_data2)             # <<<<<<<<<<<<<<
  * 
  * 
  */
   PyMem_Free(__pyx_v_h_data2);
 
-  /* "P4J/algorithms/mutual_information.pyx":65
- *             IP[indexMatrixToVector(i, j, N)] = (1.-rho**2)/(2.*M_PI*(1.+rho**2-2.*rho*cosf(angle[i]-angle[j])))
+  /* "P4J/algorithms/mutual_information.pyx":71
+ *                 two_float*M_PI*(one_float+rho**2-two_float*rho*cosf(angle[i]-angle[j])))
  * 
  * cdef inline void IP_gaussian(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] h_data, DTYPE_t h_KDE, Py_ssize_t N):             # <<<<<<<<<<<<<<
  *     cdef Py_ssize_t i, j
- *     cdef DTYPE_t gauss_var, delta2, h_KDE2 = 2.0*powf(h_KDE, 2.0)
+ *     cdef DTYPE_t one_float = 1.0
  */
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
 }
 
-/* "P4J/algorithms/mutual_information.pyx":84
+/* "P4J/algorithms/mutual_information.pyx":94
  *  Testing Abramson's weighted KDE:
  * """
  * cdef inline void IP_gaussian2(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] h_data, DTYPE_t h_KDE, Py_ssize_t N):             # <<<<<<<<<<<<<<
  *     cdef Py_ssize_t i, j
- *     cdef DTYPE_t gauss_var, delta2, h_KDE2 = 2.0*powf(h_KDE, 2.0)
+ *     cdef DTYPE_t one_float = 1.0
  */
 
 static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_gaussian2(__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *__pyx_v_IP, __Pyx_memviewslice __pyx_v_data, __Pyx_memviewslice __pyx_v_h_data, __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_h_KDE, Py_ssize_t __pyx_v_N) {
   Py_ssize_t __pyx_v_i;
   Py_ssize_t __pyx_v_j;
+  __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_one_float;
+  __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_two_float;
+  __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_half_float;
   __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_gauss_var;
   __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_delta2;
   __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_h_KDE2;
@@ -2474,38 +2557,65 @@ static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_gaus
   Py_ssize_t __pyx_t_8;
   __Pyx_RefNannySetupContext("IP_gaussian2", 0);
 
-  /* "P4J/algorithms/mutual_information.pyx":86
+  /* "P4J/algorithms/mutual_information.pyx":96
  * cdef inline void IP_gaussian2(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] h_data, DTYPE_t h_KDE, Py_ssize_t N):
  *     cdef Py_ssize_t i, j
- *     cdef DTYPE_t gauss_var, delta2, h_KDE2 = 2.0*powf(h_KDE, 2.0)             # <<<<<<<<<<<<<<
+ *     cdef DTYPE_t one_float = 1.0             # <<<<<<<<<<<<<<
+ *     cdef DTYPE_t two_float = 2.0
+ *     cdef DTYPE_t half_float = 0.5
+ */
+  __pyx_v_one_float = 1.0;
+
+  /* "P4J/algorithms/mutual_information.pyx":97
+ *     cdef Py_ssize_t i, j
+ *     cdef DTYPE_t one_float = 1.0
+ *     cdef DTYPE_t two_float = 2.0             # <<<<<<<<<<<<<<
+ *     cdef DTYPE_t half_float = 0.5
+ *     cdef DTYPE_t gauss_var, delta2, h_KDE2 = two_float*powf(h_KDE, two_float)
+ */
+  __pyx_v_two_float = 2.0;
+
+  /* "P4J/algorithms/mutual_information.pyx":98
+ *     cdef DTYPE_t one_float = 1.0
+ *     cdef DTYPE_t two_float = 2.0
+ *     cdef DTYPE_t half_float = 0.5             # <<<<<<<<<<<<<<
+ *     cdef DTYPE_t gauss_var, delta2, h_KDE2 = two_float*powf(h_KDE, two_float)
+ *     cdef DTYPE_t* w = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))
+ */
+  __pyx_v_half_float = 0.5;
+
+  /* "P4J/algorithms/mutual_information.pyx":99
+ *     cdef DTYPE_t two_float = 2.0
+ *     cdef DTYPE_t half_float = 0.5
+ *     cdef DTYPE_t gauss_var, delta2, h_KDE2 = two_float*powf(h_KDE, two_float)             # <<<<<<<<<<<<<<
  *     cdef DTYPE_t* w = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))
  *     cdef DTYPE_t sum_w = 0.0
  */
-  __pyx_v_h_KDE2 = (2.0 * powf(__pyx_v_h_KDE, 2.0));
+  __pyx_v_h_KDE2 = (__pyx_v_two_float * powf(__pyx_v_h_KDE, __pyx_v_two_float));
 
-  /* "P4J/algorithms/mutual_information.pyx":87
- *     cdef Py_ssize_t i, j
- *     cdef DTYPE_t gauss_var, delta2, h_KDE2 = 2.0*powf(h_KDE, 2.0)
+  /* "P4J/algorithms/mutual_information.pyx":100
+ *     cdef DTYPE_t half_float = 0.5
+ *     cdef DTYPE_t gauss_var, delta2, h_KDE2 = two_float*powf(h_KDE, two_float)
  *     cdef DTYPE_t* w = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
  *     cdef DTYPE_t sum_w = 0.0
  *     for i in range(N):
  */
   __pyx_v_w = ((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *)PyMem_Malloc((__pyx_v_N * (sizeof(__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t)))));
 
-  /* "P4J/algorithms/mutual_information.pyx":88
- *     cdef DTYPE_t gauss_var, delta2, h_KDE2 = 2.0*powf(h_KDE, 2.0)
+  /* "P4J/algorithms/mutual_information.pyx":101
+ *     cdef DTYPE_t gauss_var, delta2, h_KDE2 = two_float*powf(h_KDE, two_float)
  *     cdef DTYPE_t* w = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))
  *     cdef DTYPE_t sum_w = 0.0             # <<<<<<<<<<<<<<
  *     for i in range(N):
- *         w[i] = 1.0/powf(h_data[i], 2.0)
+ *         w[i] = one_float/powf(h_data[i], two_float)
  */
   __pyx_v_sum_w = 0.0;
 
-  /* "P4J/algorithms/mutual_information.pyx":89
+  /* "P4J/algorithms/mutual_information.pyx":102
  *     cdef DTYPE_t* w = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))
  *     cdef DTYPE_t sum_w = 0.0
  *     for i in range(N):             # <<<<<<<<<<<<<<
- *         w[i] = 1.0/powf(h_data[i], 2.0)
+ *         w[i] = one_float/powf(h_data[i], two_float)
  *         sum_w += w[i]
  */
   __pyx_t_1 = __pyx_v_N;
@@ -2513,19 +2623,19 @@ static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_gaus
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/algorithms/mutual_information.pyx":90
+    /* "P4J/algorithms/mutual_information.pyx":103
  *     cdef DTYPE_t sum_w = 0.0
  *     for i in range(N):
- *         w[i] = 1.0/powf(h_data[i], 2.0)             # <<<<<<<<<<<<<<
+ *         w[i] = one_float/powf(h_data[i], two_float)             # <<<<<<<<<<<<<<
  *         sum_w += w[i]
  *     for i in range(N):
  */
     __pyx_t_4 = __pyx_v_i;
-    (__pyx_v_w[__pyx_v_i]) = (1.0 / ((double)powf((*((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) __pyx_v_h_data.data) + __pyx_t_4)) ))), 2.0)));
+    (__pyx_v_w[__pyx_v_i]) = (__pyx_v_one_float / powf((*((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) __pyx_v_h_data.data) + __pyx_t_4)) ))), __pyx_v_two_float));
 
-    /* "P4J/algorithms/mutual_information.pyx":91
+    /* "P4J/algorithms/mutual_information.pyx":104
  *     for i in range(N):
- *         w[i] = 1.0/powf(h_data[i], 2.0)
+ *         w[i] = one_float/powf(h_data[i], two_float)
  *         sum_w += w[i]             # <<<<<<<<<<<<<<
  *     for i in range(N):
  *         w[i] = w[i]/sum_w
@@ -2533,8 +2643,8 @@ static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_gaus
     __pyx_v_sum_w = (__pyx_v_sum_w + (__pyx_v_w[__pyx_v_i]));
   }
 
-  /* "P4J/algorithms/mutual_information.pyx":92
- *         w[i] = 1.0/powf(h_data[i], 2.0)
+  /* "P4J/algorithms/mutual_information.pyx":105
+ *         w[i] = one_float/powf(h_data[i], two_float)
  *         sum_w += w[i]
  *     for i in range(N):             # <<<<<<<<<<<<<<
  *         w[i] = w[i]/sum_w
@@ -2545,7 +2655,7 @@ static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_gaus
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/algorithms/mutual_information.pyx":93
+    /* "P4J/algorithms/mutual_information.pyx":106
  *         sum_w += w[i]
  *     for i in range(N):
  *         w[i] = w[i]/sum_w             # <<<<<<<<<<<<<<
@@ -2555,41 +2665,41 @@ static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_gaus
     (__pyx_v_w[__pyx_v_i]) = ((__pyx_v_w[__pyx_v_i]) / __pyx_v_sum_w);
   }
 
-  /* "P4J/algorithms/mutual_information.pyx":94
+  /* "P4J/algorithms/mutual_information.pyx":107
  *     for i in range(N):
  *         w[i] = w[i]/sum_w
  *     for i in range(N):             # <<<<<<<<<<<<<<
  *         gauss_var = h_KDE2
- *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/sqrtf(2.0*M_PI*gauss_var)
+ *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], two_float)/sqrtf(two_float*M_PI*gauss_var)
  */
   __pyx_t_1 = __pyx_v_N;
   __pyx_t_2 = __pyx_t_1;
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/algorithms/mutual_information.pyx":95
+    /* "P4J/algorithms/mutual_information.pyx":108
  *         w[i] = w[i]/sum_w
  *     for i in range(N):
  *         gauss_var = h_KDE2             # <<<<<<<<<<<<<<
- *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/sqrtf(2.0*M_PI*gauss_var)
+ *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], two_float)/sqrtf(two_float*M_PI*gauss_var)
  *         for j in range(i+1, N):
  */
     __pyx_v_gauss_var = __pyx_v_h_KDE2;
 
-    /* "P4J/algorithms/mutual_information.pyx":96
+    /* "P4J/algorithms/mutual_information.pyx":109
  *     for i in range(N):
  *         gauss_var = h_KDE2
- *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/sqrtf(2.0*M_PI*gauss_var)             # <<<<<<<<<<<<<<
+ *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], two_float)/sqrtf(two_float*M_PI*gauss_var)             # <<<<<<<<<<<<<<
  *         for j in range(i+1, N):
- *             delta2 = powf(data[i] - data[j], 2.0)
+ *             delta2 = powf(data[i] - data[j], two_float)
  */
-    (__pyx_v_IP[__pyx_f_3P4J_10algorithms_18mutual_information_indexMatrixToVector(__pyx_v_i, __pyx_v_i, __pyx_v_N)]) = (powf((__pyx_v_w[__pyx_v_i]), 2.0) / sqrtf(((2.0 * __pyx_v_3P4J_10algorithms_18mutual_information_M_PI) * __pyx_v_gauss_var)));
+    (__pyx_v_IP[__pyx_f_3P4J_10algorithms_18mutual_information_indexMatrixToVector(__pyx_v_i, __pyx_v_i, __pyx_v_N)]) = (powf((__pyx_v_w[__pyx_v_i]), __pyx_v_two_float) / sqrtf(((__pyx_v_two_float * __pyx_v_3P4J_10algorithms_18mutual_information_M_PI) * __pyx_v_gauss_var)));
 
-    /* "P4J/algorithms/mutual_information.pyx":97
+    /* "P4J/algorithms/mutual_information.pyx":110
  *         gauss_var = h_KDE2
- *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/sqrtf(2.0*M_PI*gauss_var)
+ *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], two_float)/sqrtf(two_float*M_PI*gauss_var)
  *         for j in range(i+1, N):             # <<<<<<<<<<<<<<
- *             delta2 = powf(data[i] - data[j], 2.0)
+ *             delta2 = powf(data[i] - data[j], two_float)
  *             gauss_var = h_KDE2
  */
     __pyx_t_5 = __pyx_v_N;
@@ -2597,59 +2707,59 @@ static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_gaus
     for (__pyx_t_7 = (__pyx_v_i + 1); __pyx_t_7 < __pyx_t_6; __pyx_t_7+=1) {
       __pyx_v_j = __pyx_t_7;
 
-      /* "P4J/algorithms/mutual_information.pyx":98
- *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/sqrtf(2.0*M_PI*gauss_var)
+      /* "P4J/algorithms/mutual_information.pyx":111
+ *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], two_float)/sqrtf(two_float*M_PI*gauss_var)
  *         for j in range(i+1, N):
- *             delta2 = powf(data[i] - data[j], 2.0)             # <<<<<<<<<<<<<<
+ *             delta2 = powf(data[i] - data[j], two_float)             # <<<<<<<<<<<<<<
  *             gauss_var = h_KDE2
- *             IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]*expf(-0.5*delta2/gauss_var)/sqrtf(2.0*M_PI*gauss_var)
+ *             IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]*expf(
  */
       __pyx_t_4 = __pyx_v_i;
       __pyx_t_8 = __pyx_v_j;
-      __pyx_v_delta2 = powf(((*((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) __pyx_v_data.data) + __pyx_t_4)) ))) - (*((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) __pyx_v_data.data) + __pyx_t_8)) )))), 2.0);
+      __pyx_v_delta2 = powf(((*((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) __pyx_v_data.data) + __pyx_t_4)) ))) - (*((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) __pyx_v_data.data) + __pyx_t_8)) )))), __pyx_v_two_float);
 
-      /* "P4J/algorithms/mutual_information.pyx":99
+      /* "P4J/algorithms/mutual_information.pyx":112
  *         for j in range(i+1, N):
- *             delta2 = powf(data[i] - data[j], 2.0)
+ *             delta2 = powf(data[i] - data[j], two_float)
  *             gauss_var = h_KDE2             # <<<<<<<<<<<<<<
- *             IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]*expf(-0.5*delta2/gauss_var)/sqrtf(2.0*M_PI*gauss_var)
- *     PyMem_Free(w)
+ *             IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]*expf(
+ *                 -half_float*delta2/gauss_var)/sqrtf(two_float*M_PI*gauss_var)
  */
       __pyx_v_gauss_var = __pyx_v_h_KDE2;
 
-      /* "P4J/algorithms/mutual_information.pyx":100
- *             delta2 = powf(data[i] - data[j], 2.0)
+      /* "P4J/algorithms/mutual_information.pyx":113
+ *             delta2 = powf(data[i] - data[j], two_float)
  *             gauss_var = h_KDE2
- *             IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]*expf(-0.5*delta2/gauss_var)/sqrtf(2.0*M_PI*gauss_var)             # <<<<<<<<<<<<<<
+ *             IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]*expf(             # <<<<<<<<<<<<<<
+ *                 -half_float*delta2/gauss_var)/sqrtf(two_float*M_PI*gauss_var)
  *     PyMem_Free(w)
- * 
  */
-      (__pyx_v_IP[__pyx_f_3P4J_10algorithms_18mutual_information_indexMatrixToVector(__pyx_v_i, __pyx_v_j, __pyx_v_N)]) = ((((__pyx_v_w[__pyx_v_i]) * (__pyx_v_w[__pyx_v_j])) * expf(((-0.5 * __pyx_v_delta2) / ((double)__pyx_v_gauss_var)))) / sqrtf(((2.0 * __pyx_v_3P4J_10algorithms_18mutual_information_M_PI) * __pyx_v_gauss_var)));
+      (__pyx_v_IP[__pyx_f_3P4J_10algorithms_18mutual_information_indexMatrixToVector(__pyx_v_i, __pyx_v_j, __pyx_v_N)]) = ((((__pyx_v_w[__pyx_v_i]) * (__pyx_v_w[__pyx_v_j])) * expf((((-__pyx_v_half_float) * __pyx_v_delta2) / __pyx_v_gauss_var))) / sqrtf(((__pyx_v_two_float * __pyx_v_3P4J_10algorithms_18mutual_information_M_PI) * __pyx_v_gauss_var)));
     }
   }
 
-  /* "P4J/algorithms/mutual_information.pyx":101
- *             gauss_var = h_KDE2
- *             IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]*expf(-0.5*delta2/gauss_var)/sqrtf(2.0*M_PI*gauss_var)
+  /* "P4J/algorithms/mutual_information.pyx":115
+ *             IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]*expf(
+ *                 -half_float*delta2/gauss_var)/sqrtf(two_float*M_PI*gauss_var)
  *     PyMem_Free(w)             # <<<<<<<<<<<<<<
  * 
  * 
  */
   PyMem_Free(__pyx_v_w);
 
-  /* "P4J/algorithms/mutual_information.pyx":84
+  /* "P4J/algorithms/mutual_information.pyx":94
  *  Testing Abramson's weighted KDE:
  * """
  * cdef inline void IP_gaussian2(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] h_data, DTYPE_t h_KDE, Py_ssize_t N):             # <<<<<<<<<<<<<<
  *     cdef Py_ssize_t i, j
- *     cdef DTYPE_t gauss_var, delta2, h_KDE2 = 2.0*powf(h_KDE, 2.0)
+ *     cdef DTYPE_t one_float = 1.0
  */
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
 }
 
-/* "P4J/algorithms/mutual_information.pyx":104
+/* "P4J/algorithms/mutual_information.pyx":118
  * 
  * 
  * cdef inline void IP_cauchy(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] err, DTYPE_t h_KDE, Py_ssize_t N):             # <<<<<<<<<<<<<<
@@ -2663,6 +2773,8 @@ static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_cauc
   __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_delta2;
   __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *__pyx_v_w;
   __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_w_sum;
+  __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_one_float;
+  __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_two_float;
   __Pyx_RefNannyDeclarations
   Py_ssize_t __pyx_t_1;
   Py_ssize_t __pyx_t_2;
@@ -2674,29 +2786,47 @@ static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_cauc
   Py_ssize_t __pyx_t_8;
   __Pyx_RefNannySetupContext("IP_cauchy", 0);
 
-  /* "P4J/algorithms/mutual_information.pyx":107
+  /* "P4J/algorithms/mutual_information.pyx":121
  *     cdef Py_ssize_t i, j
  *     cdef DTYPE_t delta2
  *     cdef DTYPE_t* w = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
  *     cdef DTYPE_t w_sum = 0.0
- *     for i in range(N):
+ *     cdef DTYPE_t one_float = 1.0
  */
   __pyx_v_w = ((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *)PyMem_Malloc((__pyx_v_N * (sizeof(__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t)))));
 
-  /* "P4J/algorithms/mutual_information.pyx":108
+  /* "P4J/algorithms/mutual_information.pyx":122
  *     cdef DTYPE_t delta2
  *     cdef DTYPE_t* w = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))
  *     cdef DTYPE_t w_sum = 0.0             # <<<<<<<<<<<<<<
- *     for i in range(N):
- *         w[i] = 1.0/powf(err[i], 2.0)
+ *     cdef DTYPE_t one_float = 1.0
+ *     cdef DTYPE_t two_float = 2.0
  */
   __pyx_v_w_sum = 0.0;
 
-  /* "P4J/algorithms/mutual_information.pyx":109
+  /* "P4J/algorithms/mutual_information.pyx":123
  *     cdef DTYPE_t* w = <DTYPE_t*>PyMem_Malloc(N*sizeof(DTYPE_t))
  *     cdef DTYPE_t w_sum = 0.0
+ *     cdef DTYPE_t one_float = 1.0             # <<<<<<<<<<<<<<
+ *     cdef DTYPE_t two_float = 2.0
+ *     for i in range(N):
+ */
+  __pyx_v_one_float = 1.0;
+
+  /* "P4J/algorithms/mutual_information.pyx":124
+ *     cdef DTYPE_t w_sum = 0.0
+ *     cdef DTYPE_t one_float = 1.0
+ *     cdef DTYPE_t two_float = 2.0             # <<<<<<<<<<<<<<
+ *     for i in range(N):
+ *         w[i] = one_float/powf(err[i], two_float)
+ */
+  __pyx_v_two_float = 2.0;
+
+  /* "P4J/algorithms/mutual_information.pyx":125
+ *     cdef DTYPE_t one_float = 1.0
+ *     cdef DTYPE_t two_float = 2.0
  *     for i in range(N):             # <<<<<<<<<<<<<<
- *         w[i] = 1.0/powf(err[i], 2.0)
+ *         w[i] = one_float/powf(err[i], two_float)
  *         w_sum += w[i]
  */
   __pyx_t_1 = __pyx_v_N;
@@ -2704,19 +2834,19 @@ static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_cauc
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/algorithms/mutual_information.pyx":110
- *     cdef DTYPE_t w_sum = 0.0
+    /* "P4J/algorithms/mutual_information.pyx":126
+ *     cdef DTYPE_t two_float = 2.0
  *     for i in range(N):
- *         w[i] = 1.0/powf(err[i], 2.0)             # <<<<<<<<<<<<<<
+ *         w[i] = one_float/powf(err[i], two_float)             # <<<<<<<<<<<<<<
  *         w_sum += w[i]
  *     for i in range(N):
  */
     __pyx_t_4 = __pyx_v_i;
-    (__pyx_v_w[__pyx_v_i]) = (1.0 / ((double)powf((*((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) __pyx_v_err.data) + __pyx_t_4)) ))), 2.0)));
+    (__pyx_v_w[__pyx_v_i]) = (__pyx_v_one_float / powf((*((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) __pyx_v_err.data) + __pyx_t_4)) ))), __pyx_v_two_float));
 
-    /* "P4J/algorithms/mutual_information.pyx":111
+    /* "P4J/algorithms/mutual_information.pyx":127
  *     for i in range(N):
- *         w[i] = 1.0/powf(err[i], 2.0)
+ *         w[i] = one_float/powf(err[i], two_float)
  *         w_sum += w[i]             # <<<<<<<<<<<<<<
  *     for i in range(N):
  *         w[i] = w[i]/w_sum
@@ -2724,8 +2854,8 @@ static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_cauc
     __pyx_v_w_sum = (__pyx_v_w_sum + (__pyx_v_w[__pyx_v_i]));
   }
 
-  /* "P4J/algorithms/mutual_information.pyx":112
- *         w[i] = 1.0/powf(err[i], 2.0)
+  /* "P4J/algorithms/mutual_information.pyx":128
+ *         w[i] = one_float/powf(err[i], two_float)
  *         w_sum += w[i]
  *     for i in range(N):             # <<<<<<<<<<<<<<
  *         w[i] = w[i]/w_sum
@@ -2736,21 +2866,21 @@ static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_cauc
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/algorithms/mutual_information.pyx":113
+    /* "P4J/algorithms/mutual_information.pyx":129
  *         w_sum += w[i]
  *     for i in range(N):
  *         w[i] = w[i]/w_sum             # <<<<<<<<<<<<<<
  *     for i in range(N):
- *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/(M_PI*2.0*h_KDE)
+ *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], two_float)/(M_PI*two_float*h_KDE)
  */
     (__pyx_v_w[__pyx_v_i]) = ((__pyx_v_w[__pyx_v_i]) / __pyx_v_w_sum);
   }
 
-  /* "P4J/algorithms/mutual_information.pyx":114
+  /* "P4J/algorithms/mutual_information.pyx":130
  *     for i in range(N):
  *         w[i] = w[i]/w_sum
  *     for i in range(N):             # <<<<<<<<<<<<<<
- *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/(M_PI*2.0*h_KDE)
+ *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], two_float)/(M_PI*two_float*h_KDE)
  *         for j in range(i+1, N):
  */
   __pyx_t_1 = __pyx_v_N;
@@ -2758,59 +2888,59 @@ static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_cauc
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/algorithms/mutual_information.pyx":115
+    /* "P4J/algorithms/mutual_information.pyx":131
  *         w[i] = w[i]/w_sum
  *     for i in range(N):
- *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/(M_PI*2.0*h_KDE)             # <<<<<<<<<<<<<<
+ *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], two_float)/(M_PI*two_float*h_KDE)             # <<<<<<<<<<<<<<
  *         for j in range(i+1, N):
- *             delta2 = powf((data[i] - data[j])/(2.0*h_KDE), 2.0)
+ *             delta2 = powf((data[i] - data[j])/(two_float*h_KDE), two_float)
  */
-    (__pyx_v_IP[__pyx_f_3P4J_10algorithms_18mutual_information_indexMatrixToVector(__pyx_v_i, __pyx_v_i, __pyx_v_N)]) = (((double)powf((__pyx_v_w[__pyx_v_i]), 2.0)) / ((__pyx_v_3P4J_10algorithms_18mutual_information_M_PI * 2.0) * __pyx_v_h_KDE));
+    (__pyx_v_IP[__pyx_f_3P4J_10algorithms_18mutual_information_indexMatrixToVector(__pyx_v_i, __pyx_v_i, __pyx_v_N)]) = (powf((__pyx_v_w[__pyx_v_i]), __pyx_v_two_float) / ((__pyx_v_3P4J_10algorithms_18mutual_information_M_PI * __pyx_v_two_float) * __pyx_v_h_KDE));
 
-    /* "P4J/algorithms/mutual_information.pyx":116
+    /* "P4J/algorithms/mutual_information.pyx":132
  *     for i in range(N):
- *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/(M_PI*2.0*h_KDE)
+ *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], two_float)/(M_PI*two_float*h_KDE)
  *         for j in range(i+1, N):             # <<<<<<<<<<<<<<
- *             delta2 = powf((data[i] - data[j])/(2.0*h_KDE), 2.0)
- *             IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]/(M_PI*2.0*h_KDE*(1.0 + delta2))
+ *             delta2 = powf((data[i] - data[j])/(two_float*h_KDE), two_float)
+ *             IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]/(M_PI*two_float*h_KDE*(one_float + delta2))
  */
     __pyx_t_5 = __pyx_v_N;
     __pyx_t_6 = __pyx_t_5;
     for (__pyx_t_7 = (__pyx_v_i + 1); __pyx_t_7 < __pyx_t_6; __pyx_t_7+=1) {
       __pyx_v_j = __pyx_t_7;
 
-      /* "P4J/algorithms/mutual_information.pyx":117
- *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], 2.0)/(M_PI*2.0*h_KDE)
+      /* "P4J/algorithms/mutual_information.pyx":133
+ *         IP[indexMatrixToVector(i, i, N)] = powf(w[i], two_float)/(M_PI*two_float*h_KDE)
  *         for j in range(i+1, N):
- *             delta2 = powf((data[i] - data[j])/(2.0*h_KDE), 2.0)             # <<<<<<<<<<<<<<
- *             IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]/(M_PI*2.0*h_KDE*(1.0 + delta2))
+ *             delta2 = powf((data[i] - data[j])/(two_float*h_KDE), two_float)             # <<<<<<<<<<<<<<
+ *             IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]/(M_PI*two_float*h_KDE*(one_float + delta2))
  *     PyMem_Free(w)
  */
       __pyx_t_4 = __pyx_v_i;
       __pyx_t_8 = __pyx_v_j;
-      __pyx_v_delta2 = powf((((double)((*((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) __pyx_v_data.data) + __pyx_t_4)) ))) - (*((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) __pyx_v_data.data) + __pyx_t_8)) ))))) / (2.0 * __pyx_v_h_KDE)), 2.0);
+      __pyx_v_delta2 = powf((((*((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) __pyx_v_data.data) + __pyx_t_4)) ))) - (*((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) __pyx_v_data.data) + __pyx_t_8)) )))) / (__pyx_v_two_float * __pyx_v_h_KDE)), __pyx_v_two_float);
 
-      /* "P4J/algorithms/mutual_information.pyx":118
+      /* "P4J/algorithms/mutual_information.pyx":134
  *         for j in range(i+1, N):
- *             delta2 = powf((data[i] - data[j])/(2.0*h_KDE), 2.0)
- *             IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]/(M_PI*2.0*h_KDE*(1.0 + delta2))             # <<<<<<<<<<<<<<
+ *             delta2 = powf((data[i] - data[j])/(two_float*h_KDE), two_float)
+ *             IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]/(M_PI*two_float*h_KDE*(one_float + delta2))             # <<<<<<<<<<<<<<
  *     PyMem_Free(w)
  * 
  */
-      (__pyx_v_IP[__pyx_f_3P4J_10algorithms_18mutual_information_indexMatrixToVector(__pyx_v_i, __pyx_v_j, __pyx_v_N)]) = (((double)((__pyx_v_w[__pyx_v_i]) * (__pyx_v_w[__pyx_v_j]))) / (((__pyx_v_3P4J_10algorithms_18mutual_information_M_PI * 2.0) * __pyx_v_h_KDE) * (1.0 + __pyx_v_delta2)));
+      (__pyx_v_IP[__pyx_f_3P4J_10algorithms_18mutual_information_indexMatrixToVector(__pyx_v_i, __pyx_v_j, __pyx_v_N)]) = (((__pyx_v_w[__pyx_v_i]) * (__pyx_v_w[__pyx_v_j])) / (((__pyx_v_3P4J_10algorithms_18mutual_information_M_PI * __pyx_v_two_float) * __pyx_v_h_KDE) * (__pyx_v_one_float + __pyx_v_delta2)));
     }
   }
 
-  /* "P4J/algorithms/mutual_information.pyx":119
- *             delta2 = powf((data[i] - data[j])/(2.0*h_KDE), 2.0)
- *             IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]/(M_PI*2.0*h_KDE*(1.0 + delta2))
+  /* "P4J/algorithms/mutual_information.pyx":135
+ *             delta2 = powf((data[i] - data[j])/(two_float*h_KDE), two_float)
+ *             IP[indexMatrixToVector(i, j, N)] = w[i]*w[j]/(M_PI*two_float*h_KDE*(one_float + delta2))
  *     PyMem_Free(w)             # <<<<<<<<<<<<<<
  * 
  * cdef inline Py_ssize_t indexMatrixToVector(Py_ssize_t i, Py_ssize_t j, Py_ssize_t N):
  */
   PyMem_Free(__pyx_v_w);
 
-  /* "P4J/algorithms/mutual_information.pyx":104
+  /* "P4J/algorithms/mutual_information.pyx":118
  * 
  * 
  * cdef inline void IP_cauchy(DTYPE_t* IP, DTYPE_t [::1] data, DTYPE_t [::1] err, DTYPE_t h_KDE, Py_ssize_t N):             # <<<<<<<<<<<<<<
@@ -2822,7 +2952,7 @@ static CYTHON_INLINE void __pyx_f_3P4J_10algorithms_18mutual_information_IP_cauc
   __Pyx_RefNannyFinishContext();
 }
 
-/* "P4J/algorithms/mutual_information.pyx":121
+/* "P4J/algorithms/mutual_information.pyx":137
  *     PyMem_Free(w)
  * 
  * cdef inline Py_ssize_t indexMatrixToVector(Py_ssize_t i, Py_ssize_t j, Py_ssize_t N):             # <<<<<<<<<<<<<<
@@ -2835,7 +2965,7 @@ static CYTHON_INLINE Py_ssize_t __pyx_f_3P4J_10algorithms_18mutual_information_i
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("indexMatrixToVector", 0);
 
-  /* "P4J/algorithms/mutual_information.pyx":123
+  /* "P4J/algorithms/mutual_information.pyx":139
  * cdef inline Py_ssize_t indexMatrixToVector(Py_ssize_t i, Py_ssize_t j, Py_ssize_t N):
  *     # Only works for i <= j, which is always the case here
  *     return i*N - (i-1)*i/2 + j - i             # <<<<<<<<<<<<<<
@@ -2845,7 +2975,7 @@ static CYTHON_INLINE Py_ssize_t __pyx_f_3P4J_10algorithms_18mutual_information_i
   __pyx_r = ((((__pyx_v_i * __pyx_v_N) - (((__pyx_v_i - 1) * __pyx_v_i) / 2)) + __pyx_v_j) - __pyx_v_i);
   goto __pyx_L0;
 
-  /* "P4J/algorithms/mutual_information.pyx":121
+  /* "P4J/algorithms/mutual_information.pyx":137
  *     PyMem_Free(w)
  * 
  * cdef inline Py_ssize_t indexMatrixToVector(Py_ssize_t i, Py_ssize_t j, Py_ssize_t N):             # <<<<<<<<<<<<<<
@@ -2859,7 +2989,7 @@ static CYTHON_INLINE Py_ssize_t __pyx_f_3P4J_10algorithms_18mutual_information_i
   return __pyx_r;
 }
 
-/* "P4J/algorithms/mutual_information.pyx":136
+/* "P4J/algorithms/mutual_information.pyx":152
  *     cdef DTYPE_t* mjd
  *     cdef int mode # 0: Cauchy, 1:
  *     def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err, DTYPE_t h_KDE_M, DTYPE_t h_KDE_P, int mode=0, int kernel=0):             # <<<<<<<<<<<<<<
@@ -2916,25 +3046,25 @@ static int __pyx_pw_3P4J_10algorithms_18mutual_information_3QMI_1__init__(PyObje
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_mag)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 0, 5, 7, 1); __PYX_ERR(0, 136, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 0, 5, 7, 1); __PYX_ERR(0, 152, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_err)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 0, 5, 7, 2); __PYX_ERR(0, 136, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 0, 5, 7, 2); __PYX_ERR(0, 152, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_h_KDE_M)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 0, 5, 7, 3); __PYX_ERR(0, 136, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 0, 5, 7, 3); __PYX_ERR(0, 152, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
         if (likely((values[4] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_h_KDE_P)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 0, 5, 7, 4); __PYX_ERR(0, 136, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 0, 5, 7, 4); __PYX_ERR(0, 152, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  5:
@@ -2950,7 +3080,7 @@ static int __pyx_pw_3P4J_10algorithms_18mutual_information_3QMI_1__init__(PyObje
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 136, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 152, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2967,25 +3097,25 @@ static int __pyx_pw_3P4J_10algorithms_18mutual_information_3QMI_1__init__(PyObje
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_mjd = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_mjd.memview)) __PYX_ERR(0, 136, __pyx_L3_error)
-    __pyx_v_mag = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_mag.memview)) __PYX_ERR(0, 136, __pyx_L3_error)
-    __pyx_v_err = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t(values[2], PyBUF_WRITABLE); if (unlikely(!__pyx_v_err.memview)) __PYX_ERR(0, 136, __pyx_L3_error)
-    __pyx_v_h_KDE_M = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_h_KDE_M == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 136, __pyx_L3_error)
-    __pyx_v_h_KDE_P = __pyx_PyFloat_AsFloat(values[4]); if (unlikely((__pyx_v_h_KDE_P == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 136, __pyx_L3_error)
+    __pyx_v_mjd = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_mjd.memview)) __PYX_ERR(0, 152, __pyx_L3_error)
+    __pyx_v_mag = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_mag.memview)) __PYX_ERR(0, 152, __pyx_L3_error)
+    __pyx_v_err = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t(values[2], PyBUF_WRITABLE); if (unlikely(!__pyx_v_err.memview)) __PYX_ERR(0, 152, __pyx_L3_error)
+    __pyx_v_h_KDE_M = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_h_KDE_M == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 152, __pyx_L3_error)
+    __pyx_v_h_KDE_P = __pyx_PyFloat_AsFloat(values[4]); if (unlikely((__pyx_v_h_KDE_P == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 152, __pyx_L3_error)
     if (values[5]) {
-      __pyx_v_mode = __Pyx_PyInt_As_int(values[5]); if (unlikely((__pyx_v_mode == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 136, __pyx_L3_error)
+      __pyx_v_mode = __Pyx_PyInt_As_int(values[5]); if (unlikely((__pyx_v_mode == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 152, __pyx_L3_error)
     } else {
       __pyx_v_mode = ((int)0);
     }
     if (values[6]) {
-      __pyx_v_kernel = __Pyx_PyInt_As_int(values[6]); if (unlikely((__pyx_v_kernel == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 136, __pyx_L3_error)
+      __pyx_v_kernel = __Pyx_PyInt_As_int(values[6]); if (unlikely((__pyx_v_kernel == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 152, __pyx_L3_error)
     } else {
       __pyx_v_kernel = ((int)0);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 0, 5, 7, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 136, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 5, 7, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 152, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("P4J.algorithms.mutual_information.QMI.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3018,7 +3148,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "P4J/algorithms/mutual_information.pyx":138
+  /* "P4J/algorithms/mutual_information.pyx":154
  *     def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err, DTYPE_t h_KDE_M, DTYPE_t h_KDE_P, int mode=0, int kernel=0):
  *         cdef Py_ssize_t i, j, mat_idx
  *         self.mode = mode             # <<<<<<<<<<<<<<
@@ -3027,7 +3157,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
  */
   __pyx_v_self->mode = __pyx_v_mode;
 
-  /* "P4J/algorithms/mutual_information.pyx":139
+  /* "P4J/algorithms/mutual_information.pyx":155
  *         cdef Py_ssize_t i, j, mat_idx
  *         self.mode = mode
  *         self.N = mag.shape[0]             # <<<<<<<<<<<<<<
@@ -3036,7 +3166,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
  */
   __pyx_v_self->N = (__pyx_v_mag.shape[0]);
 
-  /* "P4J/algorithms/mutual_information.pyx":140
+  /* "P4J/algorithms/mutual_information.pyx":156
  *         self.mode = mode
  *         self.N = mag.shape[0]
  *         self.mjd = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
@@ -3045,7 +3175,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
  */
   __pyx_v_self->mjd = ((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t)))));
 
-  /* "P4J/algorithms/mutual_information.pyx":141
+  /* "P4J/algorithms/mutual_information.pyx":157
  *         self.N = mag.shape[0]
  *         self.mjd = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.angle = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
@@ -3054,7 +3184,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
  */
   __pyx_v_self->angle = ((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t)))));
 
-  /* "P4J/algorithms/mutual_information.pyx":142
+  /* "P4J/algorithms/mutual_information.pyx":158
  *         self.mjd = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.angle = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         if not self.mjd:             # <<<<<<<<<<<<<<
@@ -3064,16 +3194,16 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
   __pyx_t_1 = ((!(__pyx_v_self->mjd != 0)) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "P4J/algorithms/mutual_information.pyx":143
+    /* "P4J/algorithms/mutual_information.pyx":159
  *         self.angle = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         if not self.mjd:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  *         if not self.angle:
  *             raise MemoryError()
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 143, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 159, __pyx_L1_error)
 
-    /* "P4J/algorithms/mutual_information.pyx":142
+    /* "P4J/algorithms/mutual_information.pyx":158
  *         self.mjd = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.angle = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         if not self.mjd:             # <<<<<<<<<<<<<<
@@ -3082,7 +3212,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
  */
   }
 
-  /* "P4J/algorithms/mutual_information.pyx":144
+  /* "P4J/algorithms/mutual_information.pyx":160
  *         if not self.mjd:
  *             raise MemoryError()
  *         if not self.angle:             # <<<<<<<<<<<<<<
@@ -3092,16 +3222,16 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
   __pyx_t_1 = ((!(__pyx_v_self->angle != 0)) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "P4J/algorithms/mutual_information.pyx":145
+    /* "P4J/algorithms/mutual_information.pyx":161
  *             raise MemoryError()
  *         if not self.angle:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  *         for i in range(self.N):
  *             self.mjd[i] = mjd[i]
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 145, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 161, __pyx_L1_error)
 
-    /* "P4J/algorithms/mutual_information.pyx":144
+    /* "P4J/algorithms/mutual_information.pyx":160
  *         if not self.mjd:
  *             raise MemoryError()
  *         if not self.angle:             # <<<<<<<<<<<<<<
@@ -3110,7 +3240,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
  */
   }
 
-  /* "P4J/algorithms/mutual_information.pyx":146
+  /* "P4J/algorithms/mutual_information.pyx":162
  *         if not self.angle:
  *             raise MemoryError()
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -3122,7 +3252,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
   for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_i = __pyx_t_4;
 
-    /* "P4J/algorithms/mutual_information.pyx":147
+    /* "P4J/algorithms/mutual_information.pyx":163
  *             raise MemoryError()
  *         for i in range(self.N):
  *             self.mjd[i] = mjd[i]             # <<<<<<<<<<<<<<
@@ -3133,7 +3263,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
     (__pyx_v_self->mjd[__pyx_v_i]) = (*((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *) __pyx_v_mjd.data) + __pyx_t_5)) )));
   }
 
-  /* "P4J/algorithms/mutual_information.pyx":149
+  /* "P4J/algorithms/mutual_information.pyx":165
  *             self.mjd[i] = mjd[i]
  *         #self.h_KDE_P = 0.9*(1.0/sqrtf(12.0))*powf(self.N, -0.2)  # bandwidth considering a uniform distribution in phase
  *         self.h_KDE_P = h_KDE_P             # <<<<<<<<<<<<<<
@@ -3142,7 +3272,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
  */
   __pyx_v_self->h_KDE_P = __pyx_v_h_KDE_P;
 
-  /* "P4J/algorithms/mutual_information.pyx":150
+  /* "P4J/algorithms/mutual_information.pyx":166
  *         #self.h_KDE_P = 0.9*(1.0/sqrtf(12.0))*powf(self.N, -0.2)  # bandwidth considering a uniform distribution in phase
  *         self.h_KDE_P = h_KDE_P
  *         self.IP_M = <DTYPE_t*>PyMem_Malloc(self.N*(self.N+1)/2*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
@@ -3151,7 +3281,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
  */
   __pyx_v_self->IP_M = ((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *)PyMem_Malloc((((__pyx_v_self->N * (__pyx_v_self->N + 1)) / 2) * (sizeof(__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t)))));
 
-  /* "P4J/algorithms/mutual_information.pyx":151
+  /* "P4J/algorithms/mutual_information.pyx":167
  *         self.h_KDE_P = h_KDE_P
  *         self.IP_M = <DTYPE_t*>PyMem_Malloc(self.N*(self.N+1)/2*sizeof(DTYPE_t))
  *         self.IP_P = <DTYPE_t*>PyMem_Malloc(self.N*(self.N+1)/2*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
@@ -3160,7 +3290,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
  */
   __pyx_v_self->IP_P = ((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *)PyMem_Malloc((((__pyx_v_self->N * (__pyx_v_self->N + 1)) / 2) * (sizeof(__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t)))));
 
-  /* "P4J/algorithms/mutual_information.pyx":152
+  /* "P4J/algorithms/mutual_information.pyx":168
  *         self.IP_M = <DTYPE_t*>PyMem_Malloc(self.N*(self.N+1)/2*sizeof(DTYPE_t))
  *         self.IP_P = <DTYPE_t*>PyMem_Malloc(self.N*(self.N+1)/2*sizeof(DTYPE_t))
  *         if not self.IP_M:             # <<<<<<<<<<<<<<
@@ -3170,16 +3300,16 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
   __pyx_t_1 = ((!(__pyx_v_self->IP_M != 0)) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "P4J/algorithms/mutual_information.pyx":153
+    /* "P4J/algorithms/mutual_information.pyx":169
  *         self.IP_P = <DTYPE_t*>PyMem_Malloc(self.N*(self.N+1)/2*sizeof(DTYPE_t))
  *         if not self.IP_M:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  *         if not self.IP_P:
  *             raise MemoryError()
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 153, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 169, __pyx_L1_error)
 
-    /* "P4J/algorithms/mutual_information.pyx":152
+    /* "P4J/algorithms/mutual_information.pyx":168
  *         self.IP_M = <DTYPE_t*>PyMem_Malloc(self.N*(self.N+1)/2*sizeof(DTYPE_t))
  *         self.IP_P = <DTYPE_t*>PyMem_Malloc(self.N*(self.N+1)/2*sizeof(DTYPE_t))
  *         if not self.IP_M:             # <<<<<<<<<<<<<<
@@ -3188,7 +3318,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
  */
   }
 
-  /* "P4J/algorithms/mutual_information.pyx":154
+  /* "P4J/algorithms/mutual_information.pyx":170
  *         if not self.IP_M:
  *             raise MemoryError()
  *         if not self.IP_P:             # <<<<<<<<<<<<<<
@@ -3198,16 +3328,16 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
   __pyx_t_1 = ((!(__pyx_v_self->IP_P != 0)) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "P4J/algorithms/mutual_information.pyx":155
+    /* "P4J/algorithms/mutual_information.pyx":171
  *             raise MemoryError()
  *         if not self.IP_P:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  *         # Fill the IP matrix of the magnitudes
  *         if kernel == 0:
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 155, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 171, __pyx_L1_error)
 
-    /* "P4J/algorithms/mutual_information.pyx":154
+    /* "P4J/algorithms/mutual_information.pyx":170
  *         if not self.IP_M:
  *             raise MemoryError()
  *         if not self.IP_P:             # <<<<<<<<<<<<<<
@@ -3216,7 +3346,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
  */
   }
 
-  /* "P4J/algorithms/mutual_information.pyx":157
+  /* "P4J/algorithms/mutual_information.pyx":173
  *             raise MemoryError()
  *         # Fill the IP matrix of the magnitudes
  *         if kernel == 0:             # <<<<<<<<<<<<<<
@@ -3226,7 +3356,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
   switch (__pyx_v_kernel) {
     case 0:
 
-    /* "P4J/algorithms/mutual_information.pyx":158
+    /* "P4J/algorithms/mutual_information.pyx":174
  *         # Fill the IP matrix of the magnitudes
  *         if kernel == 0:
  *             IP_gaussian(self.IP_M, mag, err, h_KDE_M, self.N)             # <<<<<<<<<<<<<<
@@ -3235,7 +3365,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
  */
     __pyx_f_3P4J_10algorithms_18mutual_information_IP_gaussian(__pyx_v_self->IP_M, __pyx_v_mag, __pyx_v_err, __pyx_v_h_KDE_M, __pyx_v_self->N);
 
-    /* "P4J/algorithms/mutual_information.pyx":157
+    /* "P4J/algorithms/mutual_information.pyx":173
  *             raise MemoryError()
  *         # Fill the IP matrix of the magnitudes
  *         if kernel == 0:             # <<<<<<<<<<<<<<
@@ -3245,7 +3375,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
     break;
     case 1:
 
-    /* "P4J/algorithms/mutual_information.pyx":160
+    /* "P4J/algorithms/mutual_information.pyx":176
  *             IP_gaussian(self.IP_M, mag, err, h_KDE_M, self.N)
  *         elif kernel == 1:
  *             IP_cauchy(self.IP_M, mag, err, h_KDE_M, self.N)             # <<<<<<<<<<<<<<
@@ -3254,7 +3384,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
  */
     __pyx_f_3P4J_10algorithms_18mutual_information_IP_cauchy(__pyx_v_self->IP_M, __pyx_v_mag, __pyx_v_err, __pyx_v_h_KDE_M, __pyx_v_self->N);
 
-    /* "P4J/algorithms/mutual_information.pyx":159
+    /* "P4J/algorithms/mutual_information.pyx":175
  *         if kernel == 0:
  *             IP_gaussian(self.IP_M, mag, err, h_KDE_M, self.N)
  *         elif kernel == 1:             # <<<<<<<<<<<<<<
@@ -3264,7 +3394,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
     break;
     case 2:
 
-    /* "P4J/algorithms/mutual_information.pyx":162
+    /* "P4J/algorithms/mutual_information.pyx":178
  *             IP_cauchy(self.IP_M, mag, err, h_KDE_M, self.N)
  *         elif kernel == 2:
  *             IP_gaussian2(self.IP_M, mag, err, h_KDE_M, self.N)             # <<<<<<<<<<<<<<
@@ -3273,7 +3403,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
  */
     __pyx_f_3P4J_10algorithms_18mutual_information_IP_gaussian2(__pyx_v_self->IP_M, __pyx_v_mag, __pyx_v_err, __pyx_v_h_KDE_M, __pyx_v_self->N);
 
-    /* "P4J/algorithms/mutual_information.pyx":161
+    /* "P4J/algorithms/mutual_information.pyx":177
  *         elif kernel == 1:
  *             IP_cauchy(self.IP_M, mag, err, h_KDE_M, self.N)
  *         elif kernel == 2:             # <<<<<<<<<<<<<<
@@ -3284,7 +3414,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
     default: break;
   }
 
-  /* "P4J/algorithms/mutual_information.pyx":164
+  /* "P4J/algorithms/mutual_information.pyx":180
  *             IP_gaussian2(self.IP_M, mag, err, h_KDE_M, self.N)
  * 
  *         self.VC1 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
@@ -3293,7 +3423,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
  */
   __pyx_v_self->VC1 = ((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t)))));
 
-  /* "P4J/algorithms/mutual_information.pyx":165
+  /* "P4J/algorithms/mutual_information.pyx":181
  * 
  *         self.VC1 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.VC2 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))             # <<<<<<<<<<<<<<
@@ -3302,7 +3432,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
  */
   __pyx_v_self->VC2 = ((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t *)PyMem_Malloc((__pyx_v_self->N * (sizeof(__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t)))));
 
-  /* "P4J/algorithms/mutual_information.pyx":166
+  /* "P4J/algorithms/mutual_information.pyx":182
  *         self.VC1 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.VC2 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         if not self.VC1:             # <<<<<<<<<<<<<<
@@ -3312,16 +3442,16 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
   __pyx_t_1 = ((!(__pyx_v_self->VC1 != 0)) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "P4J/algorithms/mutual_information.pyx":167
+    /* "P4J/algorithms/mutual_information.pyx":183
  *         self.VC2 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         if not self.VC1:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  *         if not self.VC2:
  *             raise MemoryError()
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 167, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 183, __pyx_L1_error)
 
-    /* "P4J/algorithms/mutual_information.pyx":166
+    /* "P4J/algorithms/mutual_information.pyx":182
  *         self.VC1 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         self.VC2 = <DTYPE_t*>PyMem_Malloc(self.N*sizeof(DTYPE_t))
  *         if not self.VC1:             # <<<<<<<<<<<<<<
@@ -3330,7 +3460,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
  */
   }
 
-  /* "P4J/algorithms/mutual_information.pyx":168
+  /* "P4J/algorithms/mutual_information.pyx":184
  *         if not self.VC1:
  *             raise MemoryError()
  *         if not self.VC2:             # <<<<<<<<<<<<<<
@@ -3340,16 +3470,16 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
   __pyx_t_1 = ((!(__pyx_v_self->VC2 != 0)) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "P4J/algorithms/mutual_information.pyx":169
+    /* "P4J/algorithms/mutual_information.pyx":185
  *             raise MemoryError()
  *         if not self.VC2:
  *             raise MemoryError()             # <<<<<<<<<<<<<<
  * 
  *         # Precompute terms related to the magnitudes
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 169, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 185, __pyx_L1_error)
 
-    /* "P4J/algorithms/mutual_information.pyx":168
+    /* "P4J/algorithms/mutual_information.pyx":184
  *         if not self.VC1:
  *             raise MemoryError()
  *         if not self.VC2:             # <<<<<<<<<<<<<<
@@ -3358,7 +3488,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
  */
   }
 
-  /* "P4J/algorithms/mutual_information.pyx":172
+  /* "P4J/algorithms/mutual_information.pyx":188
  * 
  *         # Precompute terms related to the magnitudes
  *         self.VM1 = 0.0             # <<<<<<<<<<<<<<
@@ -3367,7 +3497,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
  */
   __pyx_v_self->VM1 = 0.0;
 
-  /* "P4J/algorithms/mutual_information.pyx":173
+  /* "P4J/algorithms/mutual_information.pyx":189
  *         # Precompute terms related to the magnitudes
  *         self.VM1 = 0.0
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -3379,7 +3509,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
   for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_i = __pyx_t_4;
 
-    /* "P4J/algorithms/mutual_information.pyx":174
+    /* "P4J/algorithms/mutual_information.pyx":190
  *         self.VM1 = 0.0
  *         for i in range(self.N):
  *             self.VC1[i] = 0.0             # <<<<<<<<<<<<<<
@@ -3389,7 +3519,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
     (__pyx_v_self->VC1[__pyx_v_i]) = 0.0;
   }
 
-  /* "P4J/algorithms/mutual_information.pyx":175
+  /* "P4J/algorithms/mutual_information.pyx":191
  *         for i in range(self.N):
  *             self.VC1[i] = 0.0
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -3401,7 +3531,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
   for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_i = __pyx_t_4;
 
-    /* "P4J/algorithms/mutual_information.pyx":176
+    /* "P4J/algorithms/mutual_information.pyx":192
  *             self.VC1[i] = 0.0
  *         for i in range(self.N):
  *             mat_idx = indexMatrixToVector(i, i, self.N)             # <<<<<<<<<<<<<<
@@ -3410,7 +3540,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
  */
     __pyx_v_mat_idx = __pyx_f_3P4J_10algorithms_18mutual_information_indexMatrixToVector(__pyx_v_i, __pyx_v_i, __pyx_v_self->N);
 
-    /* "P4J/algorithms/mutual_information.pyx":177
+    /* "P4J/algorithms/mutual_information.pyx":193
  *         for i in range(self.N):
  *             mat_idx = indexMatrixToVector(i, i, self.N)
  *             self.VC1[i] += self.IP_M[mat_idx]             # <<<<<<<<<<<<<<
@@ -3420,7 +3550,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
     __pyx_t_6 = __pyx_v_i;
     (__pyx_v_self->VC1[__pyx_t_6]) = ((__pyx_v_self->VC1[__pyx_t_6]) + (__pyx_v_self->IP_M[__pyx_v_mat_idx]));
 
-    /* "P4J/algorithms/mutual_information.pyx":178
+    /* "P4J/algorithms/mutual_information.pyx":194
  *             mat_idx = indexMatrixToVector(i, i, self.N)
  *             self.VC1[i] += self.IP_M[mat_idx]
  *             self.VM1 += self.IP_M[mat_idx]             # <<<<<<<<<<<<<<
@@ -3429,7 +3559,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
  */
     __pyx_v_self->VM1 = (__pyx_v_self->VM1 + (__pyx_v_self->IP_M[__pyx_v_mat_idx]));
 
-    /* "P4J/algorithms/mutual_information.pyx":179
+    /* "P4J/algorithms/mutual_information.pyx":195
  *             self.VC1[i] += self.IP_M[mat_idx]
  *             self.VM1 += self.IP_M[mat_idx]
  *             for j in range(i+1, self.N):             # <<<<<<<<<<<<<<
@@ -3441,7 +3571,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
     for (__pyx_t_8 = (__pyx_v_i + 1); __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
       __pyx_v_j = __pyx_t_8;
 
-      /* "P4J/algorithms/mutual_information.pyx":180
+      /* "P4J/algorithms/mutual_information.pyx":196
  *             self.VM1 += self.IP_M[mat_idx]
  *             for j in range(i+1, self.N):
  *                 mat_idx = indexMatrixToVector(i, j, self.N)             # <<<<<<<<<<<<<<
@@ -3450,7 +3580,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
  */
       __pyx_v_mat_idx = __pyx_f_3P4J_10algorithms_18mutual_information_indexMatrixToVector(__pyx_v_i, __pyx_v_j, __pyx_v_self->N);
 
-      /* "P4J/algorithms/mutual_information.pyx":181
+      /* "P4J/algorithms/mutual_information.pyx":197
  *             for j in range(i+1, self.N):
  *                 mat_idx = indexMatrixToVector(i, j, self.N)
  *                 self.VC1[i] += self.IP_M[mat_idx]             # <<<<<<<<<<<<<<
@@ -3460,7 +3590,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
       __pyx_t_9 = __pyx_v_i;
       (__pyx_v_self->VC1[__pyx_t_9]) = ((__pyx_v_self->VC1[__pyx_t_9]) + (__pyx_v_self->IP_M[__pyx_v_mat_idx]));
 
-      /* "P4J/algorithms/mutual_information.pyx":182
+      /* "P4J/algorithms/mutual_information.pyx":198
  *                 mat_idx = indexMatrixToVector(i, j, self.N)
  *                 self.VC1[i] += self.IP_M[mat_idx]
  *                 self.VC1[j] += self.IP_M[mat_idx]             # <<<<<<<<<<<<<<
@@ -3470,7 +3600,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
       __pyx_t_9 = __pyx_v_j;
       (__pyx_v_self->VC1[__pyx_t_9]) = ((__pyx_v_self->VC1[__pyx_t_9]) + (__pyx_v_self->IP_M[__pyx_v_mat_idx]));
 
-      /* "P4J/algorithms/mutual_information.pyx":183
+      /* "P4J/algorithms/mutual_information.pyx":199
  *                 self.VC1[i] += self.IP_M[mat_idx]
  *                 self.VC1[j] += self.IP_M[mat_idx]
  *                 self.VM1 += 2.0*self.IP_M[mat_idx]             # <<<<<<<<<<<<<<
@@ -3481,7 +3611,7 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
     }
   }
 
-  /* "P4J/algorithms/mutual_information.pyx":136
+  /* "P4J/algorithms/mutual_information.pyx":152
  *     cdef DTYPE_t* mjd
  *     cdef int mode # 0: Cauchy, 1:
  *     def __init__(self, DTYPE_t [::1] mjd, DTYPE_t [::1] mag, DTYPE_t [::1] err, DTYPE_t h_KDE_M, DTYPE_t h_KDE_P, int mode=0, int kernel=0):             # <<<<<<<<<<<<<<
@@ -3503,12 +3633,12 @@ static int __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI___init__(struct 
   return __pyx_r;
 }
 
-/* "P4J/algorithms/mutual_information.pyx":185
+/* "P4J/algorithms/mutual_information.pyx":201
  *                 self.VM1 += 2.0*self.IP_M[mat_idx]
  * 
  *     def eval_frequency(self, DTYPE_t freq):             # <<<<<<<<<<<<<<
  *         cdef Py_ssize_t i, j
- *         for i in range(self.N):
+ *         cdef DTYPE_t one_float = 1.0
  */
 
 /* Python wrapper */
@@ -3522,7 +3652,7 @@ static PyObject *__pyx_pw_3P4J_10algorithms_18mutual_information_3QMI_3eval_freq
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("eval_frequency (wrapper)", 0);
   assert(__pyx_arg_freq); {
-    __pyx_v_freq = __pyx_PyFloat_AsFloat(__pyx_arg_freq); if (unlikely((__pyx_v_freq == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 185, __pyx_L3_error)
+    __pyx_v_freq = __pyx_PyFloat_AsFloat(__pyx_arg_freq); if (unlikely((__pyx_v_freq == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 201, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3540,6 +3670,8 @@ static PyObject *__pyx_pw_3P4J_10algorithms_18mutual_information_3QMI_3eval_freq
 static PyObject *__pyx_pf_3P4J_10algorithms_18mutual_information_3QMI_2eval_frequency(struct __pyx_obj_3P4J_10algorithms_18mutual_information_QMI *__pyx_v_self, __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_freq) {
   Py_ssize_t __pyx_v_i;
   Py_ssize_t __pyx_v_j;
+  __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_one_float;
+  __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_two_float;
   Py_ssize_t __pyx_v_mat_idx;
   CYTHON_UNUSED __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_VM1;
   __pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t __pyx_v_VM2;
@@ -3560,11 +3692,29 @@ static PyObject *__pyx_pf_3P4J_10algorithms_18mutual_information_3QMI_2eval_freq
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("eval_frequency", 0);
 
-  /* "P4J/algorithms/mutual_information.pyx":187
+  /* "P4J/algorithms/mutual_information.pyx":203
  *     def eval_frequency(self, DTYPE_t freq):
  *         cdef Py_ssize_t i, j
+ *         cdef DTYPE_t one_float = 1.0             # <<<<<<<<<<<<<<
+ *         cdef DTYPE_t two_float = 2.0
+ *         for i in range(self.N):
+ */
+  __pyx_v_one_float = 1.0;
+
+  /* "P4J/algorithms/mutual_information.pyx":204
+ *         cdef Py_ssize_t i, j
+ *         cdef DTYPE_t one_float = 1.0
+ *         cdef DTYPE_t two_float = 2.0             # <<<<<<<<<<<<<<
+ *         for i in range(self.N):
+ *             self.angle[i] = two_float*M_PI*fmodf(self.mjd[i], one_float/freq)*freq # output in [0.0, 2.0*pi]
+ */
+  __pyx_v_two_float = 2.0;
+
+  /* "P4J/algorithms/mutual_information.pyx":205
+ *         cdef DTYPE_t one_float = 1.0
+ *         cdef DTYPE_t two_float = 2.0
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
- *             self.angle[i] = 2.0*M_PI*fmodf(self.mjd[i], 1.0/freq)*freq # output in [0.0, 2.0*pi]
+ *             self.angle[i] = two_float*M_PI*fmodf(self.mjd[i], one_float/freq)*freq # output in [0.0, 2.0*pi]
  * #        IP_wrappednormal(self.IP_P, self.angle, self.h_KDE_P, self.N)
  */
   __pyx_t_1 = __pyx_v_self->N;
@@ -3572,18 +3722,18 @@ static PyObject *__pyx_pf_3P4J_10algorithms_18mutual_information_3QMI_2eval_freq
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/algorithms/mutual_information.pyx":188
- *         cdef Py_ssize_t i, j
+    /* "P4J/algorithms/mutual_information.pyx":206
+ *         cdef DTYPE_t two_float = 2.0
  *         for i in range(self.N):
- *             self.angle[i] = 2.0*M_PI*fmodf(self.mjd[i], 1.0/freq)*freq # output in [0.0, 2.0*pi]             # <<<<<<<<<<<<<<
+ *             self.angle[i] = two_float*M_PI*fmodf(self.mjd[i], one_float/freq)*freq # output in [0.0, 2.0*pi]             # <<<<<<<<<<<<<<
  * #        IP_wrappednormal(self.IP_P, self.angle, self.h_KDE_P, self.N)
  *         IP_wrappedcauchy(self.IP_P, self.angle, self.h_KDE_P, self.N)
  */
-    (__pyx_v_self->angle[__pyx_v_i]) = (((2.0 * __pyx_v_3P4J_10algorithms_18mutual_information_M_PI) * fmodf((__pyx_v_self->mjd[__pyx_v_i]), (1.0 / ((double)__pyx_v_freq)))) * __pyx_v_freq);
+    (__pyx_v_self->angle[__pyx_v_i]) = (((__pyx_v_two_float * __pyx_v_3P4J_10algorithms_18mutual_information_M_PI) * fmodf((__pyx_v_self->mjd[__pyx_v_i]), (__pyx_v_one_float / __pyx_v_freq))) * __pyx_v_freq);
   }
 
-  /* "P4J/algorithms/mutual_information.pyx":190
- *             self.angle[i] = 2.0*M_PI*fmodf(self.mjd[i], 1.0/freq)*freq # output in [0.0, 2.0*pi]
+  /* "P4J/algorithms/mutual_information.pyx":208
+ *             self.angle[i] = two_float*M_PI*fmodf(self.mjd[i], one_float/freq)*freq # output in [0.0, 2.0*pi]
  * #        IP_wrappednormal(self.IP_P, self.angle, self.h_KDE_P, self.N)
  *         IP_wrappedcauchy(self.IP_P, self.angle, self.h_KDE_P, self.N)             # <<<<<<<<<<<<<<
  *         cdef Py_ssize_t mat_idx
@@ -3591,7 +3741,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_18mutual_information_3QMI_2eval_freq
  */
   __pyx_f_3P4J_10algorithms_18mutual_information_IP_wrappedcauchy(__pyx_v_self->IP_P, __pyx_v_self->angle, __pyx_v_self->h_KDE_P, __pyx_v_self->N);
 
-  /* "P4J/algorithms/mutual_information.pyx":192
+  /* "P4J/algorithms/mutual_information.pyx":210
  *         IP_wrappedcauchy(self.IP_P, self.angle, self.h_KDE_P, self.N)
  *         cdef Py_ssize_t mat_idx
  *         cdef DTYPE_t VM1=0.0, VM2=0.0, VC=0.0, VJ=0.0             # <<<<<<<<<<<<<<
@@ -3603,7 +3753,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_18mutual_information_3QMI_2eval_freq
   __pyx_v_VC = 0.0;
   __pyx_v_VJ = 0.0;
 
-  /* "P4J/algorithms/mutual_information.pyx":193
+  /* "P4J/algorithms/mutual_information.pyx":211
  *         cdef Py_ssize_t mat_idx
  *         cdef DTYPE_t VM1=0.0, VM2=0.0, VC=0.0, VJ=0.0
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -3615,7 +3765,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_18mutual_information_3QMI_2eval_freq
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/algorithms/mutual_information.pyx":194
+    /* "P4J/algorithms/mutual_information.pyx":212
  *         cdef DTYPE_t VM1=0.0, VM2=0.0, VC=0.0, VJ=0.0
  *         for i in range(self.N):
  *             self.VC2[i] = 0.0             # <<<<<<<<<<<<<<
@@ -3625,7 +3775,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_18mutual_information_3QMI_2eval_freq
     (__pyx_v_self->VC2[__pyx_v_i]) = 0.0;
   }
 
-  /* "P4J/algorithms/mutual_information.pyx":195
+  /* "P4J/algorithms/mutual_information.pyx":213
  *         for i in range(self.N):
  *             self.VC2[i] = 0.0
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -3637,7 +3787,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_18mutual_information_3QMI_2eval_freq
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/algorithms/mutual_information.pyx":196
+    /* "P4J/algorithms/mutual_information.pyx":214
  *             self.VC2[i] = 0.0
  *         for i in range(self.N):
  *             mat_idx = indexMatrixToVector(i, i, self.N)             # <<<<<<<<<<<<<<
@@ -3646,7 +3796,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_18mutual_information_3QMI_2eval_freq
  */
     __pyx_v_mat_idx = __pyx_f_3P4J_10algorithms_18mutual_information_indexMatrixToVector(__pyx_v_i, __pyx_v_i, __pyx_v_self->N);
 
-    /* "P4J/algorithms/mutual_information.pyx":197
+    /* "P4J/algorithms/mutual_information.pyx":215
  *         for i in range(self.N):
  *             mat_idx = indexMatrixToVector(i, i, self.N)
  *             self.VC2[i] += self.IP_P[mat_idx]             # <<<<<<<<<<<<<<
@@ -3656,7 +3806,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_18mutual_information_3QMI_2eval_freq
     __pyx_t_4 = __pyx_v_i;
     (__pyx_v_self->VC2[__pyx_t_4]) = ((__pyx_v_self->VC2[__pyx_t_4]) + (__pyx_v_self->IP_P[__pyx_v_mat_idx]));
 
-    /* "P4J/algorithms/mutual_information.pyx":198
+    /* "P4J/algorithms/mutual_information.pyx":216
  *             mat_idx = indexMatrixToVector(i, i, self.N)
  *             self.VC2[i] += self.IP_P[mat_idx]
  *             VM2 += self.IP_P[mat_idx]             # <<<<<<<<<<<<<<
@@ -3665,7 +3815,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_18mutual_information_3QMI_2eval_freq
  */
     __pyx_v_VM2 = (__pyx_v_VM2 + (__pyx_v_self->IP_P[__pyx_v_mat_idx]));
 
-    /* "P4J/algorithms/mutual_information.pyx":199
+    /* "P4J/algorithms/mutual_information.pyx":217
  *             self.VC2[i] += self.IP_P[mat_idx]
  *             VM2 += self.IP_P[mat_idx]
  *             VJ += self.IP_M[mat_idx]*self.IP_P[mat_idx]             # <<<<<<<<<<<<<<
@@ -3674,70 +3824,70 @@ static PyObject *__pyx_pf_3P4J_10algorithms_18mutual_information_3QMI_2eval_freq
  */
     __pyx_v_VJ = (__pyx_v_VJ + ((__pyx_v_self->IP_M[__pyx_v_mat_idx]) * (__pyx_v_self->IP_P[__pyx_v_mat_idx])));
 
-    /* "P4J/algorithms/mutual_information.pyx":200
+    /* "P4J/algorithms/mutual_information.pyx":218
  *             VM2 += self.IP_P[mat_idx]
  *             VJ += self.IP_M[mat_idx]*self.IP_P[mat_idx]
  *             for j in range(i+1, self.N):             # <<<<<<<<<<<<<<
  *                 mat_idx = indexMatrixToVector(i, j, self.N)
- *                 VM2 += 2.0*self.IP_P[mat_idx]
+ *                 VM2 += two_float*self.IP_P[mat_idx]
  */
     __pyx_t_4 = __pyx_v_self->N;
     __pyx_t_5 = __pyx_t_4;
     for (__pyx_t_6 = (__pyx_v_i + 1); __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
-      /* "P4J/algorithms/mutual_information.pyx":201
+      /* "P4J/algorithms/mutual_information.pyx":219
  *             VJ += self.IP_M[mat_idx]*self.IP_P[mat_idx]
  *             for j in range(i+1, self.N):
  *                 mat_idx = indexMatrixToVector(i, j, self.N)             # <<<<<<<<<<<<<<
- *                 VM2 += 2.0*self.IP_P[mat_idx]
+ *                 VM2 += two_float*self.IP_P[mat_idx]
  *                 self.VC2[j] += self.IP_P[mat_idx]
  */
       __pyx_v_mat_idx = __pyx_f_3P4J_10algorithms_18mutual_information_indexMatrixToVector(__pyx_v_i, __pyx_v_j, __pyx_v_self->N);
 
-      /* "P4J/algorithms/mutual_information.pyx":202
+      /* "P4J/algorithms/mutual_information.pyx":220
  *             for j in range(i+1, self.N):
  *                 mat_idx = indexMatrixToVector(i, j, self.N)
- *                 VM2 += 2.0*self.IP_P[mat_idx]             # <<<<<<<<<<<<<<
+ *                 VM2 += two_float*self.IP_P[mat_idx]             # <<<<<<<<<<<<<<
  *                 self.VC2[j] += self.IP_P[mat_idx]
  *                 self.VC2[i] += self.IP_P[mat_idx]
  */
-      __pyx_v_VM2 = (__pyx_v_VM2 + (2.0 * (__pyx_v_self->IP_P[__pyx_v_mat_idx])));
+      __pyx_v_VM2 = (__pyx_v_VM2 + (__pyx_v_two_float * (__pyx_v_self->IP_P[__pyx_v_mat_idx])));
 
-      /* "P4J/algorithms/mutual_information.pyx":203
+      /* "P4J/algorithms/mutual_information.pyx":221
  *                 mat_idx = indexMatrixToVector(i, j, self.N)
- *                 VM2 += 2.0*self.IP_P[mat_idx]
+ *                 VM2 += two_float*self.IP_P[mat_idx]
  *                 self.VC2[j] += self.IP_P[mat_idx]             # <<<<<<<<<<<<<<
  *                 self.VC2[i] += self.IP_P[mat_idx]
- *                 VJ += 2.0*self.IP_M[mat_idx]*self.IP_P[mat_idx]
+ *                 VJ += two_float*self.IP_M[mat_idx]*self.IP_P[mat_idx]
  */
       __pyx_t_7 = __pyx_v_j;
       (__pyx_v_self->VC2[__pyx_t_7]) = ((__pyx_v_self->VC2[__pyx_t_7]) + (__pyx_v_self->IP_P[__pyx_v_mat_idx]));
 
-      /* "P4J/algorithms/mutual_information.pyx":204
- *                 VM2 += 2.0*self.IP_P[mat_idx]
+      /* "P4J/algorithms/mutual_information.pyx":222
+ *                 VM2 += two_float*self.IP_P[mat_idx]
  *                 self.VC2[j] += self.IP_P[mat_idx]
  *                 self.VC2[i] += self.IP_P[mat_idx]             # <<<<<<<<<<<<<<
- *                 VJ += 2.0*self.IP_M[mat_idx]*self.IP_P[mat_idx]
+ *                 VJ += two_float*self.IP_M[mat_idx]*self.IP_P[mat_idx]
  *         for i in range(self.N):
  */
       __pyx_t_7 = __pyx_v_i;
       (__pyx_v_self->VC2[__pyx_t_7]) = ((__pyx_v_self->VC2[__pyx_t_7]) + (__pyx_v_self->IP_P[__pyx_v_mat_idx]));
 
-      /* "P4J/algorithms/mutual_information.pyx":205
+      /* "P4J/algorithms/mutual_information.pyx":223
  *                 self.VC2[j] += self.IP_P[mat_idx]
  *                 self.VC2[i] += self.IP_P[mat_idx]
- *                 VJ += 2.0*self.IP_M[mat_idx]*self.IP_P[mat_idx]             # <<<<<<<<<<<<<<
+ *                 VJ += two_float*self.IP_M[mat_idx]*self.IP_P[mat_idx]             # <<<<<<<<<<<<<<
  *         for i in range(self.N):
  *             VC += self.VC1[i]*self.VC2[i]
  */
-      __pyx_v_VJ = (__pyx_v_VJ + ((2.0 * (__pyx_v_self->IP_M[__pyx_v_mat_idx])) * (__pyx_v_self->IP_P[__pyx_v_mat_idx])));
+      __pyx_v_VJ = (__pyx_v_VJ + ((__pyx_v_two_float * (__pyx_v_self->IP_M[__pyx_v_mat_idx])) * (__pyx_v_self->IP_P[__pyx_v_mat_idx])));
     }
   }
 
-  /* "P4J/algorithms/mutual_information.pyx":206
+  /* "P4J/algorithms/mutual_information.pyx":224
  *                 self.VC2[i] += self.IP_P[mat_idx]
- *                 VJ += 2.0*self.IP_M[mat_idx]*self.IP_P[mat_idx]
+ *                 VJ += two_float*self.IP_M[mat_idx]*self.IP_P[mat_idx]
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
  *             VC += self.VC1[i]*self.VC2[i]
  *         if self.mode == 0:  # Cauchy-Schwarz MI
@@ -3747,8 +3897,8 @@ static PyObject *__pyx_pf_3P4J_10algorithms_18mutual_information_3QMI_2eval_freq
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/algorithms/mutual_information.pyx":207
- *                 VJ += 2.0*self.IP_M[mat_idx]*self.IP_P[mat_idx]
+    /* "P4J/algorithms/mutual_information.pyx":225
+ *                 VJ += two_float*self.IP_M[mat_idx]*self.IP_P[mat_idx]
  *         for i in range(self.N):
  *             VC += self.VC1[i]*self.VC2[i]             # <<<<<<<<<<<<<<
  *         if self.mode == 0:  # Cauchy-Schwarz MI
@@ -3757,95 +3907,95 @@ static PyObject *__pyx_pf_3P4J_10algorithms_18mutual_information_3QMI_2eval_freq
     __pyx_v_VC = (__pyx_v_VC + ((__pyx_v_self->VC1[__pyx_v_i]) * (__pyx_v_self->VC2[__pyx_v_i])));
   }
 
-  /* "P4J/algorithms/mutual_information.pyx":208
+  /* "P4J/algorithms/mutual_information.pyx":226
  *         for i in range(self.N):
  *             VC += self.VC1[i]*self.VC2[i]
  *         if self.mode == 0:  # Cauchy-Schwarz MI             # <<<<<<<<<<<<<<
  *             # The log(N) terms cancel out in this sum
- *             return logf(self.VM1*VM2) + logf(VJ) - 2.0*logf(VC)
+ *             return logf(self.VM1*VM2) + logf(VJ) - two_float*logf(VC)
  */
   switch (__pyx_v_self->mode) {
     case 0:
 
-    /* "P4J/algorithms/mutual_information.pyx":210
+    /* "P4J/algorithms/mutual_information.pyx":228
  *         if self.mode == 0:  # Cauchy-Schwarz MI
  *             # The log(N) terms cancel out in this sum
- *             return logf(self.VM1*VM2) + logf(VJ) - 2.0*logf(VC)             # <<<<<<<<<<<<<<
+ *             return logf(self.VM1*VM2) + logf(VJ) - two_float*logf(VC)             # <<<<<<<<<<<<<<
  *         elif self.mode == 1:  # Euclidean MI
- *             return (self.VM1*VM2/self.N**2 + VJ - 2.0*VC/self.N)/self.N**2
+ *             return (self.VM1*VM2/self.N**2 + VJ - two_float*VC/self.N)/self.N**2
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_8 = PyFloat_FromDouble(((logf((__pyx_v_self->VM1 * __pyx_v_VM2)) + logf(__pyx_v_VJ)) - (2.0 * logf(__pyx_v_VC)))); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 210, __pyx_L1_error)
+    __pyx_t_8 = PyFloat_FromDouble(((logf((__pyx_v_self->VM1 * __pyx_v_VM2)) + logf(__pyx_v_VJ)) - (__pyx_v_two_float * logf(__pyx_v_VC)))); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 228, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __pyx_r = __pyx_t_8;
     __pyx_t_8 = 0;
     goto __pyx_L0;
 
-    /* "P4J/algorithms/mutual_information.pyx":208
+    /* "P4J/algorithms/mutual_information.pyx":226
  *         for i in range(self.N):
  *             VC += self.VC1[i]*self.VC2[i]
  *         if self.mode == 0:  # Cauchy-Schwarz MI             # <<<<<<<<<<<<<<
  *             # The log(N) terms cancel out in this sum
- *             return logf(self.VM1*VM2) + logf(VJ) - 2.0*logf(VC)
+ *             return logf(self.VM1*VM2) + logf(VJ) - two_float*logf(VC)
  */
     break;
     case 1:
 
-    /* "P4J/algorithms/mutual_information.pyx":212
- *             return logf(self.VM1*VM2) + logf(VJ) - 2.0*logf(VC)
+    /* "P4J/algorithms/mutual_information.pyx":230
+ *             return logf(self.VM1*VM2) + logf(VJ) - two_float*logf(VC)
  *         elif self.mode == 1:  # Euclidean MI
- *             return (self.VM1*VM2/self.N**2 + VJ - 2.0*VC/self.N)/self.N**2             # <<<<<<<<<<<<<<
+ *             return (self.VM1*VM2/self.N**2 + VJ - two_float*VC/self.N)/self.N**2             # <<<<<<<<<<<<<<
  *         elif self.mode == 2:  # Quadratic Mutual Entropy, not safe yet
  *             # Using Renyi's formulation
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_8 = PyFloat_FromDouble((((((__pyx_v_self->VM1 * __pyx_v_VM2) / ((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t)__Pyx_pow_Py_ssize_t(__pyx_v_self->N, 2))) + __pyx_v_VJ) - ((2.0 * __pyx_v_VC) / ((double)__pyx_v_self->N))) / ((double)__Pyx_pow_Py_ssize_t(__pyx_v_self->N, 2)))); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 212, __pyx_L1_error)
+    __pyx_t_8 = PyFloat_FromDouble((((((__pyx_v_self->VM1 * __pyx_v_VM2) / ((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t)__Pyx_pow_Py_ssize_t(__pyx_v_self->N, 2))) + __pyx_v_VJ) - ((__pyx_v_two_float * __pyx_v_VC) / ((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t)__pyx_v_self->N))) / ((__pyx_t_3P4J_10algorithms_18mutual_information_DTYPE_t)__Pyx_pow_Py_ssize_t(__pyx_v_self->N, 2)))); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 230, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __pyx_r = __pyx_t_8;
     __pyx_t_8 = 0;
     goto __pyx_L0;
 
-    /* "P4J/algorithms/mutual_information.pyx":211
+    /* "P4J/algorithms/mutual_information.pyx":229
  *             # The log(N) terms cancel out in this sum
- *             return logf(self.VM1*VM2) + logf(VJ) - 2.0*logf(VC)
+ *             return logf(self.VM1*VM2) + logf(VJ) - two_float*logf(VC)
  *         elif self.mode == 1:  # Euclidean MI             # <<<<<<<<<<<<<<
- *             return (self.VM1*VM2/self.N**2 + VJ - 2.0*VC/self.N)/self.N**2
+ *             return (self.VM1*VM2/self.N**2 + VJ - two_float*VC/self.N)/self.N**2
  *         elif self.mode == 2:  # Quadratic Mutual Entropy, not safe yet
  */
     break;
     case 2:
 
-    /* "P4J/algorithms/mutual_information.pyx":215
+    /* "P4J/algorithms/mutual_information.pyx":233
  *         elif self.mode == 2:  # Quadratic Mutual Entropy, not safe yet
  *             # Using Renyi's formulation
- *             return fabsf(-logf(self.VM1) - logf(VM2) + logf(VJ) + 2*logf(self.N))             # <<<<<<<<<<<<<<
+ *             return fabsf(-logf(self.VM1) - logf(VM2) + logf(VJ) + two_float*logf(self.N))             # <<<<<<<<<<<<<<
  *             # Using Tsallis' formulation
  *             # return 1.0 - (self.VM1 + VM2 - VJ)/self.N**2  # Tsallis
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_8 = PyFloat_FromDouble(fabsf(((((-logf(__pyx_v_self->VM1)) - logf(__pyx_v_VM2)) + logf(__pyx_v_VJ)) + (2.0 * logf(__pyx_v_self->N))))); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 215, __pyx_L1_error)
+    __pyx_t_8 = PyFloat_FromDouble(fabsf(((((-logf(__pyx_v_self->VM1)) - logf(__pyx_v_VM2)) + logf(__pyx_v_VJ)) + (__pyx_v_two_float * logf(__pyx_v_self->N))))); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 233, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __pyx_r = __pyx_t_8;
     __pyx_t_8 = 0;
     goto __pyx_L0;
 
-    /* "P4J/algorithms/mutual_information.pyx":213
+    /* "P4J/algorithms/mutual_information.pyx":231
  *         elif self.mode == 1:  # Euclidean MI
- *             return (self.VM1*VM2/self.N**2 + VJ - 2.0*VC/self.N)/self.N**2
+ *             return (self.VM1*VM2/self.N**2 + VJ - two_float*VC/self.N)/self.N**2
  *         elif self.mode == 2:  # Quadratic Mutual Entropy, not safe yet             # <<<<<<<<<<<<<<
  *             # Using Renyi's formulation
- *             return fabsf(-logf(self.VM1) - logf(VM2) + logf(VJ) + 2*logf(self.N))
+ *             return fabsf(-logf(self.VM1) - logf(VM2) + logf(VJ) + two_float*logf(self.N))
  */
     break;
     default: break;
   }
 
-  /* "P4J/algorithms/mutual_information.pyx":185
+  /* "P4J/algorithms/mutual_information.pyx":201
  *                 self.VM1 += 2.0*self.IP_M[mat_idx]
  * 
  *     def eval_frequency(self, DTYPE_t freq):             # <<<<<<<<<<<<<<
  *         cdef Py_ssize_t i, j
- *         for i in range(self.N):
+ *         cdef DTYPE_t one_float = 1.0
  */
 
   /* function exit code */
@@ -3861,7 +4011,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_18mutual_information_3QMI_2eval_freq
   return __pyx_r;
 }
 
-/* "P4J/algorithms/mutual_information.pyx":219
+/* "P4J/algorithms/mutual_information.pyx":237
  *             # return 1.0 - (self.VM1 + VM2 - VJ)/self.N**2  # Tsallis
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -3884,7 +4034,7 @@ static void __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI_4__dealloc__(st
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "P4J/algorithms/mutual_information.pyx":220
+  /* "P4J/algorithms/mutual_information.pyx":238
  * 
  *     def __dealloc__(self):
  *         PyMem_Free(self.IP_M)             # <<<<<<<<<<<<<<
@@ -3893,7 +4043,7 @@ static void __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI_4__dealloc__(st
  */
   PyMem_Free(__pyx_v_self->IP_M);
 
-  /* "P4J/algorithms/mutual_information.pyx":221
+  /* "P4J/algorithms/mutual_information.pyx":239
  *     def __dealloc__(self):
  *         PyMem_Free(self.IP_M)
  *         PyMem_Free(self.IP_P)             # <<<<<<<<<<<<<<
@@ -3902,7 +4052,7 @@ static void __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI_4__dealloc__(st
  */
   PyMem_Free(__pyx_v_self->IP_P);
 
-  /* "P4J/algorithms/mutual_information.pyx":222
+  /* "P4J/algorithms/mutual_information.pyx":240
  *         PyMem_Free(self.IP_M)
  *         PyMem_Free(self.IP_P)
  *         PyMem_Free(self.mjd)             # <<<<<<<<<<<<<<
@@ -3911,7 +4061,7 @@ static void __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI_4__dealloc__(st
  */
   PyMem_Free(__pyx_v_self->mjd);
 
-  /* "P4J/algorithms/mutual_information.pyx":223
+  /* "P4J/algorithms/mutual_information.pyx":241
  *         PyMem_Free(self.IP_P)
  *         PyMem_Free(self.mjd)
  *         PyMem_Free(self.angle)             # <<<<<<<<<<<<<<
@@ -3920,7 +4070,7 @@ static void __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI_4__dealloc__(st
  */
   PyMem_Free(__pyx_v_self->angle);
 
-  /* "P4J/algorithms/mutual_information.pyx":224
+  /* "P4J/algorithms/mutual_information.pyx":242
  *         PyMem_Free(self.mjd)
  *         PyMem_Free(self.angle)
  *         PyMem_Free(self.VC1)             # <<<<<<<<<<<<<<
@@ -3929,7 +4079,7 @@ static void __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI_4__dealloc__(st
  */
   PyMem_Free(__pyx_v_self->VC1);
 
-  /* "P4J/algorithms/mutual_information.pyx":225
+  /* "P4J/algorithms/mutual_information.pyx":243
  *         PyMem_Free(self.angle)
  *         PyMem_Free(self.VC1)
  *         PyMem_Free(self.VC2)             # <<<<<<<<<<<<<<
@@ -3938,7 +4088,7 @@ static void __pyx_pf_3P4J_10algorithms_18mutual_information_3QMI_4__dealloc__(st
  */
   PyMem_Free(__pyx_v_self->VC2);
 
-  /* "P4J/algorithms/mutual_information.pyx":219
+  /* "P4J/algorithms/mutual_information.pyx":237
  *             # return 1.0 - (self.VM1 + VM2 - VJ)/self.N**2  # Tsallis
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -18043,8 +18193,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 37, __pyx_L1_error)
-  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(0, 143, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(0, 159, __pyx_L1_error)
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(1, 2, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 133, __pyx_L1_error)
   __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(1, 151, __pyx_L1_error)
@@ -18397,15 +18547,15 @@ static int __Pyx_modinit_type_init_code(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_init_code", 0);
   /*--- Type init code ---*/
-  if (PyType_Ready(&__pyx_type_3P4J_10algorithms_18mutual_information_QMI) < 0) __PYX_ERR(0, 125, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_3P4J_10algorithms_18mutual_information_QMI) < 0) __PYX_ERR(0, 141, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_3P4J_10algorithms_18mutual_information_QMI.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_3P4J_10algorithms_18mutual_information_QMI.tp_dictoffset && __pyx_type_3P4J_10algorithms_18mutual_information_QMI.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_3P4J_10algorithms_18mutual_information_QMI.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_QMI, (PyObject *)&__pyx_type_3P4J_10algorithms_18mutual_information_QMI) < 0) __PYX_ERR(0, 125, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_3P4J_10algorithms_18mutual_information_QMI) < 0) __PYX_ERR(0, 125, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_QMI, (PyObject *)&__pyx_type_3P4J_10algorithms_18mutual_information_QMI) < 0) __PYX_ERR(0, 141, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_3P4J_10algorithms_18mutual_information_QMI) < 0) __PYX_ERR(0, 141, __pyx_L1_error)
   __pyx_ptype_3P4J_10algorithms_18mutual_information_QMI = &__pyx_type_3P4J_10algorithms_18mutual_information_QMI;
   __pyx_vtabptr_array = &__pyx_vtable_array;
   __pyx_vtable_array.get_memview = (PyObject *(*)(struct __pyx_array_obj *))__pyx_array_get_memview;
