@@ -2,6 +2,7 @@ from __future__ import division, print_function
 import numpy as np
 from scipy.stats import gamma, exponnorm
 
+
 class synthetic_light_curve_generator:
     def __init__(self, T, N, rseed=None):
         """

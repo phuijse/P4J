@@ -60,17 +60,22 @@ cdef class LKSL:
 
     def eval_frequency(self, DTYPE_t freq):
         cdef Py_ssize_t i, j
+        cdef DTYPE_t one_float = 1.0
+        cdef DTYPE_t two_float = 2.0
+        cdef DTYPE_t half_float = 0.5
         for i in range(self.N):
-            self.phase[i] = fmodf(self.mjd[i], 1.0/freq)*freq  # output in [0.0, 1.0]
+            self.phase[i] = fmodf(self.mjd[i], one_float/freq)*freq  # output in [0.0, 1.0]
         argsort(self.phase, self.sorted_idx, self.N)
         cdef DTYPE_t err2_err2 = self.err2[self.sorted_idx[0]] + self.err2[self.sorted_idx[self.N-1]]
-        cdef DTYPE_t err2_acum = 1.0/err2_err2
-        cdef DTYPE_t SL = powf(self.mag[self.sorted_idx[0]] - self.mag[self.sorted_idx[self.N-1]], 2.0)/err2_err2
+        cdef DTYPE_t err2_acum = one_float/err2_err2
+        cdef DTYPE_t SL = powf(
+            self.mag[self.sorted_idx[0]] - self.mag[self.sorted_idx[self.N-1]], two_float)/err2_err2
         for i in range(1, self.N):
             err2_err2 = self.err2[self.sorted_idx[i-1]] + self.err2[self.sorted_idx[i]]
-            err2_acum += 1.0/err2_err2
-            SL += powf(self.mag[self.sorted_idx[i-1]] - self.mag[self.sorted_idx[i]], 2.0)/err2_err2
-        return 0.5*SL*self.normalizer/err2_acum
+            err2_acum += one_float/err2_err2
+            SL += powf(
+                self.mag[self.sorted_idx[i-1]] - self.mag[self.sorted_idx[i]], two_float)/err2_err2
+        return half_float*SL*self.normalizer/err2_acum
 
     def __dealloc__(self):
         PyMem_Free(self.mjd)
