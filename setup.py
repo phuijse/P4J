@@ -17,7 +17,8 @@ if os.name == 'nt':  # Windows, assuming MSVC compiler
     compiler_args = ['/Ox', '/fp:fast']
 elif os.name == 'posix':  # UNIX, assuming GCC compiler
     libraries = ['m']
-    compiler_args = ['-O3', '-ffast-math', '-march=native']
+    compiler_args = ['-O2']
+    # compiler_args = ['-O3', '-ffast-math', '-march=native']
 else:
     raise Exception('Unsupported operating system')
 
