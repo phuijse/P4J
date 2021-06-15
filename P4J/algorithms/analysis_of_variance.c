@@ -7,7 +7,9 @@
         "extra_compile_args": [
             "-O3",
             "-ffast-math",
-            "-march=native"
+            "-march=native",
+            "-mtune=native",
+            "-flto"
         ],
         "include_dirs": [
             ".",
