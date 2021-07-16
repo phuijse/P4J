@@ -73,7 +73,6 @@ cdef class AOV:
             self.barx = weighted_mean(self.mag, self.err, self.N)
         else:
             self.barx = mean(self.mag, self.N)
-        
 
     def eval_frequency(self, DTYPE_t freq):
         # More memory consuming but almost twice as fast!
@@ -107,7 +106,6 @@ cdef class AOV:
                 num += self.tmp_sizes[j]*(barxi - self.barx)**2
                 
         return self.normalizer*num/den
-
     
     def eval_frequency_old(self, DTYPE_t freq):
         cdef Py_ssize_t i, j
@@ -144,5 +142,3 @@ cdef class AOV:
         PyMem_Free(self.tmp_mag)
         PyMem_Free(self.tmp_err)
         PyMem_Free(self.tmp_sizes)
-
-

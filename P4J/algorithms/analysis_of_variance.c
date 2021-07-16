@@ -7,7 +7,9 @@
         "extra_compile_args": [
             "-O3",
             "-ffast-math",
-            "-march=native"
+            "-march=native",
+            "-mtune=native",
+            "-flto"
         ],
         "include_dirs": [
             ".",
@@ -2604,7 +2606,7 @@ static int __pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV___init__(struc
  *         else:
  *             self.barx = mean(self.mag, self.N)             # <<<<<<<<<<<<<<
  * 
- * 
+ *     def eval_frequency(self, DTYPE_t freq):
  */
   /*else*/ {
     __pyx_v_self->barx = __pyx_f_3P4J_10algorithms_9utilities_mean(__pyx_v_self->mag, __pyx_v_self->N);
@@ -2633,8 +2635,8 @@ static int __pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV___init__(struc
   return __pyx_r;
 }
 
-/* "P4J/algorithms/analysis_of_variance.pyx":78
- * 
+/* "P4J/algorithms/analysis_of_variance.pyx":77
+ *             self.barx = mean(self.mag, self.N)
  * 
  *     def eval_frequency(self, DTYPE_t freq):             # <<<<<<<<<<<<<<
  *         # More memory consuming but almost twice as fast!
@@ -2652,7 +2654,7 @@ static PyObject *__pyx_pw_3P4J_10algorithms_20analysis_of_variance_3AOV_3eval_fr
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("eval_frequency (wrapper)", 0);
   assert(__pyx_arg_freq); {
-    __pyx_v_freq = __pyx_PyFloat_AsFloat(__pyx_arg_freq); if (unlikely((__pyx_v_freq == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 78, __pyx_L3_error)
+    __pyx_v_freq = __pyx_PyFloat_AsFloat(__pyx_arg_freq); if (unlikely((__pyx_v_freq == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 77, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2691,7 +2693,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_2eval_fr
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("eval_frequency", 0);
 
-  /* "P4J/algorithms/analysis_of_variance.pyx":81
+  /* "P4J/algorithms/analysis_of_variance.pyx":80
  *         # More memory consuming but almost twice as fast!
  *         cdef Py_ssize_t i, j
  *         cdef DTYPE_t one_float = 1.0             # <<<<<<<<<<<<<<
@@ -2700,7 +2702,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_2eval_fr
  */
   __pyx_v_one_float = 1.0;
 
-  /* "P4J/algorithms/analysis_of_variance.pyx":82
+  /* "P4J/algorithms/analysis_of_variance.pyx":81
  *         cdef Py_ssize_t i, j
  *         cdef DTYPE_t one_float = 1.0
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -2712,7 +2714,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_2eval_fr
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/algorithms/analysis_of_variance.pyx":83
+    /* "P4J/algorithms/analysis_of_variance.pyx":82
  *         cdef DTYPE_t one_float = 1.0
  *         for i in range(self.N):
  *             self.phase[i] = fmodf(self.mjd[i], one_float/freq)*freq  # output in [0.0, 1.0]             # <<<<<<<<<<<<<<
@@ -2722,7 +2724,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_2eval_fr
     (__pyx_v_self->phase[__pyx_v_i]) = (fmodf((__pyx_v_self->mjd[__pyx_v_i]), (__pyx_v_one_float / __pyx_v_freq)) * __pyx_v_freq);
   }
 
-  /* "P4J/algorithms/analysis_of_variance.pyx":84
+  /* "P4J/algorithms/analysis_of_variance.pyx":83
  *         for i in range(self.N):
  *             self.phase[i] = fmodf(self.mjd[i], one_float/freq)*freq  # output in [0.0, 1.0]
  *         cdef DTYPE_t num=0.0, den=0.0             # <<<<<<<<<<<<<<
@@ -2732,7 +2734,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_2eval_fr
   __pyx_v_num = 0.0;
   __pyx_v_den = 0.0;
 
-  /* "P4J/algorithms/analysis_of_variance.pyx":88
+  /* "P4J/algorithms/analysis_of_variance.pyx":87
  *         cdef DTYPE_t barxi
  * 
  *         for j in range(self.Nbins):             # <<<<<<<<<<<<<<
@@ -2744,7 +2746,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_2eval_fr
   for (__pyx_t_1 = 0; __pyx_t_1 < __pyx_t_5; __pyx_t_1+=1) {
     __pyx_v_j = __pyx_t_1;
 
-    /* "P4J/algorithms/analysis_of_variance.pyx":89
+    /* "P4J/algorithms/analysis_of_variance.pyx":88
  * 
  *         for j in range(self.Nbins):
  *             self.tmp_sizes[j] = 0             # <<<<<<<<<<<<<<
@@ -2754,7 +2756,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_2eval_fr
     (__pyx_v_self->tmp_sizes[__pyx_v_j]) = 0;
   }
 
-  /* "P4J/algorithms/analysis_of_variance.pyx":91
+  /* "P4J/algorithms/analysis_of_variance.pyx":90
  *             self.tmp_sizes[j] = 0
  * 
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -2766,7 +2768,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_2eval_fr
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/algorithms/analysis_of_variance.pyx":92
+    /* "P4J/algorithms/analysis_of_variance.pyx":91
  * 
  *         for i in range(self.N):
  *             j = (int)(floorf(self.phase[i]*self.Nbins))             # <<<<<<<<<<<<<<
@@ -2775,7 +2777,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_2eval_fr
  */
     __pyx_v_j = ((Py_ssize_t)floorf(((__pyx_v_self->phase[__pyx_v_i]) * __pyx_v_self->Nbins)));
 
-    /* "P4J/algorithms/analysis_of_variance.pyx":93
+    /* "P4J/algorithms/analysis_of_variance.pyx":92
  *         for i in range(self.N):
  *             j = (int)(floorf(self.phase[i]*self.Nbins))
  *             self.tmp_mag[self.tmp_sizes[j] + self.N*j] = self.mag[i]             # <<<<<<<<<<<<<<
@@ -2784,7 +2786,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_2eval_fr
  */
     (__pyx_v_self->tmp_mag[((__pyx_v_self->tmp_sizes[__pyx_v_j]) + (__pyx_v_self->N * __pyx_v_j))]) = (__pyx_v_self->mag[__pyx_v_i]);
 
-    /* "P4J/algorithms/analysis_of_variance.pyx":94
+    /* "P4J/algorithms/analysis_of_variance.pyx":93
  *             j = (int)(floorf(self.phase[i]*self.Nbins))
  *             self.tmp_mag[self.tmp_sizes[j] + self.N*j] = self.mag[i]
  *             self.tmp_err[self.tmp_sizes[j] + self.N*j] = self.err[i]             # <<<<<<<<<<<<<<
@@ -2793,7 +2795,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_2eval_fr
  */
     (__pyx_v_self->tmp_err[((__pyx_v_self->tmp_sizes[__pyx_v_j]) + (__pyx_v_self->N * __pyx_v_j))]) = (__pyx_v_self->err[__pyx_v_i]);
 
-    /* "P4J/algorithms/analysis_of_variance.pyx":95
+    /* "P4J/algorithms/analysis_of_variance.pyx":94
  *             self.tmp_mag[self.tmp_sizes[j] + self.N*j] = self.mag[i]
  *             self.tmp_err[self.tmp_sizes[j] + self.N*j] = self.err[i]
  *             self.tmp_sizes[j] += 1             # <<<<<<<<<<<<<<
@@ -2804,7 +2806,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_2eval_fr
     (__pyx_v_self->tmp_sizes[__pyx_t_6]) = ((__pyx_v_self->tmp_sizes[__pyx_t_6]) + 1);
   }
 
-  /* "P4J/algorithms/analysis_of_variance.pyx":97
+  /* "P4J/algorithms/analysis_of_variance.pyx":96
  *             self.tmp_sizes[j] += 1
  * 
  *         for j in range(self.Nbins):             # <<<<<<<<<<<<<<
@@ -2816,7 +2818,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_2eval_fr
   for (__pyx_t_1 = 0; __pyx_t_1 < __pyx_t_5; __pyx_t_1+=1) {
     __pyx_v_j = __pyx_t_1;
 
-    /* "P4J/algorithms/analysis_of_variance.pyx":98
+    /* "P4J/algorithms/analysis_of_variance.pyx":97
  * 
  *         for j in range(self.Nbins):
  *             if self.tmp_sizes[j] > 1:             # <<<<<<<<<<<<<<
@@ -2826,7 +2828,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_2eval_fr
     __pyx_t_7 = (((__pyx_v_self->tmp_sizes[__pyx_v_j]) > 1) != 0);
     if (__pyx_t_7) {
 
-      /* "P4J/algorithms/analysis_of_variance.pyx":99
+      /* "P4J/algorithms/analysis_of_variance.pyx":98
  *         for j in range(self.Nbins):
  *             if self.tmp_sizes[j] > 1:
  *                 if self.use_errorbars:             # <<<<<<<<<<<<<<
@@ -2836,7 +2838,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_2eval_fr
       __pyx_t_7 = (__pyx_v_self->use_errorbars != 0);
       if (__pyx_t_7) {
 
-        /* "P4J/algorithms/analysis_of_variance.pyx":100
+        /* "P4J/algorithms/analysis_of_variance.pyx":99
  *             if self.tmp_sizes[j] > 1:
  *                 if self.use_errorbars:
  *                     barxi = weighted_mean((self.tmp_mag + self.N*j),             # <<<<<<<<<<<<<<
@@ -2845,7 +2847,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_2eval_fr
  */
         __pyx_v_barxi = __pyx_f_3P4J_10algorithms_9utilities_weighted_mean((__pyx_v_self->tmp_mag + (__pyx_v_self->N * __pyx_v_j)), (__pyx_v_self->tmp_err + (__pyx_v_self->N * __pyx_v_j)), (__pyx_v_self->tmp_sizes[__pyx_v_j]));
 
-        /* "P4J/algorithms/analysis_of_variance.pyx":99
+        /* "P4J/algorithms/analysis_of_variance.pyx":98
  *         for j in range(self.Nbins):
  *             if self.tmp_sizes[j] > 1:
  *                 if self.use_errorbars:             # <<<<<<<<<<<<<<
@@ -2855,7 +2857,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_2eval_fr
         goto __pyx_L12;
       }
 
-      /* "P4J/algorithms/analysis_of_variance.pyx":104
+      /* "P4J/algorithms/analysis_of_variance.pyx":103
  *                                           self.tmp_sizes[j])
  *                 else:
  *                     barxi = mean((self.tmp_mag + self.N*j), self.tmp_sizes[j])             # <<<<<<<<<<<<<<
@@ -2867,7 +2869,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_2eval_fr
       }
       __pyx_L12:;
 
-      /* "P4J/algorithms/analysis_of_variance.pyx":105
+      /* "P4J/algorithms/analysis_of_variance.pyx":104
  *                 else:
  *                     barxi = mean((self.tmp_mag + self.N*j), self.tmp_sizes[j])
  *                 for i in range(self.tmp_sizes[j]):             # <<<<<<<<<<<<<<
@@ -2879,7 +2881,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_2eval_fr
       for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_9; __pyx_t_2+=1) {
         __pyx_v_i = __pyx_t_2;
 
-        /* "P4J/algorithms/analysis_of_variance.pyx":106
+        /* "P4J/algorithms/analysis_of_variance.pyx":105
  *                     barxi = mean((self.tmp_mag + self.N*j), self.tmp_sizes[j])
  *                 for i in range(self.tmp_sizes[j]):
  *                     den += (self.tmp_mag[i + self.N*j] - barxi)**2             # <<<<<<<<<<<<<<
@@ -2889,7 +2891,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_2eval_fr
         __pyx_v_den = (__pyx_v_den + powf(((__pyx_v_self->tmp_mag[(__pyx_v_i + (__pyx_v_self->N * __pyx_v_j))]) - __pyx_v_barxi), 2.0));
       }
 
-      /* "P4J/algorithms/analysis_of_variance.pyx":107
+      /* "P4J/algorithms/analysis_of_variance.pyx":106
  *                 for i in range(self.tmp_sizes[j]):
  *                     den += (self.tmp_mag[i + self.N*j] - barxi)**2
  *                 num += self.tmp_sizes[j]*(barxi - self.barx)**2             # <<<<<<<<<<<<<<
@@ -2898,7 +2900,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_2eval_fr
  */
       __pyx_v_num = (__pyx_v_num + ((__pyx_v_self->tmp_sizes[__pyx_v_j]) * powf((__pyx_v_barxi - __pyx_v_self->barx), 2.0)));
 
-      /* "P4J/algorithms/analysis_of_variance.pyx":98
+      /* "P4J/algorithms/analysis_of_variance.pyx":97
  * 
  *         for j in range(self.Nbins):
  *             if self.tmp_sizes[j] > 1:             # <<<<<<<<<<<<<<
@@ -2908,22 +2910,22 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_2eval_fr
     }
   }
 
-  /* "P4J/algorithms/analysis_of_variance.pyx":109
+  /* "P4J/algorithms/analysis_of_variance.pyx":108
  *                 num += self.tmp_sizes[j]*(barxi - self.barx)**2
  * 
  *         return self.normalizer*num/den             # <<<<<<<<<<<<<<
  * 
- * 
+ *     def eval_frequency_old(self, DTYPE_t freq):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_10 = PyFloat_FromDouble(((__pyx_v_self->normalizer * __pyx_v_num) / __pyx_v_den)); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 109, __pyx_L1_error)
+  __pyx_t_10 = PyFloat_FromDouble(((__pyx_v_self->normalizer * __pyx_v_num) / __pyx_v_den)); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __pyx_r = __pyx_t_10;
   __pyx_t_10 = 0;
   goto __pyx_L0;
 
-  /* "P4J/algorithms/analysis_of_variance.pyx":78
- * 
+  /* "P4J/algorithms/analysis_of_variance.pyx":77
+ *             self.barx = mean(self.mag, self.N)
  * 
  *     def eval_frequency(self, DTYPE_t freq):             # <<<<<<<<<<<<<<
  *         # More memory consuming but almost twice as fast!
@@ -2941,8 +2943,8 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_2eval_fr
   return __pyx_r;
 }
 
-/* "P4J/algorithms/analysis_of_variance.pyx":112
- * 
+/* "P4J/algorithms/analysis_of_variance.pyx":110
+ *         return self.normalizer*num/den
  * 
  *     def eval_frequency_old(self, DTYPE_t freq):             # <<<<<<<<<<<<<<
  *         cdef Py_ssize_t i, j
@@ -2960,7 +2962,7 @@ static PyObject *__pyx_pw_3P4J_10algorithms_20analysis_of_variance_3AOV_5eval_fr
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("eval_frequency_old (wrapper)", 0);
   assert(__pyx_arg_freq); {
-    __pyx_v_freq = __pyx_PyFloat_AsFloat(__pyx_arg_freq); if (unlikely((__pyx_v_freq == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 112, __pyx_L3_error)
+    __pyx_v_freq = __pyx_PyFloat_AsFloat(__pyx_arg_freq); if (unlikely((__pyx_v_freq == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 110, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3000,7 +3002,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_fr
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("eval_frequency_old", 0);
 
-  /* "P4J/algorithms/analysis_of_variance.pyx":114
+  /* "P4J/algorithms/analysis_of_variance.pyx":112
  *     def eval_frequency_old(self, DTYPE_t freq):
  *         cdef Py_ssize_t i, j
  *         cdef DTYPE_t one_float = 1.0             # <<<<<<<<<<<<<<
@@ -3009,7 +3011,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_fr
  */
   __pyx_v_one_float = 1.0;
 
-  /* "P4J/algorithms/analysis_of_variance.pyx":115
+  /* "P4J/algorithms/analysis_of_variance.pyx":113
  *         cdef Py_ssize_t i, j
  *         cdef DTYPE_t one_float = 1.0
  *         for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -3021,7 +3023,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_fr
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "P4J/algorithms/analysis_of_variance.pyx":116
+    /* "P4J/algorithms/analysis_of_variance.pyx":114
  *         cdef DTYPE_t one_float = 1.0
  *         for i in range(self.N):
  *             self.phase[i] = fmodf(self.mjd[i], one_float/freq)*freq  # output in [0.0, 1.0]             # <<<<<<<<<<<<<<
@@ -3031,7 +3033,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_fr
     (__pyx_v_self->phase[__pyx_v_i]) = (fmodf((__pyx_v_self->mjd[__pyx_v_i]), (__pyx_v_one_float / __pyx_v_freq)) * __pyx_v_freq);
   }
 
-  /* "P4J/algorithms/analysis_of_variance.pyx":117
+  /* "P4J/algorithms/analysis_of_variance.pyx":115
  *         for i in range(self.N):
  *             self.phase[i] = fmodf(self.mjd[i], one_float/freq)*freq  # output in [0.0, 1.0]
  *         cdef DTYPE_t num=0.0, den=0.0 # These are the unormalized s1 and s2 in the paper             # <<<<<<<<<<<<<<
@@ -3041,7 +3043,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_fr
   __pyx_v_num = 0.0;
   __pyx_v_den = 0.0;
 
-  /* "P4J/algorithms/analysis_of_variance.pyx":120
+  /* "P4J/algorithms/analysis_of_variance.pyx":118
  *         cdef ITYPE_t samples_in_bin
  *         cdef DTYPE_t barxi
  *         for j in range(self.Nbins):             # <<<<<<<<<<<<<<
@@ -3053,7 +3055,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_fr
   for (__pyx_t_1 = 0; __pyx_t_1 < __pyx_t_5; __pyx_t_1+=1) {
     __pyx_v_j = __pyx_t_1;
 
-    /* "P4J/algorithms/analysis_of_variance.pyx":121
+    /* "P4J/algorithms/analysis_of_variance.pyx":119
  *         cdef DTYPE_t barxi
  *         for j in range(self.Nbins):
  *             samples_in_bin = 0             # <<<<<<<<<<<<<<
@@ -3062,7 +3064,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_fr
  */
     __pyx_v_samples_in_bin = 0;
 
-    /* "P4J/algorithms/analysis_of_variance.pyx":122
+    /* "P4J/algorithms/analysis_of_variance.pyx":120
  *         for j in range(self.Nbins):
  *             samples_in_bin = 0
  *             for i in range(self.N):             # <<<<<<<<<<<<<<
@@ -3074,7 +3076,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_fr
     for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_3; __pyx_t_6+=1) {
       __pyx_v_i = __pyx_t_6;
 
-      /* "P4J/algorithms/analysis_of_variance.pyx":123
+      /* "P4J/algorithms/analysis_of_variance.pyx":121
  *             samples_in_bin = 0
  *             for i in range(self.N):
  *                 if floorf(self.phase[i]*self.Nbins) == j:             # <<<<<<<<<<<<<<
@@ -3084,7 +3086,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_fr
       __pyx_t_7 = ((floorf(((__pyx_v_self->phase[__pyx_v_i]) * __pyx_v_self->Nbins)) == __pyx_v_j) != 0);
       if (__pyx_t_7) {
 
-        /* "P4J/algorithms/analysis_of_variance.pyx":124
+        /* "P4J/algorithms/analysis_of_variance.pyx":122
  *             for i in range(self.N):
  *                 if floorf(self.phase[i]*self.Nbins) == j:
  *                     self.tmp_mag[samples_in_bin] = self.mag[i]             # <<<<<<<<<<<<<<
@@ -3093,7 +3095,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_fr
  */
         (__pyx_v_self->tmp_mag[__pyx_v_samples_in_bin]) = (__pyx_v_self->mag[__pyx_v_i]);
 
-        /* "P4J/algorithms/analysis_of_variance.pyx":125
+        /* "P4J/algorithms/analysis_of_variance.pyx":123
  *                 if floorf(self.phase[i]*self.Nbins) == j:
  *                     self.tmp_mag[samples_in_bin] = self.mag[i]
  *                     self.tmp_err[samples_in_bin] = self.err[i]             # <<<<<<<<<<<<<<
@@ -3102,7 +3104,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_fr
  */
         (__pyx_v_self->tmp_err[__pyx_v_samples_in_bin]) = (__pyx_v_self->err[__pyx_v_i]);
 
-        /* "P4J/algorithms/analysis_of_variance.pyx":126
+        /* "P4J/algorithms/analysis_of_variance.pyx":124
  *                     self.tmp_mag[samples_in_bin] = self.mag[i]
  *                     self.tmp_err[samples_in_bin] = self.err[i]
  *                     samples_in_bin += 1             # <<<<<<<<<<<<<<
@@ -3111,7 +3113,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_fr
  */
         __pyx_v_samples_in_bin = (__pyx_v_samples_in_bin + 1);
 
-        /* "P4J/algorithms/analysis_of_variance.pyx":123
+        /* "P4J/algorithms/analysis_of_variance.pyx":121
  *             samples_in_bin = 0
  *             for i in range(self.N):
  *                 if floorf(self.phase[i]*self.Nbins) == j:             # <<<<<<<<<<<<<<
@@ -3121,7 +3123,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_fr
       }
     }
 
-    /* "P4J/algorithms/analysis_of_variance.pyx":128
+    /* "P4J/algorithms/analysis_of_variance.pyx":126
  *                     samples_in_bin += 1
  * 
  *             if samples_in_bin > 1:             # <<<<<<<<<<<<<<
@@ -3131,7 +3133,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_fr
     __pyx_t_7 = ((__pyx_v_samples_in_bin > 1) != 0);
     if (__pyx_t_7) {
 
-      /* "P4J/algorithms/analysis_of_variance.pyx":129
+      /* "P4J/algorithms/analysis_of_variance.pyx":127
  * 
  *             if samples_in_bin > 1:
  *                 if self.use_errorbars:             # <<<<<<<<<<<<<<
@@ -3141,7 +3143,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_fr
       __pyx_t_7 = (__pyx_v_self->use_errorbars != 0);
       if (__pyx_t_7) {
 
-        /* "P4J/algorithms/analysis_of_variance.pyx":130
+        /* "P4J/algorithms/analysis_of_variance.pyx":128
  *             if samples_in_bin > 1:
  *                 if self.use_errorbars:
  *                     barxi = weighted_mean(self.tmp_mag, self.tmp_err, samples_in_bin)             # <<<<<<<<<<<<<<
@@ -3150,7 +3152,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_fr
  */
         __pyx_v_barxi = __pyx_f_3P4J_10algorithms_9utilities_weighted_mean(__pyx_v_self->tmp_mag, __pyx_v_self->tmp_err, __pyx_v_samples_in_bin);
 
-        /* "P4J/algorithms/analysis_of_variance.pyx":129
+        /* "P4J/algorithms/analysis_of_variance.pyx":127
  * 
  *             if samples_in_bin > 1:
  *                 if self.use_errorbars:             # <<<<<<<<<<<<<<
@@ -3160,7 +3162,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_fr
         goto __pyx_L11;
       }
 
-      /* "P4J/algorithms/analysis_of_variance.pyx":132
+      /* "P4J/algorithms/analysis_of_variance.pyx":130
  *                     barxi = weighted_mean(self.tmp_mag, self.tmp_err, samples_in_bin)
  *                 else:
  *                     barxi = mean(self.tmp_mag, samples_in_bin)             # <<<<<<<<<<<<<<
@@ -3172,7 +3174,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_fr
       }
       __pyx_L11:;
 
-      /* "P4J/algorithms/analysis_of_variance.pyx":133
+      /* "P4J/algorithms/analysis_of_variance.pyx":131
  *                 else:
  *                     barxi = mean(self.tmp_mag, samples_in_bin)
  *                 for i in range(samples_in_bin):             # <<<<<<<<<<<<<<
@@ -3184,7 +3186,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_fr
       for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_9; __pyx_t_2+=1) {
         __pyx_v_i = __pyx_t_2;
 
-        /* "P4J/algorithms/analysis_of_variance.pyx":134
+        /* "P4J/algorithms/analysis_of_variance.pyx":132
  *                     barxi = mean(self.tmp_mag, samples_in_bin)
  *                 for i in range(samples_in_bin):
  *                     den += (self.tmp_mag[i] - barxi)**2             # <<<<<<<<<<<<<<
@@ -3194,7 +3196,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_fr
         __pyx_v_den = (__pyx_v_den + powf(((__pyx_v_self->tmp_mag[__pyx_v_i]) - __pyx_v_barxi), 2.0));
       }
 
-      /* "P4J/algorithms/analysis_of_variance.pyx":135
+      /* "P4J/algorithms/analysis_of_variance.pyx":133
  *                 for i in range(samples_in_bin):
  *                     den += (self.tmp_mag[i] - barxi)**2
  *                 num += samples_in_bin*(barxi - self.barx)**2             # <<<<<<<<<<<<<<
@@ -3203,7 +3205,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_fr
  */
       __pyx_v_num = (__pyx_v_num + (__pyx_v_samples_in_bin * powf((__pyx_v_barxi - __pyx_v_self->barx), 2.0)));
 
-      /* "P4J/algorithms/analysis_of_variance.pyx":128
+      /* "P4J/algorithms/analysis_of_variance.pyx":126
  *                     samples_in_bin += 1
  * 
  *             if samples_in_bin > 1:             # <<<<<<<<<<<<<<
@@ -3213,7 +3215,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_fr
     }
   }
 
-  /* "P4J/algorithms/analysis_of_variance.pyx":137
+  /* "P4J/algorithms/analysis_of_variance.pyx":135
  *                 num += samples_in_bin*(barxi - self.barx)**2
  * 
  *         return self.normalizer*num/den             # <<<<<<<<<<<<<<
@@ -3221,14 +3223,14 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_fr
  *     def __dealloc__(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_10 = PyFloat_FromDouble(((__pyx_v_self->normalizer * __pyx_v_num) / __pyx_v_den)); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_10 = PyFloat_FromDouble(((__pyx_v_self->normalizer * __pyx_v_num) / __pyx_v_den)); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __pyx_r = __pyx_t_10;
   __pyx_t_10 = 0;
   goto __pyx_L0;
 
-  /* "P4J/algorithms/analysis_of_variance.pyx":112
- * 
+  /* "P4J/algorithms/analysis_of_variance.pyx":110
+ *         return self.normalizer*num/den
  * 
  *     def eval_frequency_old(self, DTYPE_t freq):             # <<<<<<<<<<<<<<
  *         cdef Py_ssize_t i, j
@@ -3246,7 +3248,7 @@ static PyObject *__pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_4eval_fr
   return __pyx_r;
 }
 
-/* "P4J/algorithms/analysis_of_variance.pyx":139
+/* "P4J/algorithms/analysis_of_variance.pyx":137
  *         return self.normalizer*num/den
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -3269,7 +3271,7 @@ static void __pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_6__dealloc__(
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "P4J/algorithms/analysis_of_variance.pyx":140
+  /* "P4J/algorithms/analysis_of_variance.pyx":138
  * 
  *     def __dealloc__(self):
  *         PyMem_Free(self.mjd)             # <<<<<<<<<<<<<<
@@ -3278,7 +3280,7 @@ static void __pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_6__dealloc__(
  */
   PyMem_Free(__pyx_v_self->mjd);
 
-  /* "P4J/algorithms/analysis_of_variance.pyx":141
+  /* "P4J/algorithms/analysis_of_variance.pyx":139
  *     def __dealloc__(self):
  *         PyMem_Free(self.mjd)
  *         PyMem_Free(self.mag)             # <<<<<<<<<<<<<<
@@ -3287,7 +3289,7 @@ static void __pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_6__dealloc__(
  */
   PyMem_Free(__pyx_v_self->mag);
 
-  /* "P4J/algorithms/analysis_of_variance.pyx":142
+  /* "P4J/algorithms/analysis_of_variance.pyx":140
  *         PyMem_Free(self.mjd)
  *         PyMem_Free(self.mag)
  *         PyMem_Free(self.err)             # <<<<<<<<<<<<<<
@@ -3296,7 +3298,7 @@ static void __pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_6__dealloc__(
  */
   PyMem_Free(__pyx_v_self->err);
 
-  /* "P4J/algorithms/analysis_of_variance.pyx":143
+  /* "P4J/algorithms/analysis_of_variance.pyx":141
  *         PyMem_Free(self.mag)
  *         PyMem_Free(self.err)
  *         PyMem_Free(self.phase)             # <<<<<<<<<<<<<<
@@ -3305,7 +3307,7 @@ static void __pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_6__dealloc__(
  */
   PyMem_Free(__pyx_v_self->phase);
 
-  /* "P4J/algorithms/analysis_of_variance.pyx":144
+  /* "P4J/algorithms/analysis_of_variance.pyx":142
  *         PyMem_Free(self.err)
  *         PyMem_Free(self.phase)
  *         PyMem_Free(self.tmp_mag)             # <<<<<<<<<<<<<<
@@ -3314,25 +3316,22 @@ static void __pyx_pf_3P4J_10algorithms_20analysis_of_variance_3AOV_6__dealloc__(
  */
   PyMem_Free(__pyx_v_self->tmp_mag);
 
-  /* "P4J/algorithms/analysis_of_variance.pyx":145
+  /* "P4J/algorithms/analysis_of_variance.pyx":143
  *         PyMem_Free(self.phase)
  *         PyMem_Free(self.tmp_mag)
  *         PyMem_Free(self.tmp_err)             # <<<<<<<<<<<<<<
  *         PyMem_Free(self.tmp_sizes)
- * 
  */
   PyMem_Free(__pyx_v_self->tmp_err);
 
-  /* "P4J/algorithms/analysis_of_variance.pyx":146
+  /* "P4J/algorithms/analysis_of_variance.pyx":144
  *         PyMem_Free(self.tmp_mag)
  *         PyMem_Free(self.tmp_err)
  *         PyMem_Free(self.tmp_sizes)             # <<<<<<<<<<<<<<
- * 
- * 
  */
   PyMem_Free(__pyx_v_self->tmp_sizes);
 
-  /* "P4J/algorithms/analysis_of_variance.pyx":139
+  /* "P4J/algorithms/analysis_of_variance.pyx":137
  *         return self.normalizer*num/den
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<

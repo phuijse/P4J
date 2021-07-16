@@ -27,8 +27,39 @@ class TestMultibandPeriodogram(unittest.TestCase):
         my_per.finetune_best_frequencies(n_local_optima=3, fresolution=1e-5)
         best_freq, best_per = my_per.get_best_frequencies()
         self.assertEqual(len(my_per.per_single_band), len(np.unique(self.fids)))
-        assert_allclose(best_freq, np.array([1.234178, 9.704867, 3.4884443], dtype=np.float32), rtol=1e-4)
-        assert_allclose(best_per, np.array([142.32555, 83.98334, 77.32429], dtype=np.float32), rtol=1e-4)
+        assert_allclose(
+            best_freq,
+            np.array(
+                [1.2341979, 9.704909, 0.86988866],
+                dtype=np.float32),
+            rtol=1e-4)
+        assert_allclose(
+            best_per,
+            np.array(
+                [131.16, 85.5, 76.9],
+                dtype=np.float32),
+            rtol=1e-2)
+
+    def test_mbperiodogram_log_period_grid(self):
+        my_per = MultiBandPeriodogram(method="MHAOV")
+        my_per.set_data(self.mjds, self.mags, self.errs, self.fids)
+        my_per.frequency_grid_evaluation(
+            fmin=0.01, fmax=10., fresolution=1e-4, log_period_spacing=True)
+        my_per.finetune_best_frequencies(n_local_optima=3, fresolution=1e-5)
+        best_freq, best_per = my_per.get_best_frequencies()
+        self.assertEqual(len(my_per.per_single_band), len(np.unique(self.fids)))
+        assert_allclose(
+            best_freq,
+            np.array(
+                [1.2341979, 9.704909, 0.86988866],
+                dtype=np.float32),
+            rtol=1e-4)
+        assert_allclose(
+            best_per,
+            np.array(
+                [131.16, 85.5, 76.9],
+                dtype=np.float32),
+            rtol=1e-2)
 
 
 if __name__ == '__main__':

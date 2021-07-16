@@ -24,7 +24,7 @@ https://github.com/phuijse/P4J
 
 """
 
-__version__ = '1.0.0'
+__version__ = '1.1.0'
 
 from .generator import synthetic_light_curve_generator
 from .periodograms import periodogram, MultiBandPeriodogram

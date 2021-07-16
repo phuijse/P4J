@@ -80,6 +80,7 @@ class MultiBandPeriodogram(BasePeriodogram):
                 self.per_single_band[filter_name][replace_idx] = pers_fine[1][filter_name][new_best]
     
 
+# TODO: rename as Periodogram in v2.0.0
 class periodogram(BasePeriodogram):
     def __init__(self, method='QMIEU', n_jobs=1, debug=False):
         """
@@ -121,7 +122,7 @@ class periodogram(BasePeriodogram):
         self.per = None
         self.debug = debug
         
-        if not type(n_jobs) is int:
+        if type(n_jobs) is not int:
             raise TypeError("Number of jobs must be an integer")
         if n_jobs < 1:
             raise ValueError("Number of jobs must be greater than 0")
@@ -161,7 +162,7 @@ class periodogram(BasePeriodogram):
         # Standardization
         weights = np.power(err, -2.0)
         weights = weights/np.sum(weights)
-        self.lc_stats = {'loc' : robust_loc(mag, weights), 
+        self.lc_stats = {'loc': robust_loc(mag, weights),
                          'scale': robust_scale(mag, weights),
                          'N': len(mjd)}        
         
@@ -175,7 +176,7 @@ class periodogram(BasePeriodogram):
                 hm = hm*self.lc_stats['scale']
             if 'h_KDE_M' in kwarg:
                 hm = hm*kwarg['h_KDE_M']
-            hp = 1.0 # How to choose this more appropietly?
+            hp = 1.0  # How to choose this more appropietly?
             if 'h_KDE_P' in kwarg:
                 hp = hp*kwarg['h_KDE_P']
             kernel = 0  # Select the kernel for the magnitudes, 0 is safe
@@ -217,7 +218,7 @@ class periodogram(BasePeriodogram):
         #else:
         #    pers = Parallel(n_jobs=self.n_jobs)(delayed(self.compute_metric)(freq) for freq in freqs)
 
-        if self.method in ["PDM1", "LKSL"]: # Minima are best
+        if self.method in ["PDM1", "LKSL"]:  # Minima are best
             pers = -pers
         return pers, None  # TODO: THIS IS UGLY!!
     

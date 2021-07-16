@@ -12,24 +12,29 @@ except ImportError:
 
 include_dirs = ['.', np.get_include()]
 library_dirs = []
-if os.name == 'nt':  # Windows, assumming MSVC compiler
+if os.name == 'nt':  # Windows, assuming MSVC compiler
     libraries = []
     compiler_args = ['/Ox', '/fp:fast']
-elif os.name == 'posix':  # UNIX, assumming GCC compiler
+elif os.name == 'posix':  # UNIX, assuming GCC compiler
     libraries = ['m']
-    compiler_args = ['-O3', '-ffast-math', '-march=native']
+    compiler_args = ['-O3', '-ffast-math', '-march=native', '-mtune=native', '-flto']
 else:
     raise Exception('Unsupported operating system')
 
-extensions = [
-    Extension(
-        "*",
-        sources=[os.path.join("P4J", "algorithms", "*.pyx")],
-        extra_compile_args=compiler_args,
-        include_dirs=include_dirs,
-        libraries=libraries,
-        library_dirs=library_dirs
-    )]
+
+extensions = []
+for file in os.listdir(os.path.join("P4J", "algorithms")):
+    if file.endswith('.pyx'):
+        extensions.append(
+            Extension(
+                '.'.join(['P4J', 'algorithms', file.rstrip('.pyx')]),
+                sources=[os.path.join("P4J", "algorithms", file)],
+                extra_compile_args=compiler_args,
+                include_dirs=include_dirs,
+                libraries=libraries,
+                library_dirs=library_dirs
+            )
+        )
 
 """
 Allow users to install the module even if they do not have cython.
