@@ -160,11 +160,11 @@ class periodogram(BasePeriodogram):
             self.err = self.err[~na_mask]
         
         # Standardization
-        weights = np.power(err, -2.0)
+        weights = np.power(self.err, -2.0)
         weights = weights/np.sum(weights)
-        self.lc_stats = {'loc': robust_loc(mag, weights),
-                         'scale': robust_scale(mag, weights),
-                         'N': len(mjd)}        
+        self.lc_stats = {'loc': robust_loc(self.mag, weights),
+                         'scale': robust_scale(self.mag, weights),
+                         'N': len(self.mjd)}        
         
         if standardize:
             self.mag = (self.mag - self.lc_stats['loc'])/self.lc_stats['scale']

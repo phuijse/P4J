@@ -1,29 +1,34 @@
 import numpy as np
+import os
+
+import pandas as pd
 from numpy.testing import assert_allclose
 import unittest
 from P4J import periodogram
-from P4J.generator import synthetic_light_curve_generator
 
 
 class TestPeriodogram(unittest.TestCase):
     def setUp(self) -> None:
-        lc_generator = synthetic_light_curve_generator(T=100.0, N=50, rseed=0)
-        lc_generator.set_model(f0=1.23456, A=[1.0, 0.5, 0.25])
-        mjd, mag, err = lc_generator.draw_noisy_time_series(SNR=2.0)
-        self.mjd = mjd
-        self.mag = mag
-        self.err = err
+        dirname = os.path.dirname(os.path.abspath(__file__))
+        filename = os.path.join(
+            dirname,
+            'single_band_light_curve.csv'
+        )
+        df = pd.read_csv(filename)
+        self.mjd = df['mjd'].values
+        self.mag = df['mag'].values
+        self.err = df['err'].values
 
     def test_standardize(self):
         my_per = periodogram(method='AOV')
         my_per.set_data(self.mjd, self.mag, self.err, standardize=True)
         assert_allclose(
             my_per.mag[:3],
-            np.array([-0.858135,  0.484007,  0.997515], dtype=np.float32),
+            np.array([-0.885704,  0.472172,  0.9917], dtype=np.float32),
             atol=1e-4)
         assert_allclose(
             my_per.err[:3],
-            np.array([1.422936, 0.715789, 1.490285], dtype=np.float32),
+            np.array([1.439618, 0.724181, 1.507756], dtype=np.float32),
             atol=1e-4)
 
     def test_removenan(self):
@@ -49,11 +54,11 @@ class TestPeriodogram(unittest.TestCase):
 
         assert_allclose(
             best_freq,
-            np.array([1.234198, 9.704867, 0.869914], dtype=np.float32),
+            np.array([1.234198, 9.704867, 3.488431], dtype=np.float32),
             rtol=1e-4)
         assert_allclose(
             best_per,
-            np.array([61.65133, 43.194977, 38.42828], dtype=np.float32),
+            np.array([66.697205, 42.329742, 38.673233], dtype=np.float32),
             rtol=1e-4)
 
     def test_periodogram_aov(self):
@@ -71,7 +76,7 @@ class TestPeriodogram(unittest.TestCase):
 
         assert_allclose(
             best_per,
-            np.array([9.660553, 8.129339, 8.114369], dtype=np.float32),
+            np.array([9.226296, 8.59803, 7.567729], dtype=np.float32),
             rtol=1e-4)
 
     def test_periodogram_pdm(self):
@@ -101,11 +106,11 @@ class TestPeriodogram(unittest.TestCase):
 
         assert_allclose(
             best_freq,
-            np.array([1.235051, 6.06309, 3.489141], dtype=np.float32),
+            np.array([1.234961, 3.4893, 6.063464], dtype=np.float32),
             rtol=1e-4)
         assert_allclose(
             best_per,
-            np.array([0.039919, 0.030958, 0.029757], dtype=np.float32),
+            np.array([0.039739, 0.030634, 0.029636], dtype=np.float32),
             rtol=1e-4)
 
 

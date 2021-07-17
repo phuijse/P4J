@@ -1,4 +1,4 @@
-P4J
+P4J (ALeRCE version)
 ===
 
 Description
@@ -33,7 +33,7 @@ Install from PyPI using::
 
 or clone this github and do::
 
-    python setup.py install --user
+    python -m pip install -e .
 
 Example
 -------
@@ -52,6 +52,8 @@ TODO
 Authors
 -------
 
+Original authors:
+
 -  Pablo Huijse pablo.huijse@gmail.com (Millennium Institute of Astrophysics and Universidad Austral de Chile)
 -  Pavlos Protopapas (Harvard Institute of Applied Computational Sciences)
 -  Pablo A. Estévez (Millennium Institute of Astrophysics and Universidad de Chile)
@@ -59,6 +61,8 @@ Authors
 -  José C. Príncipe (University of Florida)
 
 (P4J = Four Pablos and one Jose)
+
+This fork has modifications made by the ALeRCE team.
 
 Acknowledgment
 --------------
