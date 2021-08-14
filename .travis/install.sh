@@ -15,6 +15,4 @@ if [ $TRAVIS_OS_NAME = 'osx' ]; then
 	    brew install python@3.8
 	    ;;
     esac
-else
-    # Install some custom requirements on Linux
 fi
