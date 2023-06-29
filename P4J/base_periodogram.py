@@ -44,6 +44,8 @@ class BasePeriodogram(abc.ABC):
             If False (default) uses a linear-spaced frequency grid.
         """
         self.freq_step_coarse = fresolution
+
+        # TODO: remove. log_period_spacing is not right.
         if log_period_spacing:
             period_min = np.log10(1.0/fmax)
             period_max = np.log10(1.0/fmin)
@@ -55,7 +57,25 @@ class BasePeriodogram(abc.ABC):
             freqs = np.arange(start=np.amax([fmin, fresolution]), stop=fmax,
                               step=fresolution, dtype=np.float32)
         self.per, self.per_single_band = self._compute_periodogram(freqs)
-        self.freq = freqs 
+        self.freq = freqs
+
+    def optimal_frequency_grid_evaluation(
+            self, smallest_period: float, largest_period: float, shift: float = 0.1):
+        lc_time_length = self.get_lc_time_length()
+        smallest_frequency = 1.0/largest_period
+        largest_frequency = 1.0/smallest_period
+        f_range = largest_frequency - smallest_frequency
+        grid_size = int(np.ceil(f_range * lc_time_length / (2.0 * shift)))
+        self.freq_step_coarse = f_range / (grid_size - 1)
+
+        frequency_grid = np.linspace(
+            smallest_frequency,
+            largest_frequency,
+            grid_size,
+            dtype=np.float32
+        )
+        self.per, self.per_single_band = self._compute_periodogram(frequency_grid)
+        self.freq = frequency_grid
     
     def find_local_maxima(self, n_local_optima=10):
         local_optima_index = 1+np.where(
@@ -78,7 +98,7 @@ class BasePeriodogram(abc.ABC):
         """
         Computes the selected criterion over a grid of frequencies 
         around a specified amount of  local optima of the periodograms. This
-        function is intended for additional fine tuning of the results obtained
+        function is intended for additional fine-tuning of the results obtained
         with grid_search
         """
         if self.freq_step_coarse < fresolution:
@@ -112,6 +132,17 @@ class BasePeriodogram(abc.ABC):
             self.best_local_optima = local_optima_index[idx]
         else:
             self.best_local_optima = local_optima_index
+
+    def optimal_finetune_best_frequencies(self, times_finer: float = 10.0, n_local_optima: int = 10):
+        """
+        Computes the selected criterion over a grid of frequencies
+        around a specified amount of  local optima of the periodograms. This
+        function is intended for additional fine-tuning of the results obtained
+        with grid_search
+        """
+
+        fresolution = self.freq_step_coarse / times_finer
+        self.finetune_best_frequencies(fresolution, n_local_optima=n_local_optima)
 
     @abc.abstractmethod
     def _update_periodogram(self, local_optimum_index, freqs_fine, pers_fine):

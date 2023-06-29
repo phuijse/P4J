@@ -44,6 +44,27 @@ class TestPeriodogram(unittest.TestCase):
         my_per.finetune_best_frequencies(n_local_optima=3, fresolution=1e-5)
         return my_per.get_best_frequencies()
 
+    def test_optimal_frequency_grid_evaluation(self):
+        my_per = periodogram(method='MHAOV')
+        my_per.set_data(self.mjd, self.mag, self.err)
+        my_per.optimal_frequency_grid_evaluation(
+            smallest_period=0.1,
+            largest_period=100.0,
+            shift=0.1
+        )
+        my_per.optimal_finetune_best_frequencies(10.0, n_local_optima=3)
+        best_freq, best_per = my_per.get_best_frequencies()
+
+        self.assertEqual(best_freq.dtype, np.float32)
+        self.assertEqual(best_per.dtype, np.float32)
+        self.assertEqual(best_freq.shape, (3,))
+        self.assertEqual(best_per.shape, (3,))
+
+        assert_allclose(
+            best_freq[0],
+            1.23456,
+            rtol=1e-3)
+
     def test_periodogram_mhaov(self):
         best_freq, best_per = self.fit_eval_periodogram('MHAOV')
 

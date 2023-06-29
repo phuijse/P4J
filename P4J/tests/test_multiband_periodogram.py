@@ -39,6 +39,31 @@ class TestMultibandPeriodogram(unittest.TestCase):
                 dtype=np.float32),
             rtol=1e-2)
 
+    def test_mbperiodogram_optimal_grid(self):
+        my_per = MultiBandPeriodogram(method="MHAOV")
+        my_per.set_data(self.mjds, self.mags, self.errs, self.fids)
+        my_per.optimal_frequency_grid_evaluation(
+            smallest_period=0.1,
+            largest_period=100.0,
+            shift=0.1
+        )
+        my_per.optimal_finetune_best_frequencies(
+            times_finer=10.0, n_local_optima=3)
+        best_freq, best_per = my_per.get_best_frequencies()
+        self.assertEqual(len(my_per.per_single_band), len(np.unique(self.fids)))
+        assert_allclose(
+            best_freq,
+            np.array(
+                [1.234182, 9.704867, 3.488425],
+                dtype=np.float32),
+            rtol=1e-4)
+        assert_allclose(
+            best_per,
+            np.array(
+                [142.32545, 83.98332, 77.325165],
+                dtype=np.float32),
+            rtol=1e-2)
+
     def test_mbperiodogram_log_period_grid(self):
         my_per = MultiBandPeriodogram(method="MHAOV")
         my_per.set_data(self.mjds, self.mags, self.errs, self.fids)

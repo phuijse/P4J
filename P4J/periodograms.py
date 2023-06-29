@@ -50,6 +50,9 @@ class MultiBandPeriodogram(BasePeriodogram):
                     MHAOV(self.mjds[mask],
                           self.mags[mask] - self.lc_stats[filter_name].loc,
                           self.errs[mask], Nharmonics=1, mode=0)})
+
+    def get_lc_time_length(self):
+        return np.max(self.mjds) - np.min(self.mjds)
             
     def _compute_periodogram(self, freqs):        
         per_single_band = {}
@@ -211,6 +214,9 @@ class periodogram(BasePeriodogram):
             if 'Nharmonics' in kwarg:
                 Nharmonics = kwarg["Nharmonics"]
             self.cython_per = MHAOV(self.mjd, self.mag, self.err, Nharmonics)  
+
+    def get_lc_time_length(self):
+        return np.max(self.mjd) - np.min(self.mjd)
 
     def _compute_periodogram(self, freqs):
         if self.n_jobs == 1:
