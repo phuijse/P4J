@@ -1,6 +1,7 @@
 import numpy as np
 import abc
 import logging
+from typing import List
 
 
 class BasePeriodogram(abc.ABC):
@@ -66,6 +67,7 @@ class BasePeriodogram(abc.ABC):
         largest_frequency = 1.0/smallest_period
         f_range = largest_frequency - smallest_frequency
         grid_size = int(np.ceil(f_range * lc_time_length / (2.0 * shift)))
+        grid_size = max(grid_size, 1_000)
         self.freq_step_coarse = f_range / (grid_size - 1)
 
         frequency_grid = np.linspace(
@@ -77,20 +79,18 @@ class BasePeriodogram(abc.ABC):
         self.per, self.per_single_band = self._compute_periodogram(frequency_grid)
         self.freq = frequency_grid
     
-    def find_local_maxima(self, n_local_optima=10):
+    def find_local_maxima(self, n_local_optima=10) -> List[int]:
         local_optima_index = 1+np.where(
             (self.per[1:-1] > self.per[:-2]) & (self.per[1:-1] > self.per[2:]))[0]
         
-        if len(local_optima_index) < n_local_optima:
-            logging.warning("Not enough local maxima found in the periodogram")
-            # TODO: refactor. This is not well handled.
-            return
+        n_optima_found = len(local_optima_index)
+        if n_optima_found < n_local_optima:
+            logging.warning(f"Only {n_optima_found} local maxima were found in the periodogram")
+            n_local_optima = min(n_local_optima, n_optima_found)
+
         # Keep only n_local_optima
         best_local_optima = local_optima_index[np.argsort(self.per[local_optima_index])][::-1]
-        if n_local_optima > 0:
-            best_local_optima = best_local_optima[:n_local_optima]
-        else:
-            best_local_optima = best_local_optima[0]
+        best_local_optima = best_local_optima[:n_local_optima]
             
         return best_local_optima
     
