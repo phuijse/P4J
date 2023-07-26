@@ -63,7 +63,7 @@ cdef struct Sorter:
     Py_ssize_t index
     DTYPE_t value
 
-cdef int _compare(const_void *a, const_void *b):
+cdef int _compare(const_void *a, const_void *b) noexcept:
     cdef DTYPE_t v = ((<Sorter*>a)).value-((<Sorter*>b)).value
     if v < 0: return -1
     if v >= 0: return 1
