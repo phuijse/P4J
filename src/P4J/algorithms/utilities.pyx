@@ -19,7 +19,7 @@ cdef DTYPE_t mean(DTYPE_t* data, Py_ssize_t N):
     return acum/N
 
 """
-Computes an unbiased estimator of the weighted variance, where w_i = (1.0/e_i**2)
+Computes the weighted sample mean
 """
 cdef DTYPE_t weighted_mean(DTYPE_t* data, DTYPE_t* err, Py_ssize_t N):
     cdef DTYPE_t w_mean = 0.0
@@ -30,6 +30,10 @@ cdef DTYPE_t weighted_mean(DTYPE_t* data, DTYPE_t* err, Py_ssize_t N):
         w_mean += data[i]/powf(err[i], 2.0)
     return w_mean/w_sum
 
+
+"""
+Computes an unbiased estimator of the weighted variance, where w_i = (1.0/e_i**2)
+"""
 cdef DTYPE_t unbiased_weighted_variance(DTYPE_t* data, DTYPE_t* err2, Py_ssize_t N):
     cdef DTYPE_t w_mean = 0.0
     cdef DTYPE_t w_var = 0.0
@@ -59,7 +63,7 @@ cdef struct Sorter:
     Py_ssize_t index
     DTYPE_t value
 
-cdef int _compare(const_void *a, const_void *b):
+cdef int _compare(const_void *a, const_void *b) noexcept:
     cdef DTYPE_t v = ((<Sorter*>a)).value-((<Sorter*>b)).value
     if v < 0: return -1
     if v >= 0: return 1
