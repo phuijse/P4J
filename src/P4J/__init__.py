@@ -16,7 +16,7 @@ string length [6], and the orthogonal multiharmonic AoV periodogram [7].
 
 """
 
-__version__ = '1.1.0'
+__version__ = '1.1.2'
 
 from .generator import synthetic_light_curve_generator
 from .periodograms import periodogram, MultiBandPeriodogram
